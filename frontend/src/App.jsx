@@ -1,17 +1,16 @@
-import { useState } from 'react'
-import './App.css'
+import "./App.css";
+import PageLayout from "./components/PageLayout";
+import HomePage from "./pages/HomePage";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        
-      </div>
-     
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<PageLayout />}>
+        <Route index element={<HomePage />} />
+      </Route>
+    </Routes>
+  );
 }
 
-export default App
+export default App;
