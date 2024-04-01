@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function CookingTimeFilter() {
+export function CookingTimeFilter() {
   return <div>CookingTimeFilter</div>;
 }

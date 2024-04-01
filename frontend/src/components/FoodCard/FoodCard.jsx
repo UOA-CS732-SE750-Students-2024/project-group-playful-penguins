@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function FoodCard() {
+export function FoodCard() {
   return <div>FoodCard</div>;
 }

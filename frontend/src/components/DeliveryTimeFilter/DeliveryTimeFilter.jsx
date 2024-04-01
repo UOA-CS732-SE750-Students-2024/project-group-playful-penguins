@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function DeliveryTimeFilter() {
+export function DeliveryTimeFilter() {
   return <div>DeliveryTimeFilter</div>;
 }

@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function PrepTimeFilter() {
+export function PrepTimeFilter() {
   return <div>PrepTimeFilter</div>;
 }

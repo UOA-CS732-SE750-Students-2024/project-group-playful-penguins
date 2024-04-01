@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function SortBy() {
+export function SortBy() {
   return <div>SortBy</div>;
 }

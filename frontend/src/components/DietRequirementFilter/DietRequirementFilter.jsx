@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function DietRequirementFilter() {
+export function DietRequirementFilter() {
   return <div>DietRequirementFilter</div>;
 }

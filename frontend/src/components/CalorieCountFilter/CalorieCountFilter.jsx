@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function CalorieCountFilter() {
+export function CalorieCountFilter() {
   return <div>CalorieCountFilter</div>;
 }
