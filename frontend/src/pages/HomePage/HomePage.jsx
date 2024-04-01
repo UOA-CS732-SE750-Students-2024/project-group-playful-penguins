@@ -1,11 +1,11 @@
 import React from "react";
-import FilterPanel from "../../components/FilterPanel/FilterPanel";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import SortBy from "../../components/SortBy/SortBy";
+import { FilterPanel } from "../../components/FilterPanel/FilterPanel";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
+import { SortBy } from "../../components/SortBy/SortBy";
+import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
-import FoodList from "../../components/FoodList/FoodList";
 
-function HomePage() {
+export function HomePage() {
   return (
     <div className={styles.home_container}>
       <div className={styles.container_one}>
@@ -27,5 +27,3 @@ function HomePage() {
     </div>
   );
 }
-
-export default HomePage;

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styles from "./Navbar.module.css";
 import { AppContext } from "../../providers/AppContextProvider";
-function Navbar() {
+export function Navbar() {
   const { isTakeout, changeCategory } = useContext(AppContext);
   return (
     <div className={isTakeout ? styles.header_takeout : styles.header_cook}>
@@ -23,5 +23,3 @@ function Navbar() {
     </div>
   );
 }
-
-export default Navbar;
