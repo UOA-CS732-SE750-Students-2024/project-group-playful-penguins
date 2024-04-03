@@ -1,0 +1,117 @@
+.quicksand-light {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.quicksand-regular {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.quicksand-medium {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.quicksand-semibold {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.quicksand-bold {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: rgb(251, 239, 241);
+  background: linear-gradient(
+    90deg,
+    rgba(251, 239, 241, 1) 0%,
+    rgba(204, 245, 241, 1) 80%
+  );
+}
+
+.topbar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#user-icon {
+  margin-right: 32px;
+}
+
+#logo-icon {
+  margin-left: 32px;
+}
+
+.slogan-container {
+  margin-top: 80px;
+  margin-left: 100px;
+}
+
+.slogan-first-line {
+  font-size: 3rem;
+}
+
+.slogan-second-line {
+  font-size: 4rem;
+}
+
+.CTAs-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 0px;
+  height: 50vh;
+}
+
+.CTA {
+  width: 50%;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 1.4rem;
+}
+
+.CTA-takeout {
+  background: #edb1bb;
+}
+
+.CTA-cook {
+  background: #00ccbb;
+}
+
+button {
+  border-radius: 15px;
+  border-style: none;
+  color: white;
+  font-size: 1.6em;
+}
+
+#CTA-button-takeout {
+  background: #8e6a70;
+  padding: 1.2rem 5rem;
+}
+
+#CTA-button-cook {
+  background: #00665e;
+  padding: 1.2rem;
+}
