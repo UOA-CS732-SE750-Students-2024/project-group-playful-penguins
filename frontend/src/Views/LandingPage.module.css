@@ -54,6 +54,8 @@ body {
 
 #user-icon {
   margin-right: 32px;
+  width: 4vmin;
+  height: 4vmin;
 }
 
 #logo-icon {
