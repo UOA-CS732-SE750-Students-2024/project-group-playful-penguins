@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
-import { CalorieCountFilter } from "../CalorieCountFilter/CalorieCountFilter";
-import { PrepTimeFilter } from "../PrepTimeFilter/PrepTimeFilter";
-import { CookingTimeFilter } from "../CookingTimeFilter/CookingTimeFilter";
-import { PriceFilter } from "../PriceFilter/PriceFilter";
-import { DeliveryTimeFilter } from "../DeliveryTimeFilter/DeliveryTimeFilter";
-import { DietRequirementFilter } from "../DietRequirementFilter/DietRequirementFilter";
+import { CalorieCountFilter } from "../Filters/CalorieCountFilter/CalorieCountFilter";
+import { PrepTimeFilter } from "../Filters/PrepTimeFilter/PrepTimeFilter";
+import { DietRequirementFilter } from "../Filters/DietRequirementFilter/DietRequirementFilter";
+import { CookingTimeFilter } from "../Filters/CookingTimeFilter/CookingTimeFilter";
+import { DeliveryTimeFilter } from "../Filters/DeliveryTimeFilter/DeliveryTimeFilter";
+import { PriceFilter } from "../Filters/PriceFilter/PriceFilter";
+
 export function FilterPanel() {
   const { isTakeout } = useContext(AppContext);
 
