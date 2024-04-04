@@ -13,26 +13,26 @@ export default function ExpandedTakeoutCard(){
 
     // food param could be turned into map function
     return(
-    <div className={styles.card}>
+    <div className={styles[`card`]}>
         
-        <div className={styles.cardTopContent}>
+        <div className={styles[`card-top-content`]}>
             
             <div>
-                <img src={foodItem.imageUrl} alt={foodItem.title} className={styles.foodImage} />
+                <img src={foodItem.imageUrl} alt={foodItem.title} className={styles[`food-image`]} />
             </div>
 
             <div>
-                <h2 className={styles.foodTitle} >{foodItem.title}</h2>
-                <div className={styles.foodParams}>
-                    <div className={styles.singleParam}>
+                <h2 className={styles[`food-title`]} >{foodItem.title}</h2>
+                <div className={styles[`food-params`]}>
+                    <div className={styles[`single-param`]}>
                         <img src={icons[0]} />
                         <p>Prep Time:</p>
                     </div>
-                    <div className={styles.singleParam}>
+                    <div className={styles[`single-param`]}>
                         <img src={icons[0]} />
                         <p>Cooking Time:</p>
                     </div>
-                    <div className={styles.singleParam}>
+                    <div className={styles[`single-param`]}>
                         <img src={icons[1]} />
                         <p>Serves:</p>
                     </div>
@@ -41,9 +41,9 @@ export default function ExpandedTakeoutCard(){
 
         </div>
 
-        <div className={styles.cardBottomContent}>
-            <h3 className={styles.cardDescriptionTitle}>Description</h3>
-            <p className={styles.cardDescription}>{foodItem.description}</p>
+        <div className={styles[`card-bottom-content`]}>
+            <h3 className={styles[`card-description-title`]}>Description</h3>
+            <p className={styles[`card-description`]}>{foodItem.description}</p>
         </div>
 
     </div>
