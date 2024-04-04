@@ -1,5 +1,5 @@
 import styles from "./LandingPage.module.css";
-import UserIcon from "../assets/SVGIconComponents/UserIcon";
+import UserIcon from "../../assets/SVGIconComponents/UserIcon";
 
 export default function LandingPage() {
   console.log(styles);

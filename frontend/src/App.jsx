@@ -1,8 +1,7 @@
 import { PageLayout } from "./components/PageLayout/PageLayout";
 import { HomePage } from "./pages/HomePage/HomePage";
-import { Routes, Route, useNavigate, useParams, Navigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import LandingPage from './Views/LandingPage';
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 function App() {
   return (
@@ -13,13 +12,6 @@ function App() {
       </Route>
     </Routes>
   );
-    
-
-     
-
-   
-   
-  )
 }
 
 export default App;
