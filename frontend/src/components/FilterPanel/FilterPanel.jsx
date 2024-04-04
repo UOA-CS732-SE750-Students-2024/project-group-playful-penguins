@@ -26,8 +26,8 @@ export function FilterPanel() {
       )}
       <DietRequirementFilter />
       <div>
-        <button>Submit</button>
-        <button>Reest</button>
+        <button>Apply</button>
+        <button>Reset</button>
       </div>
     </div>
   );
