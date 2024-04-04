@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<PageLayout />}>
+      <Route path="/home" element={<PageLayout />}>
         <Route index element={<HomePage />} />
       </Route>
     </Routes>
