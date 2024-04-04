@@ -7,20 +7,20 @@ import styles from "./HomePage.module.css";
 
 export function HomePage() {
   return (
-    <div className={styles.home_container}>
-      <div className={styles.container_one}>
+    <div className={styles["home-container"]}>
+      <div className={styles["filter-container"]}>
         <FilterPanel />
       </div>
-      <div className={styles.container_two}>
-        <div className={styles.feature_container}>
-          <div className={styles.search_bar}>
+      <div className={styles["features-and-food-list-container"]}>
+        <div className={styles["search-and-sort-panel"]}>
+          <div className={styles["search-bar"]}>
             <SearchBar />
           </div>
-          <div className={styles.sort_by}>
+          <div className={styles["sort-by"]}>
             <SortBy />
           </div>
         </div>
-        <div className={styles.food_list}>
+        <div className={styles["food-list"]}>
           <FoodList />
         </div>
       </div>

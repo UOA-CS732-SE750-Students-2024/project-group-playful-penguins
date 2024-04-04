@@ -24,7 +24,7 @@ export function FilterPanel() {
         </div>
       )}
       <DietRequirementFilter />
-      <div className="buttons_container">
+      <div>
         <button>Submit</button>
         <button>Reest</button>
       </div>

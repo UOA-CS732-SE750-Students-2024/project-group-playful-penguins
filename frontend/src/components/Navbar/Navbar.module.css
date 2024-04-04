@@ -1,4 +1,4 @@
-.header_takeout {
+.header-takeout {
   background-color: #f8e0e4;
   box-shadow: 0px 5px 2px lightgray;
   box-sizing: border-box;
@@ -8,7 +8,7 @@
   align-items: center;
   padding: 0 20px;
 }
-.header_cook {
+.header-cook {
   background-color: #99ebe4;
   box-shadow: 0px 5px 2px lightgray;
   box-sizing: border-box;
@@ -19,7 +19,7 @@
   padding: 0 20px;
 }
 
-.takeout_button {
+.takeout-button {
   background-color: white;
   border: none;
   color: black;
@@ -30,7 +30,7 @@
   font-size: 16px;
 }
 
-.takeout_button_picked {
+.takeout-button-picked {
   background-color: #edb1bb;
   border: none;
   color: white;
@@ -40,7 +40,7 @@
   display: inline-block;
   font-size: 16px;
 }
-.cook_button {
+.cook-button {
   background-color: white;
   border: none;
   color: black;
@@ -51,7 +51,7 @@
   font-size: 16px;
 }
 
-.cook_button_picked {
+.cook-button-picked {
   background-color: #00ccbb;
   border: none;
   color: black;

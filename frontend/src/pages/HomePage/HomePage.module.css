@@ -1,37 +1,37 @@
-.home_container {
+.home-container {
   display: flex;
   display: flex;
   height: 100%;
 }
 
-.container_one {
+.filter-container {
   flex: 1;
   background-color: cyan;
 }
 
-.container_two {
+.features-and-food-list-container {
   flex: 4;
   display: flex;
   flex-direction: column;
 }
 
-.feature_container {
+.search-and-sort-panel {
   display: flex;
   flex-direction: row;
   flex: 1;
 }
 
-.search_bar {
+.search-bar {
   flex: 2;
   background-color: brown;
 }
 
-.sort_by {
+.sort-by {
   flex: 1;
   background-color: fuchsia;
 }
 
-.food_list {
+.food-list {
   flex: 3;
   background-color: yellow;
 }
