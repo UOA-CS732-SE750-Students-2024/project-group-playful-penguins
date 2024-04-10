@@ -1,132 +1,14 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { styled } from "@mui/material/styles";
-
-const PRIMARY_COLOR = "#00665E";
-const SECONDARY_COLOR = "#CCF5F1";
-
-const CustomSlider = styled(Slider)({
-  color: PRIMARY_COLOR,
-  height: 8,
-  "& .MuiSlider-thumb": {
-    height: 24,
-    width: 24,
-    backgroundColor: "#fff",
-    border: `2px solid ${PRIMARY_COLOR}`,
-    "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
-      boxShadow: `0px 0px 0px 8px ${PRIMARY_COLOR}`,
-    },
-    "&:before": {
-      display: "none",
-    },
-  },
-  "& .MuiSlider-track": {
-    height: 8,
-    borderRadius: 4,
-    background: PRIMARY_COLOR,
-  },
-  "& .MuiSlider-rail": {
-    color: SECONDARY_COLOR,
-    opacity: 1,
-    height: 8,
-    borderRadius: 4,
-  },
-});
-
-// Custom Styled TextField for the design
-const StyledTextField = styled(TextField)(({ theme }) => ({
-  "& .MuiOutlinedInput-root": {
-    borderRadius: 15,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[1],
-    "&.Mui-focused": {
-      boxShadow: theme.shadows[3],
-    },
-    "& fieldset": {
-      borderWidth: "0 !important",
-    },
-    "& input": {
-      textAlign: "center",
-    },
-  },
-}));
+import React, { useContext } from "react";
+import { FilterTemplate } from "../FilterTemplate/FilterTemplate";
+import { AppContext } from "../../../providers/AppContextProvider";
 
 export function CalorieCountFilter() {
-  const [sliderValue, setSliderValue] = useState([20, 37]);
-  const [minValue, setMinValue] = useState(sliderValue[0]);
-  const [maxValue, setMaxValue] = useState(sliderValue[1]);
-
-  const handleSliderChange = (event, newValue) => {
-    setSliderValue(newValue);
-    setMinValue(newValue[0]);
-    setMaxValue(newValue[1]);
-  };
-
-  const handleMinChange = (event) => {
-    const newMin = Number(event.target.value);
-    setMinValue(newMin);
-    if (newMin <= maxValue) {
-      setSliderValue([newMin, maxValue]);
-    }
-  };
-
-  const handleMaxChange = (event) => {
-    const newMax = Number(event.target.value);
-    setMaxValue(newMax);
-    if (newMax >= minValue) {
-      setSliderValue([minValue, newMax]);
-    }
-  };
-
+  const { calorieCountValuesFilter, setCalorieCountValuesFilter } =
+    useContext(AppContext);
   return (
-    <Box
-      sx={{
-        padding: 2,
-        margin: "auto",
-        maxWidth: 500,
-      }}
-    >
-      <Typography
-        variant="h6"
-        gutterBottom
-        component="div"
-        color={PRIMARY_COLOR}
-      >
-        Calorie Count
-      </Typography>
-      <CustomSlider
-        value={sliderValue}
-        onChange={handleSliderChange}
-        valueLabelDisplay="auto"
-        min={0} // Set a minimum value for the slider
-        max={100} // Set a maximum value for the slider
-      />
-      <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1 }}>
-        <StyledTextField
-          type="number"
-          id="outlined-basic-min"
-          size="small"
-          value={minValue}
-          onChange={handleMinChange}
-          inputProps={{ min: "0", max: `${maxValue}` }} // Ensure min cannot exceed max
-          sx={{ flex: 1 }} // Allow the text field to grow
-        />
-        <Typography variant="h6" component="span" sx={{ alignSelf: "center" }}>
-          —
-        </Typography>
-        <StyledTextField
-          type="number"
-          id="outlined-basic-max"
-          size="small"
-          value={maxValue}
-          onChange={handleMaxChange}
-          inputProps={{ min: `${minValue}`, max: "100" }} // Ensure max cannot be less than min
-          sx={{ flex: 1 }} // Allow the text field to grow
-        />
-      </Box>
-    </Box>
+    <FilterTemplate
+      filterValue={calorieCountValuesFilter}
+      setFilterValue={setCalorieCountValuesFilter}
+    />
   );
 }
