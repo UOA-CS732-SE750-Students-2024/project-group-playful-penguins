@@ -1,60 +1,61 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
+import { AppContext } from "../../../providers/AppContextProvider";
 
-const PRIMARY_COLOR = "#00665E";
-const SECONDARY_COLOR = "#CCF5F1";
+export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
+  const { isTakeout } = useContext(AppContext);
 
-const CustomSlider = styled(Slider)({
-  color: PRIMARY_COLOR,
-  height: 8,
-  "& .MuiSlider-thumb": {
-    height: 24,
-    width: 24,
-    backgroundColor: "#fff",
-    border: `2px solid ${PRIMARY_COLOR}`,
-    "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
-      boxShadow: `0px 0px 0px 8px ${PRIMARY_COLOR}`,
-    },
-    "&:before": {
-      display: "none",
-    },
-  },
-  "& .MuiSlider-track": {
+  const PRIMARY_COLOR = isTakeout ? "#00665E" : "#12222E";
+  const SECONDARY_COLOR = isTakeout ? "#CCF5F1" : "#12222E";
+
+  const StyledSlider = styled(Slider)({
+    color: PRIMARY_COLOR,
     height: 8,
-    borderRadius: 4,
-    background: PRIMARY_COLOR,
-  },
-  "& .MuiSlider-rail": {
-    color: SECONDARY_COLOR,
-    opacity: 1,
-    height: 8,
-    borderRadius: 4,
-  },
-});
+    "& .MuiSlider-thumb": {
+      height: 24,
+      width: 24,
+      backgroundColor: "#fff",
+      border: `2px solid ${PRIMARY_COLOR}`,
+      "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
+        boxShadow: `0px 0px 0px 8px ${PRIMARY_COLOR}`,
+      },
+      "&:before": {
+        display: "none",
+      },
+    },
+    "& .MuiSlider-track": {
+      height: 8,
+      borderRadius: 4,
+      background: PRIMARY_COLOR,
+    },
+    "& .MuiSlider-rail": {
+      color: SECONDARY_COLOR,
+      opacity: 1,
+      height: 8,
+      borderRadius: 4,
+    },
+  });
 
-// Custom Styled TextField for the design
-const StyledTextField = styled(TextField)(({ theme }) => ({
-  "& .MuiOutlinedInput-root": {
-    borderRadius: 15,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[1],
-    "&.Mui-focused": {
-      boxShadow: theme.shadows[3],
+  const StyledTextField = styled(TextField)(({ theme }) => ({
+    "& .MuiOutlinedInput-root": {
+      borderRadius: 15,
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[1],
+      "&.Mui-focused": {
+        boxShadow: theme.shadows[3],
+      },
+      "& fieldset": {
+        borderWidth: "0 !important",
+      },
+      "& input": {
+        textAlign: "center",
+      },
     },
-    "& fieldset": {
-      borderWidth: "0 !important",
-    },
-    "& input": {
-      textAlign: "center",
-    },
-  },
-}));
-
-export function FilterTemplate({ filterValue, setFilterValue }) {
+  }));
   const [minValue, setMinValue] = useState(filterValue[0]);
   const [maxValue, setMaxValue] = useState(filterValue[1]);
 
@@ -94,9 +95,9 @@ export function FilterTemplate({ filterValue, setFilterValue }) {
         component="div"
         color={PRIMARY_COLOR}
       >
-        Calorie Count
+        {filterName}
       </Typography>
-      <CustomSlider
+      <StyledSlider
         value={filterValue}
         onChange={handleSliderChange}
         valueLabelDisplay="auto"

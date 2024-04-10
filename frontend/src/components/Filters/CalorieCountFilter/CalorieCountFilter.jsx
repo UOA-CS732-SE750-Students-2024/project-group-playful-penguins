@@ -7,6 +7,7 @@ export function CalorieCountFilter() {
     useContext(AppContext);
   return (
     <FilterTemplate
+      filterName="Calorie Count"
       filterValue={calorieCountValuesFilter}
       setFilterValue={setCalorieCountValuesFilter}
     />
