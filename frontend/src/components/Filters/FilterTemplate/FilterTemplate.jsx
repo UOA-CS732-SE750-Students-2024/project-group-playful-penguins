@@ -6,22 +6,17 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { AppContext } from "../../../providers/AppContextProvider";
 
-export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
-  const { isTakeout } = useContext(AppContext);
-
-  const PRIMARY_COLOR = isTakeout ? "#77695E" : "#00665E";
-  const SECONDARY_COLOR = isTakeout ? "#FBEFF1" : "#CCF5F1";
-
-  const StyledSlider = styled(Slider)({
-    color: PRIMARY_COLOR,
+const StyledSlider = styled(Slider)(
+  ({ theme, primaryColor, secondaryColor }) => ({
+    color: primaryColor,
     height: 8,
     "& .MuiSlider-thumb": {
       height: 24,
       width: 24,
       backgroundColor: "#fff",
-      border: `2px solid ${PRIMARY_COLOR}`,
+      border: `2px solid ${primaryColor}`,
       "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
-        boxShadow: `0px 0px 0px 8px ${PRIMARY_COLOR}`,
+        boxShadow: `0px 0px 0px 8px ${primaryColor}`,
       },
       "&:before": {
         display: "none",
@@ -30,32 +25,40 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
     "& .MuiSlider-track": {
       height: 8,
       borderRadius: 4,
-      background: PRIMARY_COLOR,
+      background: primaryColor,
     },
     "& .MuiSlider-rail": {
-      color: SECONDARY_COLOR,
+      color: secondaryColor,
       opacity: 1,
       height: 8,
       borderRadius: 4,
     },
-  });
+  })
+);
 
-  const StyledTextField = styled(TextField)(({ theme }) => ({
-    "& .MuiOutlinedInput-root": {
-      borderRadius: 15,
-      backgroundColor: theme.palette.background.paper,
-      boxShadow: theme.shadows[1],
-      "&.Mui-focused": {
-        boxShadow: theme.shadows[3],
-      },
-      "& fieldset": {
-        borderWidth: "0 !important",
-      },
-      "& input": {
-        textAlign: "center",
-      },
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 15,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[1],
+    "&.Mui-focused": {
+      boxShadow: theme.shadows[3],
     },
-  }));
+    "& fieldset": {
+      borderWidth: "0 !important",
+    },
+    "& input": {
+      textAlign: "center",
+    },
+  },
+}));
+
+export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
+  const { isTakeout } = useContext(AppContext);
+
+  const primaryColor = isTakeout ? "#77695E" : "#00665E";
+  const secondaryColor = isTakeout ? "#FBEFF1" : "#CCF5F1";
+
   const [minValue, setMinValue] = useState(filterValue[0]);
   const [maxValue, setMaxValue] = useState(filterValue[1]);
 
@@ -93,11 +96,13 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
         variant="h6"
         gutterBottom
         component="div"
-        color={PRIMARY_COLOR}
+        color={primaryColor}
       >
         {filterName}
       </Typography>
       <StyledSlider
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
         value={filterValue}
         onChange={handleSliderChange}
         valueLabelDisplay="auto"
