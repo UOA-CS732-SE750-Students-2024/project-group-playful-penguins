@@ -1,9 +1,23 @@
 import styles from "./LandingPage.module.css";
 import UserIcon from "../../assets/SVGIconComponents/UserIcon";
-
+import { AppContext } from "../../providers/AppContextProvider";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
-  
+  const { isTakeout, changeCategory } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  function openCookPage() {
+    changeCategory(false);
+    navigate(`/home`);
+  }
+
+  function openTakeoutPage() {
+    changeCategory(true);
+    navigate(`/home`);
+  }
+
   return (
     <>
       <div className={styles.topbar}>
@@ -42,6 +56,7 @@ export default function LandingPage() {
             </strong>
           </h3>
           <button
+            onClick={openTakeoutPage}
             id={`${styles["CTA-button-takeout"]}`}
             className={styles["quicksand-bold"]}
           >
@@ -58,6 +73,7 @@ export default function LandingPage() {
             </span>
           </h3>
           <button
+            onClick={openCookPage}
             id={`${styles["CTA-button-cook"]}`}
             className={styles["quicksand-bold"]}
           >

@@ -106,6 +106,7 @@ button {
   border-style: none;
   color: white;
   font-size: 1.6em;
+  cursor: pointer;
 }
 
 #CTA-button-takeout {
