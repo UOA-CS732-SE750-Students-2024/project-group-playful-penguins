@@ -9,8 +9,8 @@ import { AppContext } from "../../../providers/AppContextProvider";
 export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
   const { isTakeout } = useContext(AppContext);
 
-  const PRIMARY_COLOR = isTakeout ? "#00665E" : "#12222E";
-  const SECONDARY_COLOR = isTakeout ? "#CCF5F1" : "#12222E";
+  const PRIMARY_COLOR = isTakeout ? "#77695E" : "#00665E";
+  const SECONDARY_COLOR = isTakeout ? "#FBEFF1" : "#CCF5F1";
 
   const StyledSlider = styled(Slider)({
     color: PRIMARY_COLOR,
