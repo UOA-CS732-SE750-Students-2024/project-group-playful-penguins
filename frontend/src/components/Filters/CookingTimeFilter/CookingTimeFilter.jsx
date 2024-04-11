@@ -3,13 +3,13 @@ import { FilterTemplate } from "../FilterTemplate/FilterTemplate";
 import { AppContext } from "../../../providers/AppContextProvider";
 
 export function CookingTimeFilter() {
-  const { deliveryTimeValuesFilter, setDeliveryTimeValuesFilter } =
+  const { cookingTimeValuesFilter, setCookingTimeValuesFilter } =
     useContext(AppContext);
   return (
     <FilterTemplate
       filterName="Cooking Time"
-      filterValue={deliveryTimeValuesFilter}
-      setFilterValue={setDeliveryTimeValuesFilter}
+      filterValue={cookingTimeValuesFilter}
+      setFilterValue={setCookingTimeValuesFilter}
     />
   );
 }

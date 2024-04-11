@@ -116,7 +116,7 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
           size="small"
           value={minValue}
           onChange={handleMinChange}
-          inputProps={{ min: "0", max: `${maxValue}` }} // Ensure min cannot exceed max
+          inputProps={{ readOnly: true }} // Make TextField read-only
           sx={{ flex: 1 }} // Allow the text field to grow
         />
         <Typography variant="h6" component="span" sx={{ alignSelf: "center" }}>
@@ -128,8 +128,8 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
           size="small"
           value={maxValue}
           onChange={handleMaxChange}
-          inputProps={{ min: `${minValue}`, max: "100" }} // Ensure max cannot be less than min
           sx={{ flex: 1 }} // Allow the text field to grow
+          inputProps={{ readOnly: true }} // Make TextField read-only
         />
       </Box>
     </Box>
