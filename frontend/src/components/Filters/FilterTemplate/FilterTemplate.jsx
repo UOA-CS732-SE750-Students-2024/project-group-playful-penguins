@@ -6,53 +6,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { AppContext } from "../../../providers/AppContextProvider";
 import colors from "../../../constants/styles-constant";
-
-const StyledSlider = styled(Slider)(
-  ({ theme, primaryColor, secondaryColor }) => ({
-    color: primaryColor,
-    height: 8,
-    "& .MuiSlider-thumb": {
-      height: 24,
-      width: 24,
-      backgroundColor: "#fff",
-      border: `2px solid ${primaryColor}`,
-      "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
-        boxShadow: `0px 0px 0px 8px ${primaryColor}`,
-      },
-      "&:before": {
-        display: "none",
-      },
-    },
-    "& .MuiSlider-track": {
-      height: 8,
-      borderRadius: 4,
-      background: primaryColor,
-    },
-    "& .MuiSlider-rail": {
-      color: secondaryColor,
-      opacity: 1,
-      height: 8,
-      borderRadius: 4,
-    },
-  })
-);
-
-const StyledTextField = styled(TextField)(({ theme }) => ({
-  "& .MuiOutlinedInput-root": {
-    borderRadius: 15,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[1],
-    "&.Mui-focused": {
-      boxShadow: theme.shadows[3],
-    },
-    "& fieldset": {
-      borderWidth: "0 !important",
-    },
-    "& input": {
-      textAlign: "center",
-    },
-  },
-}));
+import { StyledSlider, StyledTextField } from "../../../theme-overrides";
 
 export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
   const { isTakeout } = useContext(AppContext);
