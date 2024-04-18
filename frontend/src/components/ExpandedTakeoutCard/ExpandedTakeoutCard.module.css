@@ -73,3 +73,14 @@
     text-align: left;
     margin: 10px;
 }
+
+.card-button{
+    margin-top: 25px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.card-button button{
+    height: 30px;
+    font-size: 24px;
+}

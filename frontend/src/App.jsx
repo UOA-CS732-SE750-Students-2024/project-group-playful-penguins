@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import ExpandedTakeoutCard from './components/ExpandedTakeoutCard/ExpandedTakeoutCard'
 
 function App() {
