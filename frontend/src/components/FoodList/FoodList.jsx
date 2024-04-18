@@ -1,5 +1,6 @@
 import React from "react";
+import { FoodCard } from "../FoodCard/FoodCard";
 
 export function FoodList() {
-  return <div>FoodList</div>;
+  return <div><FoodCard/></div>;
 }
