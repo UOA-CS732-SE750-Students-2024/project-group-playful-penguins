@@ -1,5 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FilterTemplate } from "../FilterTemplate/FilterTemplate";
+import { AppContext } from "../../../providers/AppContextProvider";
 
 export function CookingTimeFilter() {
-  return <div>CookingTimeFilter</div>;
+  const { cookingTimeValuesFilter, setCookingTimeValuesFilter } =
+    useContext(AppContext);
+  return (
+    <FilterTemplate
+      filterName="Cooking Time"
+      filterValue={cookingTimeValuesFilter}
+      setFilterValue={setCookingTimeValuesFilter}
+    />
+  );
 }
