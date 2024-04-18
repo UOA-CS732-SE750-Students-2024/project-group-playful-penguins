@@ -1,4 +1,4 @@
-.card {
+.card{
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -15,20 +15,20 @@
   }
 
 /* Top half of the card (image, title and icons) */
-.cardTopContent{
+.card-top-content{
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-.foodImage {
+.food-image {
     height: 250px;
     margin: 25px;
     margin-bottom: 10px;
     border-radius: 10px;
 }
 
-.foodTitle{
+.food-title{
     width: 100%;
     padding: 15px;
     font-size: 24px;
@@ -39,37 +39,37 @@
 
 }
 
-.singleParam{
+.single-param{
     display: flex;
     flex-direction: row;
     margin: 5px;
 }
 
-.singleParam img{
+.single-param img{
     height: 30px;
     margin: 10px;
 }
 
-.singleParam p{
+.single-param p{
     font-size: 16px;
     margin: 10px;
 }
 
 
 /* Bottom half of the card (description) */
-.cardBottomContent {
+.card-bottom-content {
     padding: 10px;
     height: 50%;
 }
 
-.cardDescriptionTitle {
+.card-description-title {
     text-align: left;
     margin-top: 0;
     margin-left: 10px;
     margin-bottom: 5px;
 }
 
-.cardDescription {
+.card-description {
     text-align: left;
     margin: 10px;
 }
