@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import { AppContext } from "../../../providers/AppContextProvider";
+import colors from "../../../constants/styles-constant";
 
 const StyledSlider = styled(Slider)(
   ({ theme, primaryColor, secondaryColor }) => ({
@@ -56,8 +57,12 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
   const { isTakeout } = useContext(AppContext);
 
-  const primaryColor = isTakeout ? "#77695E" : "#00665E";
-  const secondaryColor = isTakeout ? "#FBEFF1" : "#CCF5F1";
+  const primaryColor = isTakeout
+    ? colors.TAKE_OUT_COLOR.PRIMARY_COLOR
+    : colors.COOK_AT_HOME_COLOR.PRIMARY_COLOR;
+  const secondaryColor = isTakeout
+    ? colors.TAKE_OUT_COLOR.SECONDARY_COLOR
+    : colors.COOK_AT_HOME_COLOR.SECONDARY_COLOR;
 
   const [minValue, setMinValue] = useState(filterValue[0]);
   const [maxValue, setMaxValue] = useState(filterValue[1]);
