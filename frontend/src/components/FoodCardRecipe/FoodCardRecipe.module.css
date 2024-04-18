@@ -30,6 +30,7 @@
 .title {
     font-size: 1.5rem; /* Adjusted for better responsiveness */
     font-weight: 800;
+    padding-bottom: 15px;
     margin-bottom: 26px; 
     font-family: Arial; /* Changed from font-style to font-family */
 }
