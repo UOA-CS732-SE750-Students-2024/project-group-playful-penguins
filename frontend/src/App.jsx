@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import ExpandedTakeoutCard from './ExpandedTakeoutCard'
+import ExpandedTakeoutCard from './components/ExpandedTakeoutCard/ExpandedTakeoutCard'
 
 function App() {
   const [count, setCount] = useState(0)
