@@ -1,17 +1,28 @@
 import styles from "./RecipeInfo.module.css";
+import * as React from "react";
 import fontStyle from "../../assets/GlobalStyles/CustomFont.module.css";
 import ClockIcon from "../../assets/SVGIconComponents/ClockIcon";
 import ServingsIcon from "../../assets/SVGIconComponents/ServingsIcon";
-import Box from '@mui/system/Box';
+import Box from "@mui/system/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
+function generate(element) {
+  return [0, 1, 2].map((value) =>
+    React.cloneElement(element, {
+      key: value,
+    })
+  );
+}
 
 export default function RecipeInfo() {
   return (
-    <> 
-      <div className={styles["box"]}>
-        <div className={styles["info-container"]}>
-          <div className={styles["details-container"]}>
-            <div
+    <>
+      <Box className={styles["box"]}>
+        <Box className={styles["info-container"]}>
+          <Box className={styles["details-container"]}>
+            <Box
               className={styles["recipe-photo-container"]}
               src="/images/Yaki-Udon.jpg"
             >
@@ -19,8 +30,8 @@ export default function RecipeInfo() {
                 className={styles["recipe-photo"]}
                 src="/images/Yaki-Udon.jpg"
               />
-            </div>
-            <div className={styles["basic-info"]}>
+            </Box>
+            <Box className={styles["basic-info"]}>
               {/* {Recipe name} */}
               <h1 className={fontStyle["quicksand-bold"]}>Veggie Yaki Udon </h1>
               {/* Timing information */}
@@ -52,59 +63,68 @@ export default function RecipeInfo() {
                 ipsam optio praesentium perspiciatis, ad quo vitae nam
                 reprehenderit?
               </div>
-            </div>
-          </div>
-          <div className={styles["food-type-container"]}>
+            </Box>
+          </Box>
+          <Box className={styles["food-type-container"]}>
             <h3 className={fontStyle["quicksand-regular"]}>
               <strong>Course : </strong> Dinner, Lunch
             </h3>
             <h3 className={fontStyle["quicksand-regular"]}>
               <strong>Cuisine : </strong> Japanese
             </h3>
-            <div
+            <Box
               className={`${fontStyle["quicksand-regular"]} ${styles["diet-label"]}`}
             >
               VEGAN
-            </div>
-          </div>
-          <div className={styles["section-container"]}>
-            <div className={styles["ingredients-container"]}>
+            </Box>
+          </Box>
+          <Box className={styles["section-container"]}>
+            <Box className={styles["ingredients-container"]}>
               <h2 className={fontStyle["quicksand-bold"]}>Ingredients</h2>
-              <div
+              <Box
                 className={`${fontStyle["quicksand-regular"]} ${styles["ingredients-list-container"]}`}
               >
-                <ul>
-                  <li>
-                    <div className={styles["ingredient-item"]}>First one</div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div
+                <List>
+                  {generate(
+                    <ListItem>
+                      <ListItemText
+                        className={`${fontStyle["quicksand-regular"]} ${styles["ingredient-item"]}`}
+                        primary="Ingredient name"
+                      />
+                    </ListItem>
+                  )}
+                </List>
+              </Box>
+            </Box>
+            <Box
               className={`${fontStyle["quicksand-semibold"]} ${styles["nutrients-container"]}`}
             >
               <h3>NUTRITION INFORMATION</h3>
-              <div
+              <Box
                 className={`${fontStyle["quicksand-medium"]} ${styles["nutrients-item"]}`}
               >
                 will show carbs
-              </div>
-            </div>
-          </div>
-          <div className={styles["directions-container"]}>
+              </Box>
+            </Box>
+          </Box>
+          <Box className={styles["directions-container"]}>
             <h2 className={fontStyle["quicksand-bold"]}>Directions</h2>
-            <ol><li><div
-              className={`${fontStyle["quicksand-medium"]} ${styles["direction-item"]}`}
-            >
-              {" "}
-              Step 1{" "}
-            </div></li></ol>
-          </div>
-        </div>
-      </div>
+            <List>
+                  {generate(
+                    <ListItem>
+                      <ListItemText
+                        className={`${fontStyle["quicksand-regular"]} ${styles["ingredient-item"]}`}
+                        primary="Step number"
+                        // secondary="Full description of the direction"
+                      />
+                    </ListItem>
+                  )}
+                </List>
+          </Box>
+        </Box>
+      </Box>
 
       {/* MUI */}
-      
     </>
   );
 }
