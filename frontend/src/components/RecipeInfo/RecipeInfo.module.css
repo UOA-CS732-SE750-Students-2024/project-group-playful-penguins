@@ -8,6 +8,7 @@
   margin-right: 165px;
   margin-left: 165px;
   margin-top: 169px;
+  flex-wrap: wrap;
 }
 
 .info-container {
@@ -124,7 +125,8 @@
 }
 
 .directions-container {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-between;
 }
