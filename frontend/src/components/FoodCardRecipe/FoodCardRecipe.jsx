@@ -3,14 +3,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import styles from './FoodCard.module.css';
+import styles from './FoodCardRecipe.module.css';
 
 const title = "Burrito bowl with chipotle black beans";
 const image = "../../public/images/bowl.png"; 
 const time = "35";
 const serves = "2";
 
-export function FoodCard() {
+export function FoodCardRecipe() {
 
   return (
     <Card className={styles.card}>
