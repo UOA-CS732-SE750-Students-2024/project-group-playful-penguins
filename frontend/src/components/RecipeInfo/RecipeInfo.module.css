@@ -97,7 +97,7 @@
 .section-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items:self-start;
   justify-content: space-between;
   margin-top: 12px;
   margin-bottom: 12px;
@@ -118,12 +118,17 @@
   display: flex;
   flex-direction: column;
   background-color: #e6faf8;
-  align-items: left;
-  padding: 16px;
+  text-align: center;
+  padding: 32px;
   border-radius: 16px;
+  gap: 10px;
   background-color: #e6faf8;
 }
-
+.nutrients-item {
+  font-size: 18px;
+  text-align: left;
+  align-items: left;
+}
 .directions-container {
   display: inline-flex;
   flex-wrap: wrap;
@@ -133,5 +138,13 @@
 
 .direction-item {
   border-bottom: 1px solid #cfcfcf;
-  font-size: 24px;
+  font-size: 20px;
+  padding: 10px;
+}
+.direction-step-item{
+  font-size: 20px;
+  padding: 10px;
+}
+.green-font{
+  color: #003d38;
 }
