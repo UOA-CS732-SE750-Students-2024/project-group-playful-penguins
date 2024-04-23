@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export const AppContext = React.createContext({});
 
 export function AppContextProvider({ children }) {
-  const [isTakeout, setTakeout] = useState(true);
+  const [isTakeout, setTakeout] = useState(false);
   const changeCategory = (boolean) => setTakeout(boolean);
   const [calorieCountValuesFilter, setCalorieCountValuesFilter] = useState([
     20, 50,
