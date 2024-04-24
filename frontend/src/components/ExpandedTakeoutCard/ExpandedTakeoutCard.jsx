@@ -21,31 +21,31 @@ export default function ExpandedTakeoutCard(){
     return(
     <Card className={styles[`card`]}>
         <CardContent className={styles[`card-top-content`]}>
-            <div>
+            <Box>
                 <CardMedia component="img" image={foodItem.imageUrl} alt={foodItem.title} className={styles[`food-image`]} />
-            </div>
+            </Box>
 
-            <div>
+            <Box>
                 <Typography  variant="h5" component="h2" className={styles[`food-title`]} >
                     {foodItem.title}
                 </Typography>
 
-                <div className={styles[`food-params`]}>
-                    <div className={styles[`single-param`]}>
-                        <img src={icons[0]} />
+                <Box>
+                    <Box className={styles[`single-param`]}>
+                        <CardMedia image={icons[0]} />
                         <Typography variant="body2">Delivery Time:</Typography >
-                    </div>
-                    <div className={styles[`single-param`]}>
-                        <img src={icons[1]} />
+                    </Box>
+                    <Box className={styles[`single-param`]}>
+                        <CardMedia image={icons[1]} />
                         <Typography variant="body2">Price Range:</Typography>
-                    </div>
-                    <div className={styles[`single-param`]}>
-                        <img src={icons[2]} />
+                    </Box>
+                    <Box className={styles[`single-param`]}>
+                        <CardMedia image={icons[2]} />
                         <Typography variant="body2">Serves:</Typography>
-                    </div>
-                </div>
+                    </Box>
+                </Box>
                 
-            </div>
+            </Box>
         </CardContent>
 
         <CardContent className={styles[`card-bottom-content`]}>
@@ -56,9 +56,9 @@ export default function ExpandedTakeoutCard(){
                 {foodItem.description}
             </Typography>
 
-            <div className={styles[`card-button`]}>
+            <Box className={styles[`card-button`]}>
                 <Button variant="contained">Order!</Button>
-            </div>
+            </Box>
         </CardContent>
     </Card>
     );

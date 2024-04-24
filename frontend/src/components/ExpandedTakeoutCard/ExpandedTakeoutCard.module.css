@@ -5,14 +5,11 @@
     overflow: hidden;
     color: black;
     background-color: white;
-
     display: flex;
     flex-direction: column;
-    
-    
     height: auto;
     width: 600px;
-  }
+}
 
 /* Top half of the card (image, title and icons) */
 .card-top-content{
@@ -32,10 +29,6 @@
     text-align: left;
 }
 
-.foodParams{
-
-}
-
 .single-param{
     display: flex;
     flex-direction: row;
@@ -51,7 +44,6 @@
     font-size: 16px;
     margin: 10px;
 }
-
 
 /* Bottom half of the card (description) */
 .card-bottom-content {
