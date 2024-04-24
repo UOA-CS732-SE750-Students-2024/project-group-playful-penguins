@@ -6,6 +6,7 @@ import { DietRequirementFilter } from "../Filters/DietRequirementFilter/DietRequ
 import { CookingTimeFilter } from "../Filters/CookingTimeFilter/CookingTimeFilter";
 import { DeliveryTimeFilter } from "../Filters/DeliveryTimeFilter/DeliveryTimeFilter";
 import { PriceFilter } from "../Filters/PriceFilter/PriceFilter";
+import { Box, Button } from "@mui/material";
 
 export function FilterPanel() {
   const { isTakeout } = useContext(AppContext);
@@ -25,10 +26,50 @@ export function FilterPanel() {
         </div>
       )}
       <DietRequirementFilter />
-      <div>
-        <button>Apply</button>
-        <button>Reset</button>
-      </div>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          pl: "16px",
+          pr: "16px",
+          pt: "8px",
+          margin: "auto",
+        }}
+      >
+        <Button
+          variant="text"
+          size="large"
+          sx={{
+            flex: 1, // TODO change color dynamically
+            color: "white",
+            borderRadius: "15px",
+            backgroundColor: "#7575DE",
+            "&:hover": {
+              backgroundColor: "#B22222",
+            },
+            marginRight: "8px",
+          }}
+        >
+          Apply
+        </Button>
+        <Button
+          variant="text"
+          size="large"
+          sx={{
+            flex: 1,
+            color: "black", // TODO change color dynamically
+            borderRadius: "15px",
+            backgroundColor: "#D9D9D9",
+            "&:hover": {
+              backgroundColor: "darkgray",
+              borderColor: "darkgray",
+            },
+            marginLeft: "8px",
+          }}
+        >
+          Reset
+        </Button>
+      </Box>
     </div>
   );
 }
