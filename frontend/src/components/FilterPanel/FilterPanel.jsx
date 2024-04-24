@@ -12,7 +12,11 @@ export function FilterPanel() {
   const { isTakeout } = useContext(AppContext);
 
   return (
-    <div>
+    <Box
+      sx={{
+        pt: "16px",
+      }}
+    >
       <CalorieCountFilter />
       {isTakeout ? (
         <div>
@@ -70,6 +74,6 @@ export function FilterPanel() {
           Reset
         </Button>
       </Box>
-    </div>
+    </Box>
   );
 }
