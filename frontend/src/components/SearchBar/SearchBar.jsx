@@ -19,14 +19,16 @@ export function SearchBar() {
         variant="outlined"
         placeholder="Search for recipes"
         fullWidth
+        he
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon></SearchIcon>
             </InputAdornment>
           ),
-          style: {
-            borderRadius: "10px",
+          sx: {
+            height: "65px",
+            borderRadius: "15px",
             boxShadow: "0 3px 6px rgba(0,0,0,0.1)",
             backgroundColor: isTakeout ? "#FDF7F8" : "#E6FAF8",
           },
