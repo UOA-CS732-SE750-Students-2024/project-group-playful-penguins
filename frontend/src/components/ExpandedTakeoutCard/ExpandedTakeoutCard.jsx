@@ -1,4 +1,10 @@
 import styles from "./ExpandedTakeoutCard.module.css"
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+
 
 //should take a food item as a parameter
 export default function ExpandedTakeoutCard(){
@@ -13,43 +19,47 @@ export default function ExpandedTakeoutCard(){
 
     // food param could be turned into map function
     return(
-    <div className={styles[`card`]}>
-        
-        <div className={styles[`card-top-content`]}>
-            
+    <Card className={styles[`card`]}>
+        <CardContent className={styles[`card-top-content`]}>
             <div>
-                <img src={foodItem.imageUrl} alt={foodItem.title} className={styles[`food-image`]} />
+                <CardMedia component="img" image={foodItem.imageUrl} alt={foodItem.title} className={styles[`food-image`]} />
             </div>
 
             <div>
-                <h2 className={styles[`food-title`]} >{foodItem.title}</h2>
+                <Typography  variant="h5" component="h2" className={styles[`food-title`]} >
+                    {foodItem.title}
+                </Typography>
+
                 <div className={styles[`food-params`]}>
                     <div className={styles[`single-param`]}>
                         <img src={icons[0]} />
-                        <p>Delivery Time:</p>
+                        <Typography variant="body2">Delivery Time:</Typography >
                     </div>
                     <div className={styles[`single-param`]}>
                         <img src={icons[1]} />
-                        <p>Price Range:</p>
+                        <Typography variant="body2">Price Range:</Typography>
                     </div>
                     <div className={styles[`single-param`]}>
                         <img src={icons[2]} />
-                        <p>Serves:</p>
+                        <Typography variant="body2">Serves:</Typography>
                     </div>
                 </div>
+                
             </div>
+        </CardContent>
 
-        </div>
-
-        <div className={styles[`card-bottom-content`]}>
-            <h3 className={styles[`card-description-title`]}>Description</h3>
-            <p className={styles[`card-description`]}>{foodItem.description}</p>
+        <CardContent className={styles[`card-bottom-content`]}>
+            <Typography variant="h6" className={styles[`card-description-title`]}>
+                Description
+            </Typography>
+            <Typography variant="body1" className={styles[`card-description`]}>
+                {foodItem.description}
+            </Typography>
 
             <div className={styles[`card-button`]}>
-                <button>Order!</button>
+                <Button variant="contained">Order!</Button>
             </div>
-        </div>
-
-    </div>
+        </CardContent>
+    </Card>
     );
 }
