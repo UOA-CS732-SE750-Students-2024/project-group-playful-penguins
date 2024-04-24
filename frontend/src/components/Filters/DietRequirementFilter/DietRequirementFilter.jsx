@@ -5,15 +5,13 @@ import { colors } from "../../../constants/styles-constant";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export function DietRequirementFilter() {
-  const { isTakeout } = useContext(AppContext);
+  const { isTakeout, selectedRequirement, setSelectedRequirement } =
+    useContext(AppContext);
   const primaryColor = isTakeout
     ? colors.TAKE_OUT_COLOR.PRIMARY_COLOR
     : colors.COOK_AT_HOME_COLOR.PRIMARY_COLOR;
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedRequirement, setSelectedRequirement] = useState(
-    "Choose a diet requirement"
-  );
   const [isItemSelected, setIsItemSelected] = useState(true);
 
   const handleClick = (event) => {

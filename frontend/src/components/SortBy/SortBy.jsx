@@ -5,10 +5,10 @@ import { colors } from "../../constants/styles-constant";
 import { AppContext } from "../../providers/AppContextProvider";
 
 export function SortBy() {
-  const { isTakeout } = useContext(AppContext);
+  const { isTakeout, selectedSortByOption, setSelectedSortByOption } =
+    useContext(AppContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedSortByOption, setSelectedSortByOption] = useState("Sort By");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -18,7 +18,7 @@ export function SortBy() {
     setAnchorEl(null);
   };
 
-  const handleRequirementSelect = (requirement) => {
+  const handleSortBySelect = (requirement) => {
     setSelectedSortByOption(requirement);
     handleClose();
   };
@@ -62,10 +62,10 @@ export function SortBy() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleRequirementSelect("Name(A-Z)")}>
+        <MenuItem onClick={() => handleSortBySelect("Name(A-Z)")}>
           Name(A-Z)
         </MenuItem>
-        <MenuItem onClick={() => handleRequirementSelect("Name(Z-A)")}>
+        <MenuItem onClick={() => handleSortBySelect("Name(Z-A)")}>
           Name(Z-A)
         </MenuItem>
       </Menu>

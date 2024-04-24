@@ -16,6 +16,10 @@ export function AppContextProvider({ children }) {
   const [deliveryTimeValuesFilter, setDeliveryTimeValuesFilter] = useState([
     20, 50,
   ]);
+  const [selectedRequirement, setSelectedRequirement] = useState(
+    "Choose a diet requirement"
+  );
+  const [selectedSortByOption, setSelectedSortByOption] = useState("Sort By");
 
   const context = {
     isTakeout,
@@ -30,6 +34,10 @@ export function AppContextProvider({ children }) {
     setPriceValuesFilter,
     deliveryTimeValuesFilter,
     setDeliveryTimeValuesFilter,
+    selectedRequirement,
+    setSelectedRequirement,
+    selectedSortByOption,
+    setSelectedSortByOption,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
