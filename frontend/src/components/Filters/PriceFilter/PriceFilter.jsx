@@ -1,5 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FilterTemplate } from "../FilterTemplate/FilterTemplate";
+import { AppContext } from "../../../providers/AppContextProvider";
 
 export function PriceFilter() {
-  return <div>PriceFilter</div>;
+  const { priceValuesFilter, setPriceValuesFilter } = useContext(AppContext);
+  return (
+    <FilterTemplate
+      filterName="Price"
+      filterValue={priceValuesFilter}
+      setFilterValue={setPriceValuesFilter}
+    />
+  );
 }

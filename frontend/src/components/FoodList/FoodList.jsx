@@ -1,5 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FoodCardRecipe } from "../FoodCardRecipe/FoodCardRecipe";
+import { FoodCardTakeout } from "../FoodCardTakeout/FoodCardTakeout";
+import { AppContext } from "../../providers/AppContextProvider";
 
 export function FoodList() {
-  return <div>FoodList</div>;
+  const { isTakeout } = useContext(AppContext);
+
+  return (<div>
+    {isTakeout ? (
+      <FoodCardTakeout />
+    ) : (<FoodCardRecipe />)}</div>
+  );
 }
