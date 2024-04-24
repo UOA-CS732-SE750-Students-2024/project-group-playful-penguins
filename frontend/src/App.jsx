@@ -1,17 +1,18 @@
-import { useState } from 'react'
-import ExpandedTakeoutCard from './components/ExpandedTakeoutCard/ExpandedTakeoutCard'
+
+import { PageLayout } from "./components/PageLayout/PageLayout";
+import { HomePage } from "./pages/HomePage/HomePage";
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <ExpandedTakeoutCard/>
-      </div>
-     
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<LandingPage />}></Route>
+      <Route path="/home" element={<PageLayout />}>
+        <Route index element={<HomePage />} />
+      </Route>
+    </Routes>
+  );
 }
 
-export default App
+export default App;
