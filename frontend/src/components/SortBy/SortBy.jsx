@@ -56,7 +56,12 @@ export function SortBy() {
         {selectedSortByOption}
       </Button>
       <Menu
-        id="simple-menu"
+        MenuListProps={{
+          sx: {
+            width: "150px",
+          },
+        }}
+        id="sort-by-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}

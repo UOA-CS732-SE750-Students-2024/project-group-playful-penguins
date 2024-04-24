@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { Children, useContext, useState } from "react";
 import { Menu, MenuItem, Button, Typography, Box } from "@mui/material";
 import { AppContext } from "../../../providers/AppContextProvider";
 import { colors } from "../../../constants/styles-constant";
@@ -39,7 +39,7 @@ export function DietRequirementFilter() {
       sx={{
         padding: 2,
         margin: "auto",
-        maxWidth: 500,
+        minWidth: "300px",
       }}
     >
       <Typography
@@ -75,7 +75,12 @@ export function DietRequirementFilter() {
           {selectedRequirement}
         </Button>
         <Menu
-          id="simple-menu"
+          MenuListProps={{
+            sx: {
+              width: "300px",
+            },
+          }}
+          id="diet-requirement-menu"
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
