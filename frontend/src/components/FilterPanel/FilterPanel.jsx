@@ -7,6 +7,7 @@ import { CookingTimeFilter } from "../Filters/CookingTimeFilter/CookingTimeFilte
 import { DeliveryTimeFilter } from "../Filters/DeliveryTimeFilter/DeliveryTimeFilter";
 import { PriceFilter } from "../Filters/PriceFilter/PriceFilter";
 import { Box, Button } from "@mui/material";
+import { colors } from "../../constants/styles-constant";
 
 export function FilterPanel() {
   const { isTakeout } = useContext(AppContext);
@@ -47,9 +48,9 @@ export function FilterPanel() {
             flex: 1, // TODO change color dynamically
             color: "white",
             borderRadius: "15px",
-            backgroundColor: "#7575DE",
+            backgroundColor: isTakeout ? "#EDB1BB" : "#00CCBB",
             "&:hover": {
-              backgroundColor: "#B22222",
+              backgroundColor: isTakeout ? "#473538" : "#00665E",
             },
             marginRight: "8px",
           }}
@@ -61,7 +62,7 @@ export function FilterPanel() {
           size="large"
           sx={{
             flex: 1,
-            color: "black", // TODO change color dynamically
+            color: "black",
             borderRadius: "15px",
             backgroundColor: "#D9D9D9",
             "&:hover": {
