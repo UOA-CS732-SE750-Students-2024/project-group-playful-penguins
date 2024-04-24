@@ -11,6 +11,28 @@ import { colors } from "../../constants/styles-constant";
 
 export function FilterPanel() {
   const { isTakeout } = useContext(AppContext);
+  const {
+    setCalorieCountValuesFilter,
+    setPrepTimeValuesFilter,
+    setCookingTimeValuesFilter,
+    setPriceValuesFilter,
+    setDeliveryTimeValuesFilter,
+    setSelectedRequirement,
+    setSelectedSortByOption,
+    setIsRequirementSelected,
+  } = useContext(AppContext);
+
+  const handleReset = () => {
+    // Reset all filters to their initial values
+    setCalorieCountValuesFilter([20, 50]);
+    setPrepTimeValuesFilter([20, 50]);
+    setCookingTimeValuesFilter([20, 50]);
+    setPriceValuesFilter([20, 50]);
+    setDeliveryTimeValuesFilter([20, 50]);
+    setSelectedRequirement("Choose a diet requirement");
+    setSelectedSortByOption("Sort By");
+    setIsRequirementSelected(false);
+  };
 
   return (
     <Box
@@ -58,6 +80,7 @@ export function FilterPanel() {
           Apply
         </Button>
         <Button
+          onClick={handleReset}
           variant="text"
           size="large"
           sx={{

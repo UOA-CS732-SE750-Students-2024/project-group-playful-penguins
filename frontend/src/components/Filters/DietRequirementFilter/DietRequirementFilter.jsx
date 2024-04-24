@@ -5,14 +5,18 @@ import { colors } from "../../../constants/styles-constant";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export function DietRequirementFilter() {
-  const { isTakeout, selectedRequirement, setSelectedRequirement } =
-    useContext(AppContext);
+  const {
+    isTakeout,
+    selectedRequirement,
+    setSelectedRequirement,
+    isRequirementSelected,
+    setIsRequirementSelected,
+  } = useContext(AppContext);
   const primaryColor = isTakeout
     ? colors.TAKE_OUT_COLOR.PRIMARY_COLOR
     : colors.COOK_AT_HOME_COLOR.PRIMARY_COLOR;
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isItemSelected, setIsItemSelected] = useState(true);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -24,7 +28,9 @@ export function DietRequirementFilter() {
 
   const handleRequirementSelect = (requirement) => {
     setSelectedRequirement(requirement);
-    setIsItemSelected(false);
+    console.log(isRequirementSelected); // This should log the updated state.
+    setIsRequirementSelected(true);
+    console.log(isRequirementSelected); // This should log the updated state.
     handleClose();
   };
 
@@ -50,7 +56,7 @@ export function DietRequirementFilter() {
           aria-haspopup="true"
           onClick={handleClick}
           sx={{
-            color: isItemSelected ? "#878787" : "black",
+            color: isRequirementSelected ? "black" : "#878787",
             backgroundColor: "white",
             borderRadius: "20px",
             border: "1px solid #E0E0E0",
@@ -64,7 +70,7 @@ export function DietRequirementFilter() {
               backgroundColor: "#f9f9f9",
             },
           }}
-          endIcon={isItemSelected ? <KeyboardArrowDownIcon /> : null}
+          endIcon={isRequirementSelected ? null : <KeyboardArrowDownIcon />}
         >
           {selectedRequirement}
         </Button>

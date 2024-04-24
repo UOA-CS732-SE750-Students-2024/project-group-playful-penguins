@@ -20,6 +20,7 @@ export function AppContextProvider({ children }) {
     "Choose a diet requirement"
   );
   const [selectedSortByOption, setSelectedSortByOption] = useState("Sort By");
+  const [isRequirementSelected, setIsRequirementSelected] = useState(false);
 
   const context = {
     isTakeout,
@@ -38,6 +39,8 @@ export function AppContextProvider({ children }) {
     setSelectedRequirement,
     selectedSortByOption,
     setSelectedSortByOption,
+    isRequirementSelected,
+    setIsRequirementSelected,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
