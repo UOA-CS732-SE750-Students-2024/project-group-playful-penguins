@@ -3,48 +3,22 @@ import * as React from "react";
 import fontStyle from "../../assets/GlobalStyles/CustomFont.module.css";
 import ClockIcon from "../../assets/SVGIconComponents/ClockIcon";
 import ServingsIcon from "../../assets/SVGIconComponents/ServingsIcon";
-import Box from "@mui/system/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import { Grid, styled } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Grid,
+  styled,
+  Typography,
+} from "@mui/material";
 
-function generate(element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    })
-  );
-}
-
-const StyledListItem = styled(ListItem)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "flex-start",
-}));
-
-const StepNumber = styled(ListItemText)(({ theme }) => ({
-  minWidth: "50px",
+const StepLabel = styled("div")({
   fontWeight: "bold",
-  marginRight: theme.spacing(2), // space between step number and text
-}));
-
-const StepContainer = styled(Grid)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  padding: theme.spacing(1, 0), // Apply vertical padding
-}));
-
-
-const StepLabel = styled('div')({
-  fontWeight: 'bold',
-  marginRight: '8px', // Adjust spacing as needed
+  marginRight: "8px",
 });
 
-const DirectionText = styled('div')({});
-
-
+const DirectionText = styled("div")({});
 
 const recipeName = "Veggie Yaki Udon";
 const numServings = "2";
@@ -83,9 +57,10 @@ const nutritionInfo = [
 
 export default function RecipeInfo() {
   return (
-    <>
-      <Box className={styles["box"]}>
+    <>{/* Top-level container */}
+      <Box className={styles["top-container"]}>
         <Box className={styles["info-container"]}>
+          {/* Recipe name, photo information */}
           <Box className={styles["details-container"]}>
             <Box
               className={styles["recipe-photo-container"]}
@@ -97,52 +72,60 @@ export default function RecipeInfo() {
               />
             </Box>
             <Box className={styles["basic-info"]}>
-              {/* {Recipe name} */}
-              <h1 className={fontStyle["quicksand-bold"]}>{recipeName}</h1>
+             
+              <Typography variant="h4" fontWeight="fontWeightBold">
+                {recipeName}
+              </Typography>
               {/* Timing information */}
-              <div className={styles["time-info"]}>
-                <div id={styles["clock-icon"]}>
+              <Box className={styles["time-info"]}>
+                <Box id={styles["clock-icon"]}>
                   <ClockIcon />
-                </div>
-                <h3 className={fontStyle["quicksand-medium"]}>
+                </Box>
+                <Typography variant="h6" fontWeight="fontWeightMedium">
                   Prep time {prepTime}
-                </h3>
-                <div id={styles["clock-icon"]}>
+                </Typography>
+                <Box id={styles["clock-icon"]}>
                   <ClockIcon />
-                </div>
-                <h3 className={fontStyle["quicksand-medium"]}>
-                  Prep time {cookingTime}
-                </h3>
-              </div>
-              <div className={styles["servings-info"]}>
-                <div id={styles["servings-icon"]}>
+                </Box>
+                <Typography variant="h6" fontWeight="fontWeightMedium">
+                  Cook time {cookingTime}
+                </Typography>
+              </Box>
+              {/* Servings information */}
+              <Box className={styles["servings-info"]}>
+                <Box id={styles["servings-icon"]}>
                   <ServingsIcon />
-                </div>
-                <h3 className={fontStyle["quicksand-medium"]}>
+                </Box>
+                <Typography variant="h6" fontWeight="fontWeightMedium">
+                  {" "}
                   {numServings} Servings
-                </h3>
-              </div>
-              <div className={fontStyle["quicksand-regular"]}>
+                </Typography>
+              </Box>
+              {/* Recipe detailed description */}
+              <Typography variant="body1" fontWeight="fontWeightMedium">
+                {" "}
                 {recipeDescription}
-              </div>
+              </Typography>
             </Box>
           </Box>
+          {/* Cuisine, dietary requirement information */}
           <Box className={styles["food-type-container"]}>
-            <h3 className={fontStyle["quicksand-regular"]}>
+            <Typography variant="h6" fontWeight="fontWeightRegular">
               <strong>Course : </strong> {`${courseType[0]}, ${courseType[1]}`}
-            </h3>
-            <h3 className={fontStyle["quicksand-regular"]}>
+            </Typography>
+            <Typography variant="h6" fontWeight="fontWeightRegular">
               <strong>Cuisine : </strong> {cuisineType}
-            </h3>
-            <Box
-              className={`${fontStyle["quicksand-regular"]} ${styles["diet-label"]}`}
-            >
-              {dietRequirementLabel}
+            </Typography>
+            <Box className={styles["diet-label"]}>
+              <Typography>{dietRequirementLabel}</Typography>
             </Box>
           </Box>
+          {/* Ingredients and Nutrition information */}
           <Box className={styles["section-container"]}>
             <Box className={styles["ingredients-container"]}>
-              <h2 className={fontStyle["quicksand-bold"]}>Ingredients</h2>
+              <Typography variant="h5" fontWeight="fontWeightBold">
+                Ingredients
+              </Typography>
               <Box
                 className={`${fontStyle["quicksand-regular"]} ${styles["ingredients-list-container"]}`}
               >
@@ -151,9 +134,7 @@ export default function RecipeInfo() {
                     <ListItem key={index} className={styles["ingredient-item"]}>
                       <ListItemText
                         primary={
-                          <Typography variant="body1">
-                            • {ingredient}
-                          </Typography>
+                          <Typography variant="h6">• {ingredient}</Typography>
                         }
                       />
                     </ListItem>
@@ -164,7 +145,9 @@ export default function RecipeInfo() {
             <Box
               className={`${fontStyle["quicksand-semibold"]} ${styles["nutrients-container"]}`}
             >
-              <h3>NUTRITION INFORMATION</h3>
+              <Typography variant="h6" fontWeight="fontWeightBold">
+                NUTRITION INFORMATION
+              </Typography>
               {nutritionInfo.map((nutrient, index) => (
                 <Box
                   key={index}
@@ -175,10 +158,15 @@ export default function RecipeInfo() {
               ))}
             </Box>
           </Box>
+          {/* Directions of the recipe */}
           <Box className={styles["directions-container"]}>
-            <h2 className={`${fontStyle["quicksand-bold"]} ${styles["green-font"]}`}>Directions</h2>
-
-            {/* {EXPERIMENTING with grid } */}
+            <Typography
+              variant="h5"
+              fontWeight="fontWeightBold"
+              className={` ${styles["green-font"]}`}
+            >
+              Directions
+            </Typography>
             <Grid container spacing={2}>
               {directions.map((text, index) => (
                 <Grid
@@ -189,11 +177,30 @@ export default function RecipeInfo() {
                   spacing={2}
                   alignItems="center"
                 >
-                  <Grid item className={`${fontStyle["quicksand-bold"]} ${styles["direction-step-item"]}  ${styles["green-font"]}`}>
-                    <StepLabel>{`Step ${index + 1}`}</StepLabel>
+                  <Grid
+                    item
+                    className={`${styles["direction-step-item"]}  ${styles["green-font"]}`}
+                  >
+                    <StepLabel>
+                      <Typography
+                        variant="h6"
+                        fontWeight="fontWeightMedium"
+                        className={` ${styles["green-font"]}`}
+                      >
+                        {`Step ${index + 1}`}
+                      </Typography>
+                    </StepLabel>
                   </Grid>
-                  <Grid item xs className={`${fontStyle["quicksand-bold"]} ${styles["direction-item"]}` }>
-                    <DirectionText>{text}</DirectionText>
+                  <Grid
+                    item
+                    xs
+                    className={`${fontStyle["quicksand-bold"]} ${styles["direction-item"]}`}
+                  >
+                    <DirectionText>
+                      <Typography variant="h6" fontWeight="fontWeightMedium">
+                        {text}
+                      </Typography>
+                    </DirectionText>
                   </Grid>
                 </Grid>
               ))}
@@ -201,8 +208,6 @@ export default function RecipeInfo() {
           </Box>
         </Box>
       </Box>
-
-      {/* MUI */}
     </>
   );
 }
