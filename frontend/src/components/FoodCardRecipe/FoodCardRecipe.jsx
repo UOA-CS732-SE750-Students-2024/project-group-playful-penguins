@@ -23,7 +23,7 @@ export function FoodCardRecipe() {
         className={styles.cardMedia}
       />
       <CardContent className={styles.cardContent}>
-        <Typography gutterBottom component="div" className={styles.title}>
+        <Typography gutterBottom component="div" className={styles.title} fontWeight="fontWeightBold">
           {title}
         </Typography>
         <div className={styles.details}>

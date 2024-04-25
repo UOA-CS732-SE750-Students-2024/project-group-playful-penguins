@@ -11,7 +11,7 @@ export function FoodList() {
 
   return (
     <div className={styles.scrollableContainer}>
-    <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 4 }}>
+    <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       {cards.map((card, index) => (
         <Grid item xs={12} sm={6} md={4} key={index}>
           {isTakeout ? <FoodCardTakeout /> : <FoodCardRecipe />}
