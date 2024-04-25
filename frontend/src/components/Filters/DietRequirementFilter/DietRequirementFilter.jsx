@@ -34,6 +34,13 @@ export function DietRequirementFilter() {
     handleClose();
   };
 
+  const dietRequirements = [
+    { id: "vegan", name: "Vegan" },
+    { id: "glutenFree", name: "Gluten-free" },
+    { id: "lactoseIntolerance", name: "Lactose intolerance" },
+    { id: "glutenIntolerance", name: "Gluten intolerance" },
+  ];
+
   return (
     <Box
       sx={{
@@ -86,22 +93,14 @@ export function DietRequirementFilter() {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={() => handleRequirementSelect("Vegan")}>
-            Vegan
-          </MenuItem>
-          <MenuItem onClick={() => handleRequirementSelect("Gluten-free")}>
-            Gluten-free
-          </MenuItem>
-          <MenuItem
-            onClick={() => handleRequirementSelect("Lactose intolerance")}
-          >
-            Lactose intolerance
-          </MenuItem>
-          <MenuItem
-            onClick={() => handleRequirementSelect("Gluten intolerance")}
-          >
-            Gluten intolerance
-          </MenuItem>
+          {dietRequirements.map((requirement) => (
+            <MenuItem
+              key={requirement.id}
+              onClick={() => handleRequirementSelect(requirement.name)}
+            >
+              {requirement.name}
+            </MenuItem>
+          ))}
         </Menu>
       </Box>
     </Box>

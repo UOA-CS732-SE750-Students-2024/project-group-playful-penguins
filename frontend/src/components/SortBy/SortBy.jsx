@@ -22,6 +22,10 @@ export function SortBy() {
     setSelectedSortByOption(requirement);
     handleClose();
   };
+  const sortByOptions = [
+    { id: "Name(A-Z)", name: "Name(A-Z)" },
+    { id: "Name(Z-A)", name: "Name(Z-A)" },
+  ];
 
   return (
     <Box
@@ -67,12 +71,14 @@ export function SortBy() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => handleSortBySelect("Name(A-Z)")}>
-          Name(A-Z)
-        </MenuItem>
-        <MenuItem onClick={() => handleSortBySelect("Name(Z-A)")}>
-          Name(Z-A)
-        </MenuItem>
+        {sortByOptions.map((sortByOption) => (
+          <MenuItem
+            key={sortByOption.id}
+            onClick={() => handleSortBySelect(sortByOption.name)}
+          >
+            {sortByOption.name}
+          </MenuItem>
+        ))}
       </Menu>
     </Box>
   );
