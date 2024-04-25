@@ -21,12 +21,10 @@
 
 .search-bar {
   flex: 2;
-  background-color: brown;
 }
 
 .sort-by {
   flex: 1;
-  background-color: fuchsia;
 }
 
 .food-list {
