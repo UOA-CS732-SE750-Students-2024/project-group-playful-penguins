@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/home" element={<PageLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="recipe" element={<RecipeInfo />} />
+          <Route path="recipe/:id" element={<RecipeInfo />} />
         </Route>
       </Routes>
     </ThemeProvider>

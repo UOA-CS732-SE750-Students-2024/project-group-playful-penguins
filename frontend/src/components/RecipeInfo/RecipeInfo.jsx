@@ -1,5 +1,6 @@
 import styles from "./RecipeInfo.module.css";
 import * as React from "react";
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import fontStyle from "../../assets/GlobalStyles/CustomFont.module.css";
 import ClockIcon from "../../assets/SVGIconComponents/ClockIcon";
 import ServingsIcon from "../../assets/SVGIconComponents/ServingsIcon";
@@ -19,6 +20,8 @@ const StepLabel = styled("div")({
 });
 
 const DirectionText = styled("div")({});
+
+
 
 const recipeName = "Veggie Yaki Udon";
 const numServings = "2";
@@ -55,8 +58,12 @@ const nutritionInfo = [
   { type: "Total Fat Content", amount: `1.3g` },
 ];
 
+
+
 export default function RecipeInfo() {
+  const { id } = useParams();
   return (
+    
     <>{/* Top-level container */}
       <Box className={styles["top-container"]}>
         <Box className={styles["info-container"]}>
@@ -74,7 +81,7 @@ export default function RecipeInfo() {
             <Box className={styles["basic-info"]}>
              
               <Typography variant="h4" fontWeight="fontWeightBold">
-                {recipeName}
+                {/* {recipeName} */}{id}
               </Typography>
               {/* Timing information */}
               <Box className={styles["time-info"]}>
