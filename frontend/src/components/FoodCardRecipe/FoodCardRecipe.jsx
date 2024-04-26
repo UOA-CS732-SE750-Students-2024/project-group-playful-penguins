@@ -10,26 +10,26 @@ const image = "../../public/images/bowl.png";
 const time = "35";
 const serves = "2";
 
-export function FoodCardRecipe() {
+export function FoodCardRecipe({data}) {
 
   return (
     <Card className={styles.card}>
       <CardMedia
         component="img"
-        image={image}
-        alt={title}
+        image={data.image}
+        alt={data.title}
         className={styles.cardMedia}
       />
       <CardContent className={styles.cardContent}>
         <Typography gutterBottom component="div" className={styles.title}>
-          {title}
+          {data.title}
         </Typography>
         <div className={styles.details}>
           <Typography variant="body2" color="text.secondary">
-            {time} mins
+            {data.readyInMinutes} mins
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Serves {serves}
+            Serves {data.servings}
           </Typography>
         </div>
       </CardContent>
