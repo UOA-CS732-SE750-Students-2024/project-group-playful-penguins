@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
 import TakeoutService from "../../services/TakeoutService";
 import { getRecipes } from '../../services/RecipeService';
+import { Typography } from "@mui/material";
 
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -67,17 +68,29 @@ export function HomePage() {
         </div>
         <div className={styles["food-list"]}>
           {isLoading ? (
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-              }}
-            >
-              <LinearProgress sx={{ width: "80%" }} />
-            </Box>
+             <Box
+             sx={{
+               width: "100%",
+               display: "flex",
+               flexDirection: "column",
+               justifyContent: "center",
+               alignItems: "center",
+               height: "100%",
+               gap: "10px",
+             }}
+           >
+             <Typography variant="h5">
+               Hang in there while we grab that recipe for you!
+             </Typography>
+             <LinearProgress
+               sx={{
+                 width: "80%",
+                 "& .MuiLinearProgress-bar": {
+                   backgroundColor: "#003d38",
+                 },
+               }}
+             />
+           </Box>
           ) : (
             <FoodList foodData={foodData} />
           )}

@@ -20,7 +20,7 @@ export default function LandingPage() {
   }
 
   return (
-    <>
+    <Box className ={styles["top-container"]}>
       <Box className={styles.topbar}>
         <img
           id={styles["logo-icon"]}
@@ -83,6 +83,6 @@ export default function LandingPage() {
           </button>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 }

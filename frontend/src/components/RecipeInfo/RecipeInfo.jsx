@@ -1,9 +1,8 @@
 import styles from "./RecipeInfo.module.css";
-
 import { useState, useEffect, useCallback } from "react";
 import * as React from "react";
 import { getRecipes, getRecipeByID } from "../../services/RecipeService";
-
+import LinearProgress from "@mui/material/LinearProgress";
 import {
   BrowserRouter as Router,
   Routes,
@@ -23,40 +22,13 @@ import {
   Typography,
 } from "@mui/material";
 
+
 const StepLabel = styled("div")({
   fontWeight: "bold",
   marginRight: "8px",
 });
 
 const DirectionText = styled("div")({});
-
-const recipeName = "Veggie Yaki Udon";
-const numServings = "2";
-const prepTime = "25 mins";
-const cookingTime = "20 mins";
-const recipeDescription =
-  "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Facilis eum similique delectus quia minus quaerat cum quibusdamcupiditate. Consequatur corporis mollitia nisi similique? Maximeporro doloremque,voluptatum sapiente, facere velit adipisciipsam optio praesentium perspiciatis, ad quo vitae namreprehenderit?";
-const courseType = ["Dinner", "Lunch"];
-const cuisineType = "Japanese";
-const dietRequirementLabel = "VEGAN";
-const ingredientList = [
-  "2 packs of udon noodles",
-  "2 tablespoons sesame oil",
-  "1 onion, sliced",
-  "1 bell pepper, sliced",
-  "1 cup mushrooms, sliced",
-  "2 tablespoons soy sauce",
-  "1 cup shredded cabbage",
-];
-const directions = [
-  "Prepare the udon noodles according to the package instructions, usually boiling them in water for 3-4 minutes, then drain and set aside.",
-  "Heat the sesame oil in a large pan or wok over medium-high heat.",
-  "Add the sliced onion and bell pepper to the pan. Sauté for about 5 minutes or until the vegetables start to soften.",
-  "Add the mushrooms to the pan and continue to cook for another 3-4 minutes, until all the vegetables are tender and nicely browned.",
-  "Toss in the cooked udon noodles along with the soy sauce. Stir well to combine and ensure the noodles are well coated with the sauce.",
-  "Stir in the shredded cabbage and cook for another 2 minutes, just until the cabbage is slightly wilted but still crunchy.",
-  "Serve hot, garnished with sesame seeds or chopped green onions if desired.",
-];
 
 const nutritionInfo = [
   { type: "Calories Content", amount: `100 kcal` },
@@ -75,7 +47,7 @@ export default function RecipeInfo() {
     try {
       const data = await getRecipeByID(id);
       setRecipe(data);
-      console.log(data);
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -94,8 +66,8 @@ export default function RecipeInfo() {
 
   return (
     <>
-      {recipe ? (
-        <Box className={styles["top-container"]}>
+      <Box className={styles["top-container"]}>
+        {!isLoading && recipe ? (
           <Box className={styles["info-container"]}>
             {/* Recipe name, photo information */}
             <Box className={styles["details-container"]}>
@@ -104,7 +76,7 @@ export default function RecipeInfo() {
               </Box>
               <Box className={styles["basic-info"]}>
                 <Typography variant="h4" fontWeight="fontWeightBold">
-                  {recipe.title }
+                  {recipe.title}
                 </Typography>
                 {/* Timing information */}
                 <Box className={styles["time-info"]}>
@@ -181,9 +153,9 @@ export default function RecipeInfo() {
                 {nutritionInfo.map((nutrient, index) => (
                   <Box
                     key={index}
-                    className={`${fontStyle["quicksand-medium"]} ${styles["nutrients-item"]}`}
+                    className={` ${styles["nutrients-item"]}`}
                   >
-                    {`${nutrient.type}:   ${nutrient.amount}`}
+                    <Typography variant="h6" fontWeight="fontWeightMedium">{`${nutrient.type}:   ${nutrient.amount}`}</Typography>
                   </Box>
                 ))}
               </Box>
@@ -238,10 +210,32 @@ export default function RecipeInfo() {
               </Grid>
             </Box>
           </Box>
-        </Box>
-      ) : (
-        "Loading recipe..."
-      )}
+        ) : (
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+              gap: "10px",
+            }}
+          >
+            <Typography variant="h5">
+              Hang in there while we grab that recipe for you!
+            </Typography>
+            <LinearProgress
+              sx={{
+                width: "80%",
+                "& .MuiLinearProgress-bar": {
+                  backgroundColor: "#003d38",
+                },
+              }}
+            />
+          </Box>
+        )}
+      </Box>
     </>
   );
 }
