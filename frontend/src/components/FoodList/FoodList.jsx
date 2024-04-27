@@ -4,6 +4,7 @@ import { FoodCardTakeout } from "../FoodCardTakeout/FoodCardTakeout";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../providers/AppContextProvider";
 
+
 export function FoodList({foodData}) {
   const { isTakeout } = useContext(AppContext);
   const navigate = useNavigate();

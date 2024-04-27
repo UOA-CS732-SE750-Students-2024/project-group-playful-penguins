@@ -16,4 +16,23 @@ const getRecipes = async () => {
     }
 }
 
-export default { getRecipes };
+const getRecipeByID = async (id) => {
+    try {
+        console.log("trying to communicate")
+        const response = await axios.get(BACKEND_URL + `/recipes/${id}`);
+        
+        
+        console.log(response.data);
+        if (!response.data) {
+            throw new Error('No data from backend');
+        };
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data: ', error);
+    }
+}
+
+
+
+export { getRecipes, getRecipeByID };
+

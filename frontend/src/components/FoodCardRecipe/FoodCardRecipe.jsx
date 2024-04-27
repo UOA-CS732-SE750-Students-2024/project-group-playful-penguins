@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import styles from './FoodCardRecipe.module.css';
 import { useNavigate } from "react-router-dom";
+import Skeleton from 'react-loading-skeleton';
 
 const title = "Burrito bowl with chipotle black beans";
 const image = "../../public/images/bowl.png"; 
@@ -29,11 +30,11 @@ export function FoodCardRecipe({data}) {
       />
       <CardContent className={styles.cardContent}>
         <Typography gutterBottom component="div" className={styles.title}>
-          {data.title}
+          {data.title || Skeleton}
         </Typography>
         <div className={styles.details}>
           <Typography variant="body2" color="text.secondary">
-            {data.readyInMinutes} mins
+            {data.readyInMinutes || Skeleton} mins
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Serves {data.servings}

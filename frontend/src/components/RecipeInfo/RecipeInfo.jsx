@@ -1,6 +1,15 @@
 import styles from "./RecipeInfo.module.css";
+
+import { useState, useEffect, useCallback } from "react";
 import * as React from "react";
-import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import { getRecipes, getRecipeByID } from "../../services/RecipeService";
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useParams,
+} from "react-router-dom";
 import fontStyle from "../../assets/GlobalStyles/CustomFont.module.css";
 import ClockIcon from "../../assets/SVGIconComponents/ClockIcon";
 import ServingsIcon from "../../assets/SVGIconComponents/ServingsIcon";
@@ -20,8 +29,6 @@ const StepLabel = styled("div")({
 });
 
 const DirectionText = styled("div")({});
-
-
 
 const recipeName = "Veggie Yaki Udon";
 const numServings = "2";
@@ -58,163 +65,183 @@ const nutritionInfo = [
   { type: "Total Fat Content", amount: `1.3g` },
 ];
 
-
-
 export default function RecipeInfo() {
   const { id } = useParams();
+  const [recipe, setRecipe] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchRecipe = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const data = await getRecipeByID(id);
+      setRecipe(data);
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    setIsLoading(false);
+  }, [id]);
+
+  useEffect(() => {
+    fetchRecipe();
+  }, []);
+
+  // the data being fetched from API needs to be processed
+  function removeTags(text) {
+    let cleanText = text.replace(/<b>|<\/b>|<a href="[^"]*">|<\/a>/g, "");
+    return cleanText;
+  }
+
   return (
-    
-    <>{/* Top-level container */}
-      <Box className={styles["top-container"]}>
-        <Box className={styles["info-container"]}>
-          {/* Recipe name, photo information */}
-          <Box className={styles["details-container"]}>
-            <Box
-              className={styles["recipe-photo-container"]}
-              src="/images/Yaki-Udon.jpg"
-            >
-              <img
-                className={styles["recipe-photo"]}
-                src="/images/Yaki-Udon.jpg"
-              />
-            </Box>
-            <Box className={styles["basic-info"]}>
-             
-              <Typography variant="h4" fontWeight="fontWeightBold">
-                {/* {recipeName} */}{id}
-              </Typography>
-              {/* Timing information */}
-              <Box className={styles["time-info"]}>
-                <Box id={styles["clock-icon"]}>
-                  <ClockIcon />
-                </Box>
-                <Typography variant="h6" fontWeight="fontWeightMedium">
-                  Prep time {prepTime}
-                </Typography>
-                <Box id={styles["clock-icon"]}>
-                  <ClockIcon />
-                </Box>
-                <Typography variant="h6" fontWeight="fontWeightMedium">
-                  Cook time {cookingTime}
-                </Typography>
+    <>
+      {recipe ? (
+        <Box className={styles["top-container"]}>
+          <Box className={styles["info-container"]}>
+            {/* Recipe name, photo information */}
+            <Box className={styles["details-container"]}>
+              <Box className={styles["recipe-photo-container"]}>
+                <img className={styles["recipe-photo"]} src={recipe.image} />
               </Box>
-              {/* Servings information */}
-              <Box className={styles["servings-info"]}>
-                <Box id={styles["servings-icon"]}>
-                  <ServingsIcon />
+              <Box className={styles["basic-info"]}>
+                <Typography variant="h4" fontWeight="fontWeightBold">
+                  {recipe.title }
+                </Typography>
+                {/* Timing information */}
+                <Box className={styles["time-info"]}>
+                  <Box id={styles["clock-icon"]}>
+                    <ClockIcon />
+                  </Box>
+                  <Typography variant="h6" fontWeight="fontWeightMedium">
+                    Total time taken : {recipe.readyInMinutes} mins
+                  </Typography>
                 </Box>
-                <Typography variant="h6" fontWeight="fontWeightMedium">
+                {/* Servings information */}
+                <Box className={styles["servings-info"]}>
+                  <Box id={styles["servings-icon"]}>
+                    <ServingsIcon />
+                  </Box>
+                  <Typography variant="h6" fontWeight="fontWeightMedium">
+                    {" "}
+                    {recipe.servings} Servings
+                  </Typography>
+                </Box>
+                {/* Recipe detailed description */}
+                <Typography variant="body1" fontWeight="fontWeightMedium">
                   {" "}
-                  {numServings} Servings
+                  {removeTags(recipe.summary)}
                 </Typography>
               </Box>
-              {/* Recipe detailed description */}
-              <Typography variant="body1" fontWeight="fontWeightMedium">
-                {" "}
-                {recipeDescription}
-              </Typography>
             </Box>
-          </Box>
-          {/* Cuisine, dietary requirement information */}
-          <Box className={styles["food-type-container"]}>
-            <Typography variant="h6" fontWeight="fontWeightRegular">
-              <strong>Course : </strong> {`${courseType[0]}, ${courseType[1]}`}
-            </Typography>
-            <Typography variant="h6" fontWeight="fontWeightRegular">
-              <strong>Cuisine : </strong> {cuisineType}
-            </Typography>
-            <Box className={styles["diet-label"]}>
-              <Typography>{dietRequirementLabel}</Typography>
-            </Box>
-          </Box>
-          {/* Ingredients and Nutrition information */}
-          <Box className={styles["section-container"]}>
-            <Box className={styles["ingredients-container"]}>
-              <Typography variant="h5" fontWeight="fontWeightBold">
-                Ingredients
+            {/* Cuisine, dietary requirement information */}
+            <Box className={styles["food-type-container"]}>
+              <Typography variant="h6" fontWeight="fontWeightRegular">
+                <strong>Dish Type: </strong>
+                {recipe && recipe.dishTypes && recipe.dishTypes.length > 0
+                  ? recipe.dishTypes.join(", ")
+                  : "No dish types available"}
               </Typography>
-              <Box
-                className={`${fontStyle["quicksand-regular"]} ${styles["ingredients-list-container"]}`}
-              >
-                <List>
-                  {ingredientList.map((ingredient, index) => (
-                    <ListItem key={index} className={styles["ingredient-item"]}>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">• {ingredient}</Typography>
-                        }
-                      />
-                    </ListItem>
-                  ))}
-                </List>
+              <Typography variant="h6" fontWeight="fontWeightRegular">
+                {recipe.cuisines &&
+                  recipe.cuisines.length > 0 &&
+                  (<strong>Cuisine : </strong>)` ${recipe.cuisines.join(", ")}`}
+              </Typography>
+              <Box className={styles["diet-label"]}>
+                <Typography>{recipe.diets[0]}</Typography>
               </Box>
             </Box>
-            <Box
-              className={`${fontStyle["quicksand-semibold"]} ${styles["nutrients-container"]}`}
-            >
-              <Typography variant="h6" fontWeight="fontWeightBold">
-                NUTRITION INFORMATION
-              </Typography>
-              {nutritionInfo.map((nutrient, index) => (
-                <Box
-                  key={index}
-                  className={`${fontStyle["quicksand-medium"]} ${styles["nutrients-item"]}`}
-                >
-                  {`${nutrient.type}:   ${nutrient.amount}`}
-                </Box>
-              ))}
-            </Box>
-          </Box>
-          {/* Directions of the recipe */}
-          <Box className={styles["directions-container"]}>
-            <Typography
-              variant="h5"
-              fontWeight="fontWeightBold"
-              className={` ${styles["green-font"]}`}
-            >
-              Directions
-            </Typography>
-            <Grid container spacing={2}>
-              {directions.map((text, index) => (
-                <Grid
-                  key={index}
-                  container
-                  item
-                  xs={12}
-                  spacing={2}
-                  alignItems="center"
-                >
-                  <Grid
-                    item
-                    className={`${styles["direction-step-item"]}  ${styles["green-font"]}`}
-                  >
-                    <StepLabel>
-                      <Typography
-                        variant="h6"
-                        fontWeight="fontWeightMedium"
-                        className={` ${styles["green-font"]}`}
+            {/* Ingredients and Nutrition information */}
+            <Box className={styles["section-container"]}>
+              <Box className={styles["ingredients-container"]}>
+                <Typography variant="h5" fontWeight="fontWeightBold">
+                  Ingredients
+                </Typography>
+                <Box className={` ${styles["ingredients-list-container"]}`}>
+                  <List>
+                    {recipe.extendedIngredients.map((ingredient, index) => (
+                      <ListItem
+                        key={index}
+                        className={styles["ingredient-item"]}
                       >
-                        {`Step ${index + 1}`}
-                      </Typography>
-                    </StepLabel>
-                  </Grid>
-                  <Grid
-                    item
-                    xs
-                    className={`${fontStyle["quicksand-bold"]} ${styles["direction-item"]}`}
+                        <ListItemText
+                          primary={
+                            <Typography variant="h6">
+                              • {ingredient.original}
+                            </Typography>
+                          }
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              </Box>
+              <Box className={` ${styles["nutrients-container"]}`}>
+                <Typography variant="h6" fontWeight="fontWeightBold">
+                  NUTRITION INFORMATION
+                </Typography>
+                {nutritionInfo.map((nutrient, index) => (
+                  <Box
+                    key={index}
+                    className={`${fontStyle["quicksand-medium"]} ${styles["nutrients-item"]}`}
                   >
-                    <DirectionText>
-                      <Typography variant="h6" fontWeight="fontWeightMedium">
-                        {text}
-                      </Typography>
-                    </DirectionText>
-                  </Grid>
-                </Grid>
-              ))}
-            </Grid>
+                    {`${nutrient.type}:   ${nutrient.amount}`}
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+            {/* Directions of the recipe */}
+            <Box className={styles["directions-container"]}>
+              <Typography
+                variant="h5"
+                fontWeight="fontWeightBold"
+                className={` ${styles["green-font"]}`}
+              >
+                Directions
+              </Typography>
+              <Grid container spacing={2}>
+                {recipe.analyzedInstructions[0].steps.map(
+                  (direction, index) => (
+                    <Grid
+                      key={index}
+                      container
+                      item
+                      xs={12}
+                      spacing={2}
+                      alignItems="center"
+                    >
+                      <Grid
+                        item
+                        className={`${styles["direction-step-item"]}  ${styles["green-font"]}`}
+                      >
+                        <StepLabel>
+                          <Typography
+                            variant="h6"
+                            fontWeight="fontWeightMedium"
+                            className={` ${styles["green-font"]}`}
+                          >
+                            {`Step ${index + 1}`}
+                          </Typography>
+                        </StepLabel>
+                      </Grid>
+                      <Grid item xs className={` ${styles["direction-item"]}`}>
+                        <DirectionText>
+                          <Typography
+                            variant="h6"
+                            fontWeight="fontWeightMedium"
+                          >
+                            {direction.step}
+                          </Typography>
+                        </DirectionText>
+                      </Grid>
+                    </Grid>
+                  )
+                )}
+              </Grid>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      ) : (
+        "Loading recipe..."
+      )}
     </>
   );
 }

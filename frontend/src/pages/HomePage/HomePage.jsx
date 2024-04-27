@@ -6,8 +6,8 @@ import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
-import RecipesService from "../../services/RecipeService";
 import TakeoutService from "../../services/TakeoutService";
+import { getRecipes } from '../../services/RecipeService';
 
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -22,7 +22,7 @@ export function HomePage() {
   const fetchRecipeData = async () => {
     setIsLoading(true);
     try {
-      const data = await RecipesService.getRecipes();
+      const data = await getRecipes();
       setFoodData(data);
       console.log(data);
     } catch (error) {
