@@ -46,7 +46,6 @@ const getRecipeByID = async (req, res) => {
     let recipe = await db
       .collection("recipes")
       .findOne({ id: recipeID }, { projection: fieldsToRetrieve });
-
     res.json(recipe);
   } catch (error) {
     console.error("Error: ", error);
