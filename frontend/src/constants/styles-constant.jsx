@@ -45,10 +45,11 @@ export const FILTERS = {
     INITIAL_VALUE: "Choose a diet requirement",
     STATE_KEY: "selectedRequirement",
     OPTIONS: [
-      { id: "vegan", name: "Vegan" },
-      { id: "glutenFree", name: "Gluten-free" },
-      { id: "lactoseIntolerance", name: "Lactose intolerance" },
-      { id: "glutenIntolerance", name: "Gluten intolerance" },
+      { id: "vegetarian", name: "Vegetarian", urlKey: "vegetarian" },
+      { id: "vegan", name: "Vegan", urlKey: "vegan" },
+      { id: "glutenFree", name: "Gluten-free", urlKey: "glutenFree" },
+      { id: "dairyFree", name: "Dairy-free", urlKey: "dairyFree" },
+      { id: "lowFODMAP", name: "Low FODMAP", urlKey: "lowFodmap" },
     ],
   },
 };

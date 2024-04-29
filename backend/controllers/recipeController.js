@@ -46,11 +46,26 @@ const getRecipeByID = async (req, res) => {
     let recipe = await db
       .collection("recipes")
       .findOne({ id: recipeID }, { projection: fieldsToRetrieve });
-
     res.json(recipe);
   } catch (error) {
     console.error("Error: ", error);
   }
 };
 
-export { getRecipes, getRecipeByID };
+const getFilteredRecipes = async (req, res) => {
+  try {
+    let db = await connectToDatabase(process.env.DB_NAME);
+    let query = {};
+
+    if (req.query.dietRequirement) {
+      query[req.query.dietRequirement] = true;
+    }
+
+    let recipes = await db.collection("recipes").find(query).toArray();
+    res.json(recipes);
+  } catch (error) {
+    console.error("Error: ", error);
+  }
+};
+
+export { getRecipes, getRecipeByID, getFilteredRecipes };

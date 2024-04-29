@@ -88,7 +88,7 @@ export function DietRequirementFilter() {
           {filterConfig.OPTIONS.map((requirement) => (
             <MenuItem
               key={requirement.id}
-              onClick={() => handleRequirementSelect(requirement.name)}
+              onClick={() => handleRequirementSelect(requirement.urlKey)}
             >
               {requirement.name}
             </MenuItem>
