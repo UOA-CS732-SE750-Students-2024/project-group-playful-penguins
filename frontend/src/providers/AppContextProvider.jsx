@@ -11,23 +11,22 @@ export function AppContextProvider({ children }) {
     cookingTimeValues: FILTERS.COOKING_TIME.INITIAL_VALUE,
     priceValues: FILTERS.PRICE.INITIAL_VALUE,
     deliveryTimeValues: FILTERS.DELIVERY_TIME.INITIAL_VALUE,
-    selectedRequirement: "Choose a diet requirement",
+    selectedRequirement: FILTERS.DIET_REQUIREMENT.INITIAL_VALUE,
   });
 
   const [selectedSortByOption, setSelectedSortByOption] = useState("Sort By");
-  const [isRequirementSelected, setIsRequirementSelected] = useState(false);
 
   const changeCategory = (boolean) => setTakeout(boolean);
 
   const context = {
     isTakeout,
     changeCategory,
+
     filters,
     setFilters,
+
     selectedSortByOption,
     setSelectedSortByOption,
-    isRequirementSelected,
-    setIsRequirementSelected,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
