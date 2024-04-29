@@ -71,7 +71,13 @@ export function DietRequirementFilter() {
           }}
           endIcon={isRequirementSelected ? null : <KeyboardArrowDownIcon />}
         >
-          {filters[stateKey]}
+          {/* Since we are not storing the name of the diet requirement, so we need to use the filters (from app 
+              context), to retrieve the name of the selected diet requirement. */}
+          {filters[stateKey] !== filterConfig.INITIAL_VALUE
+            ? FILTERS.DIET_REQUIREMENT.OPTIONS.find(
+                (option) => option.urlKey === filters[stateKey]
+              )?.name
+            : filters[stateKey]}
         </Button>
         <Menu
           MenuListProps={{
