@@ -4,8 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import RecipeInfo from "./components/RecipeInfo/RecipeInfo";
 import { createTheme, ThemeProvider } from "@mui/material";
-
-
 const theme = createTheme({
   typography: {
     fontFamily: '"Quicksand", sans-serif',
@@ -16,7 +14,6 @@ const theme = createTheme({
   },
 });
 
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -24,7 +21,7 @@ function App() {
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/home" element={<PageLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="recipe" element={<RecipeInfo />} />
+          <Route path="recipe/:id" element={<RecipeInfo />} />
         </Route>
       </Routes>
     </ThemeProvider>
