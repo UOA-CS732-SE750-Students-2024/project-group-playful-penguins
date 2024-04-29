@@ -40,4 +40,15 @@ export const FILTERS = {
     MIN_AND_MAX_VALUE: [0, 14],
     STATE_KEY: "deliveryTimeValues",
   },
+  DIET_REQUIREMENT: {
+    NAME: "Diet Requirement",
+    INITIAL_VALUE: "Choose a diet requirement",
+    STATE_KEY: "selectedRequirement",
+    OPTIONS: [
+      { id: "vegan", name: "Vegan" },
+      { id: "glutenFree", name: "Gluten-free" },
+      { id: "lactoseIntolerance", name: "Lactose intolerance" },
+      { id: "glutenIntolerance", name: "Gluten intolerance" },
+    ],
+  },
 };
