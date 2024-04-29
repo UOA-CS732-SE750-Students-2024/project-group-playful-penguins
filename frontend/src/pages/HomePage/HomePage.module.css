@@ -16,7 +16,6 @@
 .search-and-sort-panel {
   display: flex;
   flex-direction: row;
-  max-height: 150px;
   flex: 1;
 }
 
