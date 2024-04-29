@@ -53,4 +53,33 @@ const getRecipeByID = async (req, res) => {
   }
 };
 
-export { getRecipes, getRecipeByID };
+
+
+const getRecipesByScroll = async (req, res) => {
+  const pageSize = 5; 
+  const page = parseInt(req.query.page) || 1; 
+  console.log("here")
+  console.log(page)
+  try {
+    let db = await connectToDatabase(process.env.DB_NAME);
+    const fieldsToRetrieve = {
+      id: 1,
+      title: 1,
+      servings: 1,
+      readyInMinutes: 1,
+      image: 1,
+    };
+    let recipes = await db
+      .collection("recipes")
+      .find()
+      .project(fieldsToRetrieve)
+      .skip((page - 1) * pageSize)
+      .limit(pageSize)
+      .toArray();
+    res.json(recipes);
+  } catch (error) {
+    console.error("Error: ", error);
+  }
+};
+
+export { getRecipes, getRecipeByID, getRecipesByScroll };
