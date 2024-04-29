@@ -1,10 +1,11 @@
-import asyncHandler from "express-async-handler";
 import connectToDatabase from "../config/db.js";
 import dotenv from "dotenv";
+import { getSortCriteria } from "../functions/getSortCriteria.js";
+import { getDietRequirement } from "../functions/getDietRequirement.js";
 
 dotenv.config();
 
-const getRecipes = async (event) => {
+const getRecipes = async (req, res) => {
   try {
     let db = await connectToDatabase(process.env.DB_NAME);
     const fieldsToRetrieve = {
@@ -14,12 +15,14 @@ const getRecipes = async (event) => {
       readyInMinutes: 1,
       image: 1,
     };
+    const sortCriteria = getSortCriteria(req);
     let recipes = await db
       .collection("recipes")
       .find()
+      .sort(sortCriteria)
       .project(fieldsToRetrieve)
       .toArray();
-    event.res.json(recipes);
+    res.json(recipes);
   } catch (error) {
     console.error("Error: ", error);
   }
@@ -55,13 +58,13 @@ const getRecipeByID = async (req, res) => {
 const getFilteredRecipes = async (req, res) => {
   try {
     let db = await connectToDatabase(process.env.DB_NAME);
-    let query = {};
-
-    if (req.query.dietRequirement) {
-      query[req.query.dietRequirement] = true;
-    }
-
-    let recipes = await db.collection("recipes").find(query).toArray();
+    const sortCriteria = getSortCriteria(req);
+    const query = getDietRequirement(req);
+    let recipes = await db
+      .collection("recipes")
+      .find(query)
+      .sort(sortCriteria)
+      .toArray();
     res.json(recipes);
   } catch (error) {
     console.error("Error: ", error);
