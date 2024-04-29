@@ -26,7 +26,6 @@ const getFilteredRecipes = async (filters) => {
     ) {
       url += `?dietRequirement=${filters[FILTERS.DIET_REQUIREMENT.STATE_KEY]}`;
     }
-    console.log(url);
     const response = await axios.get(url);
     if (!response.data) {
       throw new Error("No data from backend");
