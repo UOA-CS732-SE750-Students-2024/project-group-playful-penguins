@@ -1,10 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
 import { Box, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 export function SearchBar() {
-  const { isTakeout } = useContext(AppContext);
+  const { isTakeout, searchTerm, setSearchTerm } = useContext(AppContext);
+  const inputEl = useRef(null);
+
+  useEffect(
+    function () {
+      function callback(e) {
+        if (document.activeElement === inputEl.current) return;
+
+        if (e.code === "Enter") {
+          inputEl.current.focus();
+        }
+      }
+
+      document.addEventListener("keydown", callback);
+      return () => document.addEventListener("keydown", callback);
+    },
+    [setSearchTerm]
+  );
 
   return (
     <Box
@@ -16,6 +33,9 @@ export function SearchBar() {
       }}
     >
       <TextField
+        onChange={(e) => setSearchTerm(e.target.value)}
+        value={searchTerm}
+        ref={inputEl}
         variant="outlined"
         placeholder="Search for recipes"
         fullWidth

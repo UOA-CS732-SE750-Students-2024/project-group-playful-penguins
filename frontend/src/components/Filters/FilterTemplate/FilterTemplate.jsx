@@ -63,7 +63,7 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
         onChange={handleSliderChange}
         valueLabelDisplay="auto"
         min={0}
-        max={100}
+        max={1000}
       />
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1 }}>
         <StyledTextField

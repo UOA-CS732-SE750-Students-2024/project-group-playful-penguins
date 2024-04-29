@@ -6,7 +6,7 @@ export function AppContextProvider({ children }) {
   const [isTakeout, setTakeout] = useState(false);
   const changeCategory = (boolean) => setTakeout(boolean);
   const [calorieCountValuesFilter, setCalorieCountValuesFilter] = useState([
-    20, 50,
+    100, 900,
   ]);
   const [prepTimeValuesFilter, setPrepTimeValuesFilter] = useState([20, 50]);
   const [cookingTimeValuesFilter, setCookingTimeValuesFilter] = useState([
@@ -16,11 +16,13 @@ export function AppContextProvider({ children }) {
   const [deliveryTimeValuesFilter, setDeliveryTimeValuesFilter] = useState([
     20, 50,
   ]);
-  const [selectedRequirement, setSelectedRequirement] = useState(
-    "Choose a diet requirement"
-  );
+  const [selectedRequirement, setSelectedRequirement] = useState("");
   const [selectedSortByOption, setSelectedSortByOption] = useState("Sort By");
   const [isRequirementSelected, setIsRequirementSelected] = useState(false);
+
+  const [takeouts, setTakeouts] = useState([]);
+
+  const [searchTerm, setSearchTerm] = useState([]);
 
   const context = {
     isTakeout,
@@ -41,6 +43,10 @@ export function AppContextProvider({ children }) {
     setSelectedSortByOption,
     isRequirementSelected,
     setIsRequirementSelected,
+    takeouts,
+    setTakeouts,
+    searchTerm,
+    setSearchTerm,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

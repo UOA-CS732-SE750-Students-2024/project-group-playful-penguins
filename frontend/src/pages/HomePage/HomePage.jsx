@@ -1,28 +1,56 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FilterPanel } from "../../components/FilterPanel/FilterPanel";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { SortBy } from "../../components/SortBy/SortBy";
 import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
-import RecipesService from "../../services/RecipeService";
+import { AppContext } from "../../providers/AppContextProvider";
+import TakeoutService from "../../services/TakeoutService";
+import { getRecipes } from "../../services/RecipeService";
+import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export function HomePage() {
+  const { isTakeout, setTakeouts } = useContext(AppContext);
 
-  const [recipeData, setRecipeData] = useState(null);
+  const [foodData, setFoodData] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchRecipeData = async () => {
-    setIsLoading(true);
-    try {
-      const data = await RecipesService.getRecipes();
-      setRecipeData(data);
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-    setIsLoading(false);
-  };
+  // const fetchRecipeData = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const data = await getRecipes();
+  //     setFoodData(data);
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  //   setIsLoading(false);
+  // };
+
+  // const fetchTakeoutData = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const data = await TakeoutService.getTakeouts();
+  //     setFoodData(data);
+  //     setTakeouts(data);
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  //   setIsLoading(false);
+  // };
+
+  // useEffect(() => {
+  //   if (isTakeout) {
+  //     fetchTakeoutData();
+  //   } else {
+  //     fetchRecipeData();
+  //   }
+  // }, [isTakeout]);
 
   return (
     <div className={styles["home-container"]}>
@@ -39,7 +67,33 @@ export function HomePage() {
           </div>
         </div>
         <div className={styles["food-list"]}>
-          <FoodList />
+          {isLoading ? (
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+                gap: "10px",
+              }}
+            >
+              <Typography variant="h5">
+                Hang in there while we grab that recipe for you!
+              </Typography>
+              <LinearProgress
+                sx={{
+                  width: "80%",
+                  "& .MuiLinearProgress-bar": {
+                    backgroundColor: "#003d38",
+                  },
+                }}
+              />
+            </Box>
+          ) : (
+            <FoodList foodData={foodData} />
+          )}
         </div>
       </div>
     </div>
