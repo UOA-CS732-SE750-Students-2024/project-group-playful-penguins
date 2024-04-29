@@ -1,15 +1,37 @@
 import axios from "axios";
+import { FILTERS } from "../constants/styles-constant";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const getRecipes = async (filters) => {
+const getRecipes = async () => {
   try {
     const response = await axios.get(BACKEND_URL + "/recipes/");
     if (!response.data) {
       throw new Error("No data from backend");
     }
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    return [];
+  }
+};
+
+const getFilteredRecipes = async (filters) => {
+  try {
+    let url = `${BACKEND_URL}/recipes/filter`;
+
+    if (
+      filters[FILTERS.DIET_REQUIREMENT.STATE_KEY] !==
+      FILTERS.DIET_REQUIREMENT.INITIAL_VALUE
+    ) {
+      url += `?dietRequirement=${filters[FILTERS.DIET_REQUIREMENT.STATE_KEY]}`;
+    }
+    console.log(url);
+    const response = await axios.get(url);
+    if (!response.data) {
+      throw new Error("No data from backend");
+    }
     const recipes = response.data;
-    console.log(recipes);
     const filteredRecipes = recipes.filter((recipe) => {
       return (
         // TODO Filter feature is implemented, but preparation time, calorie count and cooking time are supported
@@ -18,7 +40,6 @@ const getRecipes = async (filters) => {
         recipe.pricePerServing <= filters.prepTimeValues[1]
       );
     });
-    console.log(filteredRecipes);
     return filteredRecipes;
   } catch (error) {
     console.error("Error fetching data: ", error);
