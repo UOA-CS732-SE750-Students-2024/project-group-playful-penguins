@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FILTERS } from "../constants/styles-constant";
+import { FILTERS, SORT_BY } from "../constants/styles-constant";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -34,7 +34,7 @@ const getFilteredRecipes = async (filters, selectedSortByOption) => {
       url += `?dietRequirement=${filters[FILTERS.DIET_REQUIREMENT.STATE_KEY]}`;
     }
 
-    if (selectedSortByOption.key !== "initialValue") {
+    if (selectedSortByOption !== SORT_BY.INITIAL_VALUE) {
       url += `&sortBy=${selectedSortByOption.sortBy}&sortOrder=${selectedSortByOption.sortOrder}`;
     }
 
