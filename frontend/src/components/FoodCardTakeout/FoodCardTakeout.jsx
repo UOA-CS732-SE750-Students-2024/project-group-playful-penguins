@@ -8,6 +8,7 @@ import styles from "./FoodCardTakeout.module.css";
 import { ExpandedTakeoutCard } from "../../components/ExpandedTakeoutCard/ExpandedTakeoutCard";
 import { useState } from "react";
 import { Box } from "@mui/material";
+import Zoom from "@mui/material/Zoom";
 
 const title = "Garden Veggie Pita";
 const image = "../../public/images/pita.png";
@@ -52,7 +53,11 @@ export function FoodCardTakeout() {
         open={openTakeoutCard}
         onClose={handleClose}
       >
-        <ExpandedTakeoutCard handleClose={handleClose} />
+        <Zoom in={openTakeoutCard}>
+          <Box>
+            <ExpandedTakeoutCard handleClose={handleClose} />
+          </Box>
+        </Zoom>
       </Modal>
     </Box>
   );
