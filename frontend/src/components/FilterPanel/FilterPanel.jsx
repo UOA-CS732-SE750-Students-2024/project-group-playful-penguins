@@ -7,31 +7,22 @@ import { CookingTimeFilter } from "../Filters/CookingTimeFilter/CookingTimeFilte
 import { DeliveryTimeFilter } from "../Filters/DeliveryTimeFilter/DeliveryTimeFilter";
 import { PriceFilter } from "../Filters/PriceFilter/PriceFilter";
 import { Box, Button } from "@mui/material";
-import { colors } from "../../constants/styles-constant";
+import { colors, FILTERS } from "../../constants/styles-constant";
 
 export function FilterPanel() {
-  const { isTakeout } = useContext(AppContext);
-  const {
-    setCalorieCountValuesFilter,
-    setPrepTimeValuesFilter,
-    setCookingTimeValuesFilter,
-    setPriceValuesFilter,
-    setDeliveryTimeValuesFilter,
-    setSelectedRequirement,
-    setSelectedSortByOption,
-    setIsRequirementSelected,
-  } = useContext(AppContext);
+  const { isTakeout, setFilters } = useContext(AppContext);
 
   const handleReset = () => {
-    // Reset all filters to their initial values
-    setCalorieCountValuesFilter([20, 50]);
-    setPrepTimeValuesFilter([20, 50]);
-    setCookingTimeValuesFilter([20, 50]);
-    setPriceValuesFilter([20, 50]);
-    setDeliveryTimeValuesFilter([20, 50]);
-    setSelectedRequirement("Choose a diet requirement");
-    setSelectedSortByOption("Sort By");
-    setIsRequirementSelected(false);
+    // Create a new object to hold the reset filters
+    const resetFilters = {};
+
+    // Iterate over the keys in FILTERS
+    Object.keys(FILTERS).forEach((key) => {
+      // Assign the initial value from FILTERS to the corresponding state key
+      resetFilters[FILTERS[key].STATE_KEY] = FILTERS[key].INITIAL_VALUE;
+    });
+
+    setFilters(resetFilters);
   };
 
   return (
