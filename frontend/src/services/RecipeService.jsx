@@ -3,12 +3,19 @@ import { FILTERS } from "../constants/styles-constant";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const getRecipes = async () => {
+const getRecipes = async (selectedSortByOption) => {
   try {
-    const response = await axios.get(BACKEND_URL + "/recipes/");
+    const url = `${BACKEND_URL}/recipes`;
+    if (selectedSortByOption.key !== "initialValue") {
+      url += `?sortBy=${selectedSortByOption.sortBy}&sortOrder=${selectedSortByOption.sortOrder}`;
+    }
+
+    const response = await axios.get(url);
+
     if (!response.data) {
       throw new Error("No data from backend");
     }
+
     return response.data;
   } catch (error) {
     console.error("Error fetching data: ", error);
@@ -16,7 +23,7 @@ const getRecipes = async () => {
   }
 };
 
-const getFilteredRecipes = async (filters) => {
+const getFilteredRecipes = async (filters, selectedSortByOption) => {
   try {
     let url = `${BACKEND_URL}/recipes/filter`;
 
@@ -26,10 +33,16 @@ const getFilteredRecipes = async (filters) => {
     ) {
       url += `?dietRequirement=${filters[FILTERS.DIET_REQUIREMENT.STATE_KEY]}`;
     }
+
+    if (selectedSortByOption.key !== "initialValue") {
+      url += `&sortBy=${selectedSortByOption.sortBy}&sortOrder=${selectedSortByOption.sortOrder}`;
+    }
+
     const response = await axios.get(url);
     if (!response.data) {
       throw new Error("No data from backend");
     }
+
     const recipes = response.data;
     const filteredRecipes = recipes.filter((recipe) => {
       return (
