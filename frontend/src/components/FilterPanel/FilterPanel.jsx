@@ -12,7 +12,8 @@ import { LoadingButton } from "@mui/lab";
 import { getFilteredRecipes } from "../../services/RecipeService";
 
 export function FilterPanel() {
-  const { isTakeout, filters, setFilters } = useContext(AppContext);
+  const { isTakeout, filters, setFilters, selectedSortByOption } =
+    useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleApplyFilters = async (event) => {
@@ -21,7 +22,10 @@ export function FilterPanel() {
 
     setIsLoading(true);
     try {
-      const data = await getFilteredRecipes(filters);
+      const data = await RecipesService.getFilteredRecipes(
+        filters,
+        selectedSortByOption
+      );
       console.log(data);
     } catch (error) {
       console.error("Error fetching filtered recipes:", error);

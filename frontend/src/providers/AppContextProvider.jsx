@@ -14,7 +14,12 @@ export function AppContextProvider({ children }) {
     selectedRequirement: FILTERS.DIET_REQUIREMENT.INITIAL_VALUE,
   });
 
-  const [selectedSortByOption, setSelectedSortByOption] = useState("Sort By");
+  const [selectedSortByOption, setSelectedSortByOption] = useState({
+    key: "initialValue",
+    name: "Sort by",
+    sortBy: "",
+    sortOrder: "",
+  });
 
   const changeCategory = (boolean) => setTakeout(boolean);
 

@@ -18,13 +18,24 @@ export function SortBy() {
     setAnchorEl(null);
   };
 
-  const handleSortBySelect = (requirement) => {
-    setSelectedSortByOption(requirement);
+  const handleSortBySelect = (selectedOption) => {
+    setSelectedSortByOption(selectedOption);
     handleClose();
+    console.log(selectedOption);
   };
   const sortByOptions = [
-    { id: "Name(A-Z)", name: "Name(A-Z)" },
-    { id: "Name(Z-A)", name: "Name(Z-A)" },
+    {
+      key: "titleAlphabeticalOrder",
+      name: "Name(A-Z)",
+      sortBy: "title",
+      sortOrder: "asc",
+    },
+    {
+      key: "titleReverseAlphabeticalOrder",
+      name: "Name(Z-A)",
+      sortBy: "title",
+      sortOrder: "desc",
+    },
   ];
 
   return (
@@ -57,7 +68,7 @@ export function SortBy() {
         }}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        {selectedSortByOption}
+        {selectedSortByOption.name}
       </Button>
       <Menu
         MenuListProps={{
@@ -73,8 +84,8 @@ export function SortBy() {
       >
         {sortByOptions.map((sortByOption) => (
           <MenuItem
-            key={sortByOption.id}
-            onClick={() => handleSortBySelect(sortByOption.name)}
+            key={sortByOption.key}
+            onClick={() => handleSortBySelect(sortByOption)}
           >
             {sortByOption.name}
           </MenuItem>
