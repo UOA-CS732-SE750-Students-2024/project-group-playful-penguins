@@ -53,3 +53,26 @@ export const FILTERS = {
     ],
   },
 };
+
+export const SORT_BY = {
+  INITIAL_VALUE: {
+    key: "initialValue",
+    name: "Sort by",
+    sortBy: "",
+    sortOrder: "",
+  },
+  OPTIONS: [
+    {
+      key: "titleAlphabeticalOrder",
+      name: "Name(A-Z)",
+      sortBy: "title",
+      sortOrder: "asc",
+    },
+    {
+      key: "titleReverseAlphabeticalOrder",
+      name: "Name(Z-A)",
+      sortBy: "title",
+      sortOrder: "desc",
+    },
+  ],
+};

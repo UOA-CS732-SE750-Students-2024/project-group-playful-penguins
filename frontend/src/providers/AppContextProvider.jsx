@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FILTERS } from "../constants/styles-constant";
+import { FILTERS, SORT_BY } from "../constants/styles-constant";
 
 export const AppContext = React.createContext({});
 
@@ -14,12 +14,9 @@ export function AppContextProvider({ children }) {
     selectedRequirement: FILTERS.DIET_REQUIREMENT.INITIAL_VALUE,
   });
 
-  const [selectedSortByOption, setSelectedSortByOption] = useState({
-    key: "initialValue",
-    name: "Sort by",
-    sortBy: "",
-    sortOrder: "",
-  });
+  const [selectedSortByOption, setSelectedSortByOption] = useState(
+    SORT_BY.INITIAL_VALUE
+  );
 
   const changeCategory = (boolean) => setTakeout(boolean);
 

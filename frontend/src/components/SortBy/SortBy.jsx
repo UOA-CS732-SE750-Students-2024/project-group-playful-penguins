@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Menu, MenuItem, Button, Typography, Box } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { colors } from "../../constants/styles-constant";
+import { colors, SORT_BY } from "../../constants/styles-constant";
 import { AppContext } from "../../providers/AppContextProvider";
 
 export function SortBy() {
@@ -21,22 +21,8 @@ export function SortBy() {
   const handleSortBySelect = (selectedOption) => {
     setSelectedSortByOption(selectedOption);
     handleClose();
-    console.log(selectedOption);
   };
-  const sortByOptions = [
-    {
-      key: "titleAlphabeticalOrder",
-      name: "Name(A-Z)",
-      sortBy: "title",
-      sortOrder: "asc",
-    },
-    {
-      key: "titleReverseAlphabeticalOrder",
-      name: "Name(Z-A)",
-      sortBy: "title",
-      sortOrder: "desc",
-    },
-  ];
+  const sortByOptions = SORT_BY.OPTIONS;
 
   return (
     <Box
