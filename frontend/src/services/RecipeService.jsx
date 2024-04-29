@@ -1,15 +1,13 @@
 import axios from "axios";
-import { FILTERS, SORT_BY } from "../constants/styles-constant";
+import { getSortQuery } from "./getQuery/getSortQuery";
+import { getFilterQuery } from "./getQuery/getFilterQuery";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const getRecipes = async (selectedSortByOption) => {
   try {
-    const url = `${BACKEND_URL}/recipes`;
-    if (selectedSortByOption.key !== "initialValue") {
-      url += `?sortBy=${selectedSortByOption.sortBy}&sortOrder=${selectedSortByOption.sortOrder}`;
-    }
-
+    const sortQuery = getSortQuery(selectedSortByOption);
+    const url = `${BACKEND_URL}/recipes?${sortQuery}`;
     const response = await axios.get(url);
 
     if (!response.data) {
@@ -25,19 +23,9 @@ const getRecipes = async (selectedSortByOption) => {
 
 const getFilteredRecipes = async (filters, selectedSortByOption) => {
   try {
-    let url = `${BACKEND_URL}/recipes/filter`;
-
-    if (
-      filters[FILTERS.DIET_REQUIREMENT.STATE_KEY] !==
-      FILTERS.DIET_REQUIREMENT.INITIAL_VALUE
-    ) {
-      url += `?dietRequirement=${filters[FILTERS.DIET_REQUIREMENT.STATE_KEY]}`;
-    }
-    console.log(url);
-
-    if (selectedSortByOption !== SORT_BY.INITIAL_VALUE) {
-      url += `&sortBy=${selectedSortByOption.sortBy}&sortOrder=${selectedSortByOption.sortOrder}`;
-    }
+    const filterQuery = getFilterQuery(filters);
+    const sortQuery = getSortQuery(selectedSortByOption);
+    const url = `${BACKEND_URL}/recipes/filter?${filterQuery}&${sortQuery}`;
 
     const response = await axios.get(url);
     if (!response.data) {
