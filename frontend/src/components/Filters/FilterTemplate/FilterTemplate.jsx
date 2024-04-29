@@ -1,8 +1,11 @@
 import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
 import { AppContext } from "../../../providers/AppContextProvider";
-import { colors } from "../../../constants/styles-constant";
+import colors from "../../../constants/styles-constant";
 import { StyledSlider, StyledTextField } from "../../../theme-overrides";
 
 export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
@@ -62,8 +65,8 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
         value={filterValue}
         onChange={handleSliderChange}
         valueLabelDisplay="auto"
-        min={0}
-        max={100}
+        min={0} // Set a minimum value for the slider
+        max={100} // Set a maximum value for the slider
       />
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1 }}>
         <StyledTextField
@@ -72,8 +75,8 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
           size="small"
           value={minValue}
           onChange={handleMinChange}
-          inputProps={{ readOnly: true }}
-          sx={{ flex: 1, color: "black" }}
+          inputProps={{ readOnly: true }} // Make TextField read-only
+          sx={{ flex: 1 }} // Allow the text field to grow
         />
         <Typography variant="h6" component="span" sx={{ alignSelf: "center" }}>
           —
@@ -84,8 +87,8 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
           size="small"
           value={maxValue}
           onChange={handleMaxChange}
-          inputProps={{ readOnly: true }}
-          sx={{ flex: 1, color: "black" }}
+          sx={{ flex: 1 }} // Allow the text field to grow
+          inputProps={{ readOnly: true }} // Make TextField read-only
         />
       </Box>
     </Box>
