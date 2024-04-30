@@ -132,7 +132,7 @@ const getRecipeBySearch = asyncHandler(async (req, res) => {
 // @desc    Fetch all recipes by search terms and filters (paginated)
 // @route   GET /api/recipes/search/q?key=value&pageNo=1
 // @access  Public
-// http://localhost:8000/api/recipes/search/q?title=Spicy&pageNo=1
+// http://localhost:8000/api/recipes/search/q?title=Spicy&pageNo=1&sort=asc
 const getPaginateRecipe = asyncHandler(async (req, res) => {
   const pageSize = 9; //todo - put in env
   const page = Number(req.query.pageNo) || 1;
@@ -143,9 +143,11 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
     maxCalorie,
     minCookingTime,
     maxCookingTime,
+    sort,
   } = req.query;
 
   let query = {};
+  let sortQuery = {};
 
   if (title) {
     query.title = { $regex: title, $options: "i" };
@@ -163,13 +165,20 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
     query.readyInMinutes = { $gte: minCookingTime, $lte: maxCookingTime };
   }
 
+  if (sort) {
+    sortQuery = { title: sort };
+  } else {
+    sortQuery = { title: "asc" };
+  }
+
   const count = await Recipe.countDocuments({ ...query });
   const recipes = await Recipe.find(
     { ...query },
     { id: 1, title: 1, servings: 1, readyInMinutes: 1, image: 1 }
   )
     .limit(pageSize)
-    .skip(pageSize * (page - 1));
+    .skip(pageSize * (page - 1))
+    .sort(sortQuery);
 
   res.json({ recipes, page, pages: Math.ceil(count / pageSize) });
 });

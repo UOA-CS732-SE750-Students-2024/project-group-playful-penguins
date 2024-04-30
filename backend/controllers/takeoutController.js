@@ -85,7 +85,7 @@ const getTakeoutBySearch = asyncHandler(async (req, res) => {
 // @desc    Fetch all takeout by search terms and filters (paginated)
 // @route   GET /api/takeouts/search/q?key=value&pageNo=1
 // @access  Public
-// http://localhost:8000/api/takeouts/search/q?dish_name=Spicy&pageNo=1
+// http://localhost:8000/api/takeouts/search/q?title=Spicy&pageNo=1&sort=asc
 const getPaginateTakeouts = asyncHandler(async (req, res) => {
   const pageSize = 9; //todo - put in env
   const page = Number(req.query.pageNo) || 1;
@@ -99,9 +99,11 @@ const getPaginateTakeouts = asyncHandler(async (req, res) => {
     maxPrice,
     minDeliveryTime,
     maxDeliveryTime,
+    sort,
   } = req.query;
 
   let query = {};
+  let sortQuery = {};
 
   if (title) {
     query.dish_name = { $regex: title, $options: "i" };
@@ -123,10 +125,17 @@ const getPaginateTakeouts = asyncHandler(async (req, res) => {
     query.delivery_time = { $gte: minDeliveryTime, $lte: maxDeliveryTime };
   }
 
+  if (sort) {
+    sortQuery = { dish_name: sort };
+  } else {
+    sortQuery = { dish_name: "asc" };
+  }
+
   const count = await Takeout.countDocuments({ ...query });
   const takeouts = await Takeout.find({ ...query })
     .limit(pageSize)
-    .skip(pageSize * (page - 1));
+    .skip(pageSize * (page - 1))
+    .sort(sortQuery);
 
   res.json({ takeouts, page, pages: Math.ceil(count / pageSize) });
 });
