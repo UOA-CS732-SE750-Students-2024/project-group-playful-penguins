@@ -8,8 +8,8 @@ import { DeliveryTimeFilter } from "../Filters/DeliveryTimeFilter/DeliveryTimeFi
 import { PriceFilter } from "../Filters/PriceFilter/PriceFilter";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { colors, FILTERS } from "../../constants/styles-constant";
-import RecipesService from "../../services/RecipeService";
 import { LoadingButton } from "@mui/lab";
+import { getFilteredRecipes } from "../../services/RecipeService";
 
 export function FilterPanel() {
   const { isTakeout, filters, setFilters, selectedSortByOption } =
@@ -22,10 +22,7 @@ export function FilterPanel() {
 
     setIsLoading(true);
     try {
-      const data = await RecipesService.getFilteredRecipes(
-        filters,
-        selectedSortByOption
-      );
+      const data = await getFilteredRecipes(filters, selectedSortByOption);
       console.log(data);
     } catch (error) {
       console.error("Error fetching filtered recipes:", error);
