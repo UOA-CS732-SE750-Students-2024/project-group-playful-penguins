@@ -8,14 +8,12 @@ import {
   IconButton,
   FormControl,
   OutlinedInput,
+  TextField,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import styles from "./LoginPage.module.css";
-import TextField from "@mui/material/TextField";
-import UserIcon from "../../assets/SVGIconComponents/UserIcon";
-import { AppContext } from "../../providers/AppContextProvider";
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);

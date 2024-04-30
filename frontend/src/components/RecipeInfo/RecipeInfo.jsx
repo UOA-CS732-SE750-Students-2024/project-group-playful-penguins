@@ -113,10 +113,16 @@ export default function RecipeInfo() {
                   : "No dish types available"}
               </Typography>
               <Typography variant="h6" fontWeight="fontWeightRegular">
+                <strong>cuisine Type: </strong>
+                {recipe && recipe.cuisines && recipe.cuisines.length > 0
+                  ? recipe.cuisines.join(", ")
+                  : "No dish types available"}
+              </Typography>
+              {/* <Typography variant="h6" fontWeight="fontWeightRegular">
                 {recipe.cuisines &&
                   recipe.cuisines.length > 0 &&
                   (<strong>Cuisine : </strong>)` ${recipe.cuisines.join(", ")}`}
-              </Typography>
+              </Typography> */}
               <Box className={styles["diet-label"]}>
                 <Typography>{recipe.diets[0]}</Typography>
               </Box>

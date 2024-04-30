@@ -8,12 +8,12 @@ import {
   IconButton,
   FormControl,
   OutlinedInput,
+  TextField,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import styles from "./SingUpPage.module.css";
+import styles from "./SignUpPage.module.css";
 import { useState } from "react";
-import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 
 export default function SignUpPage() {
@@ -45,7 +45,7 @@ export default function SignUpPage() {
             display: "flex",
             flexDirection: "row",
             alignItems: "start",
-            justifyContent: "stretch"
+            justifyContent: "stretch",
           }}
         >
           <Box className={styles.topbar}>
