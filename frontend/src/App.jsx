@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import RecipeInfo from "./components/RecipeInfo/RecipeInfo";
 import { createTheme, ThemeProvider } from "@mui/material";
 import LoginPage from "./pages/LoginPage/LoginPage";
+
 const theme = createTheme({
   typography: {
     fontFamily: '"Quicksand", sans-serif',
