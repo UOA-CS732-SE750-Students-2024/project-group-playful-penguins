@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Menu, MenuItem, Button, Typography, Box } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { colors } from "../../constants/styles-constant";
+import { colors, SORT_BY } from "../../constants/styles-constant";
 import { AppContext } from "../../providers/AppContextProvider";
 
 export function SortBy() {
@@ -18,14 +18,11 @@ export function SortBy() {
     setAnchorEl(null);
   };
 
-  const handleSortBySelect = (requirement) => {
-    setSelectedSortByOption(requirement);
+  const handleSortBySelect = (selectedOption) => {
+    setSelectedSortByOption(selectedOption);
     handleClose();
   };
-  const sortByOptions = [
-    { id: "Name(A-Z)", name: "Name(A-Z)" },
-    { id: "Name(Z-A)", name: "Name(Z-A)" },
-  ];
+  const sortByOptions = SORT_BY.OPTIONS;
 
   return (
     <Box
@@ -57,7 +54,7 @@ export function SortBy() {
         }}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        {selectedSortByOption}
+        {selectedSortByOption.name}
       </Button>
       <Menu
         MenuListProps={{
@@ -73,8 +70,8 @@ export function SortBy() {
       >
         {sortByOptions.map((sortByOption) => (
           <MenuItem
-            key={sortByOption.id}
-            onClick={() => handleSortBySelect(sortByOption.name)}
+            key={sortByOption.key}
+            onClick={() => handleSortBySelect(sortByOption)}
           >
             {sortByOption.name}
           </MenuItem>

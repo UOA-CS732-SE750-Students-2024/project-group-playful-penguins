@@ -1,14 +1,19 @@
 import axios from "axios";
-import { FILTERS } from "../constants/styles-constant";
+import { getSortQuery } from "./getQuery/getSortQuery";
+import { getRecipeFilterQuery } from "./getQuery/getRecipeFilterQuery";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const getRecipes = async () => {
+const getRecipes = async (selectedSortByOption) => {
   try {
-    const response = await axios.get(BACKEND_URL + "/recipes/");
+    const sortQuery = getSortQuery(selectedSortByOption);
+    const url = `${BACKEND_URL}/recipes?${sortQuery}`;
+    const response = await axios.get(url);
+
     if (!response.data) {
       throw new Error("No data from backend");
     }
+
     return response.data;
   } catch (error) {
     console.error("Error fetching data: ", error);
@@ -16,30 +21,18 @@ const getRecipes = async () => {
   }
 };
 
-const getFilteredRecipes = async (filters) => {
+const getFilteredRecipes = async (filters, selectedSortByOption) => {
   try {
-    let url = `${BACKEND_URL}/recipes/filter`;
+    const filterQuery = getRecipeFilterQuery(filters);
+    const sortQuery = getSortQuery(selectedSortByOption);
+    const url = `${BACKEND_URL}/recipes/filter?${filterQuery}&${sortQuery}`;
+    console.log(url);
 
-    if (
-      filters[FILTERS.DIET_REQUIREMENT.STATE_KEY] !==
-      FILTERS.DIET_REQUIREMENT.INITIAL_VALUE
-    ) {
-      url += `?dietRequirement=${filters[FILTERS.DIET_REQUIREMENT.STATE_KEY]}`;
-    }
     const response = await axios.get(url);
     if (!response.data) {
       throw new Error("No data from backend");
     }
-    const recipes = response.data;
-    const filteredRecipes = recipes.filter((recipe) => {
-      return (
-        // TODO Filter feature is implemented, but preparation time, calorie count and cooking time are supported
-        //      by the database because it does not have this value.
-        filters.prepTimeValues[0] <= recipe.pricePerServing &&
-        recipe.pricePerServing <= filters.prepTimeValues[1]
-      );
-    });
-    return filteredRecipes;
+    return response.data;
   } catch (error) {
     console.error("Error fetching data: ", error);
     return [];

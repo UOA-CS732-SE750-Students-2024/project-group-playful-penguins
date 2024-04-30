@@ -1,10 +1,11 @@
-import asyncHandler from "express-async-handler";
 import connectToDatabase from "../config/db.js";
 import dotenv from "dotenv";
+import { getSortCriteria } from "../functions/getSortCriteria.js";
+import { getFilterQuery } from "../functions/getFilterQuery.js";
 
 dotenv.config();
 
-const getRecipes = async (event) => {
+const getRecipes = async (req, res) => {
   try {
     let db = await connectToDatabase(process.env.DB_NAME);
     const fieldsToRetrieve = {
@@ -14,12 +15,14 @@ const getRecipes = async (event) => {
       readyInMinutes: 1,
       image: 1,
     };
+    const sortCriteria = getSortCriteria(req);
     let recipes = await db
       .collection("recipes")
       .find()
+      .sort(sortCriteria)
       .project(fieldsToRetrieve)
       .toArray();
-    event.res.json(recipes);
+    res.json(recipes);
   } catch (error) {
     console.error("Error: ", error);
   }
@@ -46,7 +49,6 @@ const getRecipeByID = async (req, res) => {
     let recipe = await db
       .collection("recipes")
       .findOne({ id: recipeID }, { projection: fieldsToRetrieve });
-
     res.json(recipe);
   } catch (error) {
     console.error("Error: ", error);
@@ -56,13 +58,22 @@ const getRecipeByID = async (req, res) => {
 const getFilteredRecipes = async (req, res) => {
   try {
     let db = await connectToDatabase(process.env.DB_NAME);
-    let query = {};
-
-    if (req.query.dietRequirement) {
-      query[req.query.dietRequirement] = true;
-    }
-
-    let recipes = await db.collection("recipes").find(query).toArray();
+    const fieldsToRetrieve = {
+      id: 1,
+      healthScore: 1,
+      vegan: 1,
+      glutenFree: 1,
+      lowFodmap: 1,
+      vegetarian: 1,
+    };
+    const sortCriteria = getSortCriteria(req);
+    const query = getFilterQuery(req);
+    let recipes = await db
+      .collection("recipes")
+      .find(query)
+      .sort(sortCriteria)
+      .project(fieldsToRetrieve)
+      .toArray();
     res.json(recipes);
   } catch (error) {
     console.error("Error: ", error);

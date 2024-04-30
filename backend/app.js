@@ -1,6 +1,6 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
 
 import recipeRoutes from "./routes/recipeRoutes.js";
 
@@ -16,8 +16,6 @@ app.use("/api/recipes", recipeRoutes);
 const PORT = process.env.PORT;
 
 app.listen(
-    PORT,
-    console.log(
-        `Server running in localhost mode on port ${PORT}..`
-    )
+  PORT,
+  console.log(`Server running in localhost mode on port ${PORT}..`)
 );
