@@ -1,0 +1,30 @@
+.top-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height:100vh;
+  background: rgb(251, 239, 241);
+  background: linear-gradient(
+    90deg,
+    rgba(251, 239, 241, 1) 0%,
+    rgba(204, 245, 241, 1) 80%
+  );
+}
+
+.topbar {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* #user-icon {
+  margin-right: 32px;
+  width: 4vmin;
+  height: 4vmin;
+}
+
+#logo-icon {
+    margin-left: 32px;
+  } */
