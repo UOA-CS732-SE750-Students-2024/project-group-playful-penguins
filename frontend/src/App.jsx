@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import RecipeInfo from "./components/RecipeInfo/RecipeInfo";
 import { createTheme, ThemeProvider } from "@mui/material";
+import LoginPage from "./pages/LoginPage/LoginPage";
 const theme = createTheme({
   typography: {
     fontFamily: '"Quicksand", sans-serif',
@@ -24,6 +25,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="recipe/:id" element={<RecipeInfo />} />
         </Route>
+        <Route path="/login" element={<LoginPage />}></Route>
       </Routes>
     </ThemeProvider>
   );
