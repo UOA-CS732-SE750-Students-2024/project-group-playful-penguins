@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { AppContext } from "../../../providers/AppContextProvider";
-import { colors } from "../../../constants/styles-constant";
+import { colors, FILTERS } from "../../../constants/styles-constant";
 import { StyledSlider, StyledTextField } from "../../../theme-overrides";
 
-export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
-  const { isTakeout } = useContext(AppContext);
+export function FilterTemplate({ filterKey }) {
+  const { isTakeout, filters, setFilters } = useContext(AppContext);
 
   const primaryColor = isTakeout
     ? colors.TAKE_OUT_COLOR.PRIMARY_COLOR
@@ -15,11 +15,17 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
     ? colors.TAKE_OUT_COLOR.SECONDARY_COLOR
     : colors.COOK_AT_HOME_COLOR.SECONDARY_COLOR;
 
-  const [minValue, setMinValue] = useState(filterValue[0]);
-  const [maxValue, setMaxValue] = useState(filterValue[1]);
+  const filterConfig = FILTERS[filterKey];
+  const stateKey = filterConfig.STATE_KEY;
+
+  const [minValue, setMinValue] = useState(filters[stateKey][0]);
+  const [maxValue, setMaxValue] = useState(filters[stateKey][1]);
 
   const handleSliderChange = (event, newValue) => {
-    setFilterValue(newValue);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [stateKey]: newValue,
+    }));
     setMinValue(newValue[0]);
     setMaxValue(newValue[1]);
   };
@@ -28,7 +34,10 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
     const newMin = Number(event.target.value);
     setMinValue(newMin);
     if (newMin <= maxValue) {
-      setFilterValue([newMin, maxValue]);
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [stateKey]: [newMin, maxValue],
+      }));
     }
   };
 
@@ -36,7 +45,10 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
     const newMax = Number(event.target.value);
     setMaxValue(newMax);
     if (newMax >= minValue) {
-      setFilterValue([minValue, newMax]);
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [stateKey]: [minValue, newMax],
+      }));
     }
   };
 
@@ -54,16 +66,16 @@ export function FilterTemplate({ filterName, filterValue, setFilterValue }) {
         component="div"
         color={primaryColor}
       >
-        {filterName}
+        {filterConfig.NAME}
       </Typography>
       <StyledSlider
         primaryColor={primaryColor}
         secondaryColor={secondaryColor}
-        value={filterValue}
+        value={filters[stateKey]}
         onChange={handleSliderChange}
         valueLabelDisplay="auto"
-        min={0}
-        max={100}
+        min={filterConfig.MIN_AND_MAX_VALUE[0]}
+        max={filterConfig.MIN_AND_MAX_VALUE[1]}
       />
       <Box sx={{ display: "flex", justifyContent: "space-between", gap: 1 }}>
         <StyledTextField

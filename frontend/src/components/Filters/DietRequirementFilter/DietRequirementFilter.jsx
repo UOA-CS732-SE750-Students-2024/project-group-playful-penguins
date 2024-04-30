@@ -1,22 +1,21 @@
-import React, { Children, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Menu, MenuItem, Button, Typography, Box } from "@mui/material";
 import { AppContext } from "../../../providers/AppContextProvider";
-import { colors } from "../../../constants/styles-constant";
+import { colors, FILTERS } from "../../../constants/styles-constant";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export function DietRequirementFilter() {
-  const {
-    isTakeout,
-    selectedRequirement,
-    setSelectedRequirement,
-    isRequirementSelected,
-    setIsRequirementSelected,
-  } = useContext(AppContext);
+  const { isTakeout, filters, setFilters } = useContext(AppContext);
+
   const primaryColor = isTakeout
     ? colors.TAKE_OUT_COLOR.PRIMARY_COLOR
     : colors.COOK_AT_HOME_COLOR.PRIMARY_COLOR;
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const filterConfig = FILTERS.DIET_REQUIREMENT;
+  const stateKey = filterConfig.STATE_KEY;
+  const isRequirementSelected =
+    filters[stateKey] !== filterConfig.INITIAL_VALUE;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,19 +26,12 @@ export function DietRequirementFilter() {
   };
 
   const handleRequirementSelect = (requirement) => {
-    setSelectedRequirement(requirement);
-    console.log(isRequirementSelected); // This should log the updated state.
-    setIsRequirementSelected(true);
-    console.log(isRequirementSelected); // This should log the updated state.
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [stateKey]: requirement,
+    }));
     handleClose();
   };
-
-  const dietRequirements = [
-    { id: "vegan", name: "Vegan" },
-    { id: "glutenFree", name: "Gluten-free" },
-    { id: "lactoseIntolerance", name: "Lactose intolerance" },
-    { id: "glutenIntolerance", name: "Gluten intolerance" },
-  ];
 
   return (
     <Box
@@ -55,7 +47,7 @@ export function DietRequirementFilter() {
         component="div"
         color={primaryColor}
       >
-        Diet requirement
+        {filterConfig.NAME}
       </Typography>
       <Box>
         <Button
@@ -79,7 +71,7 @@ export function DietRequirementFilter() {
           }}
           endIcon={isRequirementSelected ? null : <KeyboardArrowDownIcon />}
         >
-          {selectedRequirement}
+          {filters[stateKey]}
         </Button>
         <Menu
           MenuListProps={{
@@ -93,10 +85,10 @@ export function DietRequirementFilter() {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {dietRequirements.map((requirement) => (
+          {filterConfig.OPTIONS.map((requirement) => (
             <MenuItem
               key={requirement.id}
-              onClick={() => handleRequirementSelect(requirement.name)}
+              onClick={() => handleRequirementSelect(requirement.urlKey)}
             >
               {requirement.name}
             </MenuItem>
