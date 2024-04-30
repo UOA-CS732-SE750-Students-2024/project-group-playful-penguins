@@ -1,11 +1,30 @@
-import { Typography, Box, Button, Divider } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Divider,
+  InputLabel,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  OutlinedInput,
+} from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import styles from "./LoginPage.module.css";
 import TextField from "@mui/material/TextField";
 import UserIcon from "../../assets/SVGIconComponents/UserIcon";
 import { AppContext } from "../../providers/AppContextProvider";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 
 export default function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   return (
     <>
       <Box className={styles["top-container"]}>
@@ -24,7 +43,28 @@ export default function LoginPage() {
           </Typography>
           <Box className={styles["text-field-group"]}>
             <TextField label="Username" sx={{ width: 400 }}></TextField>
-            <TextField label="Password" sx={{ width: 400 }}></TextField>
+            <FormControl sx={{ m: 1, width: 400 }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
             <Button
               sx={{
                 width: 400,

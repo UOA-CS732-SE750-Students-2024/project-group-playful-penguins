@@ -1,9 +1,39 @@
-import { Typography, Box, Button, Divider } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Button,
+  Divider,
+  InputLabel,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  OutlinedInput,
+} from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import styles from "./SingUpPage.module.css";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 
 export default function SignUpPage() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const [showConfirmedPassword, setShowConfirmedPassword] = useState(false);
+
+  const handleClickShowConfirmedPassword = () =>
+    setShowConfirmedPassword((show) => !show);
+
+  const handleMouseDownConfirmedPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <>
       <Box className={styles["top-container"]}>
@@ -15,6 +45,7 @@ export default function SignUpPage() {
             display: "flex",
             flexDirection: "row",
             alignItems: "start",
+            justifyContent: "stretch"
           }}
         >
           <Box className={styles.topbar}>
@@ -34,18 +65,20 @@ export default function SignUpPage() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              padding: "40px",
-              gap: "60px",
+              padding: "20px",
+              gap: "50px",
               border: "3px solid transparent",
               borderRadius: "24px",
               backgroundColor: "#ffffff",
               width: "500px",
-              height: "480px",
-              paddingBottom: "50px",
-              marginTop: "70px",
+              marginTop: "50px",
             }}
           >
-            <Typography variant="h4" fontWeight="fontWeightBold">
+            <Typography
+              variant="h4"
+              fontWeight="fontWeightBold"
+              marginTop="30px"
+            >
               Sign up with NutriGuin today!
             </Typography>
             <Box
@@ -58,11 +91,54 @@ export default function SignUpPage() {
               }}
             >
               <TextField label="Username" sx={{ width: 400 }}></TextField>
-              <TextField label="Password" sx={{ width: 400 }}></TextField>
-              <TextField
-                label="Confirm Password"
-                sx={{ width: 400 }}
-              ></TextField>
+              <FormControl sx={{ m: 1, width: 400 }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
+              <FormControl sx={{ m: 1, width: 400 }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-confirmed-password">
+                  Confirm Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-confirmed-password"
+                  type={showConfirmedPassword ? "text" : "password"}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowConfirmedPassword}
+                        onMouseDown={handleMouseDownConfirmedPassword}
+                        edge="end"
+                      >
+                        {showConfirmedPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Confirm Password"
+                />
+              </FormControl>
 
               <Button
                 sx={{
