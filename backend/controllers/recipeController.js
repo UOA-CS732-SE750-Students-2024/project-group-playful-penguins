@@ -1,7 +1,7 @@
 import connectToDatabase from "../config/db.js";
 import dotenv from "dotenv";
 import { getSortCriteria } from "../functions/getSortCriteria.js";
-import { getDietRequirement } from "../functions/getDietRequirement.js";
+import { getFilterQuery } from "../functions/getFilterQuery.js";
 
 dotenv.config();
 
@@ -58,12 +58,21 @@ const getRecipeByID = async (req, res) => {
 const getFilteredRecipes = async (req, res) => {
   try {
     let db = await connectToDatabase(process.env.DB_NAME);
+    const fieldsToRetrieve = {
+      id: 1,
+      healthScore: 1,
+      vegan: 1,
+      glutenFree: 1,
+      lowFodmap: 1,
+      vegetarian: 1,
+    };
     const sortCriteria = getSortCriteria(req);
-    const query = getDietRequirement(req);
+    const query = getFilterQuery(req);
     let recipes = await db
       .collection("recipes")
       .find(query)
       .sort(sortCriteria)
+      .project(fieldsToRetrieve)
       .toArray();
     res.json(recipes);
   } catch (error) {
