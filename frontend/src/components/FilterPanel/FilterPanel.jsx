@@ -22,10 +22,7 @@ export function FilterPanel() {
 
     setIsLoading(true);
     try {
-      const data = await RecipesService.getFilteredRecipes(
-        filters,
-        selectedSortByOption
-      );
+      const data = await getFilteredRecipes(filters, selectedSortByOption);
       console.log(data);
     } catch (error) {
       console.error("Error fetching filtered recipes:", error);

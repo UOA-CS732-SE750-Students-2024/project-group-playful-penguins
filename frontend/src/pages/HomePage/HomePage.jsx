@@ -18,12 +18,12 @@ export function HomePage() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isTakeout } = useContext(AppContext);
+  const { isTakeout, selectedSortByOption } = useContext(AppContext);
 
   const fetchRecipeData = async () => {
     setIsLoading(true);
     try {
-      const data = await getRecipes();
+      const data = await getRecipes(selectedSortByOption);
       setFoodData(data);
       console.log(data);
     } catch (error) {
