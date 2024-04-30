@@ -19,11 +19,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route path="/" element={<LoginPage />}></Route>
+        <Route path="/" element={<LandingPage />}></Route>
         <Route path="/home" element={<PageLayout />}>
           <Route index element={<HomePage />} />
           <Route path="recipe/:id" element={<RecipeInfo />} />
         </Route>
+        <Route path="/login" element={<LoginPage />}></Route>
       </Routes>
     </ThemeProvider>
   );
