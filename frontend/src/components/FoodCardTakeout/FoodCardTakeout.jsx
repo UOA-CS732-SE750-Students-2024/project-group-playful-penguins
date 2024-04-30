@@ -10,11 +10,6 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 
-const title = "Garden Veggie Pita";
-const image = "../../public/images/pita.png";
-const price = "";
-const restaurant = "Pita Pat";
-
 export function FoodCardTakeout({ data }) {
   const [openTakeoutCard, setOpenTakeoutCard] = useState(false);
 
@@ -36,7 +31,7 @@ export function FoodCardTakeout({ data }) {
         />
         <CardContent className={styles.cardContent}>
           <Typography gutterBottom component="div" className={styles.title}>
-            {title}
+            {data.dish_name}
           </Typography>
           <div className={styles.details}>
             <Typography variant="body2" color="text.secondary">

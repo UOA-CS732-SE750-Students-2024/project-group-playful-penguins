@@ -4,6 +4,8 @@ import { getFilterQuery } from "../functions/getFilterQuery.js";
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Recipe from "../model/recipeModel.js";
+import asyncHandler from "express-async-handler";
+import connectToDatabase from "../config/db.js";
 
 dotenv.config();
 

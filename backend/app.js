@@ -1,10 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
 import recipeRoutes from "./routes/recipeRoutes.js";
 import takeoutRoutes from "./routes/takeoutRoutes.js";
 import connectToDatabase from "./config/mongooseDb.js";
@@ -25,7 +21,4 @@ const PORT = process.env.PORT;
 app.listen(
   PORT,
   console.log(`Server running in localhost mode on port ${PORT}..`)
-  PORT,
-  console.log(`Server running in localhost mode on port ${PORT}..`)
 );
-
