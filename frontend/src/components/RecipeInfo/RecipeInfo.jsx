@@ -1,6 +1,7 @@
 import styles from "./RecipeInfo.module.css";
 import { useState, useEffect, useCallback } from "react";
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { getRecipes, getRecipeByID } from "../../services/RecipeService";
 import LinearProgress from "@mui/material/LinearProgress";
 import {
@@ -9,8 +10,9 @@ import {
   Route,
   useParams,
 } from "react-router-dom";
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import LocalDiningIcon from "@mui/icons-material/LocalDining";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ServingsIcon from "../../assets/SVGIconComponents/ServingsIcon";
 import Box from "@mui/material/Box";
 import {
@@ -20,6 +22,7 @@ import {
   Grid,
   styled,
   Typography,
+  Button,
 } from "@mui/material";
 
 const StepLabel = styled("div")({
@@ -56,7 +59,7 @@ export default function RecipeInfo() {
     fetchRecipe();
   }, []);
 
-  // the data being fetched from API needs to be processed
+  // the data being fetched from backend needs to be processed before displaying
   function removeTags(text) {
     let cleanText = text.replace(/<b>|<\/b>|<a href="[^"]*">|<\/a>/g, "");
     return cleanText;
@@ -64,6 +67,29 @@ export default function RecipeInfo() {
 
   return (
     <>
+      <Box
+        sx={{
+          display: "flex",
+          flexGrow: 1,
+          justifyContent: "center",
+          width: "200px",
+          marginTop: "50px",
+        }}
+      >
+        <Button
+          component={Link}
+          to="/home"
+          sx={{
+            color: "black",
+            padding: "10px 20px",
+          }}
+        >
+          <ArrowBackIcon></ArrowBackIcon>
+          <Typography variant="h6" fontWeight="fontWeightMedium">
+            Back
+          </Typography>
+        </Button>
+      </Box>
       <Box className={styles["top-container"]}>
         {!isLoading && recipe ? (
           <Box className={styles["info-container"]}>
