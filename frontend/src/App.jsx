@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import RecipeInfo from "./components/RecipeInfo/RecipeInfo";
 import { createTheme, ThemeProvider } from "@mui/material";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
 const theme = createTheme({
   typography: {
     fontFamily: '"Quicksand", sans-serif',
@@ -26,6 +27,7 @@ function App() {
           <Route path="recipe/:id" element={<RecipeInfo />} />
         </Route>
         <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/signUp" element={<SignUpPage />}></Route>
       </Routes>
     </ThemeProvider>
   );
