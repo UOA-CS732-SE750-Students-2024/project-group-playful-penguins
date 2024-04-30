@@ -1,39 +1,39 @@
-import connectToDatabase from "../config/db.js";
 import dotenv from "dotenv";
 import { getSortCriteria } from "../functions/getSortCriteria.js";
 import { getFilterQuery } from "../functions/getFilterQuery.js";
+import mongoose from "mongoose";
+const { Schema } = mongoose;
+import Recipe from "../model/recipeModel.js";
 
 dotenv.config();
 
-const getRecipes = async (req, res) => {
-  try {
-    let db = await connectToDatabase(process.env.DB_NAME);
-    const fieldsToRetrieve = {
-      id: 1,
-      title: 1,
-      servings: 1,
-      readyInMinutes: 1,
-      image: 1,
-    };
-    const sortCriteria = getSortCriteria(req);
-    let recipes = await db
-      .collection("recipes")
-      .find()
-      .sort(sortCriteria)
-      .project(fieldsToRetrieve)
-      .toArray();
-    res.json(recipes);
-  } catch (error) {
-    console.error("Error: ", error);
-  }
-};
+// @desc    Fetch all recipes
+// @route   GET /api/recipes
+// @access  Public
 
-const getRecipeByID = async (req, res) => {
+const getRecipes = asyncHandler(async (req, res) => {
+  const recipes = await Recipe.find(
+    {},
+    { id: 1, title: 1, servings: 1, readyInMinutes: 1, image: 1 }
+  );
+
+  if (recipes) {
+    res.json(recipes);
+  } else {
+    res.status(404);
+    throw new Error("Recipes not found");
+  }
+});
+
+// @desc    Fetch a takeout by ID
+// @route   GET /api/takeouts/:id
+// @access  Public
+const getRecipeByID = asyncHandler(async (req, res) => {
   const recipeID = parseInt(req.params.id, 10);
-  console.log("reached backend");
-  try {
-    let db = await connectToDatabase(process.env.DB_NAME);
-    const fieldsToRetrieve = {
+
+  const recipe = await Recipe.findOne(
+    { id: recipeID },
+    {
       id: 1,
       title: 1,
       servings: 1,
@@ -45,15 +45,16 @@ const getRecipeByID = async (req, res) => {
       cuisines: 1,
       extendedIngredients: 1,
       analyzedInstructions: 1,
-    };
-    let recipe = await db
-      .collection("recipes")
-      .findOne({ id: recipeID }, { projection: fieldsToRetrieve });
+    }
+  );
+
+  if (recipe) {
     res.json(recipe);
-  } catch (error) {
-    console.error("Error: ", error);
+  } else {
+    res.status(404);
+    throw new Error("Recipe not found");
   }
-};
+});
 
 const getFilteredRecipes = async (req, res) => {
   try {
@@ -80,4 +81,103 @@ const getFilteredRecipes = async (req, res) => {
   }
 };
 
-export { getRecipes, getRecipeByID, getFilteredRecipes };
+// @desc    Fetch all recipe by search terms and filters (non-paginated)
+// @route   GET /api/recipes/search/q?key=value
+// @access  Public
+// http://localhost:8000/api/recipes/search/q?title=Spicy
+const getRecipeBySearch = asyncHandler(async (req, res) => {
+  const {
+    title,
+    dietary_requirement,
+    minCalorie,
+    maxCalorie,
+    minCookingTime,
+    maxCookingTime,
+  } = req.query;
+
+  let query = {};
+
+  if (title) {
+    query.title = { $regex: title, $options: "i" };
+  }
+
+  if (dietary_requirement) {
+    query.diets = { $regex: dietary_requirement, $options: "i" };
+  }
+
+  // if (minCalorie && maxCalorie) {
+  //   query.calories = { $gte: minCalorie, $lte: maxCalorie };
+  // }
+
+  if (minCookingTime && maxCookingTime) {
+    query.readyInMinutes = { $gte: minCookingTime, $lte: maxCookingTime };
+  }
+
+  const recipes = await Recipe.find(query, {
+    id: 1,
+    title: 1,
+    servings: 1,
+    readyInMinutes: 1,
+    image: 1,
+  });
+
+  if (recipes) {
+    res.json(recipes);
+  } else {
+    res.status(404);
+    console.log("Recipe not found : " + query);
+  }
+});
+
+// @desc    Fetch all recipes by search terms and filters (paginated)
+// @route   GET /api/recipes/search/q?key=value&pageNo=1
+// @access  Public
+// http://localhost:8000/api/recipes/search/q?title=Spicy&pageNo=1
+const getPaginateRecipe = asyncHandler(async (req, res) => {
+  const pageSize = 9; //todo - put in env
+  const page = Number(req.query.pageNo) || 1;
+  const {
+    title,
+    dietary_requirement,
+    minCalorie,
+    maxCalorie,
+    minCookingTime,
+    maxCookingTime,
+  } = req.query;
+
+  let query = {};
+
+  if (title) {
+    query.title = { $regex: title, $options: "i" };
+  }
+
+  if (dietary_requirement) {
+    query.diets = { $regex: dietary_requirement, $options: "i" };
+  }
+
+  // if (minCalorie && maxCalorie) {
+  //   query.calories = { $gte: minCalorie, $lte: maxCalorie };
+  // }
+
+  if (minCookingTime && maxCookingTime) {
+    query.readyInMinutes = { $gte: minCookingTime, $lte: maxCookingTime };
+  }
+
+  const count = await Recipe.countDocuments({ ...query });
+  const recipes = await Recipe.find(
+    { ...query },
+    { id: 1, title: 1, servings: 1, readyInMinutes: 1, image: 1 }
+  )
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+
+  res.json({ recipes, page, pages: Math.ceil(count / pageSize) });
+});
+
+export {
+  getRecipes,
+  getRecipeByID,
+  getRecipeBySearch,
+  getPaginateRecipe,
+  getFilteredRecipes,
+};

@@ -35,7 +35,7 @@ export function HomePage() {
   const fetchTakeoutData = async () => {
     setIsLoading(true);
     try {
-      const data = await TakeoutService.getRecipes();
+      const data = await TakeoutService.getTakeouts();
       setFoodData(data);
       console.log(data);
     } catch (error) {
@@ -50,7 +50,7 @@ export function HomePage() {
     } else {
       fetchRecipeData();
     }
-  }, []);
+  }, [isTakeout]);
 
   return (
     <div className={styles["home-container"]}>
