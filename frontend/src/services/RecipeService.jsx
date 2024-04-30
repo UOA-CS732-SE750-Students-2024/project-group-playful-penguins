@@ -58,4 +58,4 @@ const getRecipeByID = async (id) => {
   }
 };
 
-export { getRecipes, getRecipeByID };
+export { getRecipes, getRecipeByID, getFilteredRecipes };
