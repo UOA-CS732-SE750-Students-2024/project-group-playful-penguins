@@ -9,8 +9,8 @@ import {
   Route,
   useParams,
 } from "react-router-dom";
-import fontStyle from "../../assets/GlobalStyles/CustomFont.module.css";
-import ClockIcon from "../../assets/SVGIconComponents/ClockIcon";
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import ServingsIcon from "../../assets/SVGIconComponents/ServingsIcon";
 import Box from "@mui/material/Box";
 import {
@@ -21,7 +21,6 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-
 
 const StepLabel = styled("div")({
   fontWeight: "bold",
@@ -47,7 +46,6 @@ export default function RecipeInfo() {
     try {
       const data = await getRecipeByID(id);
       setRecipe(data);
-      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -81,7 +79,7 @@ export default function RecipeInfo() {
                 {/* Timing information */}
                 <Box className={styles["time-info"]}>
                   <Box id={styles["clock-icon"]}>
-                    <ClockIcon />
+                    <AccessTimeIcon />
                   </Box>
                   <Typography variant="h6" fontWeight="fontWeightMedium">
                     Total time taken : {recipe.readyInMinutes} mins
@@ -90,7 +88,7 @@ export default function RecipeInfo() {
                 {/* Servings information */}
                 <Box className={styles["servings-info"]}>
                   <Box id={styles["servings-icon"]}>
-                    <ServingsIcon />
+                    <LocalDiningIcon />
                   </Box>
                   <Typography variant="h6" fontWeight="fontWeightMedium">
                     {" "}
@@ -110,13 +108,15 @@ export default function RecipeInfo() {
                 <strong>Dish Type: </strong>
                 {recipe && recipe.dishTypes && recipe.dishTypes.length > 0
                   ? recipe.dishTypes.join(", ")
-                  : "No dish types available"}
+                  : "Stay tuned for dish types !"}
               </Typography>
               <Typography variant="h6" fontWeight="fontWeightRegular">
-                {recipe.cuisines &&
-                  recipe.cuisines.length > 0 &&
-                  (<strong>Cuisine : </strong>)` ${recipe.cuisines.join(", ")}`}
+                <strong>Cuisine Type: </strong>
+                {recipe && recipe.cuisines && recipe.cuisines.length > 0
+                  ? recipe.cuisines.join(", ")
+                  : "Stay tuned for cuisine details !"}
               </Typography>
+
               <Box className={styles["diet-label"]}>
                 <Typography>{recipe.diets[0]}</Typography>
               </Box>
@@ -151,11 +151,11 @@ export default function RecipeInfo() {
                   NUTRITION INFORMATION
                 </Typography>
                 {nutritionInfo.map((nutrient, index) => (
-                  <Box
-                    key={index}
-                    className={` ${styles["nutrients-item"]}`}
-                  >
-                    <Typography variant="h6" fontWeight="fontWeightMedium">{`${nutrient.type}:   ${nutrient.amount}`}</Typography>
+                  <Box key={index} className={` ${styles["nutrients-item"]}`}>
+                    <Typography
+                      variant="h6"
+                      fontWeight="fontWeightMedium"
+                    >{`${nutrient.type}:   ${nutrient.amount}`}</Typography>
                   </Box>
                 ))}
               </Box>
