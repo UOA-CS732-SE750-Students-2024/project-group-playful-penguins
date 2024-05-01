@@ -6,12 +6,14 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { AppContext } from "../../providers/AppContextProvider";
 import { useContext } from "react";
 
 export function Navbar() {
   const { isTakeout, changeCategory } = useContext(AppContext);
+  const location = useLocation();
+  const isRecipePage = location.pathname.startsWith("/home/recipe/");
 
   const buttonGroupStyles = {
     border: "2px solid white",
@@ -96,11 +98,12 @@ export function Navbar() {
 
           <Box
             sx={{
+              display:"flex",
               flexGrow: 1,
-              display: "flex",
               backgroundColor: `${isTakeout ? "#edb1bb" : "#b2dfdb"}`,
               justifyContent: "center",
               width: "200px",
+              visibility: isRecipePage ? "hidden" : "visible",
             }}
           >
             <Box style={buttonGroupStyles}>
