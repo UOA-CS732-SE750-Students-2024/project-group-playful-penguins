@@ -8,15 +8,8 @@ import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 
 //should take a food item as a parameter
-export function ExpandedTakeoutCard({ handleClose }) {
-  //  placeholder static foodItem
-  const foodItem = {
-    title: "Triple Cheese Pizza",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras scelerisque turpis id elit vehicula, et accumsan ligula tempus. Aenean hendrerit sodales purus sit amet pharetra. Phasellus in euismod metus. Donec eu ex mauris. Pellentesque fermentum aliquet tortor, vitae porttitor nisi ornare in. Aliquam elementum rutrum enim vitae dictum. Sed et bibendum libero, id elementum ipsum. Vivamus eu pellentesque dolor. Proin in vehicula tortor. Sed in arcu non nibh ultrices porta. Nunc feugiat nisl at hendrerit iaculis. In hac habitasse platea dictumst. Suspendisse ipsum nulla, luctus vitae blandit eget, dictum in dolor. Curabitur quis diam pretium, vehicula eros at, laoreet nunc. ",
-    imageUrl: "../public/images/pizza.jpg",
-  };
-  //CHANGE TO MUI ICONS
+export function ExpandedTakeoutCard({ handleClose, data }) {
+  // //CHANGE TO MUI ICONS
   const icons = [
     "../public/images/clock-icon.png",
     "../public/images/money-icon.png",
@@ -30,8 +23,8 @@ export function ExpandedTakeoutCard({ handleClose }) {
         <Box>
           <CardMedia
             component="img"
-            image={foodItem.imageUrl}
-            alt={foodItem.title}
+            image={data.dish_image_url}
+            alt={data.dish_name}
             className={styles[`food-image`]}
           />
         </Box>
@@ -42,21 +35,27 @@ export function ExpandedTakeoutCard({ handleClose }) {
             component="h2"
             className={styles[`food-title`]}
           >
-            {foodItem.title}
+            {data.dish_name}
           </Typography>
 
           <Box>
             <Box className={styles[`single-param`]}>
               <CardMedia image={icons[0]} />
-              <Typography variant="body2">Delivery Time:</Typography>
+              <Typography variant="body2">
+                Approx delivery time {data.delivery_time} mins
+              </Typography>
             </Box>
             <Box className={styles[`single-param`]}>
               <CardMedia image={icons[1]} />
-              <Typography variant="body2">Price Range:</Typography>
+              <Typography variant="body2">
+                Approx cost per serving ${data.price}
+              </Typography>
             </Box>
             <Box className={styles[`single-param`]}>
               <CardMedia image={icons[2]} />
-              <Typography variant="body2">Serves:</Typography>
+              <Typography variant="body2">
+                Approx delivery fee ${data.delivery_fee}
+              </Typography>
             </Box>
           </Box>
         </Box>
@@ -70,11 +69,18 @@ export function ExpandedTakeoutCard({ handleClose }) {
           Description
         </Typography>
         <Typography variant="body1" className={styles[`card-description`]}>
-          {foodItem.description}
+          {data.dish_description}
         </Typography>
 
         <Box className={styles[`card-button`]}>
-          <Button variant="contained">Order!</Button>
+          <Button
+            variant="contained"
+            onClick={() =>
+              window.open(`${data.restaurant_web_url}`, "_blank", "noopener")
+            }
+          >
+            Order From {data.restaurant_name} Now
+          </Button>
         </Box>
       </CardContent>
     </Card>
