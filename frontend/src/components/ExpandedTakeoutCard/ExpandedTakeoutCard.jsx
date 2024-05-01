@@ -6,17 +6,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
-
-//should take a food item as a parameter
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import AttachMoneyTwoToneIcon from "@mui/icons-material/AttachMoneyTwoTone";
 export function ExpandedTakeoutCard({ handleClose, data }) {
-  // //CHANGE TO MUI ICONS
-  const icons = [
-    "../public/images/clock-icon.png",
-    "../public/images/money-icon.png",
-    "../public/images/cutlery-icon.png",
-  ];
-
-  // food param could be turned into map function
   return (
     <Card className={styles[`card`]}>
       <CardContent className={styles[`card-top-content`]}>
@@ -40,19 +32,19 @@ export function ExpandedTakeoutCard({ handleClose, data }) {
 
           <Box>
             <Box className={styles[`single-param`]}>
-              <CardMedia image={icons[0]} />
+              <AccessTimeIcon />
               <Typography variant="body2">
                 Approx delivery time {data.delivery_time} mins
               </Typography>
             </Box>
             <Box className={styles[`single-param`]}>
-              <CardMedia image={icons[1]} />
+              <AttachMoneyTwoToneIcon />
               <Typography variant="body2">
                 Approx cost per serving ${data.price}
               </Typography>
             </Box>
             <Box className={styles[`single-param`]}>
-              <CardMedia image={icons[2]} />
+              <AttachMoneyTwoToneIcon />
               <Typography variant="body2">
                 Approx delivery fee ${data.delivery_fee}
               </Typography>
