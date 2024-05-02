@@ -37,6 +37,7 @@ const postUserSignUp = async (req, res) => {
   const { name, email, password } = req.body;
   try {
     const user = await User.signup(name, email, password);
+    // TODO: token
     res.status(201).json({
       message: "User successfully registered!",
       user: { name: name, email: email },
