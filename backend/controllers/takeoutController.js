@@ -99,7 +99,7 @@ const getPaginateTakeouts = asyncHandler(async (req, res) => {
     maxPrice,
     minDeliveryTime,
     maxDeliveryTime,
-    sort,
+    sortOrder,
   } = req.query;
 
   let query = {};
@@ -125,10 +125,8 @@ const getPaginateTakeouts = asyncHandler(async (req, res) => {
     query.delivery_time = { $gte: minDeliveryTime, $lte: maxDeliveryTime };
   }
 
-  if (sort) {
-    sortQuery = { dish_name: sort };
-  } else {
-    sortQuery = { dish_name: "asc" };
+  if (sortOrder) {
+    sortQuery = { dish_name: sortOrder };
   }
 
   const count = await Takeout.countDocuments({ ...query });

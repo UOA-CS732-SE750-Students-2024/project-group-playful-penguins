@@ -145,7 +145,7 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
     maxCalorie,
     minCookingTime,
     maxCookingTime,
-    sort,
+    sortOrder,
   } = req.query;
 
   let query = {};
@@ -167,10 +167,8 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
     query.readyInMinutes = { $gte: minCookingTime, $lte: maxCookingTime };
   }
 
-  if (sort) {
-    sortQuery = { title: sort };
-  } else {
-    sortQuery = { title: "asc" };
+  if (sortOrder) {
+    sortQuery = { title: sortOrder };
   }
 
   const count = await Recipe.countDocuments({ ...query });
