@@ -4,6 +4,7 @@ import cors from "cors";
 import recipeRoutes from "./routes/recipeRoutes.js";
 import takeoutRoutes from "./routes/takeoutRoutes.js";
 import connectToDatabase from "./config/mongooseDb.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/takeouts", takeoutRoutes);
+app.use("/api/user", userRoutes);
 
 const PORT = process.env.PORT;
 
