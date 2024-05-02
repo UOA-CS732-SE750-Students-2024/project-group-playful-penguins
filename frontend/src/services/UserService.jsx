@@ -19,21 +19,39 @@ const authenticateGoogleUser = async (codeResponse) => {
 
 const signup = async (name, email, password) => {
   try {
-    const response = await axios.post(BACKEND_URL + "/signup", {
+    const response = await axios.post(`${BACKEND_URL}/signup`, {
       name: name,
       email: email,
       password: password,
     });
-    if (!response.data) {
-      throw new Error("No data from backend");
-    }
     return response.data;
   } catch (error) {
-    console.log(error);
-    return [];
+    console.error("Error during signup:", formatErrorMessage(error));
+    throw new Error(formatErrorMessage(error));
   }
 };
 
-// TODO: Login
+const login = async (email, password) => {
+  try {
+    const response = await axios.post(`${BACKEND_URL}/login`, {
+      email: email,
+      password: password,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error during login:", formatErrorMessage(error));
+    throw new Error(formatErrorMessage(error));
+  }
+};
 
-export { signup, authenticateGoogleUser };
+function formatErrorMessage(error) {
+  if (error.response && error.response.data && error.response.data.error) {
+    return error.response.data.error; // Assuming error details are in error.response.data.error
+  } else if (error.message) {
+    return error.message;
+  } else {
+    return "Unknown error occurred";
+  }
+}
+
+export { signup, login, authenticateGoogleUser };

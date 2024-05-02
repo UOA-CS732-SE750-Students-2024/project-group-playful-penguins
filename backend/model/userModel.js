@@ -48,5 +48,33 @@ userSchema.statics.signup = async function (name, email, password) {
   }
 };
 
+userSchema.statics.login = async function (email, password) {
+  // Check if name, email, and password are empty
+  isInputEmpty({ email, password });
+
+  // Check if the password has 8 characters
+  if (password.length < 8) {
+    throw new Error("Password must be at least 8 characters long");
+  }
+
+  try {
+    const userInDb = await User.findOne({ email });
+
+    if (!userInDb) {
+      throw new Error("Incorrect email");
+    }
+
+    // See if the password match
+    const isMatch = await bcrypt.compare(password, userInDb.password);
+
+    if (!isMatch) {
+      throw new Error("Incorrect password");
+    }
+    return userInDb;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 const User = mongoose.model("User", userSchema);
 export default User;

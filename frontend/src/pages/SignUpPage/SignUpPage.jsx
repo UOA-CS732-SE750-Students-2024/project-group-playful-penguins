@@ -20,6 +20,8 @@ import { signup } from "../../services/UserService";
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -58,13 +60,21 @@ export default function SignUpPage() {
       setIsPasswordMatch(false);
       return;
     }
-
-    const response = await signup(data.name, data.email, data.password);
-    if (!response.success) {
-      alert(response.message);
-    } else {
-      // TODO: Maybe have a toast and redirect user to the home page (login version)
-      alert("You have successfully registered");
+    setIsPasswordMatch(true);
+    try {
+      const response = await signup(data.name, data.email, data.password);
+      console.log(response);
+      setError(false);
+    } catch (error) {
+      if (error.message.includes("duplicate")) {
+        console.error("Email is already used");
+        setIsError(true);
+        setErrorMessage("Email is already used");
+      } else {
+        console.error(error.message);
+        setIsError(true);
+        setErrorMessage(error.message);
+      }
     }
   };
 
@@ -130,7 +140,9 @@ export default function SignUpPage() {
                 })}
               ></TextField>
               {errors.email && (
-                <p style={{ color: "red" }}>{errors.email.message}</p>
+                <Typography style={{ color: "red" }}>
+                  {errors.email.message}
+                </Typography>
               )}
               <FormControl sx={{ m: 1, width: 400 }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
@@ -161,7 +173,9 @@ export default function SignUpPage() {
                   })}
                 />
                 {errors.password && (
-                  <p style={{ color: "red" }}>{errors.password.message}</p>
+                  <Typography style={{ color: "red" }}>
+                    {errors.password.message}
+                  </Typography>
                 )}
               </FormControl>
               <FormControl sx={{ m: 1, width: 400 }} variant="outlined">
@@ -197,15 +211,15 @@ export default function SignUpPage() {
                   })}
                 />
                 {errors.confirmPassword && (
-                  <p style={{ color: "red" }}>
+                  <Typography style={{ color: "red" }}>
                     {errors.confirmPassword.message}
-                  </p>
+                  </Typography>
                 )}
               </FormControl>
               {!isPasswordMatch && (
-                <p style={{ color: "red" }}>
+                <Typography style={{ color: "red" }}>
                   Passwords do not match. Please try again.
-                </p>
+                </Typography>
               )}
 
               <Button
@@ -229,6 +243,9 @@ export default function SignUpPage() {
                 </Typography>
               </Button>
             </form>
+            {isError && (
+              <Typography style={{ color: "red" }}>{errorMessage}</Typography>
+            )}
             <Divider
               sx={{
                 width: 400,
