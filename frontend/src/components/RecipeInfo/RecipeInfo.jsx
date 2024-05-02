@@ -92,10 +92,56 @@ export default function RecipeInfo() {
       </Box>
       <Box className={styles["top-container"]}>
         {!isLoading && recipe ? (
-          <Box className={styles["info-container"]}>
+          <Box
+            className={styles["info-container"]}
+            sx={{
+              marginRight: {
+                // sm:"25px",
+                // md: "50px",
+                // lg: "96px",
+              },
+              marginLeft: {
+                // sm:"25px",
+                // md: "50px",
+                // lg: "96px",
+              },
+            }}
+          >
             {/* Recipe name, photo information */}
-            <Box className={styles["details-container"]}>
-              <Box className={styles["recipe-photo-container"]}>
+            <Box
+              className={styles["details-container"]}
+              sx={{
+                flexDirection: {
+                  xs:"column", // less than 600px
+                  sm:"column", // less than 900px
+                  md: "column",
+                  lg: "column", // changing this to row breaks everything!!
+                },
+                gap:{
+                  xs:"0px", // less than 600px
+                  sm:"0px", // less than 900px
+                  md: "80px",
+                  lg: "80px",
+
+                }
+              }}
+            >
+              <Box className={styles["recipe-photo-container"]} sx={{
+                width:{
+                  xs:"195px", // less than 600px
+                  sm:"195px", // less than 900px
+                  md:"390px",
+                  lg:"390px",
+                  // md: "500px",
+                  // lg: "390px",
+                },
+                height:{
+                  xs:"168px", // less than 600px
+                  sm:"168px", // less than 900px
+                  md: "337px",
+                  lg: "337px",
+                },
+              }}>
                 <img className={styles["recipe-photo"]} src={recipe.image} />
               </Box>
               <Box className={styles["basic-info"]}>
