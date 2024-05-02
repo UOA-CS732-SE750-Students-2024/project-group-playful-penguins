@@ -13,8 +13,6 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import styles from "./LoginPage.module.css";
-import { useState } from "react";
-import TextField from "@mui/material/TextField";
 import React, { useState, useEffect } from 'react';
 import { useGoogleLogin } from '@react-oauth/google'; 
 import { authenticateGoogleUser } from "../../services/UserService";

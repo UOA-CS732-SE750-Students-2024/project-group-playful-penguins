@@ -5,11 +5,10 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Link } from "@mui/material";
 import { Link as RouterLink, useLocation } from "react-router-dom";
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 import { GoogleLogin } from "@react-oauth/google";
 import {
   Link,
@@ -17,7 +16,7 @@ import {
   ListItemIcon,
   Menu,
   Avatar,
-  Divider
+  Divider,
 } from "@mui/material";
 import { AppContext } from "../../providers/AppContextProvider";
 import { useContext, useState } from "react";
@@ -92,11 +91,11 @@ export function Navbar() {
 
   const responseMessage = (response) => {
     console.log(response);
-  }
+  };
 
   const errorMessage = (error) => {
     console.log(error);
-  }
+  };
 
   return (
     <AppBar
@@ -126,7 +125,7 @@ export function Navbar() {
 
           <Box
             sx={{
-              display:"flex",
+              display: "flex",
               flexGrow: 1,
               backgroundColor: `${isTakeout ? "#edb1bb" : "#b2dfdb"}`,
               justifyContent: "center",
@@ -189,7 +188,10 @@ export function Navbar() {
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
             <MenuItem>
-              <GoogleLogin onSuccess={responseMessage} onError={errorMessage}></GoogleLogin>
+              <GoogleLogin
+                onSuccess={responseMessage}
+                onError={errorMessage}
+              ></GoogleLogin>
             </MenuItem>
             <Divider />
             <MenuItem onClick={handleClose}>
