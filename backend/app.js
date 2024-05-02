@@ -19,7 +19,7 @@ app.use("/api/recipes", recipeRoutes);
 app.use("/api/takeouts", takeoutRoutes);
 app.use("/api/user", userRoutes);
 
-app.post("/signup", postUserSignUp);
+app.post("/api/signup", postUserSignUp);
 
 // TODO: Login
 // app.post("login", postUserlogin)
