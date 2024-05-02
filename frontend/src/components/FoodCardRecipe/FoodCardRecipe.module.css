@@ -1,5 +1,5 @@
 .card {
-    max-width: 220px;
+    max-width: 250px;
     margin: auto;
     border-radius: 20px;
     overflow: hidden;
@@ -22,29 +22,39 @@
 }
 
 .cardContent {
-    padding: 16px; 
-    padding-bottom: 0; 
+    padding: 25px;
+    padding-bottom: 0;
     position: relative;
+    height: calc(100% - 250px);
 }
 
 .title {
-    font-size: 1.2rem; /* Adjusted for better responsiveness */
+    font-size: 1.2rem;
     font-weight: 800;
-    padding-bottom: 15px;
     margin-bottom: 26px; 
-    font-family: Arial; /* Changed from font-style to font-family */
+    font-family: Arial;
+    box-sizing: border-box;
+    white-space: normal; 
+    line-height: 1.5; 
+    overflow-wrap: break-word;
 }
 
+.cardTitle {
+    min-height: 80px; 
+    max-height: 100px; 
+    overflow: hidden;
+}
 
 .details {
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    width: 100%; 
-    background-color: #E6FAF8; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #E6FAF8;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px; 
+    padding: 8px 16px;
     box-sizing: border-box;
+    height: 50px; 
 }
