@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 import { response } from "express";
+import User from "../model/userModel.js";
 
 dotenv.config();
 
@@ -32,4 +33,21 @@ const authorizeGoogleUser = (req, res) => {
   }
 };
 
-export { authorizeGoogleUser };
+const postUserSignUp = async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    const user = await User.signup(name, email, password);
+    // TODO: token
+    res.status(201).json({
+      message: "User successfully registered!",
+      user: { name: name, email: email },
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// TODO: Login
+// const postUserLogin = async (req, res) => {};
+
+export { postUserSignUp, authorizeGoogleUser };
