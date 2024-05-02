@@ -1,11 +1,27 @@
 import { Typography, Box, Button, Divider } from "@mui/material";
 import styles from "./LoginPage.module.css";
 import TextField from "@mui/material/TextField";
-import UserIcon from "../../assets/SVGIconComponents/UserIcon";
-import { AppContext } from "../../providers/AppContextProvider";
-import { useContext } from "react";
+import React, { useState, useEffect } from 'react';
+import { useGoogleLogin } from '@react-oauth/google'; 
+import { authenticateGoogleUser } from "../../services/UserService";
 
 export default function LoginPage() {
+  const [user, setUser] = useState([]);
+  const [profile, setProfile] = useState([]);
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (codeResponse) => {
+      console.log(codeResponse);
+      response = await authenticateGoogleUser(codeResponse);
+      console.log(response);
+    },
+    onError: () => {
+      // Handle login errors here
+      console.error('Google login failed');
+    },
+    flow: 'auth-code',
+  });
+
   return (
     <>
       <Box className={styles["top-container"]}>
@@ -39,6 +55,23 @@ export default function LoginPage() {
             >
               <Typography variant="body1" fontWeight="fontWeightBold">
                 Log in
+              </Typography>
+            </Button>
+            <Button
+              onClick={googleLogin}
+              sx={{
+                width: 400,
+                border: "2px solid #8e6a70;",
+                borderRadius: "16px",
+                color: "black",
+                padding: "10px",
+                "&:hover": {
+                  bgcolor: "#fbeff1",
+                },
+              }}
+            >
+              <Typography variant="body1" fontWeight="fontWeightBold">
+                Sign in using Google
               </Typography>
             </Button>
             <Divider

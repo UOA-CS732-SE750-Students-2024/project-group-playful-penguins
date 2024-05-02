@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import recipeRoutes from "./routes/recipeRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/recipes", recipeRoutes);
+app.use("/api/user", userRoutes);
 
 const PORT = process.env.PORT;
 
