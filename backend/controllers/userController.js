@@ -48,6 +48,17 @@ const postUserSignUp = async (req, res) => {
 };
 
 // TODO: Login
-// const postUserLogin = async (req, res) => {};
+const postUserLogin = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.login(email, password);
+    res.status(201).json({
+      message: "Found user in DB! Logged in successfully",
+      user: { email: email },
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-export { postUserSignUp, authorizeGoogleUser };
+export { postUserSignUp, postUserLogin, authorizeGoogleUser };
