@@ -37,6 +37,10 @@ export function FoodCardTakeout({ data }) {
     }
   };
 
+  const title = data.dish_name  ? (data.dish_name.length > 60 ? `${data.dish_name.substring(0, 40)}...` : data.dish_name): data.dish_name
+
+  const restaurant_name = data.restaurant_name  ? (data.restaurant_name.length > 18 ? `${data.restaurant_name.substring(0, 18)}...` : data.restaurant_name): data.restaurant_name
+
   return (
     <Box>
       <Card onClick={() => handleOpen(data.id)} className={styles.card}>
@@ -47,15 +51,17 @@ export function FoodCardTakeout({ data }) {
           className={styles.cardMedia}
         />
         <CardContent className={styles.cardContent}>
+        <Box className={styles.cardTitle}>
           <Typography gutterBottom component="div" className={styles.title}>
-            {data.dish_name}
+            {title}
           </Typography>
+          </Box>
           <div className={styles.details}>
             <Typography variant="body2" color="text.secondary">
               $$ {data.price}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              by {data.restaurant_name}
+              by {restaurant_name}
             </Typography>
           </div>
         </CardContent>
