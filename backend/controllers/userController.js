@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 import dotenv from "dotenv";
 import { response } from "express";
 import User from "../model/userModel.js";
+import { generateAccessToken } from "../token/generateAccessToken.js";
 
 dotenv.config();
 
@@ -37,10 +38,10 @@ const postUserSignUp = async (req, res) => {
   const { name, email, password } = req.body;
   try {
     const user = await User.signup(name, email, password);
-    // TODO: token
+    const token = generateAccessToken(user);
     res.status(201).json({
       message: "User successfully registered!",
-      user: { name: name, email: email },
+      user: { name: name, email: email, token: token },
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -52,12 +53,14 @@ const postUserLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
+    const token = generateAccessToken(user);
+
     res.status(201).json({
       message: "Found user in DB! Logged in successfully",
-      user: { email: email },
+      user: { email: email, token: token },
     });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: error.message }); // Corrected here
   }
 };
 
