@@ -34,6 +34,21 @@ const RecipeSchema = mongoose.Schema({
   calories: Number,
 });
 
+RecipeSchema.statics.search = async function (searchTerm) {
+  try {
+    const matchRecipes = await Recipe.find({
+      title: { $regex: searchTerm, $options: "i" },
+    });
+    if (matchRecipes.length > 0) {
+      return matchRecipes;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 const Recipe = mongoose.model("Recipe", RecipeSchema);
 
 export default Recipe;

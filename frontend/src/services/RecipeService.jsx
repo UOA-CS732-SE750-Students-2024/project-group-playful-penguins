@@ -1,8 +1,26 @@
 import axios from "axios";
 import { getSortQuery } from "./getQuery/getSortQuery";
 import { getRecipeFilterQuery } from "./getQuery/getRecipeFilterQuery";
+import { getSearchQuery } from "./getQuery/getSearchQuery";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+const getMatchedRecipes = async (searchTerm, selectedSortByOption) => {
+  try {
+    const query = getSearchQuery(searchTerm);
+    query += getSortQuery(selectedSortByOption);
+    const url = `${BACKEND_URL}/recipes/match-recipes/query?${query}`;
+    const response = await axios.get(url);
+    console.log(url);
+    if (!response.data) {
+      throw new Error("No data from backend");
+    }
+    return response.data.recipes;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    return [];
+  }
+};
 
 const getRecipes = async (selectedSortByOption) => {
   try {
@@ -51,4 +69,4 @@ const getRecipeByID = async (id) => {
   }
 };
 
-export { getRecipes, getRecipeByID, getFilteredRecipes };
+export { getRecipes, getRecipeByID, getFilteredRecipes, getMatchedRecipes };

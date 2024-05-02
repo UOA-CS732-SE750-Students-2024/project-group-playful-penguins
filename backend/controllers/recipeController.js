@@ -185,10 +185,23 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
   res.json({ recipes, page, pages: Math.ceil(count / pageSize) });
 });
 
+const getFoodRecipes = async (req, res) => {
+  const { searchTerm } = req.query;
+  try {
+    const matchRecipes = await Recipe.search(searchTerm);
+    res.status(200).json({
+      recipes: matchRecipes,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 export {
   getRecipes,
   getRecipeByID,
   getRecipeBySearch,
   getPaginateRecipe,
   getFilteredRecipes,
+  getFoodRecipes,
 };

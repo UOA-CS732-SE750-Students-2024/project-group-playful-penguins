@@ -18,6 +18,8 @@ export function AppContextProvider({ children }) {
     SORT_BY.INITIAL_VALUE
   );
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   const changeCategory = (boolean) => setTakeout(boolean);
 
   const context = {
@@ -29,6 +31,9 @@ export function AppContextProvider({ children }) {
 
     selectedSortByOption,
     setSelectedSortByOption,
+
+    searchTerm,
+    setSearchTerm,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
