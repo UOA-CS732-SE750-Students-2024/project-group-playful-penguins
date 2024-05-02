@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Grid } from "@mui/material";
 import { FoodCardRecipe } from "../FoodCardRecipe/FoodCardRecipe";
 import { FoodCardTakeout } from "../FoodCardTakeout/FoodCardTakeout";
-import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../providers/AppContextProvider";
 import styles from "./FoodList.module.css";
 

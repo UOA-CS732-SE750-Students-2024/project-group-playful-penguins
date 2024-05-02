@@ -5,6 +5,8 @@ export const AppContext = React.createContext({});
 
 export function AppContextProvider({ children }) {
   const [isTakeout, setTakeout] = useState(false);
+  const [searchTerm, setSearchTerm] = useState([]);
+
   const [filters, setFilters] = useState({
     calorieCountValues: FILTERS.CALORIE_COUNT.INITIAL_VALUE,
     prepTimeValues: FILTERS.PREP_TIME.INITIAL_VALUE,
@@ -29,6 +31,9 @@ export function AppContextProvider({ children }) {
 
     selectedSortByOption,
     setSelectedSortByOption,
+
+    searchTerm,
+    setSearchTerm,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

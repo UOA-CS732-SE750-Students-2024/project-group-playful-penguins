@@ -4,12 +4,11 @@ import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { SortBy } from "../../components/SortBy/SortBy";
 import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
-import { useContext, useState } from "react";
+import { useContext, useState, useCallback } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
 import TakeoutService from "../../services/TakeoutService";
 import { getRecipes } from "../../services/RecipeService";
 import { Typography } from "@mui/material";
-
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 
@@ -18,31 +17,43 @@ export function HomePage() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isTakeout, selectedSortByOption } = useContext(AppContext);
+  const { isTakeout, selectedSortByOption, searchTerm } =
+    useContext(AppContext);
 
-  const fetchRecipeData = async () => {
+  const fetchRecipeData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const data = await getRecipes(selectedSortByOption);
+      const data = await getRecipes(searchTerm, selectedSortByOption);
       setFoodData(data);
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
     setIsLoading(false);
-  };
+  });
 
-  const fetchTakeoutData = async () => {
+  const fetchTakeoutData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const data = await TakeoutService.getTakeouts();
+      const data = await TakeoutService.getTakeouts(
+        searchTerm,
+        selectedSortByOption
+      );
       setFoodData(data);
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
     setIsLoading(false);
-  };
+  });
+
+  useEffect(() => {
+    if (isTakeout) {
+      fetchTakeoutData(searchTerm, selectedSortByOption);
+    } else {
+      fetchRecipeData(searchTerm, selectedSortByOption);
+    }
+  }, [searchTerm, selectedSortByOption]);
 
   useEffect(() => {
     if (isTakeout) {

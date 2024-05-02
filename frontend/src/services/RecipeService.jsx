@@ -4,11 +4,26 @@ import { getRecipeFilterQuery } from "./getQuery/getRecipeFilterQuery";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const getRecipes = async (selectedSortByOption) => {
+const getRecipes = async (searchTerm, selectedSortByOption) => {
+  let url = `${BACKEND_URL}/recipes/`;
+  let query = "";
   try {
-    const sortQuery = getSortQuery(selectedSortByOption);
-    const url = `${BACKEND_URL}/recipes?${sortQuery}`;
-    const response = await axios.get(url);
+    if (selectedSortByOption) {
+      const sortQuery = getSortQuery(selectedSortByOption);
+      if (sortQuery) query += `${sortQuery}&`;
+    }
+
+    if (searchTerm && searchTerm.length) {
+      query += `title=${searchTerm}`;
+    }
+
+    if (query !== "") {
+      url += "search/q?";
+    }
+
+    console.log(url + query);
+
+    const response = await axios.get(url + query);
 
     if (!response.data) {
       throw new Error("No data from backend");
