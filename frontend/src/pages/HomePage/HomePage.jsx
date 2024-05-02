@@ -18,7 +18,7 @@ export function HomePage() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isTakeout, selectedSortByOption, searchTerm } =
+  const { isTakeout, selectedSortByOption, searchTerm, filters } =
     useContext(AppContext);
 
   const fetchFoodData = async () => {
@@ -28,7 +28,11 @@ export function HomePage() {
       if (isTakeout) {
         // TODO: Get Takeout
       } else {
-        response = await getMatchedRecipes(searchTerm, selectedSortByOption);
+        response = await getMatchedRecipes(
+          searchTerm,
+          selectedSortByOption,
+          filters
+        );
         console.log(response);
       }
       if (response.length > 0) {

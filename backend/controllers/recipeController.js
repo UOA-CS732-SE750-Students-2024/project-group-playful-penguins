@@ -1,11 +1,12 @@
 import dotenv from "dotenv";
 import { getSortCriteria } from "../functions/getSortCriteria.js";
-import { getFilterQuery } from "../functions/getFilterQuery.js";
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Recipe from "../model/recipeModel.js";
 import asyncHandler from "express-async-handler";
 import connectToDatabase from "../config/db.js";
+import { getFilterQuery } from "../functions/getFilterQuery.js";
+import { getSearchQuery } from "../functions/getSearchQuery.js";
 
 dotenv.config();
 
@@ -188,8 +189,12 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
 const getFoodRecipes = async (req, res) => {
   const { searchTerm, sortBy, sortOrder } = req.query;
   const sortCriteria = getSortCriteria(sortBy, sortOrder);
+  const searchQuery = getSearchQuery(searchTerm);
+  const filterQuery = getFilterQuery(req);
+  const query = { $and: [searchQuery, filterQuery] };
+
   try {
-    const matchRecipes = await Recipe.search(searchTerm, sortCriteria);
+    const matchRecipes = await Recipe.search(query, sortCriteria);
     res.status(200).json({
       recipes: matchRecipes,
     });

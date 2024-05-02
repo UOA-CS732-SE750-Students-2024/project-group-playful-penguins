@@ -5,11 +5,13 @@ import { getSearchQuery } from "./getQuery/getSearchQuery";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const getMatchedRecipes = async (searchTerm, selectedSortByOption) => {
+const getMatchedRecipes = async (searchTerm, selectedSortByOption, filters) => {
   try {
     let query = getSearchQuery(searchTerm);
     query += "&" + getSortQuery(selectedSortByOption);
-    const url = `${BACKEND_URL}/recipes/match-recipes/query?${query}`;
+    query += "&" + getRecipeFilterQuery(filters);
+
+    const url = `${BACKEND_URL}/recipes/match-recipes?${query}`;
     const response = await axios.get(url);
     console.log(url);
     if (!response.data) {

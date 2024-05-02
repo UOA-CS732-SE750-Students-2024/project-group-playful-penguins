@@ -1,26 +1,27 @@
 export const getFilterQuery = (req) => {
   const {
-    calorieCountValuesMin,
-    calorieCountValuesMax,
-    prepTimeValuesMin,
-    prepTimeValuesMax,
-    cookingTimeValuesMin,
-    cookingTimeValuesMax,
+    // minCalorieCountValues,
+    // maxCalorieCountValues,
+    // minPrepTimeValues,
+    // maxPrepTimeValues,
+    minCookingTimeValues,
+    maxCookingTimeValues,
     selectedRequirement,
   } = req.query;
-  let query = {};
 
-  if (cookingTimeValuesMin && cookingTimeValuesMax) {
+  let query = {};
+  if (minCookingTimeValues && maxCookingTimeValues) {
+    // TODO: need to change healthScore to Cooking time
     query.healthScore = {
-      $gte: parseInt(cookingTimeValuesMin),
-      $lte: parseInt(cookingTimeValuesMax),
+      // assuming cookingTime is the correct field in your DB
+      $gte: parseInt(minCookingTimeValues),
+      $lte: parseInt(maxCookingTimeValues),
     };
   }
-  // TODO get the calorie count and prep time and cooking time from backend now we are using healthy score
 
   if (selectedRequirement) {
-    query[selectedRequirement] = true;
+    query[selectedRequirement] = true; // assuming this is a boolean flag in your DB
   }
-  console.log(query);
+
   return query;
 };

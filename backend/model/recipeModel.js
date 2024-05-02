@@ -34,11 +34,10 @@ const RecipeSchema = mongoose.Schema({
   calories: Number,
 });
 
-RecipeSchema.statics.search = async function (searchTerm, sortCriteria) {
+RecipeSchema.statics.search = async function (query, sortCriteria) {
+  console.log(query);
   try {
-    const matchRecipes = await Recipe.find({
-      title: { $regex: searchTerm, $options: "i" },
-    }).sort(sortCriteria);
+    const matchRecipes = await Recipe.find(query).sort(sortCriteria);
     if (matchRecipes.length > 0) {
       return matchRecipes;
     } else {
