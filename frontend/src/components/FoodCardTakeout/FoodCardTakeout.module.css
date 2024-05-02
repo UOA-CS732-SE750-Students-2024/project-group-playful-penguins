@@ -1,5 +1,5 @@
 .card {
-  max-width: 220px;
+  max-width: 250px;
   margin: auto;
   border-radius: 20px;
   overflow: hidden;
@@ -7,7 +7,7 @@
   border-style: solid;
   border-width: 0.5px;
   border-color: rgb(247, 242, 237);
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; 
 }
 
 .card:hover {
@@ -22,17 +22,27 @@
 }
 
 .cardContent {
-  padding: 16px;
-  padding-bottom: 2px;
+  padding: 25px;
+  padding-bottom: 0;
   position: relative;
+  height: calc(100% - 250px); 
 }
 
 .title {
-  font-size: 1.2rem; /* Adjusted for better responsiveness */
+  font-size: 1.2rem;
   font-weight: 800;
-  padding-bottom: 15px;
-  margin-bottom: 26px;
-  font-family: Arial; /* Changed from font-style to font-family */
+  margin-bottom: 26px; 
+  font-family: Arial;
+  box-sizing: border-box;
+  white-space: normal;
+  line-height: 1.5;
+  overflow-wrap: break-word; 
+}
+
+.cardTitle {
+  min-height: 80px; 
+  max-height: 100px; 
+  overflow: hidden; 
 }
 
 .details {
@@ -43,11 +53,11 @@
   background-color: #fdf7f8;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
   padding: 8px 16px;
   box-sizing: border-box;
+  height: 50px;
 }
-
 .modal-container {
   display: flex;
   align-items: center;
