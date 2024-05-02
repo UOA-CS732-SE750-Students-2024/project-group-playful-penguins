@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { response } from "express";
 import User from "../model/userModel.js";
 import { generateAccessToken } from "../token/generateAccessToken.js";
+import { verifyAccessToken } from "../middleware/authMiddleware.js";
 
 dotenv.config();
 
@@ -48,6 +49,18 @@ const postUserSignUp = async (req, res) => {
   }
 };
 
+const verifyUser = (req, res) => {
+  const { token } = req.body;
+  try {
+    const decode = verifyAccessToken(req.token);
+    req.status(200).json({
+      decode,
+    });
+  } catch (error) {
+    res.status(401).json({ error: "unauthorized" });
+  }
+};
+
 // TODO: Login
 const postUserLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -63,4 +76,4 @@ const postUserLogin = async (req, res) => {
   }
 };
 
-export { postUserSignUp, postUserLogin, authorizeGoogleUser };
+export { postUserSignUp, postUserLogin, authorizeGoogleUser, verifyUser };

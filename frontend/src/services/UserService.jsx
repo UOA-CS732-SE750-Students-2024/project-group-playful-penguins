@@ -17,6 +17,18 @@ const authenticateGoogleUser = async (codeResponse) => {
   }
 };
 
+const verifyAccessToken = async (token) => {
+  try {
+    const response = await axios.post(BACKEND_URL + "/user/verify", {
+      access_token: token
+    });
+    return response;
+  } catch (error) {
+    console.log(error)
+    return [];
+  }
+}
+
 const signup = async (name, email, password) => {
   try {
     const response = await axios.post(`${BACKEND_URL}/signup`, {
@@ -54,4 +66,5 @@ function formatErrorMessage(error) {
   }
 }
 
-export { signup, login, authenticateGoogleUser };
+export { signup, login, authenticateGoogleUser, verifyAccessToken };
+

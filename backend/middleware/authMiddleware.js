@@ -1,19 +1,17 @@
-import asyncHandler from "express-async-handler";
+import jwt from 'jsonwebtoken';
+import dotenv from "dotenv"
 
-const protect = asyncHandler(async (req, res, next) => {
-  let token;
+dotenv.config();
 
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    try {
-      next();
-    } catch (error) {
-      res.status(401);
-      throw new Error("NOT AUTHORIZED");
-    }
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+
+const verifyAccessToken = (token) => {
+  try {
+    const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+    return { success: true, data: decoded }
+  } catch (error) {
+    return { success: false, error: error.message}
   }
-});
+}
 
-export { protect };
+export { verifyAccessToken };

@@ -20,8 +20,9 @@ import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import { authenticateGoogleUser, login } from "../../services/UserService";
 import { useForm } from "react-hook-form";
+import { PropTypes } from "prop-types";
 
-export default function LoginPage() {
+export default function LoginPage({ setToken }) {
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
@@ -31,15 +32,17 @@ export default function LoginPage() {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+  const handelSubmit = () => {
+    setToken("token");
+  }
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (codeResponse) => {
-      console.log(codeResponse);
       response = await authenticateGoogleUser(codeResponse);
-      console.log(response);
     },
     onError: () => {
       // Handle login errors here
@@ -341,4 +344,9 @@ export default function LoginPage() {
       </Box>
     </Box>
   );
+
 }
+
+LoginPage.propTypes = {
+  setToken: PropTypes.func.isRequired
+};
