@@ -38,7 +38,6 @@ body {
 .slogan-container {
   margin-top: 80px;
   padding: 0px 40px;
-  
 }
 
 .slogan-first-line {
@@ -53,10 +52,8 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width:100%;
+  width: 100%;
   /* margin-top: 90px; */
-  
-  
 }
 
 .CTA {

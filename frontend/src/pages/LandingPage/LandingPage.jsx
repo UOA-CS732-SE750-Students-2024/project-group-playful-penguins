@@ -37,14 +37,14 @@ export default function LandingPage() {
             <Box
               sx={{
                 width: {
-                  xs: "60px", // Width for extra small screens
-                  md: "60px", // Width for medium screens
-                  lg: "80px", // Width for large screens
+                  xs: "60px",
+                  md: "60px",
+                  lg: "80px",
                 },
                 height: {
-                  xs: "60px", // Height for extra small screens
-                  md: "60px", // Height for medium screens
-                  lg: "80px", // Height for large screens
+                  xs: "60px",
+                  md: "60px",
+                  lg: "80px",
                 },
               }}
             >
@@ -69,9 +69,9 @@ export default function LandingPage() {
               className={` ${styles["slogan-first-line"]}`}
               sx={{
                 fontSize: {
-                  xs: "18px", // for small screens
-                  sm: "24px", // for medium screens
-                  md: "30px", // for larger screens
+                  xs: "18px",
+                  sm: "24px",
+                  md: "30px",
                 },
               }}
             >
@@ -85,9 +85,9 @@ export default function LandingPage() {
               sx={{
                 fontWeight: "bold",
                 fontSize: {
-                  xs: "24px", // for small screens
-                  sm: "30px", // for medium screens
-                  md: "48px", // for larger screens
+                  xs: "24px",
+                  sm: "30px",
+                  md: "48px",
                 },
               }}
             >
@@ -110,13 +110,6 @@ export default function LandingPage() {
               sm: "50vh",
               md: "50vh",
               lg: "50vh",
-            },
-
-            marginTop: {
-              // xs: "50px", fif you want this margin then remove the margin below
-              // sm: "70px", or sm:"0px"
-              // md: "80px",
-              // lg: "85px",
             },
 
             flexDirection: {
@@ -149,10 +142,10 @@ export default function LandingPage() {
               fontWeight="fontWeightMedium"
               sx={{
                 fontSize: {
-                  xs: "12px", // for small screens
+                  xs: "12px",
                   sm: "18px",
-                  md: "20px", // for medium screens
-                  lg: "24px", // for larger screens
+                  md: "20px",
+                  lg: "24px",
                 },
               }}
             >
@@ -180,9 +173,9 @@ export default function LandingPage() {
                   color: "white",
                   textTransform: "none",
                   fontSize: {
-                    xs: "18px", // for small screens
-                    md: "24px", // for medium screens
-                    lg: "32px", // for larger screens
+                    xs: "18px",
+                    md: "24px",
+                    lg: "32px",
                   },
                 }}
               >
@@ -212,10 +205,10 @@ export default function LandingPage() {
               fontWeight="fontWeightMedium"
               sx={{
                 fontSize: {
-                  xs: "12px", // for small screens
+                  xs: "12px",
                   sm: "18px",
-                  md: "20px", // for medium screens
-                  lg: "24px", // for larger screens
+                  md: "20px",
+                  lg: "24px",
                 },
               }}
             >
@@ -243,9 +236,9 @@ export default function LandingPage() {
                   color: "white",
                   textTransform: "none",
                   fontSize: {
-                    xs: "18px", // for small screens
-                    md: "24px", // for medium screens
-                    lg: "32px", // for larger screens
+                    xs: "18px",
+                    md: "24px",
+                    lg: "32px",
                   },
                 }}
               >
