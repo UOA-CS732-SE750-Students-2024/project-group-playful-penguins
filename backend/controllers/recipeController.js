@@ -58,30 +58,30 @@ const getRecipeByID = asyncHandler(async (req, res) => {
   }
 });
 
-const getFilteredRecipes = async (req, res) => {
-  try {
-    let db = await connectToDatabase(process.env.DB_NAME);
-    const fieldsToRetrieve = {
-      id: 1,
-      healthScore: 1,
-      vegan: 1,
-      glutenFree: 1,
-      lowFodmap: 1,
-      vegetarian: 1,
-    };
-    const sortCriteria = getSortCriteria(req);
-    const query = getFilterQuery(req);
-    let recipes = await db
-      .collection("recipes")
-      .find(query)
-      .sort(sortCriteria)
-      .project(fieldsToRetrieve)
-      .toArray();
-    res.json(recipes);
-  } catch (error) {
-    console.error("Error: ", error);
-  }
-};
+// const getFilteredRecipes = async (req, res) => {
+//   try {
+//     let db = await connectToDatabase(process.env.DB_NAME);
+//     const fieldsToRetrieve = {
+//       id: 1,
+//       healthScore: 1,
+//       vegan: 1,
+//       glutenFree: 1,
+//       lowFodmap: 1,
+//       vegetarian: 1,
+//     };
+//     const sortCriteria = getSortCriteria(req);
+//     const query = getFilterQuery(req);
+//     let recipes = await db
+//       .collection("recipes")
+//       .find(query)
+//       .sort(sortCriteria)
+//       .project(fieldsToRetrieve)
+//       .toArray();
+//     res.json(recipes);
+//   } catch (error) {
+//     console.error("Error: ", error);
+//   }
+// };
 
 // @desc    Fetch all recipe by search terms and filters (non-paginated)
 // @route   GET /api/recipes/search/q?key=value
@@ -186,9 +186,10 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
 });
 
 const getFoodRecipes = async (req, res) => {
-  const { searchTerm } = req.query;
+  const { searchTerm, sortBy, sortOrder } = req.query;
+  const sortCriteria = getSortCriteria(sortBy, sortOrder);
   try {
-    const matchRecipes = await Recipe.search(searchTerm);
+    const matchRecipes = await Recipe.search(searchTerm, sortCriteria);
     res.status(200).json({
       recipes: matchRecipes,
     });
@@ -202,6 +203,5 @@ export {
   getRecipeByID,
   getRecipeBySearch,
   getPaginateRecipe,
-  getFilteredRecipes,
   getFoodRecipes,
 };

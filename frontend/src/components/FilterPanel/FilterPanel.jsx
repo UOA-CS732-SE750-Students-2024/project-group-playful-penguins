@@ -9,7 +9,7 @@ import { PriceFilter } from "../Filters/PriceFilter/PriceFilter";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { colors, FILTERS } from "../../constants/styles-constant";
 import { LoadingButton } from "@mui/lab";
-import { getFilteredRecipes } from "../../services/RecipeService";
+// import { getFilteredRecipes } from "../../services/RecipeService";
 
 export function FilterPanel() {
   const { isTakeout, filters, setFilters, selectedSortByOption } =
@@ -17,17 +17,7 @@ export function FilterPanel() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleApplyFilters = async (event) => {
-    // Prevent default form submission
-    event.preventDefault();
-
-    setIsLoading(true);
-    try {
-      const data = await getFilteredRecipes(filters, selectedSortByOption);
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching filtered recipes:", error);
-    }
-    setIsLoading(false);
+    console.log(event);
   };
 
   const handleReset = () => {

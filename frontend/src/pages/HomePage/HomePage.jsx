@@ -28,7 +28,7 @@ export function HomePage() {
       if (isTakeout) {
         // TODO: Get Takeout
       } else {
-        response = await getMatchedRecipes(searchTerm);
+        response = await getMatchedRecipes(searchTerm, selectedSortByOption);
         console.log(response);
       }
       if (response.length > 0) {
@@ -44,7 +44,7 @@ export function HomePage() {
 
   useEffect(() => {
     fetchFoodData();
-  }, [searchTerm]);
+  }, [searchTerm, selectedSortByOption]);
 
   return (
     <div className={styles["home-container"]}>
