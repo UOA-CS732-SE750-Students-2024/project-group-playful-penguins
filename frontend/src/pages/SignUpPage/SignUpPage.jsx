@@ -16,6 +16,7 @@ import styles from "./SignUpPage.module.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { signup } from "../../services/UserService";
 
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -38,6 +39,7 @@ export default function SignUpPage() {
 
   const form = useForm({
     defaultValues: {
+      // TODO: remove Kenny Lam after we add input field for name
       name: "Kenny Lam",
       email: "",
       password: "",
@@ -51,10 +53,18 @@ export default function SignUpPage() {
     formState: { errors },
   } = form;
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
       setIsPasswordMatch(false);
+      return;
+    }
+
+    const response = await signup(data.name, data.email, data.password);
+    if (!response.success) {
+      alert(response.message);
+    } else {
+      // TODO: Maybe have a toast and redirect user to the home page (login version)
+      alert("You have successfully registered");
     }
   };
 
@@ -109,7 +119,7 @@ export default function SignUpPage() {
               marginBottom: "30px",
             }}
           >
-            {/* TODO: */}
+            {/* TODO: Add name input field and style the form and the error message a bit*/}
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 type="email"
