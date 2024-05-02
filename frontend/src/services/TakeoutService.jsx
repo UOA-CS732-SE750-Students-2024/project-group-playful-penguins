@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getSortQuery } from "./getQuery/getSortQuery";
+import { getTakeoutFilterQuery } from "./getQuery/getTakeoutFilterQuery";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -33,4 +34,22 @@ const getTakeouts = async (searchTerm, selectedSortByOption) => {
   }
 };
 
-export default { getTakeouts };
+const getFilteredTakeouts = async (filters, selectedSortByOption) => {
+  try {
+    const filterQuery = getTakeoutFilterQuery(filters);
+    const sortQuery = getSortQuery(selectedSortByOption);
+    const url = `${BACKEND_URL}/takeouts/filter?${filterQuery}&${sortQuery}`;
+    console.log(url);
+
+    const response = await axios.get(url);
+    if (!response.data) {
+      throw new Error("No data from backend");
+    }
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    return [];
+  }
+};
+
+export default { getTakeouts, getFilteredTakeouts };
