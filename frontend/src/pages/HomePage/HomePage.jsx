@@ -42,8 +42,9 @@ export function HomePage() {
       }
     } catch (error) {
       throw new Error(error.message);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export function HomePage() {
   return (
     <div className={styles["home-container"]}>
       <div className={styles["filter-container"]}>
-        <FilterPanel />
+        <FilterPanel onApplyFilter={fetchFoodData} />
       </div>
       <div className={styles["features-and-food-list-container"]}>
         <div className={styles["search-and-sort-panel"]}>

@@ -11,13 +11,14 @@ import { colors, FILTERS } from "../../constants/styles-constant";
 import { LoadingButton } from "@mui/lab";
 // import { getFilteredRecipes } from "../../services/RecipeService";
 
-export function FilterPanel() {
+export function FilterPanel({ onApplyFilter }) {
   const { isTakeout, filters, setFilters, selectedSortByOption } =
     useContext(AppContext);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleApplyFilters = async (event) => {
-    console.log(event);
+  const handleApplyFilters = (event) => {
+    event.preventDefault();
+    onApplyFilter();
   };
 
   const handleReset = () => {
