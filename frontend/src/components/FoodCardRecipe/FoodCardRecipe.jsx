@@ -13,11 +13,16 @@ export function FoodCardRecipe({ data }) {
   const navigate = useNavigate();
 
   function openRecipeInfo() {
-    navigate(`recipe/${data.id}`);
+    if (data) {
+      navigate(`recipe/${data.id}`);
+    }
   }
 
   // Truncate title if it's longer than 60 characters
-  const displayTitle = data.title.length > 60 ? `${data.title.substring(0, 40)}...` : data.title;
+  const displayTitle =
+    data.title && data.title.length > 60
+      ? `${data.title.substring(0, 40)}...`
+      : data.title;
 
   return (
     <Card className={styles.card} onClick={openRecipeInfo}>
@@ -28,17 +33,17 @@ export function FoodCardRecipe({ data }) {
         className={styles.cardMedia}
       />
       <CardContent className={styles.cardContent}>
-      <Box className={styles.cardTitle}>
+        <Box className={styles.cardTitle}>
           <Typography gutterBottom component="div" className={styles.title}>
             {displayTitle}
           </Typography>
         </Box>
         <div className={styles.details}>
-          <AccessTimeIcon/>
+          <AccessTimeIcon />
           <Typography variant="body2" color="text.secondary">
             {data.readyInMinutes} mins
           </Typography>
-          <LocalDiningIcon/>
+          <LocalDiningIcon />
           <Typography variant="body2" color="text.secondary">
             Serves {data.servings}
           </Typography>

@@ -37,9 +37,9 @@ export function FoodCardTakeout({ data }) {
     }
   };
 
-  const title = data.dish_name  ? (data.dish_name.length > 60 ? `${data.dish_name.substring(0, 40)}...` : data.dish_name): data.dish_name
+  const title = data && data.dish_name  ? (data.dish_name.length > 60 ? `${data.dish_name.substring(0, 40)}...` : data.dish_name): data.dish_name
 
-  const restaurant_name = data.restaurant_name  ? (data.restaurant_name.length > 18 ? `${data.restaurant_name.substring(0, 18)}...` : data.restaurant_name): data.restaurant_name
+  const restaurant_name = data && data.restaurant_name  ? (data.restaurant_name.length > 18 ? `${data.restaurant_name.substring(0, 18)}...` : data.restaurant_name): data.restaurant_name
 
   return (
     <Box>
