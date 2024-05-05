@@ -2,18 +2,12 @@ import styles from "./RecipeInfo.module.css";
 import { useState, useEffect, useCallback } from "react";
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { getRecipes, getRecipeByID } from "../../services/RecipeService";
+import { getRecipeByID } from "../../services/RecipeService";
 import LinearProgress from "@mui/material/LinearProgress";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ServingsIcon from "../../assets/SVGIconComponents/ServingsIcon";
 import Box from "@mui/material/Box";
 import {
   List,
@@ -23,6 +17,7 @@ import {
   styled,
   Typography,
   Button,
+  CardMedia,
 } from "@mui/material";
 
 const StepLabel = styled("div")({
@@ -90,16 +85,73 @@ export default function RecipeInfo() {
           </Typography>
         </Button>
       </Box>
-      <Box className={styles["top-container"]}>
+      <Box
+        className={styles["top-container"]}
+        sx={{
+          mx: {
+            xs: "42px",
+            sm: "82px",
+            md: "82px",
+            lg: "165px",
+          },
+        }}
+      >
         {!isLoading && recipe ? (
-          <Box className={styles["info-container"]}>
+          <Box
+            className={styles["info-container"]}
+            sx={{
+              mx: {
+                xs: "12px",
+                sm: "24px",
+                md: "48px",
+                lg: "96px",
+              },
+            }}
+          >
             {/* Recipe name, photo information */}
-            <Box className={styles["details-container"]}>
+            <Box
+              className={styles["details-container"]}
+              sx={{
+                flexDirection: {
+                  xs: "column",
+                  sm: "column",
+                  md: "column",
+                  lg: "row",
+                },
+              }}
+            >
               <Box className={styles["recipe-photo-container"]}>
-                <img className={styles["recipe-photo"]} src={recipe.image} />
+                <CardMedia
+                  component="img"
+                  className={styles["recipe-photo"]}
+                  src={recipe.image}
+                  sx={{
+                    height: {
+                      xs: "120px",
+                      sm: "200px",
+                      md: "200px",
+                      lg: "337px",
+                    },
+                    width: {
+                      xs: "180px",
+                      sm: "250px",
+                      md: "350px",
+                      lg: "390px",
+                    },
+                  }}
+                />
               </Box>
               <Box className={styles["basic-info"]}>
-                <Typography variant="h4" fontWeight="fontWeightBold">
+                <Typography
+                  variant="h4"
+                  fontWeight="fontWeightBold"
+                  sx={{
+                    fontSize: {
+                      xs: "22px",
+                      md: "28px",
+                    },
+                  }}
+                >
                   {recipe.title}
                 </Typography>
                 {/* Timing information */}
@@ -107,7 +159,15 @@ export default function RecipeInfo() {
                   <Box id={styles["clock-icon"]}>
                     <AccessTimeIcon />
                   </Box>
-                  <Typography variant="h6" fontWeight="fontWeightMedium">
+                  <Typography
+                    variant="h6"
+                    fontWeight="fontWeightMedium"
+                    sx={{
+                      fontSize: {
+                        xs: "16px",
+                      },
+                    }}
+                  >
                     Total time taken : {recipe.readyInMinutes} mins
                   </Typography>
                 </Box>
@@ -116,41 +176,121 @@ export default function RecipeInfo() {
                   <Box id={styles["servings-icon"]}>
                     <LocalDiningIcon />
                   </Box>
-                  <Typography variant="h6" fontWeight="fontWeightMedium">
+                  <Typography
+                    variant="h6"
+                    fontWeight="fontWeightMedium"
+                    sx={{
+                      fontSize: {
+                        xs: "16px",
+                      },
+                    }}
+                  >
                     {" "}
                     {recipe.servings} Servings
                   </Typography>
                 </Box>
                 {/* Recipe detailed description */}
-                <Typography variant="body1" fontWeight="fontWeightMedium">
+                <Typography
+                  variant="body1"
+                  fontWeight="fontWeightMedium"
+                  sx={{
+                    fontSize: {
+                      xs: "12px",
+                      md: "14px",
+                    },
+                  }}
+                >
                   {" "}
                   {removeTags(recipe.summary)}
                 </Typography>
               </Box>
             </Box>
             {/* Cuisine, dietary requirement information */}
-            <Box className={styles["food-type-container"]}>
-              <Typography variant="h6" fontWeight="fontWeightRegular">
+            <Box
+              className={styles["food-type-container"]}
+              sx={{
+                flexDirection: {
+                  xs: "column",
+                  md: "row",
+                },
+                gap: {
+                  xs: "10px",
+                  md: "5px",
+                },
+              }}
+            >
+              <Typography
+                variant="h6"
+                fontWeight="fontWeightRegular"
+                sx={{
+                  fontSize: {
+                    xs: "16px",
+                    md: "20px",
+                  },
+                }}
+              >
                 <strong>Dish Type: </strong>
                 {recipe && recipe.dishTypes && recipe.dishTypes.length > 0
                   ? recipe.dishTypes.join(", ")
                   : "Stay tuned for dish types !"}
               </Typography>
-              <Typography variant="h6" fontWeight="fontWeightRegular">
+              <Typography
+                variant="h6"
+                fontWeight="fontWeightRegular"
+                sx={{
+                  fontSize: {
+                    xs: "16px",
+                    md: "20px",
+                  },
+                }}
+              >
                 <strong>Cuisine Type: </strong>
                 {recipe && recipe.cuisines && recipe.cuisines.length > 0
                   ? recipe.cuisines.join(", ")
                   : "Stay tuned for cuisine details !"}
               </Typography>
 
-              <Box className={styles["diet-label"]}>
+              <Box
+                className={styles["diet-label"]}
+                sx={{
+                  height: "fitContent",
+                }}
+              >
                 <Typography>{recipe.diets[0]}</Typography>
               </Box>
             </Box>
             {/* Ingredients and Nutrition information */}
-            <Box className={styles["section-container"]}>
+            <Box
+              className={styles["section-container"]}
+              sx={{
+                flexDirection: {
+                  xs: "column",
+                  sm: "row",
+                  md: "row",
+                  lg: "row",
+                },
+                alignItems: {
+                  xs: "center",
+                  md: "self-start",
+                },
+
+                gap: {
+                  xs: "50px",
+                  md: "20px",
+                },
+              }}
+            >
               <Box className={styles["ingredients-container"]}>
-                <Typography variant="h5" fontWeight="fontWeightBold">
+                <Typography
+                  variant="h5"
+                  fontWeight="fontWeightBold"
+                  sx={{
+                    fontSize: {
+                      xs: "16px",
+                      md: "24px",
+                    },
+                  }}
+                >
                   Ingredients
                 </Typography>
                 <Box className={` ${styles["ingredients-list-container"]}`}>
@@ -162,7 +302,15 @@ export default function RecipeInfo() {
                       >
                         <ListItemText
                           primary={
-                            <Typography variant="h6">
+                            <Typography
+                              variant="h6"
+                              sx={{
+                                fontSize: {
+                                  xs: "12px",
+                                  md: "18px",
+                                },
+                              }}
+                            >
                               • {ingredient.original}
                             </Typography>
                           }
@@ -172,8 +320,29 @@ export default function RecipeInfo() {
                   </List>
                 </Box>
               </Box>
-              <Box className={` ${styles["nutrients-container"]}`}>
-                <Typography variant="h6" fontWeight="fontWeightBold">
+              <Box
+                className={` ${styles["nutrients-container"]}`}
+                sx={{
+                  padding: {
+                    xs: "16px",
+                    md: "32px",
+                  },
+                  gap: {
+                    xs: "5px",
+                    md: "10px",
+                  },
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  fontWeight="fontWeightBold"
+                  sx={{
+                    fontSize: {
+                      xs: "12px",
+                      md: "24px",
+                    },
+                  }}
+                >
                   NUTRITION INFORMATION
                 </Typography>
                 {nutritionInfo.map((nutrient, index) => (
@@ -181,6 +350,12 @@ export default function RecipeInfo() {
                     <Typography
                       variant="h6"
                       fontWeight="fontWeightMedium"
+                      sx={{
+                        fontSize: {
+                          xs: "12px",
+                          md: "18px",
+                        },
+                      }}
                     >{`${nutrient.type}:   ${nutrient.amount}`}</Typography>
                   </Box>
                 ))}
@@ -192,6 +367,12 @@ export default function RecipeInfo() {
                 variant="h5"
                 fontWeight="fontWeightBold"
                 className={` ${styles["green-font"]}`}
+                sx={{
+                  fontSize: {
+                    xs: "16px",
+                    md: "24px",
+                  },
+                }}
               >
                 Directions
               </Typography>
@@ -215,6 +396,12 @@ export default function RecipeInfo() {
                             variant="h6"
                             fontWeight="fontWeightMedium"
                             className={` ${styles["green-font"]}`}
+                            sx={{
+                              fontSize: {
+                                xs: "12px",
+                                md: "18px",
+                              },
+                            }}
                           >
                             {`Step ${index + 1}`}
                           </Typography>
@@ -225,6 +412,12 @@ export default function RecipeInfo() {
                           <Typography
                             variant="h6"
                             fontWeight="fontWeightMedium"
+                            sx={{
+                              fontSize: {
+                                xs: "12px",
+                                md: "18px",
+                              },
+                            }}
                           >
                             {direction.step}
                           </Typography>
