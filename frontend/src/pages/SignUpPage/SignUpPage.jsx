@@ -9,6 +9,7 @@ import {
   FormControl,
   OutlinedInput,
   TextField,
+  CardMedia,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -79,45 +80,96 @@ export default function SignUpPage() {
   };
 
   return (
-    <Box className={styles["top-container"]}>
+    <Box
+      className={styles["top-container"]}
+      sx={{
+        flexDirection: {
+          xs: "column",
+          md: "column",
+        },
+        alignItems: {
+          xs: "center",
+          md: "center",
+        },
+      }}
+    >
+      <Box className={styles.topbar}>
+        <Link to="/">
+          <Box
+            sx={{
+              marginLeft: {
+                // xs: "-120px",
+                // md: "0px"
+              },
+            }}
+          >
+            <CardMedia
+              component="img"
+              id={styles["logo-icon"]}
+              className={styles["recipe-photo"]}
+              src="/images/app-logo.png"
+              sx={{
+                height: {
+                  xs: "60px",
+                  sm: "70px",
+                  md: "70px",
+                  lg: "80px",
+                },
+                width: {
+                  xs: "60px",
+                  sm: "70px",
+                  md: "70px",
+                  lg: "80px",
+                },
+                padding:"8px 8px",
+              }}
+            />
+          </Box>
+        </Link>
+      </Box>
       <Box
         sx={{
-          width: "50%",
+          width: {
+            xs: "100vw",
+            md: "50vw",
+          },
           height: "100%",
-          padding: "20px",
+          // padding: "20px",
           display: "flex",
-          flexDirection: "row",
-          alignItems: "start",
-          justifyContent: "stretch",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: "center",
+          justifyContent: { xs: "center", md: "stretch" },
         }}
       >
-        <Box className={styles.topbar}>
-          <Link to="/">
-            <img
-              id={styles["logo-icon"]}
-              src="/images/app-logo.png"
-              width="80px"
-              height="80px"
-              alt="logo for playful penguins"
-            />
-          </Link>
-        </Box>
-
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            height:{
+              xs:"450px",
+              md:"600px"
+            },
             padding: "20px",
-            gap: "50px",
-            border: "3px solid transparent",
+            gap: { xs: "10px", md: "50px" },
+            border: "3px solid black",
             borderRadius: "24px",
             backgroundColor: "#ffffff",
-            width: "500px",
-            marginTop: "50px",
+            width: { xs: "210px", md: "500px" },
+            // marginTop: "50px",
           }}
         >
-          <Typography variant="h4" fontWeight="fontWeightBold" marginTop="30px">
+          <Typography
+            variant="h4"
+            fontWeight="fontWeightBold"
+            marginTop="30px"
+            sx={{
+              fontSize: {
+                xs: "24px",
+                md: "36px",
+              },
+            }}
+          >
             Sign up with NutriGuin today!
           </Typography>
           <Box
@@ -126,7 +178,7 @@ export default function SignUpPage() {
               display: "flex",
               gap: "10px",
               flexDirection: "column",
-              marginBottom: "30px",
+              // marginBottom: "30px",
             }}
           >
             {/* TODO: Add name input field and style the form and the error message a bit*/}
@@ -134,7 +186,19 @@ export default function SignUpPage() {
               <TextField
                 type="email"
                 label="Email"
-                sx={{ width: 400 }}
+                sx={{
+                  width: { xs: 200, md: 400 },
+                  "& .MuiInputBase-root": {
+                    height: 40, // adjust this value as needed
+                    padding: "0 14px",
+                  },
+                  "& .MuiInputLabel-root": {
+                    transform: "translate(14px, 10px) scale(1)", // adjust the initial label position
+                  },
+                  "& .MuiInputLabel-shrink": {
+                    transform: "translate(14px, -6px) scale(0.75)", // adjust the shrunk label position
+                  },
+                }}
                 {...register("email", {
                   required: "Please enter a valid email address",
                 })}
@@ -144,7 +208,23 @@ export default function SignUpPage() {
                   {errors.email.message}
                 </Typography>
               )}
-              <FormControl sx={{ m: 1, width: 400 }} variant="outlined">
+              <FormControl
+                sx={{
+                  m: 1,
+                  width: { xs: 200, md: 400 },
+                  "& .MuiInputBase-root": {
+                    height: 40, // adjust this value as needed
+                    padding: "0 14px",
+                  },
+                  "& .MuiInputLabel-root": {
+                    transform: "translate(14px, 10px) scale(1)", // adjust the initial label position
+                  },
+                  "& .MuiInputLabel-shrink": {
+                    transform: "translate(14px, -6px) scale(0.75)", // adjust the shrunk label position
+                  },
+                }}
+                variant="outlined"
+              >
                 <InputLabel htmlFor="outlined-adornment-password">
                   Password
                 </InputLabel>
@@ -178,7 +258,23 @@ export default function SignUpPage() {
                   </Typography>
                 )}
               </FormControl>
-              <FormControl sx={{ m: 1, width: 400 }} variant="outlined">
+              <FormControl
+                sx={{
+                  m: 1,
+                  width: { xs: 200, md: 400 },
+                  "& .MuiInputBase-root": {
+                    height: 40, // adjust this value as needed
+                    padding: "0 14px",
+                  },
+                  "& .MuiInputLabel-root": {
+                    transform: "translate(14px, 10px) scale(1)", // adjust the initial label position
+                  },
+                  "& .MuiInputLabel-shrink": {
+                    transform: "translate(14px, -6px) scale(0.75)", // adjust the shrunk label position
+                  },
+                }}
+                variant="outlined"
+              >
                 <InputLabel htmlFor="outlined-adornment-confirmed-password">
                   Confirm Password
                 </InputLabel>
@@ -225,7 +321,7 @@ export default function SignUpPage() {
               <Button
                 type="submit"
                 sx={{
-                  width: 400,
+                  width: { xs: 200, md: 400 },
                   border: "2px solid #8e6a70;",
                   borderRadius: "16px",
                   bgcolor: "#8e6a70",
@@ -248,7 +344,7 @@ export default function SignUpPage() {
             )}
             <Divider
               sx={{
-                width: 400,
+                width: { xs: 200, md: 400 },
                 color: "color",
                 padding: "10px",
               }}
@@ -261,7 +357,7 @@ export default function SignUpPage() {
 
             <Button
               sx={{
-                width: 400,
+                width: { xs: 200, md: 400 },
                 border: "2px solid #8e6a70;",
                 borderRadius: "16px",
                 color: "black",
@@ -281,8 +377,8 @@ export default function SignUpPage() {
 
       <Box
         sx={{
-          width: "50%",
-          height: "100%",
+          width: { xs: "0", md: "50%" },
+          height: { xs: "0", md: "100%" },
         }}
       >
         <img
