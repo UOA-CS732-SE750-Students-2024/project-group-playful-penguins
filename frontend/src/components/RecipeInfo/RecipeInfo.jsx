@@ -2,18 +2,12 @@ import styles from "./RecipeInfo.module.css";
 import { useState, useEffect, useCallback } from "react";
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { getRecipes, getRecipeByID } from "../../services/RecipeService";
+import { getRecipeByID } from "../../services/RecipeService";
 import LinearProgress from "@mui/material/LinearProgress";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ServingsIcon from "../../assets/SVGIconComponents/ServingsIcon";
 import Box from "@mui/material/Box";
 import {
   List,
@@ -151,13 +145,13 @@ export default function RecipeInfo() {
                   src={recipe.image}
                   sx={{
                     height: {
-                      xs: "150px",
+                      xs: "120px",
                       sm: "200px",
                       md: "200px",
                       lg: "337px",
                     },
                     width: {
-                      xs: "200px",
+                      xs: "180px",
                       sm: "250px",
                       md: "350px",
                       lg: "390px",
@@ -239,7 +233,7 @@ export default function RecipeInfo() {
                 },
                 gap: {
                   xs: "10px",
-                  md: "0px",
+                  md: "5px",
                 },
               }}
             >
@@ -284,12 +278,19 @@ export default function RecipeInfo() {
               sx={{
                 flexDirection: {
                   xs: "column",
+                  sm: "row",
                   md: "row",
                   lg: "row",
                 },
+                alignItems:{
+                  xs:"center",
+                  md:"self-start"
+                  
+                },
 
                 gap: {
-                  sm: "50px",
+                  xs: "50px",
+                  md: "20px",
                 },
               }}
             >
@@ -333,8 +334,29 @@ export default function RecipeInfo() {
                   </List>
                 </Box>
               </Box>
-              <Box className={` ${styles["nutrients-container"]}`}>
-                <Typography variant="h6" fontWeight="fontWeightBold">
+              <Box
+                className={` ${styles["nutrients-container"]}`}
+                sx={{
+                  padding: {
+                    xs: "16px",
+                    md: "32px",
+                  },
+                  gap: {
+                    xs: "5px",
+                    md: "10px",
+                  },
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  fontWeight="fontWeightBold"
+                  sx={{
+                    fontSize: {
+                      xs: "12px",
+                      md: "24px",
+                    },
+                  }}
+                >
                   NUTRITION INFORMATION
                 </Typography>
                 {nutritionInfo.map((nutrient, index) => (
@@ -342,6 +364,12 @@ export default function RecipeInfo() {
                     <Typography
                       variant="h6"
                       fontWeight="fontWeightMedium"
+                      sx={{
+                        fontSize: {
+                          xs: "12px",
+                          md: "18px",
+                        },
+                      }}
                     >{`${nutrient.type}:   ${nutrient.amount}`}</Typography>
                   </Box>
                 ))}

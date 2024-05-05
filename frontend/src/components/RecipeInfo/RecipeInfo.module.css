@@ -122,15 +122,15 @@
   align-items: center;
   background-color: #e6faf8;
   text-align: center;
-  padding: 32px;
+  /* padding: 32px; */
   border-radius: 16px;
-  gap: 10px;
+  /* gap: 10px; */
   background-color: #e6faf8;
 }
 .nutrients-item {
   font-size: 18px;
-  text-align: left;
-  align-items: left;
+  /* text-align: left;
+  align-items: left; */
 }
 .directions-container {
   display: inline-flex;
