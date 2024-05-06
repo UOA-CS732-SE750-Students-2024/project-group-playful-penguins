@@ -5,6 +5,9 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import styles from "./FoodCardTakeout.module.css";
+import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { ExpandedTakeoutCard } from "../../components/ExpandedTakeoutCard/ExpandedTakeoutCard";
 import { Box } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
@@ -13,6 +16,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export function FoodCardTakeout({ data }) {
   const [openTakeoutCard, setOpenTakeoutCard] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   const [takeoutData, setTakeoutData] = useState({});
 
@@ -41,6 +45,10 @@ export function FoodCardTakeout({ data }) {
 
   const restaurant_name = data.restaurant_name  ? (data.restaurant_name.length > 18 ? `${data.restaurant_name.substring(0, 18)}...` : data.restaurant_name): data.restaurant_name
 
+  const toggleFavorite = () => {
+    setFavorite(!favorite);
+  };
+
   return (
     <Box>
       <Card onClick={() => handleOpen(data.id)} className={styles.card}>
@@ -63,6 +71,16 @@ export function FoodCardTakeout({ data }) {
             <Typography variant="body2" color="text.secondary">
               by {restaurant_name}
             </Typography>
+            <IconButton
+        onClick={(event) => {
+          event.stopPropagation();
+          toggleFavorite();
+        }}
+        className={styles.favoriteIcon}
+        aria-label="add to favorites"
+      >
+        {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+      </IconButton>
           </div>
         </CardContent>
       </Card>
