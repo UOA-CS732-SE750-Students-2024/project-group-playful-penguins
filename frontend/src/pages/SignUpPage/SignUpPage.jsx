@@ -160,22 +160,22 @@ export default function SignUpPage() {
               flexDirection: "column",
               alignItems: "center",
               height: {
-                xs: "450px",
-                md: "470px",
+                // xs: "450px",
+                // md: "470px",
               },
-              padding: { xs: "10px 20px", sm: "20px 60px", md: "10px 20px"},
+              padding: { xs: "10px 20px", sm: "20px 60px", md: "20px 30px" },
               gap: { xs: "10px", md: "40px" },
               border: "3px solid transparent",
               borderRadius: "24px",
               backgroundColor: "#ffffff",
-              width: { xs: "210px", md: "400px" },
+              width: { xs: "210px", sm:"300px",md: "400px" },
               // marginTop: "50px",
             }}
           >
             <Typography
               variant="h4"
               fontWeight="fontWeightBold"
-              marginTop="30px"
+              // marginTop="30px"
               sx={{
                 fontSize: {
                   xs: "24px",
@@ -189,14 +189,16 @@ export default function SignUpPage() {
               sx={{
                 alignItems: "center",
                 display: "flex",
-                gap: "10px",
+                
+                
+                // gap: "4px",
                 flexDirection: "column",
                 // marginBottom: "30px",
               }}
             >
               {/* TODO: Add name input field and style the form and the error message a bit*/}
               <form onSubmit={handleSubmit(onSubmit)}>
-                <TextField
+                {/* <TextField
                   type="email"
                   label="Email"
                   sx={{
@@ -217,23 +219,100 @@ export default function SignUpPage() {
                   })}
                 ></TextField>
                 {errors.email && (
-                  <Typography style={{ color: "red" }}>
-                    {errors.email.message}
-                  </Typography>
-                )}
+                  // <Typography style={{ color: "red" }}>
+                  //   {errors.email.message}
+                  // </Typography>
+                  <Box
+                    sx={{
+                      width: "90%",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-start",
+                    }}
+                  >
+                    <Typography
+                      style={{ color: "red" }}
+                      sx={{
+                        fontSize: {
+                          xs: "8px",
+                          sm: "10px",
+                          md: "12px",
+                        },
+                      }}
+                    >
+                      {errors.email.message}
+                    </Typography>
+                  </Box>
+                )} */}
                 <FormControl
                   sx={{
                     m: 1,
-                    width: { xs: 200, md: 400 },
+                    width: { xs: 200, sm: 280,md: 400 },
                     "& .MuiInputBase-root": {
-                      height: 40, // adjust this value as needed
+                      height: 40,
                       padding: "0 14px",
                     },
                     "& .MuiInputLabel-root": {
-                      transform: "translate(14px, 10px) scale(1)", // adjust the initial label position
+                      transform: "translate(14px, 10px) scale(1)",
                     },
                     "& .MuiInputLabel-shrink": {
-                      transform: "translate(14px, -6px) scale(0.75)", // adjust the shrunk label position
+                      transform: "translate(14px, -6px) scale(0.75)",
+                    },
+                  }}
+                  variant="outlined"
+                >
+                  <InputLabel htmlFor="outlined-adornment-email">
+                    Email
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-email"
+                    type="email"
+                    endAdornment={
+                      <InputAdornment position="end"></InputAdornment>
+                    }
+                    label="Email"
+                    {...register("email", {
+                      required: "Please enter a valid email address",
+                    })}
+                  />
+                  {errors.email && (
+                    <Box
+                      sx={{
+                        width: "90%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        marginTop: "4px",
+                      }}
+                    >
+                      <Typography
+                        style={{ color: "red" }}
+                        sx={{
+                          fontSize: {
+                            xs: "8px",
+                            sm: "10px",
+                            md: "10px",
+                          },
+                        }}
+                      >
+                        {errors.email.message}
+                      </Typography>
+                    </Box>
+                  )}
+                </FormControl>
+                <FormControl
+                  sx={{
+                    m: 1,
+                    width: { xs: 200,sm: 280, md: 400 },
+                    "& .MuiInputBase-root": {
+                      height: 40,
+                      padding: "0 14px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      transform: "translate(14px, 10px) scale(1)",
+                    },
+                    "& .MuiInputLabel-shrink": {
+                      transform: "translate(14px, -6px) scale(0.75)",
                     },
                   }}
                   variant="outlined"
@@ -266,24 +345,46 @@ export default function SignUpPage() {
                     })}
                   />
                   {errors.password && (
-                    <Typography style={{ color: "red" }}>
-                      {errors.password.message}
-                    </Typography>
+                    // <Typography style={{ color: "red" }}>
+                    //   {errors.password.message}
+                    // </Typography>
+                    <Box
+                      sx={{
+                        width: "90%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        marginTop: "4px",
+                      }}
+                    >
+                      <Typography
+                        style={{ color: "red" }}
+                        sx={{
+                          fontSize: {
+                            xs: "8px",
+                            sm: "10px",
+                            md: "10px",
+                          },
+                        }}
+                      >
+                        {errors.password.message}
+                      </Typography>
+                    </Box>
                   )}
                 </FormControl>
                 <FormControl
                   sx={{
                     m: 1,
-                    width: { xs: 200, md: 400 },
+                    width: { xs: 200,sm: 280, md: 400 },
                     "& .MuiInputBase-root": {
-                      height: 40, // adjust this value as needed
+                      height: 40,
                       padding: "0 14px",
                     },
                     "& .MuiInputLabel-root": {
-                      transform: "translate(14px, 10px) scale(1)", // adjust the initial label position
+                      transform: "translate(14px, 10px) scale(1)",
                     },
                     "& .MuiInputLabel-shrink": {
-                      transform: "translate(14px, -6px) scale(0.75)", // adjust the shrunk label position
+                      transform: "translate(14px, -6px) scale(0.75)",
                     },
                   }}
                   variant="outlined"
@@ -320,9 +421,31 @@ export default function SignUpPage() {
                     })}
                   />
                   {errors.confirmPassword && (
-                    <Typography style={{ color: "red" }}>
-                      {errors.confirmPassword.message}
-                    </Typography>
+                    // <Typography style={{ color: "red" }}>
+                    //   {errors.confirmPassword.message}
+                    // </Typography>
+                    <Box
+                      sx={{
+                        width: "90%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        marginTop: "4px",
+                      }}
+                    >
+                      <Typography
+                        style={{ color: "red" }}
+                        sx={{
+                          fontSize: {
+                            xs: "8px",
+                            sm: "10px",
+                            md: "10px",
+                          },
+                        }}
+                      >
+                        {errors.confirmPassword.message}
+                      </Typography>
+                    </Box>
                   )}
                 </FormControl>
                 {!isPasswordMatch && (
@@ -334,12 +457,12 @@ export default function SignUpPage() {
                 <Button
                   type="submit"
                   sx={{
-                    width: { xs: 200, md: 400 },
+                    width: { xs: 200,sm: 280, md: 400 },
                     border: "2px solid #8e6a70;",
                     borderRadius: "16px",
                     bgcolor: "#8e6a70",
                     color: "white",
-                    marginTop: "20px",
+                    // marginTop: "4px",
                     padding: "10px",
                     "&:hover": {
                       bgcolor: "#fbeff1",
@@ -357,20 +480,24 @@ export default function SignUpPage() {
               )}
               <Divider
                 sx={{
-                  width: { xs: 200, md: 400 },
+                  width: { xs: 200,sm: 280, md: 400 },
                   color: "color",
                   padding: "10px",
                 }}
                 flexItem
               />
 
-              <Typography variant="body2" fontWeight="fontWeightLight">
+              <Typography
+                variant="body2"
+                fontWeight="fontWeightLight"
+                sx={{ fontSize: "10px", padding: "4px" }}
+              >
                 Already a member with us, log in!
               </Typography>
 
               <Button
                 sx={{
-                  width: { xs: 200, md: 400 },
+                  width: { xs: 200,sm: 280, md: 400 },
                   border: "2px solid #8e6a70;",
                   borderRadius: "16px",
                   color: "black",

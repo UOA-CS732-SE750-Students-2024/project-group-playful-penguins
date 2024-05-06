@@ -128,6 +128,7 @@ export default function LoginPage() {
                 xs: "24px",
                 md: "28px",
               },
+              marginBottom: "8px",
             }}
           >
             Welcome back!
@@ -137,26 +138,62 @@ export default function LoginPage() {
             <TextField
               type="email"
               label="Email"
-              sx={{ width: { xs: 200, md: 400 } }}
+              sx={{
+                width: { xs: 200, sm: 280, md: 400 },
+                "& .MuiInputBase-root": {
+                  height: 40,
+                  padding: "0 14px",
+                },
+                "& .MuiInputLabel-root": {
+                  transform: "translate(14px, 10px) scale(1)",
+                },
+                "& .MuiInputLabel-shrink": {
+                  transform: "translate(14px, -6px) scale(0.75)",
+                },
+              }}
               {...register("email", {
                 required: "Please enter a valid email address",
               })}
             ></TextField>
             {errors.email && (
-              <Typography
-                style={{ color: "red" }}
+              <Box
                 sx={{
-                  fontSize: {
-                    xs: "10px",
-                    sm: "12px",
-                  },
+                  width: "90%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
                 }}
               >
-                {errors.email.message}
-              </Typography>
+                <Typography
+                  style={{ color: "red" }}
+                  sx={{
+                    fontSize: {
+                      xs: "8px",
+                      sm: "10px",
+                      md: "12px",
+                    },
+                  }}
+                >
+                  {errors.email.message}
+                </Typography>
+              </Box>
             )}
             <FormControl
-              sx={{ m: 1, width: { xs: 200, md: 400 }, margin: 0 }}
+              sx={{
+                m: 1,
+                width: { xs: 200, sm: 280, md: 400 },
+                margin: 0,
+                "& .MuiInputBase-root": {
+                  height: 40,
+                  padding: "0 14px",
+                },
+                "& .MuiInputLabel-root": {
+                  transform: "translate(14px, 10px) scale(1)",
+                },
+                "& .MuiInputLabel-shrink": {
+                  transform: "translate(14px, -6px) scale(0.75)",
+                },
+              }}
               variant="outlined"
             >
               <InputLabel htmlFor="outlined-adornment-password">
@@ -194,17 +231,28 @@ export default function LoginPage() {
               )} */}
             </FormControl>
             {errors.password && (
-              <Typography
-                style={{ color: "red" }}
+              <Box
                 sx={{
-                  fontSize: {
-                    xs: "10px",
-                    sm: "12px",
-                  },
+                  width: "90%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
                 }}
               >
-                {errors.password.message}
-              </Typography>
+                {" "}
+                <Typography
+                  style={{ color: "red" }}
+                  sx={{
+                    fontSize: {
+                      xs: "8px",
+                      sm: "10px",
+                      md: "12px",
+                    },
+                  }}
+                >
+                  {errors.password.message}
+                </Typography>
+              </Box>
             )}
 
             <Box
@@ -219,7 +267,7 @@ export default function LoginPage() {
               <Button
                 type="submit"
                 sx={{
-                  width: { xs: 200, md: 400 },
+                  width: { xs: 200, sm: 280, md: 400 },
                   border: "2px solid #8e6a70;",
                   borderRadius: "16px",
                   color: "black",
@@ -240,7 +288,7 @@ export default function LoginPage() {
               <Button
                 onClick={googleLogin}
                 sx={{
-                  width: { xs: 200, md: 400 },
+                  width: { xs: 200, sm: 280, md: 400 },
                   border: "2px solid #8e6a70;",
                   borderRadius: "16px",
                   color: "black",
@@ -256,7 +304,7 @@ export default function LoginPage() {
               </Button>
               <Divider
                 sx={{
-                  width: { xs: 200, md: 400 },
+                  width: { xs: 200, sm: 280, md: 400 },
                   color: "color",
                   padding: "10px",
                 }}
@@ -268,8 +316,8 @@ export default function LoginPage() {
                 fontWeight="fontWeightLight"
                 sx={{
                   fontSize: {
-                    xs: "12px",
-                    md: "14px",
+                    xs: "10px",
+                    md: "12px",
                   },
                   padding: "4px 8px",
                 }}
@@ -279,7 +327,7 @@ export default function LoginPage() {
 
               <Button
                 sx={{
-                  width: { xs: 200, md: 400 },
+                  width: { xs: 200, sm: 280, md: 400 },
                   border: "2px solid #8e6a70;",
                   borderRadius: "16px",
                   bgcolor: "#8e6a70",
