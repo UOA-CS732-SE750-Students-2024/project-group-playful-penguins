@@ -209,12 +209,22 @@ const getFoodRecipes = async (req, res) => {
   const query = { $and: [searchQuery, filterQuery] };
 
   try {
-    const matchRecipes = await Recipe.search(query, sortCriteria);
-    res.status(200).json({
-      recipes: matchRecipes,
-    });
+    if (
+      req.headers &&
+      req.headers.authorization &&
+      verifyAccessToken(req.headers.authorization)
+    ) {
+      const matchRecipes = await Recipe.search(query, sortCriteria);
+      res.status(200).json({
+        recipes: matchRecipes,
+      });
+    } else {
+      const error = new Error("Unauthorized");
+      error.status = 401;
+      throw error;
+    }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.send(error.status, error);
   }
 };
 

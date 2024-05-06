@@ -18,7 +18,7 @@ const getMatchedRecipes = async (searchTerm, selectedSortByOption, filters, acce
     if (!response.data) {
       throw new Error("No data from backend");
     }
-    return response.data.recipes;
+    return response.data = response.data.recipes;
   } catch (error) {
     console.error("Error fetching data: ", error);
     if (error.response && error.response.status === 401) { return { status: 401, error}}

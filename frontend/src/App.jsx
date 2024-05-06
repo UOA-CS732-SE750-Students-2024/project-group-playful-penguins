@@ -54,7 +54,7 @@ function App() {
             isAuthenticated() ? <LandingPage /> : <Navigate to="/login" />
           }
         ></Route>
-        <Route path="/home" element={<HomePage />}>
+        <Route path="/home" element={<PageLayout />}>
           <Route index element={<HomePage />} />
           <Route path="recipe/:id" element={<RecipeInfo />} />
         </Route>

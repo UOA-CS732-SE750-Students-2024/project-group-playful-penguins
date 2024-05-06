@@ -7,7 +7,7 @@ import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
 import TakeoutService from "../../services/TakeoutService";
-import { getMatchedRecipes, getRecipes } from "../../services/RecipeService";
+import { getMatchedRecipes } from "../../services/RecipeService";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -35,15 +35,14 @@ export function HomePage() {
           filters,
           access_token
         );
-        console.log(response);
       }
       if (response) {
         if (response.status === 401) {
           navigate("/login");
-        } else if (response.data) {
-          if (response.data.length > 0) {
-            setFoodData(response.data);
-          } else if (response.data.length === 0) {
+        } else {
+          if (response.length > 0) {
+            setFoodData(response);
+          } else if (response.length === 0) {
             setFoodData([]);
           }
         }
