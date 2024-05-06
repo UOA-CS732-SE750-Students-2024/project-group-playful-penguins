@@ -11,7 +11,7 @@ export const getFilterQuery = (req) => {
 
   let query = {};
   if (minCookingTimeValues && maxCookingTimeValues) {
-    // TODO: need to change healthScore to Cooking time
+    // TODO: need to change healthScore to readyInMinutes
     query.healthScore = {
       // assuming cookingTime is the correct field in your DB
       $gte: parseInt(minCookingTimeValues),
