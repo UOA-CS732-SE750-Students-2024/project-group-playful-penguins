@@ -6,7 +6,6 @@ import RecipeInfo from "./components/RecipeInfo/RecipeInfo";
 import { createTheme, ThemeProvider } from "@mui/material";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
-import { verifyAccessToken } from "./services/UserService";
 import { useState } from "react";
 
 const theme = createTheme({
@@ -41,14 +40,10 @@ function useToken() {
 function App() {
   const { token, setToken } = useToken();
 
-  const isAuthenticated = async (token) => {
-    try {
-      const decode = await verifyAccessToken(token);
-      return decode.success;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
+  const isAuthenticated = () => {
+    if (localStorage.getItem('token')) return true;
+    else return false;
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -59,12 +54,7 @@ function App() {
             isAuthenticated() ? <LandingPage /> : <Navigate to="/login" />
           }
         ></Route>
-        <Route
-          path="/home"
-          element={
-            isAuthenticated() ? <PageLayout /> : <Navigate to="/login" />
-          }
-        >
+        <Route path="/home" element={<HomePage />}>
           <Route index element={<HomePage />} />
           <Route path="recipe/:id" element={<RecipeInfo />} />
         </Route>

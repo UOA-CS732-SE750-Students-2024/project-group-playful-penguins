@@ -67,8 +67,8 @@ export default function LoginPage({ setToken }) {
   const onSubmit = async (data) => {
     try {
       const response = await login(data.email, data.password);
-      console.log(response);
-      setError(false);
+      if (response && response.user) setToken(response.user.token);
+      setIsError(false);
     } catch (error) {
       console.error(error.message);
       setIsError(true);

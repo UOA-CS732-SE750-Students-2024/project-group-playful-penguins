@@ -4,9 +4,9 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Recipe from "../model/recipeModel.js";
 import asyncHandler from "express-async-handler";
-import connectToDatabase from "../config/db.js";
 import { getFilterQuery } from "../functions/getFilterQuery.js";
 import { getSearchQuery } from "../functions/getSearchQuery.js";
+import { verifyAccessToken } from "../middleware/authMiddleware.js";
 
 dotenv.config();
 
@@ -15,16 +15,31 @@ dotenv.config();
 // @access  Public
 
 const getRecipes = asyncHandler(async (req, res) => {
-  const recipes = await Recipe.find(
-    {},
-    { id: 1, title: 1, servings: 1, readyInMinutes: 1, image: 1 }
-  );
+  try {
+    if (
+      req.headers &&
+      req.headers.authorization &&
+      verifyAccessToken(req.headers.authorization)
+    ) {
+      const recipes = await Recipe.find(
+        {},
+        { id: 1, title: 1, servings: 1, readyInMinutes: 1, image: 1 }
+      );
 
-  if (recipes) {
-    res.json(recipes);
-  } else {
-    res.status(404);
-    throw new Error("Recipes not found");
+      if (recipes) {
+        res.json(recipes);
+      } else {
+        res.status(404).send({
+          message: "Recipes not found",
+        });
+        throw new Error("Recipes not found");
+      }
+    } else {
+      res.status(401).send({ message: "Unauthorized" });
+      throw new Error("Unauthorized");
+    }
+  } catch (error) {
+    res.send(404, error);
   }
 });
 
