@@ -20,7 +20,7 @@ export const getFilterQuery = (req) => {
   }
 
   if (selectedRequirement) {
-    query[selectedRequirement] = true; // assuming this is a boolean flag in your DB
+    query.diets = { $regex: selectedRequirement, $options: "i" };
   }
 
   return query;
