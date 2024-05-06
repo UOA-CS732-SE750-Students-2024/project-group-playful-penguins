@@ -1,11 +1,12 @@
 import dotenv from "dotenv";
 import { getSortCriteria } from "../functions/getSortCriteria.js";
-import { getFilterQuery } from "../functions/getFilterQuery.js";
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Recipe from "../model/recipeModel.js";
 import asyncHandler from "express-async-handler";
 import connectToDatabase from "../config/db.js";
+import { getFilterQuery } from "../functions/getFilterQuery.js";
+import { getSearchQuery } from "../functions/getSearchQuery.js";
 
 dotenv.config();
 
@@ -58,30 +59,30 @@ const getRecipeByID = asyncHandler(async (req, res) => {
   }
 });
 
-const getFilteredRecipes = async (req, res) => {
-  try {
-    let db = await connectToDatabase(process.env.DB_NAME);
-    const fieldsToRetrieve = {
-      id: 1,
-      healthScore: 1,
-      vegan: 1,
-      glutenFree: 1,
-      lowFodmap: 1,
-      vegetarian: 1,
-    };
-    const sortCriteria = getSortCriteria(req);
-    const query = getFilterQuery(req);
-    let recipes = await db
-      .collection("recipes")
-      .find(query)
-      .sort(sortCriteria)
-      .project(fieldsToRetrieve)
-      .toArray();
-    res.json(recipes);
-  } catch (error) {
-    console.error("Error: ", error);
-  }
-};
+// const getFilteredRecipes = async (req, res) => {
+//   try {
+//     let db = await connectToDatabase(process.env.DB_NAME);
+//     const fieldsToRetrieve = {
+//       id: 1,
+//       healthScore: 1,
+//       vegan: 1,
+//       glutenFree: 1,
+//       lowFodmap: 1,
+//       vegetarian: 1,
+//     };
+//     const sortCriteria = getSortCriteria(req);
+//     const query = getFilterQuery(req);
+//     let recipes = await db
+//       .collection("recipes")
+//       .find(query)
+//       .sort(sortCriteria)
+//       .project(fieldsToRetrieve)
+//       .toArray();
+//     res.json(recipes);
+//   } catch (error) {
+//     console.error("Error: ", error);
+//   }
+// };
 
 // @desc    Fetch all recipe by search terms and filters (non-paginated)
 // @route   GET /api/recipes/search/q?key=value
@@ -185,10 +186,27 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
   res.json({ recipes, page, pages: Math.ceil(count / pageSize) });
 });
 
+const getFoodRecipes = async (req, res) => {
+  const { searchTerm, sortBy, sortOrder } = req.query;
+  const sortCriteria = getSortCriteria(sortBy, sortOrder);
+  const searchQuery = getSearchQuery(searchTerm);
+  const filterQuery = getFilterQuery(req);
+  const query = { $and: [searchQuery, filterQuery] };
+
+  try {
+    const matchRecipes = await Recipe.search(query, sortCriteria);
+    res.status(200).json({
+      recipes: matchRecipes,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 export {
   getRecipes,
   getRecipeByID,
   getRecipeBySearch,
   getPaginateRecipe,
-  getFilteredRecipes,
+  getFoodRecipes,
 };

@@ -1,8 +1,8 @@
-export const getSortCriteria = (req) => {
+export const getSortCriteria = (sortBy, sortOrder) => {
   let sortCriteria = {};
 
-  if (req.query.sortBy && req.query.sortOrder) {
-    sortCriteria[req.query.sortBy] = req.query.sortOrder === "asc" ? 1 : -1;
+  if (sortBy && sortOrder) {
+    sortCriteria[sortBy] = sortOrder === "asc" ? 1 : -1;
   }
   return sortCriteria;
 };

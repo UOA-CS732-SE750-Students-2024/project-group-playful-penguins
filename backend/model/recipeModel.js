@@ -34,6 +34,20 @@ const RecipeSchema = mongoose.Schema({
   calories: Number,
 });
 
+RecipeSchema.statics.search = async function (query, sortCriteria) {
+  console.log(query);
+  try {
+    const matchRecipes = await Recipe.find(query).sort(sortCriteria);
+    if (matchRecipes.length > 0) {
+      return matchRecipes;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 const Recipe = mongoose.model("Recipe", RecipeSchema);
 
 export default Recipe;

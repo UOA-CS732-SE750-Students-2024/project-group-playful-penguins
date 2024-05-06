@@ -54,7 +54,6 @@ const postUserLogin = async (req, res) => {
   try {
     const user = await User.login(email, password);
     const token = generateAccessToken(user);
-
     res.status(201).json({
       message: "Found user in DB! Logged in successfully",
       user: { email: email, token: token },

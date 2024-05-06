@@ -7,7 +7,7 @@ import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
 import TakeoutService from "../../services/TakeoutService";
-import { getRecipes } from "../../services/RecipeService";
+import { getMatchedRecipes, getRecipes } from "../../services/RecipeService";
 import { Typography } from "@mui/material";
 
 import Box from "@mui/material/Box";
@@ -18,44 +18,43 @@ export function HomePage() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isTakeout, selectedSortByOption } = useContext(AppContext);
+  const { isTakeout, selectedSortByOption, searchTerm, filters } =
+    useContext(AppContext);
 
-  const fetchRecipeData = async () => {
-    setIsLoading(true);
+  const fetchFoodData = async () => {
     try {
-      const data = await getRecipes(selectedSortByOption);
-      setFoodData(data);
-      console.log(data);
+      let response = [];
+      setIsLoading(true);
+      if (isTakeout) {
+        // TODO: Get Takeout
+      } else {
+        response = await getMatchedRecipes(
+          searchTerm,
+          selectedSortByOption,
+          filters
+        );
+        console.log(response);
+      }
+      if (response.length > 0) {
+        setFoodData(response);
+      } else if (response.length === 0) {
+        setFoodData([]);
+      }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      throw new Error(error.message);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
-  };
-
-  const fetchTakeoutData = async () => {
-    setIsLoading(true);
-    try {
-      const data = await TakeoutService.getTakeouts();
-      setFoodData(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-    setIsLoading(false);
   };
 
   useEffect(() => {
-    if (isTakeout) {
-      fetchTakeoutData();
-    } else {
-      fetchRecipeData();
-    }
-  }, [isTakeout]);
+    fetchFoodData();
+  }, [searchTerm, selectedSortByOption]);
 
   return (
     <div className={styles["home-container"]}>
       <div className={styles["filter-container"]}>
-        <FilterPanel />
+        <FilterPanel onApplyFilter={fetchFoodData} />
       </div>
       <div className={styles["features-and-food-list-container"]}>
         <div className={styles["search-and-sort-panel"]}>

@@ -4,7 +4,7 @@ export const getSortQuery = (selectedSortByOption) => {
   const { key, sortBy, sortOrder } = selectedSortByOption;
 
   if (key === SORT_BY.INITIAL_VALUE.key) {
-    return "";
+    return "sortBy=&sortOrder=";
   }
 
   return `sortBy=${sortBy}&sortOrder=${sortOrder}`;

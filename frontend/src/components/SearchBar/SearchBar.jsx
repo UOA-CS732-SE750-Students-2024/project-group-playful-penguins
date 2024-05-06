@@ -4,7 +4,7 @@ import { Box, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 export function SearchBar() {
-  const { isTakeout } = useContext(AppContext);
+  const { isTakeout, setSearchTerm, searchTerm } = useContext(AppContext);
 
   return (
     <Box
@@ -16,6 +16,10 @@ export function SearchBar() {
       }}
     >
       <TextField
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          console.log(searchTerm);
+        }}
         variant="outlined"
         placeholder="Search for recipes"
         fullWidth

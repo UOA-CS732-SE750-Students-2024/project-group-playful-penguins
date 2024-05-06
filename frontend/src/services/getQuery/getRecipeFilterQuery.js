@@ -14,7 +14,7 @@ export const getRecipeFilterQuery = (filters) => {
       filters[key] === FILTERS.DIET_REQUIREMENT.INITIAL_VALUE &&
       key === FILTERS.DIET_REQUIREMENT.STATE_KEY
     ) {
-      // Do nothing
+      queryParams.push(`${key}=`);
     } else {
       if (
         key !== FILTERS.PRICE.STATE_KEY &&
@@ -22,8 +22,16 @@ export const getRecipeFilterQuery = (filters) => {
       ) {
         if (key === FILTERS.COOKING_TIME.STATE_KEY) {
           // TODO remove this if statement, I am testing the function, because we do not have some filter in database, I am using healthScore to do the filter now
-          queryParams.push(`${key}Min=${filters[key][0]}`);
-          queryParams.push(`${key}Max=${filters[key][1]}`);
+          queryParams.push(
+            `min${key.charAt(0).toUpperCase() + key.slice(1)}=${
+              filters[key][0]
+            }`
+          );
+          queryParams.push(
+            `max${key.charAt(0).toUpperCase() + key.slice(1)}=${
+              filters[key][1]
+            }`
+          );
         }
       }
     }
