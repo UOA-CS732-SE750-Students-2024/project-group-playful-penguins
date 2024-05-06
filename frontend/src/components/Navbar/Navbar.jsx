@@ -4,11 +4,13 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import StarIcon from "@mui/icons-material/Star";
 import { GoogleLogin } from "@react-oauth/google";
 import {
   Link,
@@ -25,6 +27,7 @@ export function Navbar() {
   const { isTakeout, changeCategory } = useContext(AppContext);
   const location = useLocation();
   const isRecipePage = location.pathname.startsWith("/home/recipe/");
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -32,6 +35,15 @@ export function Navbar() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+ 
+  const openedFavorites = location.pathname.startsWith("/home/favorites");
+
+  const handleOpenFavorites = () => {
+    // navigate to the route to display the favorites
+    navigate(`favorites`);
+    
   };
 
   const buttonGroupStyles = {
@@ -100,11 +112,15 @@ export function Navbar() {
   return (
     <AppBar
       position="static"
-      style={
-        isTakeout
-          ? { backgroundColor: "#edb1bb" }
-          : { backgroundColor: "#b2dfdb" }
-      }
+      style={{
+        background: isTakeout
+          ? openedFavorites
+            ? "linear-gradient(90deg, rgba(251, 239, 241, 1) 0%, rgba(204, 245, 241, 1) 80%)"
+            : "#edb1bb"
+          : openedFavorites
+          ? "linear-gradient(90deg, rgba(251, 239, 241, 1) 0%, rgba(204, 245, 241, 1) 80%)"
+          : "#b2dfdb",
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -124,13 +140,22 @@ export function Navbar() {
           </Link>
 
           <Box
+            style={{
+              background: isTakeout
+                ? openedFavorites
+                  ? "linear-gradient(90deg, rgba(251, 239, 241, 1) 0%, rgba(204, 245, 241, 1) 80%)"
+                  : "#edb1bb"
+                : openedFavorites
+                ? "linear-gradient(90deg, rgba(251, 239, 241, 1) 0%, rgba(204, 245, 241, 1) 80%)"
+                : "#b2dfdb",
+            }}
             sx={{
               display: "flex",
               flexGrow: 1,
               backgroundColor: `${isTakeout ? "#edb1bb" : "#b2dfdb"}`,
               justifyContent: "center",
               width: "200px",
-              visibility: isRecipePage ? "hidden" : "visible",
+              visibility: isRecipePage||openedFavorites ? "hidden" : "visible",
             }}
           >
             <Box style={buttonGroupStyles}>
@@ -205,6 +230,12 @@ export function Navbar() {
                 <Logout fontSize="small" />
               </ListItemIcon>
               Logout
+            </MenuItem>
+            <MenuItem onClick={handleOpenFavorites}>
+              <ListItemIcon>
+                <StarIcon fontSize="small"></StarIcon>
+              </ListItemIcon>
+              Favorites
             </MenuItem>
           </Menu>
         </Toolbar>

@@ -10,6 +10,7 @@ function generateAccessToken(user) {
   };
 
   const secret = process.env.ACCESS_TOKEN_SECRET;
+  console.log(secret);
   // TODO: GOOD to have expire time
   //   const options = { expiresIn: "1h" };
 

@@ -6,6 +6,7 @@ import RecipeInfo from "./components/RecipeInfo/RecipeInfo";
 import { createTheme, ThemeProvider } from "@mui/material";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import { Favorites } from "./components/Favorites/Favorites";
 
 const theme = createTheme({
   typography: {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/home" element={<PageLayout />}>
           <Route index element={<HomePage />} />
           <Route path="recipe/:id" element={<RecipeInfo />} />
+          <Route path="favorites" element={<Favorites />} />
         </Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/signUp" element={<SignUpPage />}></Route>

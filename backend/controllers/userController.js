@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 import dotenv from "dotenv";
 import { response } from "express";
 import User from "../model/userModel.js";
+import Recipe from "../model/recipeModel.js";
 import { generateAccessToken } from "../token/generateAccessToken.js";
 
 dotenv.config();
@@ -64,4 +65,64 @@ const postUserLogin = async (req, res) => {
   }
 };
 
-export { postUserSignUp, postUserLogin, authorizeGoogleUser };
+const getFavoriteRecipes = async(req,res)=>{
+  try {
+    // Access the email from the request object
+    const userEmail = req.email;
+
+    // Find the user by email
+    const user = await User.findOne({ email: userEmail });
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // Use the list of recipe IDs to find recipes
+    if(user.favoriteRecipes.length<=0){
+      res.json("no favorites yet")
+      return
+    }
+    const favoriteRecipes = await Recipe.find({ id: { $in: user.favoriteRecipes } });
+
+    res.json(favoriteRecipes);
+    console.log(favoriteRecipes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+};
+
+const addToFavoriteRecipes = async(req,res)=>{
+  try {
+    // Access the email from the request object
+    const userEmail = req.email;
+    const recipeId = req.params.recipeID;
+
+    // Find the user by email
+    const user = await User.findOne({ email: userEmail });
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // const favoriteRecipes = await Recipe.find({ id: { $in: user.favoriteRecipes } });
+
+    if (!user.favoriteRecipes.includes(recipeId)) {
+      user.favoriteRecipes.push(recipeId);
+      await user.save();
+  }
+
+    res.json(user.favoriteRecipes);
+    // console.log(favoriteRecipes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+};
+
+const addToFavoriteTakeouts = async(req,res)=>{
+
+};
+const getFavoriteTakeouts = async(req,res)=>{
+
+};
+
+export { postUserSignUp, postUserLogin, authorizeGoogleUser,getFavoriteRecipes,getFavoriteTakeouts,addToFavoriteRecipes,addToFavoriteTakeouts };

@@ -16,6 +16,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import styles from "./LoginPage.module.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import { authenticateGoogleUser, login } from "../../services/UserService";
 import { useForm } from "react-hook-form";
@@ -26,6 +27,8 @@ export default function LoginPage() {
   const [profile, setProfile] = useState([]);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -63,6 +66,7 @@ export default function LoginPage() {
     try {
       const response = await login(data.email, data.password);
       console.log(response);
+      navigate(`/home/favorites`)
       setError(false);
     } catch (error) {
       console.error(error.message);
