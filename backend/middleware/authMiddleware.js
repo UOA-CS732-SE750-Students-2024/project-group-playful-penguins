@@ -29,6 +29,16 @@ const verifyAccessToken = async (token) => {
   }
 };
 
+const extractUser =(token)=>{
+  try {
+    const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+    return decoded.email;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 const generateAccessToken = (user) => {
   const payload = {
     id: user._id,
@@ -41,4 +51,4 @@ const generateAccessToken = (user) => {
   return jwt.sign(payload, ACCESS_TOKEN_SECRET, options);
 };
 
-export { verifyAccessToken, generateAccessToken };
+export { verifyAccessToken, generateAccessToken,extractUser };

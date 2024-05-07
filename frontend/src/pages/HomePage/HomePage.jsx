@@ -20,7 +20,7 @@ export function HomePage() {
   const navigate = useNavigate();
   const access_token = JSON.parse(localStorage.getItem("token"));
   const [isLoading, setIsLoading] = useState(false);
-
+ 
   const { isTakeout, selectedSortByOption, searchTerm, filters } =
     useContext(AppContext);
 

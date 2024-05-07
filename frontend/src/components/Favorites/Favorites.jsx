@@ -18,6 +18,8 @@ export function Favorites() {
     setValue(newValue);
   };
 
+  const access_token = JSON.parse(localStorage.getItem("token"));
+
   const [foodData, setFoodData] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -25,9 +27,10 @@ export function Favorites() {
   const fetchRecipeData = async () => {
     setIsLoading(true);
     try {
-      const data = await displayFavoriteRecipe();
-      setFoodData(data);
+      const data = await displayFavoriteRecipe(access_token);      
       console.log(data);
+      setFoodData(data);
+     
     } catch (error) {
       console.error("Error fetching data:", error);
     }
