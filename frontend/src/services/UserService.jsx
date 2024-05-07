@@ -40,6 +40,25 @@ const login = async (email, password) => {
   }
 };
 
+<<<<<<< Updated upstream
+=======
+const displayFavoriteRecipe = async (access_token) => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/user/favorites/recipe`, {
+      headers: { Authorization: access_token },
+    });
+    console.log("Reached service!!!");
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error fetching favorite recipes:",
+      formatErrorMessage(error)
+    );
+    throw new Error(formatErrorMessage(error));
+  }
+};
+
+>>>>>>> Stashed changes
 function formatErrorMessage(error) {
   if (error.response && error.response.data && error.response.data.error) {
     return error.response.data.error; // Assuming error details are in error.response.data.error

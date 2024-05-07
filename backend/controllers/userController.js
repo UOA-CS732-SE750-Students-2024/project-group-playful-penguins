@@ -2,7 +2,12 @@ import fetch from "node-fetch";
 import dotenv from "dotenv";
 import { response } from "express";
 import User from "../model/userModel.js";
+<<<<<<< Updated upstream
 import { generateAccessToken } from "../middleware/authMiddleware.js";
+=======
+import { extractUser, generateAccessToken ,verifyAccessToken} from "../middleware/authMiddleware.js";
+
+>>>>>>> Stashed changes
 
 dotenv.config();
 
@@ -55,7 +60,6 @@ const postUserLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
-    console.log(user);
     const token = generateAccessToken(user);
     res.status(201).json({
       message: "Found user in DB! Logged in successfully",
