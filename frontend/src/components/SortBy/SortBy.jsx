@@ -40,7 +40,7 @@ export function SortBy() {
         aria-haspopup="true"
         onClick={handleClick}
         sx={{
-          width: {xs:"75px",sm:"150px"},
+          width: {xs:"100px",sm:"150px"},
           color: "white",
           backgroundColor: isTakeout ? "#77595E" : "#00665E",
           borderRadius: "15px",
