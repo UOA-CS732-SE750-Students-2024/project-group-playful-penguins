@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import { useState } from "react";
+import { Favorites } from "./components/Favorites/Favorites";
 
 const theme = createTheme({
   typography: {
@@ -56,6 +57,7 @@ function App() {
         ></Route>
         <Route path="/home" element={<PageLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="favorites" element={<Favorites />} />
           <Route path="recipe/:id" element={<RecipeInfo />} />
         </Route>
         <Route
