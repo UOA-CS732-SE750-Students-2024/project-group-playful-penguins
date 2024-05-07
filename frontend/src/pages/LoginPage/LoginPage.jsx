@@ -28,7 +28,6 @@ export default function LoginPage() {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -66,7 +65,6 @@ export default function LoginPage() {
     try {
       const response = await login(data.email, data.password);
       console.log(response);
-      navigate(`/home/favorites`)
       setError(false);
     } catch (error) {
       console.error(error.message);
