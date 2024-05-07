@@ -13,8 +13,23 @@ const TakeoutSchema = mongoose.Schema({
   location: String,
   delivery_time: Number,
   delivery_fee: Number,
+  cuisine_type: String,
+  healthiness_category: String,
 });
 
+TakeoutSchema.statics.search = async function (query, sortCriteria) {
+  console.log(query);
+  try {
+    const matchRecipes = await Recipe.find(query).sort(sortCriteria);
+    if (matchRecipes.length > 0) {
+      return matchRecipes;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 const Takeout = mongoose.model("Takeout", TakeoutSchema);
 
 export default Takeout;
