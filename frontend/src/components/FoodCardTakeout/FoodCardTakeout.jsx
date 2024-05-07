@@ -49,9 +49,17 @@ export function FoodCardTakeout({ data, isFavorite }) {
     }
   };
 
-  const title = data.dish_name  ? (data.dish_name.length > 60 ? `${data.dish_name.substring(0, 40)}...` : data.dish_name): data.dish_name
+  const title = data.dish_name
+    ? data.dish_name.length > 60
+      ? `${data.dish_name.substring(0, 40)}...`
+      : data.dish_name
+    : data.dish_name;
 
-  const restaurant_name = data.restaurant_name  ? (data.restaurant_name.length > 18 ? `${data.restaurant_name.substring(0, 18)}...` : data.restaurant_name): data.restaurant_name
+  const restaurant_name = data.restaurant_name
+    ? data.restaurant_name.length > 18
+      ? `${data.restaurant_name.substring(0, 18)}...`
+      : data.restaurant_name
+    : data.restaurant_name;
 
   const toggleFavorite = async () => {
     const newFavoriteStatus = !favorite;
@@ -77,10 +85,10 @@ export function FoodCardTakeout({ data, isFavorite }) {
           className={styles.cardMedia}
         />
         <CardContent className={styles.cardContent}>
-        <Box className={styles.cardTitle}>
-          <Typography gutterBottom component="div" className={styles.title}>
-            {title}
-          </Typography>
+          <Box className={styles.cardTitle}>
+            <Typography gutterBottom component="div" className={styles.title}>
+              {title}
+            </Typography>
           </Box>
           <div className={styles.details}>
             <Typography variant="body2" color="text.secondary">
@@ -90,15 +98,15 @@ export function FoodCardTakeout({ data, isFavorite }) {
               by {restaurant_name}
             </Typography>
             <IconButton
-        onClick={(event) => {
-          event.stopPropagation();
-          toggleFavorite();
-        }}
-        className={styles.favoriteIcon}
-        aria-label="add to favorites"
-      >
-        {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-      </IconButton>
+              onClick={(event) => {
+                event.stopPropagation();
+                toggleFavorite();
+              }}
+              className={styles.favoriteIcon}
+              aria-label="add to favorites"
+            >
+              {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            </IconButton>
           </div>
         </CardContent>
       </Card>
