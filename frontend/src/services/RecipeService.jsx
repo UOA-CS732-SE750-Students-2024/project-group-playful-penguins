@@ -1,5 +1,6 @@
 import axios from "axios";
-import { getSortQuery } from "./get-recipe-queries/getSortQuery";
+import { getSearchQuery } from "./getSearchQuery";
+import { getSortQuery } from "./getSortQuery";
 import { getRecipeFilterQuery } from "./get-recipe-queries/getRecipeFilterQuery";
 import { getSearchQuery } from "./get-recipe-queries/getSearchQuery";
 import { getFavoritesQuery } from "./get-recipe-queries/getFavoritesQuery";
