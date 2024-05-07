@@ -40,20 +40,10 @@ function useToken() {
 function App() {
   const { token, setToken } = useToken();
 
-  const isAuthenticated = () => {
-    if (localStorage.getItem('token')) return true;
-    else return false;
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <Routes>
-        <Route
-          path="/"
-          element={
-            isAuthenticated() ? <LandingPage /> : <Navigate to="/login" />
-          }
-        ></Route>
+        <Route path="/" element={<LandingPage />}></Route>
         <Route path="/home" element={<PageLayout />}>
           <Route index element={<HomePage />} />
           <Route path="recipe/:id" element={<RecipeInfo />} />
@@ -63,7 +53,10 @@ function App() {
           path="/login"
           element={<LoginPage setToken={setToken} />}
         ></Route>
-        <Route path="/signUp" element={<SignUpPage setToken={setToken} />}></Route>
+        <Route
+          path="/signUp"
+          element={<SignUpPage setToken={setToken} />}
+        ></Route>
       </Routes>
     </ThemeProvider>
   );
