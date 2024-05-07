@@ -38,13 +38,23 @@ export function DietRequirementFilter() {
       sx={{
         padding: 2,
         margin: "auto",
-        minWidth: "300px",
+        width:{
+          xs:"180px",
+          md:"280px"
+        },
+        maxWidth:"300px",
       }}
     >
       <Typography
         variant="h6"
         gutterBottom
         component="div"
+        sx={{
+          fontSize:{
+            xs:"16px",
+            md:"22px"
+          }
+        }}
         color={primaryColor}
       >
         {filterConfig.NAME}
@@ -61,7 +71,7 @@ export function DietRequirementFilter() {
             border: "1px solid #E0E0E0",
             boxShadow: "none",
             textTransform: "none",
-            height: "40px",
+            height: "fit-content",
             width: "100%",
             justifyContent: "space-evenly",
             fontSize: "16px",
@@ -82,7 +92,9 @@ export function DietRequirementFilter() {
         <Menu
           MenuListProps={{
             sx: {
-              width: "300px",
+              width:{
+                xs:"160px"
+              }
             },
           }}
           id="diet-requirement-menu"

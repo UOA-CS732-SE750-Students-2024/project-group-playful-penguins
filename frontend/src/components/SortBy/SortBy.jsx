@@ -31,6 +31,7 @@ export function SortBy() {
         pl: "16px",
         pr: "32px",
         display: "flex",
+        height:"100%",
         justifyContent: "flex-end",
       }}
     >
@@ -39,14 +40,14 @@ export function SortBy() {
         aria-haspopup="true"
         onClick={handleClick}
         sx={{
-          width: "150px",
+          width: {xs:"75px",sm:"150px"},
           color: "white",
           backgroundColor: isTakeout ? "#77595E" : "#00665E",
           borderRadius: "15px",
           border: "1px solid #E0E0E0",
-          height: "65px",
+          height:{xs:"40px",sm:"65px"}, 
           justifyContent: "space-evenly",
-          fontSize: "16px",
+          fontSize: {xs:"10px",sm:"16px"},
           textTransform: "none",
           "&:hover": {
             backgroundColor: isTakeout ? "#473538" : "#00665E",

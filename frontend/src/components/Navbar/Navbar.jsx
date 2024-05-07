@@ -27,7 +27,9 @@ export function Navbar() {
   const { isTakeout, changeCategory } = useContext(AppContext);
   const location = useLocation();
   const isRecipePage = location.pathname.startsWith("/home/recipe/");
-  const [userName, setUserName] = useState(jwtDecode(localStorage.getItem('token')).name);
+  const [userName, setUserName] = useState(
+    jwtDecode(localStorage.getItem("token")).name
+  );
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -49,8 +51,8 @@ export function Navbar() {
     padding: "4px 4px",
     textAlign: "center",
     textDecoration: "none",
-    display: "inline-block",
-    fontSize: "14px",
+    display: { xs: "flex", md: "inline-flex" },
+    fontSize: { xs: "8px", md: "14px" },
     fontWeight: "bold",
     borderRadius: "22px",
     marginTop: "4px",
@@ -65,7 +67,7 @@ export function Navbar() {
     textAlign: "center",
     textDecoration: "none",
     display: "inline-block",
-    fontSize: "14px",
+    fontSize: { xs: "10px", md: "14px" },
     fontWeight: "bold",
     borderRadius: "24px",
     margin: "2px",
@@ -85,7 +87,7 @@ export function Navbar() {
     textAlign: "center",
     textDecoration: "none",
     display: "inline-block",
-    fontSize: "14px",
+    fontSize: { xs: "10px", md: "14px" },
     fontWeight: "bold",
     borderRadius: "24px",
     margin: "2px",
@@ -115,9 +117,22 @@ export function Navbar() {
           ? { backgroundColor: "#edb1bb" }
           : { backgroundColor: "#b2dfdb" }
       }
+      sx={{
+        height: {
+          xs: "60px",
+          md: "100px",
+        },
+      }}
     >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+      <Container maxWidth="xl" sx={{
+        height:"100%"
+      }}>
+        <Toolbar
+          disableGutters
+          sx={{
+            height:"100%"            
+          }}
+        >
           <Link
             href="/"
             underline="none"
@@ -143,7 +158,18 @@ export function Navbar() {
               visibility: isRecipePage ? "hidden" : "visible",
             }}
           >
-            <Box style={buttonGroupStyles}>
+            <Box
+              sx={{
+                display: {
+                  xs: "flex",
+                  md: "inline-block",
+                },
+                flexDirection: {
+                  xs: "row",
+                },
+              }}
+              style={buttonGroupStyles}
+            >
               <Button
                 sx={isTakeout ? selectedButton : deselectedButton}
                 onClick={() => changeCategory(true)}
@@ -162,14 +188,16 @@ export function Navbar() {
           <IconButton onClick={handleClick} color="inherit">
             <Box
               sx={{
-                display:"flex",
-                flexDirection:"row",
-                gap:"8px"
+                display: "flex",
+                flexDirection: "row",
+                alignItems:"center",
+                gap: "8px",
               }}
             >
-              <Typography style={{ color: "black" }}>
-                {userName}
-              </Typography>
+              <Typography sx={{fontSize:{
+                xs:"10px",md:"14px"
+              }}}
+              style={{ color: "black" }}>{userName}</Typography>
               <AccountCircleIcon />
             </Box>
           </IconButton>

@@ -56,8 +56,15 @@ export function FilterTemplate({ filterKey }) {
     <Box
       sx={{
         padding: 2,
+        // display:"flex",
+        // alignItems:"center",
         margin: "auto",
-        maxWidth: 500,
+        // maxWidth: 500,
+        width: {
+          xs: "160px",
+          sm: "200px",
+          md: "250px",
+        },
       }}
     >
       <Typography
@@ -65,6 +72,12 @@ export function FilterTemplate({ filterKey }) {
         gutterBottom
         component="div"
         color={primaryColor}
+        sx={{
+          fontSize: {
+            xs: "16px",
+            md: "22px",
+          },
+        }}
       >
         {filterConfig.NAME}
       </Typography>
@@ -85,7 +98,18 @@ export function FilterTemplate({ filterKey }) {
           value={minValue}
           onChange={handleMinChange}
           inputProps={{ readOnly: true }}
-          sx={{ flex: 1, color: "black" }}
+          sx={{
+            flex: 1,
+            color: "black",
+            '& input': { 
+              fontSize: {
+                xs: '12px',  
+                sm: '14px',  
+                md: '16px',  
+             
+              }
+            }
+          }}
         />
         <Typography variant="h6" component="span" sx={{ alignSelf: "center" }}>
           —
@@ -97,7 +121,14 @@ export function FilterTemplate({ filterKey }) {
           value={maxValue}
           onChange={handleMaxChange}
           inputProps={{ readOnly: true }}
-          sx={{ flex: 1, color: "black" }}
+          sx={{ flex: 1, color: "black",'& input': { 
+            fontSize: {
+              xs: '12px',  
+              sm: '14px',  
+              md: '16px',  
+           
+            }
+          } }}
         />
       </Box>
     </Box>

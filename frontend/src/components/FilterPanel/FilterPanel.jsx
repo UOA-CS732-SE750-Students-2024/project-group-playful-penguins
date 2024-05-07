@@ -32,90 +32,98 @@ export function FilterPanel({ onApplyFilter }) {
   };
 
   return (
-    <form onSubmit={handleApplyFilters}>
-      <Box
-        sx={{
-          pt: "16px",
-        }}
-      >
-        <CalorieCountFilter />
-        {isTakeout ? (
-          <div>
-            <FoodPriceFilter />
-            <DeliveryFeeFilter />
-          </div>
-        ) : (
-          <div>
-            <PrepTimeFilter />
-            <CookingTimeFilter />
-          </div>
-        )}
-        <DietRequirementFilter />
+    <Box sx={{
+      
+    }}>
+      <form onSubmit={handleApplyFilters}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            pl: "16px",
-            pr: "16px",
-            pt: "8px",
-            margin: "auto",
+            pt:{
+              xs:"0px",
+              sm:"16px"
+            }
+            // pt: "16px",
           }}
         >
-          {isLoading ? (
-            <LoadingButton
-              loading={isLoading}
-              size="large"
-              sx={{
-                flex: 1,
-                borderRadius: "15px",
-                marginRight: "8px",
-                backgroundColor: "transparent",
-                border: isTakeout ? "2px solid #EDB1BB" : "2px solid #00CCBB",
-                "& .MuiCircularProgress-colorPrimary": {
-                  color: isTakeout ? "#EDB1BB" : "#00CCBB",
-                },
-              }}
-              loadingIndicator={<CircularProgress size={24} />} // Custom circular progress indicator
-            />
+          <CalorieCountFilter  />
+          {isTakeout ? (
+            <Box>
+              <FoodPriceFilter />
+              <DeliveryFeeFilter />
+            </Box>
           ) : (
+            <Box>
+              <PrepTimeFilter />
+              <CookingTimeFilter />
+            </Box>
+          )}
+          <DietRequirementFilter />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              pl: "16px",
+              pr: "16px",
+              pt: "8px",
+              margin: "auto",
+            }}
+          >
+            {isLoading ? (
+              <LoadingButton
+                loading={isLoading}
+                size="large"
+                sx={{
+                  flex: 1,
+                  borderRadius: "15px",
+                  marginRight: "8px",
+                  backgroundColor: "transparent",
+                  border: isTakeout ? "2px solid #EDB1BB" : "2px solid #00CCBB",
+                  "& .MuiCircularProgress-colorPrimary": {
+                    color: isTakeout ? "#EDB1BB" : "#00CCBB",
+                  },
+                }}
+                loadingIndicator={<CircularProgress size={24} />} // Custom circular progress indicator
+              />
+            ) : (
+              <Button
+                type="submit"
+                variant="text"
+                size="large"
+                sx={{
+                  flex: 1,
+                  color: "white",
+                  borderRadius: "15px",
+                  backgroundColor: isTakeout ? "#EDB1BB" : "#00CCBB",
+                  "&:hover": {
+                    backgroundColor: isTakeout ? "#473538" : "#00665E",
+                  },
+                  marginRight: "8px",
+                }}
+              >
+                Apply
+              </Button>
+            )}
             <Button
-              type="submit"
+              onClick={handleReset}
               variant="text"
               size="large"
               sx={{
                 flex: 1,
-                color: "white",
+                color: "black",
                 borderRadius: "15px",
-                backgroundColor: isTakeout ? "#EDB1BB" : "#00CCBB",
+                backgroundColor: "#D9D9D9",
                 "&:hover": {
-                  backgroundColor: isTakeout ? "#473538" : "#00665E",
+                  backgroundColor: "darkgray",
+                  borderColor: "darkgray",
                 },
-                marginRight: "8px",
+                marginLeft: "8px",
               }}
             >
-              Apply
+              Reset
             </Button>
-          )}
-          <Button
-            onClick={handleReset}
-            variant="text"
-            size="large"
-            sx={{
-              flex: 1,
-              color: "black",
-              borderRadius: "15px",
-              backgroundColor: "#D9D9D9",
-              "&:hover": {
-                backgroundColor: "darkgray",
-                borderColor: "darkgray",
-              },
-              marginLeft: "8px",
-            }}
-          >
-            Reset
-          </Button>
+          </Box>
         </Box>
-      </Box>
-    </form>
+      </form>
+    </Box>
   );
 }

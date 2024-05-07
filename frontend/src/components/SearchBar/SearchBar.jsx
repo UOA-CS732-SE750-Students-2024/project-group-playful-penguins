@@ -31,7 +31,7 @@ export function SearchBar() {
             </InputAdornment>
           ),
           sx: {
-            height: "65px",
+            height: {xs:"40px",sm:"65px"},
             borderRadius: "15px",
             boxShadow: "0 3px 6px rgba(0,0,0,0.1)",
             backgroundColor: isTakeout ? "#FDF7F8" : "#E6FAF8",
