@@ -1,4 +1,4 @@
-export const getCarbohydrateFilterQuery = (
+export const getRecipeCarbohydrateFilterQuery = (
   minCarbohydrateValues,
   maxCarbohydrateValues
 ) => {

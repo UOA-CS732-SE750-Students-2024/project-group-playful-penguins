@@ -25,8 +25,8 @@ export const FILTERS = {
   },
   COOKING_TIME: {
     NAME: "Cooking Time",
-    INITIAL_VALUE: [0, 18000],
-    MIN_AND_MAX_VALUE: [0, 18000],
+    INITIAL_VALUE: [0, 200],
+    MIN_AND_MAX_VALUE: [0, 200],
     STATE_KEY: "cookingTimeValues",
   },
   PRICE: {

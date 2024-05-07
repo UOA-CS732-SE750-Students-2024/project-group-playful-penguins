@@ -4,12 +4,12 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Recipe from "../model/recipeModel.js";
 import asyncHandler from "express-async-handler";
-import { getFilterQuery } from "../functions/getFilterQuery.js";
 import { getSearchQuery } from "../functions/getSearchQuery.js";
 import { verifyAccessToken } from "../middleware/authMiddleware.js";
-import { getCalorieFilterQuery } from "../functions/getCalorieFilterQuery.js";
-import { getCarbohydrateFilterQuery } from "../functions/getCarbohydrateFilterQuery.js";
-import { getCookingTimeFilterQuery } from "../functions/getCookingTimeFilterQuery.js";
+import { getSearchQuery } from "../functions/getSearchQuery.js";
+import { getRecipeCalorieFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCalorieFilterQuery.js";
+import { getRecipeCarbohydrateFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCarbohydrateFilterQuery.js";
+import { getRecipeCookingTimeFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCookingTimeFilterQuery.js";
 import { getDietRequirementQuery } from "../functions/getDietRequirementQuery.js";
 
 dotenv.config();
@@ -220,15 +220,15 @@ const getFoodRecipes = async (req, res) => {
   } = req.query;
   const sortCriteria = getSortCriteria(sortBy, sortOrder);
   const searchQuery = getSearchQuery(searchTerm);
-  const calorieFilterQuery = getCalorieFilterQuery(
+  const calorieFilterQuery = getRecipeCalorieFilterQuery(
     minCalorieValues,
     maxCalorieValues
   );
-  const carbohydrateFilterQuery = getCarbohydrateFilterQuery(
+  const carbohydrateFilterQuery = getRecipeCarbohydrateFilterQuery(
     minCarbohydrateValues,
     maxCarbohydrateValues
   );
-  const cookingTimeFilterQuery = getCookingTimeFilterQuery(
+  const cookingTimeFilterQuery = getRecipeCookingTimeFilterQuery(
     minCookingTimeValues,
     maxCookingTimeValues
   );

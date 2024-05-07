@@ -1,4 +1,4 @@
-export const getCookingTimeFilterQuery = (
+export const getRecipeCookingTimeFilterQuery = (
   minCookingTimeValues,
   maxCookingTimeValues
 ) => {

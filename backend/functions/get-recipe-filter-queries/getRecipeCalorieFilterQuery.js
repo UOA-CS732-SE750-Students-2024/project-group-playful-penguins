@@ -1,4 +1,7 @@
-export const getCalorieFilterQuery = (minCalorieValues, maxCalorieValues) => {
+export const getRecipeCalorieFilterQuery = (
+  minCalorieValues,
+  maxCalorieValues
+) => {
   console.log(minCalorieValues, maxCalorieValues);
   if (minCalorieValues && maxCalorieValues) {
     const query = {
