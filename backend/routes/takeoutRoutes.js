@@ -1,10 +1,11 @@
 import express from "express";
-const router = express.Router();
 import {
   getTakeouts,
   getTakeoutByID,
   getFoodTakeout,
 } from "../controllers/takeoutController.js";
+
+const router = express.Router();
 
 router.get("/match-takeouts", getFoodTakeout);
 router.get("/", getTakeouts);

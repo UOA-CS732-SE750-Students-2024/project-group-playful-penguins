@@ -30,7 +30,7 @@ const getRecipes = asyncHandler(async (req, res) => {
       );
 
       if (recipes) {
-        res.json(recipes);
+        res.status(200).json(recipes);
       } else {
         res.status(404).send({
           message: "Recipes not found",
