@@ -1,11 +1,9 @@
 import styles from "./LandingPage.module.css";
-import UserIcon from "../../assets/SVGIconComponents/UserIcon";
 import { AppContext } from "../../providers/AppContextProvider";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Typography, Box, Container, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export default function LandingPage() {
   const theme = useTheme();
