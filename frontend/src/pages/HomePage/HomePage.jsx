@@ -63,7 +63,7 @@ export function HomePage() {
 
   useEffect(() => {
     fetchFoodData();
-  }, [searchTerm, selectedSortByOption]);
+  }, [searchTerm, selectedSortByOption, isTakeout]);
 
   return (
     <div className={styles["home-container"]}>
