@@ -6,8 +6,10 @@ import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
-import TakeoutService from "../../services/TakeoutService";
-import { getMatchedRecipes } from "../../services/RecipeService";
+import {
+  getMatchedRecipes,
+  getMatchedTakeouts,
+} from "../../services/RecipeService";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -27,7 +29,12 @@ export function HomePage() {
       let response = [];
       setIsLoading(true);
       if (isTakeout) {
-        // TODO: Get Takeout
+        response = await getMatchedTakeouts(
+          searchTerm,
+          selectedSortByOption,
+          filters
+        );
+        console.log(response);
       } else {
         response = await getMatchedRecipes(
           searchTerm,
@@ -56,7 +63,7 @@ export function HomePage() {
 
   useEffect(() => {
     fetchFoodData();
-  }, [searchTerm, selectedSortByOption]);
+  }, [searchTerm, selectedSortByOption, isTakeout]);
 
   return (
     <div className={styles["home-container"]}>

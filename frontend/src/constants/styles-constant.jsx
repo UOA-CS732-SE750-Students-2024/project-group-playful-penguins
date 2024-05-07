@@ -9,36 +9,37 @@ export const colors = {
   },
 };
 
+// TODO need to finialise the initial valuse and min&max values
 export const FILTERS = {
-  CALORIE_COUNT: {
-    NAME: "Calorie Count",
-    INITIAL_VALUE: [20, 30],
-    MIN_AND_MAX_VALUE: [0, 100],
-    STATE_KEY: "calorieCountValues",
+  CALORIE: {
+    NAME: "Calorie",
+    INITIAL_VALUE: [0, 20000],
+    MIN_AND_MAX_VALUE: [0, 20000],
+    STATE_KEY: "calorieValues",
   },
-  PREP_TIME: {
-    NAME: "Prep Time",
-    INITIAL_VALUE: [15, 45],
-    MIN_AND_MAX_VALUE: [0, 120],
-    STATE_KEY: "prepTimeValues",
+  CARBOHYDRATE: {
+    NAME: "Carbohydrate",
+    INITIAL_VALUE: [0, 10000],
+    MIN_AND_MAX_VALUE: [0, 10000],
+    STATE_KEY: "carbohydrateValues",
   },
   COOKING_TIME: {
     NAME: "Cooking Time",
-    INITIAL_VALUE: [0, 180],
-    MIN_AND_MAX_VALUE: [0, 180],
+    INITIAL_VALUE: [0, 2000],
+    MIN_AND_MAX_VALUE: [0, 20000],
     STATE_KEY: "cookingTimeValues",
   },
-  PRICE: {
-    NAME: "Price",
-    INITIAL_VALUE: [10, 100],
-    MIN_AND_MAX_VALUE: [0, 500],
-    STATE_KEY: "priceValues",
+  FOOD_PRICE: {
+    NAME: "Food price",
+    INITIAL_VALUE: [10, 10000],
+    MIN_AND_MAX_VALUE: [0, 50000],
+    STATE_KEY: "foodPriceValues",
   },
-  DELIVERY_TIME: {
+  DELIVERY_FEE: {
     NAME: "Delivery Time",
-    INITIAL_VALUE: [1, 7],
-    MIN_AND_MAX_VALUE: [0, 14],
-    STATE_KEY: "deliveryTimeValues",
+    INITIAL_VALUE: [1, 700],
+    MIN_AND_MAX_VALUE: [0, 1400],
+    STATE_KEY: "deliveryFeeValues",
   },
   DIET_REQUIREMENT: {
     NAME: "Diet Requirement",

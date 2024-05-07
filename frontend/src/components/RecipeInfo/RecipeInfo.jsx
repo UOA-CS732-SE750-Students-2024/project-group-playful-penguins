@@ -30,7 +30,7 @@ const DirectionText = styled("div")({});
 const nutritionInfo = [
   { type: "Calories Content", amount: `100 kcal` },
   { type: "Protein Content", amount: `12.5g` },
-  { type: "Carbohydrates Content", amount: `11.4g` },
+  { type: "Carbohydrate Content", amount: `11.4g` },
   { type: "Total Fat Content", amount: `1.3g` },
 ];
 

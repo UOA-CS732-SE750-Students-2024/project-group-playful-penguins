@@ -4,9 +4,12 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Recipe from "../model/recipeModel.js";
 import asyncHandler from "express-async-handler";
-import { getFilterQuery } from "../functions/getFilterQuery.js";
-import { getSearchQuery } from "../functions/getSearchQuery.js";
 import { verifyAccessToken } from "../middleware/authMiddleware.js";
+import { getRecipeSearchQuery } from "../functions/get-recipe-filter-queries/getRecipeSearchQuery.js";
+import { getRecipeCalorieFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCalorieFilterQuery.js";
+import { getRecipeCarbohydrateFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCarbohydrateFilterQuery.js";
+import { getRecipeCookingTimeFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCookingTimeFilterQuery.js";
+import { getRecipeDietRequirementQuery } from "../functions/get-recipe-filter-queries/getRecipeDietRequirementQuery.js";
 
 dotenv.config();
 
@@ -202,11 +205,44 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
 });
 
 const getFoodRecipes = async (req, res) => {
-  const { searchTerm, sortBy, sortOrder } = req.query;
+  const {
+    searchTerm,
+    sortBy,
+    sortOrder,
+    minCalorieValues,
+    maxCalorieValues,
+    minCarbohydrateValues,
+    maxCarbohydrateValues,
+    minCookingTimeValues,
+    maxCookingTimeValues,
+    selectedRequirement,
+  } = req.query;
   const sortCriteria = getSortCriteria(sortBy, sortOrder);
-  const searchQuery = getSearchQuery(searchTerm);
-  const filterQuery = getFilterQuery(req);
-  const query = { $and: [searchQuery, filterQuery] };
+  const searchQuery = getRecipeSearchQuery(searchTerm);
+  const calorieFilterQuery = getRecipeCalorieFilterQuery(
+    minCalorieValues,
+    maxCalorieValues
+  );
+  const carbohydrateFilterQuery = getRecipeCarbohydrateFilterQuery(
+    minCarbohydrateValues,
+    maxCarbohydrateValues
+  );
+  const cookingTimeFilterQuery = getRecipeCookingTimeFilterQuery(
+    minCookingTimeValues,
+    maxCookingTimeValues
+  );
+  const dietRequirementQuery =
+    getRecipeDietRequirementQuery(selectedRequirement);
+
+  const queries = [
+    searchQuery,
+    calorieFilterQuery,
+    carbohydrateFilterQuery,
+    cookingTimeFilterQuery,
+    dietRequirementQuery,
+  ].filter((query) => query != undefined);
+
+  const query = queries.length > 0 ? { $and: queries } : {};
 
   try {
     if (
