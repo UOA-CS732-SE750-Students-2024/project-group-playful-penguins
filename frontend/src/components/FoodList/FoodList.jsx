@@ -6,11 +6,19 @@ import { AppContext } from "../../providers/AppContextProvider";
 import styles from "./FoodList.module.css";
 import { jwtDecode } from "jwt-decode";
 
-export function FoodList({ foodData, favoriteIDs }) {
+export function FoodList({ foodData }) {
   const { isTakeout } = useContext(AppContext);
   const token = localStorage.getItem('token');
   const decoded = jwtDecode(token);
-  const { favoriteRecipes, favoriteTakeouts } = decoded;
+  let { favoriteRecipes, favoriteTakeouts } = decoded;
+
+  if(!favoriteRecipes){
+    favoriteRecipes=[]
+  }
+
+  if(!favoriteTakeouts){
+    favoriteTakeouts=[]
+  }
 
   return (
     <div className={styles.scrollableContainer}>
