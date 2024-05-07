@@ -7,15 +7,16 @@ import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
 import TakeoutService from "../../services/TakeoutService";
-import { getMatchedRecipes, getRecipes } from "../../services/RecipeService";
+import { getMatchedRecipes } from "../../services/RecipeService";
 import { Typography } from "@mui/material";
-
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
+import { useNavigate } from "react-router-dom";
 
 export function HomePage() {
   const [foodData, setFoodData] = useState(null);
-
+  const navigate = useNavigate();
+  const access_token = JSON.parse(localStorage.getItem("token"));
   const [isLoading, setIsLoading] = useState(false);
 
   const { isTakeout, selectedSortByOption, searchTerm, filters } =
@@ -31,14 +32,20 @@ export function HomePage() {
         response = await getMatchedRecipes(
           searchTerm,
           selectedSortByOption,
-          filters
+          filters,
+          access_token
         );
-        console.log(response);
       }
-      if (response.length > 0) {
-        setFoodData(response);
-      } else if (response.length === 0) {
-        setFoodData([]);
+      if (response) {
+        if (response.status === 401) {
+          navigate("/login");
+        } else {
+          if (response.length > 0) {
+            setFoodData(response);
+          } else if (response.length === 0) {
+            setFoodData([]);
+          }
+        }
       }
     } catch (error) {
       throw new Error(error.message);

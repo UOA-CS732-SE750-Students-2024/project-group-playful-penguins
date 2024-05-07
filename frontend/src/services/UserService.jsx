@@ -19,7 +19,7 @@ const authenticateGoogleUser = async (codeResponse) => {
 
 const signup = async (name, email, password) => {
   try {
-    const response = await axios.post(`${BACKEND_URL}/signup`, {
+    const response = await axios.post(`${BACKEND_URL}/user/signup`, {
       name: name,
       email: email,
       password: password,
@@ -33,7 +33,7 @@ const signup = async (name, email, password) => {
 
 const login = async (email, password) => {
   try {
-    const response = await axios.post(`${BACKEND_URL}/login`, {
+    const response = await axios.post(`${BACKEND_URL}/user/login`, {
       email: email,
       password: password,
     });

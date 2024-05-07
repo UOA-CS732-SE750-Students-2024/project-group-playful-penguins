@@ -22,6 +22,9 @@ export function FoodCardRecipe({ data }) {
 
   // Truncate title if it's longer than 60 characters
   const displayTitle = data.title.length > 60 ? `${data.title.substring(0, 40)}...` : data.title;
+  const toggleFavorite = () => {
+    setFavorite(!favorite);
+  };
 
   const toggleFavorite = () => {
     setFavorite(!favorite);
