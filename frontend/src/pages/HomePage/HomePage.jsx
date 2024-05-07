@@ -10,9 +10,9 @@ import {
   getMatchedRecipes,
   getMatchedTakeouts,
 } from "../../services/RecipeService";
-import { Typography,Button } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 // import { useTheme,useMediaQuery } from "@emotion/react";
-import { useTheme,useMediaQuery } from "@mui/material";
+import { useTheme, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
@@ -76,20 +76,41 @@ export function HomePage() {
   }, [searchTerm, selectedSortByOption, isTakeout]);
 
   return (
-    <Box className={styles["home-container"]} sx={{
-      height:"100%",
-      flexDirection:{
-        xs:"column",
-        sm:"row",
-        md:"row"
-      }
-    }}>
+    <Box
+      className={styles["home-container"]}
+      sx={{
+        height: "100%",       
+        flexDirection: {
+          xs: "column",
+          sm: "row",
+          md: "row",
+        },
+      }}
+    >
       {isMobile && (
-        <Button onClick={toggleFilterVisibility} sx={{ margin: 1 }}>
-          {isFilterVisible ? "Hide Filters" : "Show Filters"}
+        <Button
+          onClick={toggleFilterVisibility}
+          sx={{
+            margin: 1,         
+            color: isTakeout ? "#77595E" : "#00665E",
+            backgroundColor: "white",
+            borderRadius: "15px",
+            border: "2px solid #E0E0E0",
+            height: "fitContent",
+            justifyContent: "space-evenly",
+            fontSize: "12px",
+            textTransform: "none",         
+          }}
+        >
+          <Typography variant="body1" fontWeight="fontWeightBold">
+            {isFilterVisible ? "Hide Filters" : "Show Filters"}
+          </Typography>
         </Button>
       )}
-      <Box className={styles["filter-container"]} sx={{ display: isFilterVisible || !isMobile ? 'block' : 'none' }}>
+      <Box
+        className={styles["filter-container"]}
+        sx={{ display: isFilterVisible || !isMobile ? "block" : "none" }}
+      >
         <FilterPanel onApplyFilter={fetchFoodData} />
       </Box>
       {/* <Box className={styles["filter-container"]}>
@@ -100,8 +121,7 @@ export function HomePage() {
           <Box className={styles["search-bar"]}>
             <SearchBar />
           </Box>
-          <Box className={styles["sort-by"] } 
-          >
+          <Box className={styles["sort-by"]}>
             <SortBy />
           </Box>
         </Box>

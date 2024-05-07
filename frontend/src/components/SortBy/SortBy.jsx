@@ -47,7 +47,7 @@ export function SortBy() {
           border: "1px solid #E0E0E0",
           height:{xs:"40px",sm:"65px"}, 
           justifyContent: "space-evenly",
-          fontSize: {xs:"10px",sm:"16px"},
+          fontSize: {xs:"12px",sm:"16px"},
           textTransform: "none",
           "&:hover": {
             backgroundColor: isTakeout ? "#473538" : "#00665E",
@@ -60,7 +60,7 @@ export function SortBy() {
       <Menu
         MenuListProps={{
           sx: {
-            width: "150px",
+           width:"150px",
           },
         }}
         id="sort-by-menu"
