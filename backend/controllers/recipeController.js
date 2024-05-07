@@ -7,6 +7,10 @@ import asyncHandler from "express-async-handler";
 import { getFilterQuery } from "../functions/getFilterQuery.js";
 import { getSearchQuery } from "../functions/getSearchQuery.js";
 import { verifyAccessToken } from "../middleware/authMiddleware.js";
+import { getCalorieFilterQuery } from "../functions/getCalorieFilterQuery.js";
+import { getCarbohydrateFilterQuery } from "../functions/getCarbohydrateFilterQuery.js";
+import { getCookingTimeFilterQuery } from "../functions/getCookingTimeFilterQuery.js";
+import { getDietRequirementQuery } from "../functions/getDietRequirementQuery.js";
 
 dotenv.config();
 
@@ -202,11 +206,43 @@ const getPaginateRecipe = asyncHandler(async (req, res) => {
 });
 
 const getFoodRecipes = async (req, res) => {
-  const { searchTerm, sortBy, sortOrder } = req.query;
+  const {
+    searchTerm,
+    sortBy,
+    sortOrder,
+    minCalorieValues,
+    maxCalorieValues,
+    minCarbohydrateValues,
+    maxCarbohydrateValues,
+    minCookingTimeValues,
+    maxCookingTimeValues,
+    selectedRequirement,
+  } = req.query;
   const sortCriteria = getSortCriteria(sortBy, sortOrder);
   const searchQuery = getSearchQuery(searchTerm);
-  const filterQuery = getFilterQuery(req);
-  const query = { $and: [searchQuery, filterQuery] };
+  const calorieFilterQuery = getCalorieFilterQuery(
+    minCalorieValues,
+    maxCalorieValues
+  );
+  const carbohydrateFilterQuery = getCarbohydrateFilterQuery(
+    minCarbohydrateValues,
+    maxCarbohydrateValues
+  );
+  const cookingTimeFilterQuery = getCookingTimeFilterQuery(
+    minCookingTimeValues,
+    maxCookingTimeValues
+  );
+  const dietRequirementQuery = getDietRequirementQuery(selectedRequirement);
+
+  const queries = [
+    searchQuery,
+    calorieFilterQuery,
+    carbohydrateFilterQuery,
+    cookingTimeFilterQuery,
+    dietRequirementQuery,
+  ].filter((query) => query != undefined);
+
+  const query = queries.length > 0 ? { $and: queries } : {};
 
   try {
     if (

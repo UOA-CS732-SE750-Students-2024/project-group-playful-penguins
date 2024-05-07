@@ -6,8 +6,8 @@ export const AppContext = React.createContext({});
 export function AppContextProvider({ children }) {
   const [isTakeout, setTakeout] = useState(false);
   const [filters, setFilters] = useState({
-    calorieCountValues: FILTERS.CALORIE_COUNT.INITIAL_VALUE,
-    prepTimeValues: FILTERS.PREP_TIME.INITIAL_VALUE,
+    calorieValues: FILTERS.CALORIE.INITIAL_VALUE,
+    carbohydrateValues: FILTERS.CARBOHYDRATE.INITIAL_VALUE,
     cookingTimeValues: FILTERS.COOKING_TIME.INITIAL_VALUE,
     priceValues: FILTERS.PRICE.INITIAL_VALUE,
     deliveryTimeValues: FILTERS.DELIVERY_TIME.INITIAL_VALUE,
