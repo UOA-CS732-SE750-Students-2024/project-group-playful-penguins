@@ -44,6 +44,22 @@ const login = async (email, password) => {
   }
 };
 
+const displayFavoriteRecipe = async (access_token) => {
+  console.log("Reached service!!!");
+  try {
+    const response = await axios.get(`/user/favorites/recipe`, {
+      headers: { Authorization: access_token },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error fetching favorite recipes:",
+      formatErrorMessage(error)
+    );
+    throw new Error(formatErrorMessage(error));
+  }
+};
+
 function formatErrorMessage(error) {
   if (error.response && error.response.data && error.response.data.error) {
     return error.response.data.error; // Assuming error details are in error.response.data.error
@@ -54,4 +70,4 @@ function formatErrorMessage(error) {
   }
 }
 
-export { signup, login, authenticateGoogleUser };
+export { signup, login, authenticateGoogleUser, displayFavoriteRecipe };

@@ -1,8 +1,9 @@
 import fetch from "node-fetch";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 import { response } from "express";
 import User from "../model/userModel.js";
-import { generateAccessToken } from "../middleware/authMiddleware.js";
+import { extractUser, generateAccessToken } from "../middleware/authMiddleware.js";
 
 dotenv.config();
 
@@ -62,4 +63,46 @@ const postUserLogin = async (req, res) => {
   }
 };
 
-export { postUserSignUp, postUserLogin, authorizeGoogleUser };
+const getFavoriteRecipes = async (req, res) => {
+  console.log("Reached backednm found user");
+  try {
+    if (
+      req.headers &&
+      req.headers.authorization &&
+      verifyAccessToken(req.headers.authorization)
+    ) {
+      // Access the email from the request object
+      const userEmail = extractUser(req.headers.authorization)
+
+      console.log("Reached backendfound user")
+
+      // Find the user by email
+      const user = await User.findOne({ email: userEmail });
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+
+      // Use the list of recipe IDs to find recipes
+      if (user.favoriteRecipes.length <= 0) {
+        res.json("no favorites yet");
+        return;
+      }
+      const favoriteRecipes = await Recipe.find({
+        id: { $in: user.favoriteRecipes },
+      });
+
+      res.json(favoriteRecipes);
+      console.log(favoriteRecipes);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+};
+
+export {
+  postUserSignUp,
+  postUserLogin,
+  authorizeGoogleUser,
+  getFavoriteRecipes,
+};
