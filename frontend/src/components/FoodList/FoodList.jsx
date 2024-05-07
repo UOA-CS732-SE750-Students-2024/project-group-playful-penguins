@@ -4,16 +4,13 @@ import { FoodCardRecipe } from "../FoodCardRecipe/FoodCardRecipe";
 import { FoodCardTakeout } from "../FoodCardTakeout/FoodCardTakeout";
 import { AppContext } from "../../providers/AppContextProvider";
 import styles from "./FoodList.module.css";
+import { jwtDecode } from "jwt-decode";
 
 export function FoodList({ foodData, favoriteIDs }) {
   const { isTakeout } = useContext(AppContext);
-  let favoriteids = [657679,
-    664419,
-    659143,
-    664737,
-    664090]
-  //const user = User.findOne({ email: 'ikin666@env.nz' });
-  //console.log(user)
+  const token = localStorage.getItem('token');
+  const decoded = jwtDecode(token);
+  const { favoriteRecipes, favoriteTakeouts } = decoded;
 
   return (
     <div className={styles.scrollableContainer}>
@@ -22,9 +19,9 @@ export function FoodList({ foodData, favoriteIDs }) {
           {foodData.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               {isTakeout ? (
-                <FoodCardTakeout key={index} data={item} isFavorite={true} />
+                <FoodCardTakeout key={index} data={item} isFavorite={favoriteTakeouts.includes(item.id)} />
               ) : (
-                <FoodCardRecipe key={index} data={item} isFavorite={favoriteIDs.includes(item.id)} itemId = {item.id}/>
+                <FoodCardRecipe key={index} data={item} isFavorite={favoriteRecipes.includes(item.id)}/>
               )
               }
             </Grid>

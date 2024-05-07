@@ -14,9 +14,9 @@ import Zoom from "@mui/material/Zoom";
 import axios from "axios";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export function FoodCardTakeout({ data }) {
+export function FoodCardTakeout({ data , isFavorite }) {
   const [openTakeoutCard, setOpenTakeoutCard] = useState(false);
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(isFavorite);
 
   const [takeoutData, setTakeoutData] = useState({});
 
