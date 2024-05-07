@@ -3,12 +3,11 @@ export const getRecipeCookingTimeFilterQuery = (
   maxCookingTimeValues
 ) => {
   if (minCookingTimeValues && maxCookingTimeValues) {
-    const query = {
+    return {
       readyInMinutes: {
         $gte: parseInt(minCookingTimeValues),
         $lte: parseInt(maxCookingTimeValues),
       },
     };
-    return query;
   }
 };

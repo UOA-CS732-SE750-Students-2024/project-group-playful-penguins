@@ -3,7 +3,7 @@ export const getRecipeCarbohydrateFilterQuery = (
   maxCarbohydrateValues
 ) => {
   if (minCarbohydrateValues && maxCarbohydrateValues) {
-    const query = {
+    return {
       "nutrition.nutrients": {
         $elemMatch: {
           name: "Carbohydrates",
@@ -14,6 +14,5 @@ export const getRecipeCarbohydrateFilterQuery = (
         },
       },
     };
-    return query;
   }
 };

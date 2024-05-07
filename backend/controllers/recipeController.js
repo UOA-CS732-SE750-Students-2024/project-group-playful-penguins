@@ -4,13 +4,12 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Recipe from "../model/recipeModel.js";
 import asyncHandler from "express-async-handler";
-import { getSearchQuery } from "../functions/getSearchQuery.js";
 import { verifyAccessToken } from "../middleware/authMiddleware.js";
-import { getSearchQuery } from "../functions/getSearchQuery.js";
+import { getRecipeSearchQuery } from "../functions/get-recipe-filter-queries/getRecipeSearchQuery.js";
 import { getRecipeCalorieFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCalorieFilterQuery.js";
 import { getRecipeCarbohydrateFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCarbohydrateFilterQuery.js";
 import { getRecipeCookingTimeFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCookingTimeFilterQuery.js";
-import { getDietRequirementQuery } from "../functions/getDietRequirementQuery.js";
+import { getRecipeDietRequirementQuery } from "../functions/get-recipe-filter-queries/getRecipeDietRequirementQuery.js";
 
 dotenv.config();
 
@@ -219,7 +218,7 @@ const getFoodRecipes = async (req, res) => {
     selectedRequirement,
   } = req.query;
   const sortCriteria = getSortCriteria(sortBy, sortOrder);
-  const searchQuery = getSearchQuery(searchTerm);
+  const searchQuery = getRecipeSearchQuery(searchTerm);
   const calorieFilterQuery = getRecipeCalorieFilterQuery(
     minCalorieValues,
     maxCalorieValues
@@ -232,7 +231,8 @@ const getFoodRecipes = async (req, res) => {
     minCookingTimeValues,
     maxCookingTimeValues
   );
-  const dietRequirementQuery = getDietRequirementQuery(selectedRequirement);
+  const dietRequirementQuery =
+    getRecipeDietRequirementQuery(selectedRequirement);
 
   const queries = [
     searchQuery,

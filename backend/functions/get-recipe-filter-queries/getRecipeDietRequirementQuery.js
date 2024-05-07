@@ -1,11 +1,10 @@
-export const getDietRequirementQuery = (selectedRequirement) => {
+export const getRecipeDietRequirementQuery = (selectedRequirement) => {
   if (selectedRequirement) {
-    const query = {
+    return {
       diets: {
         $regex: selectedRequirement,
         $options: "i",
       },
     };
-    return query;
   }
 };

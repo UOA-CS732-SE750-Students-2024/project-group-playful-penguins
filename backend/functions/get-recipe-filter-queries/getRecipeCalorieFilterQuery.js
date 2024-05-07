@@ -2,9 +2,8 @@ export const getRecipeCalorieFilterQuery = (
   minCalorieValues,
   maxCalorieValues
 ) => {
-  console.log(minCalorieValues, maxCalorieValues);
   if (minCalorieValues && maxCalorieValues) {
-    const query = {
+    return {
       "nutrition.nutrients": {
         $elemMatch: {
           name: "Calories",
@@ -15,6 +14,5 @@ export const getRecipeCalorieFilterQuery = (
         },
       },
     };
-    return query;
   }
 };

@@ -13,20 +13,20 @@ export const colors = {
 export const FILTERS = {
   CALORIE: {
     NAME: "Calorie",
-    INITIAL_VALUE: [0, 2000],
-    MIN_AND_MAX_VALUE: [0, 2000],
+    INITIAL_VALUE: [0, 20000],
+    MIN_AND_MAX_VALUE: [0, 20000],
     STATE_KEY: "calorieValues",
   },
   CARBOHYDRATE: {
     NAME: "Carbohydrate",
-    INITIAL_VALUE: [0, 1000],
-    MIN_AND_MAX_VALUE: [0, 1000],
+    INITIAL_VALUE: [0, 10000],
+    MIN_AND_MAX_VALUE: [0, 10000],
     STATE_KEY: "carbohydrateValues",
   },
   COOKING_TIME: {
     NAME: "Cooking Time",
-    INITIAL_VALUE: [0, 200],
-    MIN_AND_MAX_VALUE: [0, 200],
+    INITIAL_VALUE: [0, 2000],
+    MIN_AND_MAX_VALUE: [0, 20000],
     STATE_KEY: "cookingTimeValues",
   },
   PRICE: {
