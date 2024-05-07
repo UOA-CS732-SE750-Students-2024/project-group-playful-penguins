@@ -66,20 +66,20 @@ export function HomePage() {
   }, [searchTerm, selectedSortByOption, isTakeout]);
 
   return (
-    <div className={styles["home-container"]}>
-      <div className={styles["filter-container"]}>
-        <FilterPanel onApplyFilter={fetchFoodData} />
-      </div>
-      <div className={styles["features-and-food-list-container"]}>
-        <div className={styles["search-and-sort-panel"]}>
-          <div className={styles["search-bar"]}>
+    <Box className={styles["home-container"]}>
+      <Box className={styles["filter-container"]}>
+        <FilterPanel onApplyFilter={fetchFoodData}  />
+      </Box>
+      <Box className={styles["features-and-food-list-container"]}>
+        <Box className={styles["search-and-sort-panel"]}>
+          <Box className={styles["search-bar"]}>
             <SearchBar />
-          </div>
-          <div className={styles["sort-by"]}>
+          </Box>
+          <Box className={styles["sort-by"]}>
             <SortBy />
-          </div>
-        </div>
-        <div className={styles["food-list"]}>
+          </Box>
+        </Box>
+        <Box className={styles["food-list"]}>
           {isLoading ? (
             <Box
               sx={{
@@ -107,8 +107,8 @@ export function HomePage() {
           ) : (
             <FoodList foodData={foodData} />
           )}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }
