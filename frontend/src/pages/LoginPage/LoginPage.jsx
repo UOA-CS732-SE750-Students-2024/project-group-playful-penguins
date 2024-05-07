@@ -69,9 +69,9 @@ export default function LoginPage({ setToken }) {
       if (response && response.user) {
         setToken(response.user.token);
         sessionStorage.setItem("Name", response.user.name);
+        navigate("/");
       }
       setIsError(false);
-      navigate("/");
     } catch (error) {
       console.error(error.message);
       setIsError(true);
