@@ -1,6 +1,6 @@
 import React from "react";
 import { FilterTemplate } from "../FilterTemplate/FilterTemplate";
 
-export function DeliveryTimeFilter() {
-  return <FilterTemplate filterKey="DELIVERY_TIME" />;
+export function FoodPriceFilter() {
+  return <FilterTemplate filterKey="FOOD_PRICE" />;
 }

@@ -4,8 +4,8 @@ import { CalorieCountFilter } from "../Filters/CalorieCountFilter/CalorieCountFi
 import { PrepTimeFilter } from "../Filters/PrepTimeFilter/PrepTimeFilter";
 import { DietRequirementFilter } from "../Filters/DietRequirementFilter/DietRequirementFilter";
 import { CookingTimeFilter } from "../Filters/CookingTimeFilter/CookingTimeFilter";
-import { DeliveryTimeFilter } from "../Filters/DeliveryTimeFilter/DeliveryTimeFilter";
-import { PriceFilter } from "../Filters/PriceFilter/PriceFilter";
+import { DeliveryFeeFilter } from "../Filters/DeliveryFeeFilter/DeliveryFeeFilter";
+import { FoodPriceFilter } from "../Filters/FoodPriceFilter/FoodPriceFilter";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { colors, FILTERS } from "../../constants/styles-constant";
 import { LoadingButton } from "@mui/lab";
@@ -41,8 +41,8 @@ export function FilterPanel({ onApplyFilter }) {
         <CalorieCountFilter />
         {isTakeout ? (
           <div>
-            <PriceFilter />
-            <DeliveryTimeFilter />
+            <FoodPriceFilter />
+            <DeliveryFeeFilter />
           </div>
         ) : (
           <div>

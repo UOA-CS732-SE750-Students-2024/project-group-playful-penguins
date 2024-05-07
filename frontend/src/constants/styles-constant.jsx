@@ -29,17 +29,17 @@ export const FILTERS = {
     MIN_AND_MAX_VALUE: [0, 20000],
     STATE_KEY: "cookingTimeValues",
   },
-  PRICE: {
-    NAME: "Price",
-    INITIAL_VALUE: [10, 100],
-    MIN_AND_MAX_VALUE: [0, 500],
-    STATE_KEY: "priceValues",
+  FOOD_PRICE: {
+    NAME: "Food price",
+    INITIAL_VALUE: [10, 10000],
+    MIN_AND_MAX_VALUE: [0, 50000],
+    STATE_KEY: "foodPriceValues",
   },
-  DELIVERY_TIME: {
+  DELIVERY_FEE: {
     NAME: "Delivery Time",
-    INITIAL_VALUE: [1, 7],
-    MIN_AND_MAX_VALUE: [0, 14],
-    STATE_KEY: "deliveryTimeValues",
+    INITIAL_VALUE: [1, 700],
+    MIN_AND_MAX_VALUE: [0, 1400],
+    STATE_KEY: "deliveryFeeValues",
   },
   DIET_REQUIREMENT: {
     NAME: "Diet Requirement",
