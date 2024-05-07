@@ -50,4 +50,123 @@ function formatErrorMessage(error) {
   }
 }
 
-export { signup, login, authenticateGoogleUser };
+const getFavRecipeID = async (email, access_token) => {
+  try {
+    const url = `${BACKEND_URL}/user/favorites/recipe`;
+    const response = await axios.get(url, {
+      headers: { Authorization: access_token },
+      params: { email }
+    });
+    if (!response.data) {
+      throw new Error("No data from backend");
+    }
+    return response.data.ids; 
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    if (error.response && error.response.status === 401) {
+      return { status: 401, error };
+    }
+    return [];
+  }
+};
+
+const updateFavRecipeID = async (email, selectedRecipeID, access_token) => {
+  try {
+    const url = `${BACKEND_URL}/user/favorites/updaterecipe`;
+    const response = await axios.post(url, {recipeID: selectedRecipeID}, {
+      headers: { Authorization: access_token },
+      params: { email }
+    });
+    if (!response.data) {
+      throw new Error("No data from backend");
+    }
+    return response.data.ids; 
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    if (error.response && error.response.status === 401) {
+      return { status: 401, error };
+    }
+    return [];
+  }
+}
+
+const removeFavRecipeID  = async (email, selectedRecipeID, access_token) => {
+  try {
+    const url = `${BACKEND_URL}/user/favorites/removerecipe`;
+    const response = await axios.post(url, {recipeID: selectedRecipeID}, {
+      headers: { Authorization: access_token },
+      params: { email }
+    });
+    if (!response.data) {
+      throw new Error("No data from backend");
+    }
+    return response.data.ids; 
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    if (error.response && error.response.status === 401) {
+      return { status: 401, error };
+    }
+    return [];
+  }
+}
+
+const getFavTakeoutID = async (email, access_token) => {
+  try {
+    const url = `${BACKEND_URL}/user/favorites/takeout`;
+    const response = await axios.get(url, {
+      headers: { Authorization: access_token },
+      params: { email }
+    });
+    if (!response.data) {
+      throw new Error("No data from backend");
+    }
+    return response.data.ids; 
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    if (error.response && error.response.status === 401) {
+      return { status: 401, error };
+    }
+    return [];
+  }
+};
+
+const updateFavTakeoutID = async (email, selectedtakeoutID, access_token) => {
+  try {
+    const url = `${BACKEND_URL}/user/favorites/updatetakeout`;
+    const response = await axios.post(url, {takeoutID: selectedtakeoutID}, {
+      headers: { Authorization: access_token },
+      params: { email }
+    });
+    if (!response.data) {
+      throw new Error("No data from backend");
+    }
+    return response.data.ids; 
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    if (error.response && error.response.status === 401) {
+      return { status: 401, error };
+    }
+    return [];
+  }
+}
+
+const removeFavTakeoutID  = async (email, selectedtakeoutID, access_token) => {
+  try {
+    const url = `${BACKEND_URL}/user/favorites/removetakeout`;
+    const response = await axios.post(url, {takeoutID: selectedtakeoutID}, {
+      headers: { Authorization: access_token },
+      params: { email }
+    });
+    if (!response.data) {
+      throw new Error("No data from backend");
+    }
+    return response.data.ids; 
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+    if (error.response && error.response.status === 401) {
+      return { status: 401, error };
+    }
+    return [];
+  }
+}
+export { signup, login, authenticateGoogleUser, getFavRecipeID, updateFavRecipeID, removeFavRecipeID, getFavTakeoutID, updateFavTakeoutID,  removeFavTakeoutID};

@@ -72,6 +72,7 @@ export default function LoginPage({ setToken }) {
       const response = await login(data.email, data.password);
       if (response && response.user) {
         setToken(response.user.token);
+        localStorage.setItem('userEmail', response.user.email);
         navigate("/");
       }
       setIsError(false);

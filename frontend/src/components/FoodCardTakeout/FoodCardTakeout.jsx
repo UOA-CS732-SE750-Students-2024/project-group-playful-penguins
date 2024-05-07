@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -13,10 +13,14 @@ import { Box } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 import axios from "axios";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import {updateFavTakeoutID, removeFavTakeoutID} from "../../services/UserService";
 
-export function FoodCardTakeout({ data }) {
+
+export function FoodCardTakeout({ data, isFavorite }) {
   const [openTakeoutCard, setOpenTakeoutCard] = useState(false);
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(isFavorite);
+  const access_token = JSON.parse(localStorage.getItem("token"));
+  const email = localStorage.getItem('userEmail')
 
   const [takeoutData, setTakeoutData] = useState({});
 
@@ -27,6 +31,10 @@ export function FoodCardTakeout({ data }) {
   const handleClose = () => {
     setOpenTakeoutCard(false);
   };
+
+  useEffect(() => {
+    setFavorite(isFavorite);
+  }, [isFavorite]);
 
   const fetchTakeoutData = async (id) => {
     try {
@@ -45,8 +53,18 @@ export function FoodCardTakeout({ data }) {
 
   const restaurant_name = data.restaurant_name  ? (data.restaurant_name.length > 18 ? `${data.restaurant_name.substring(0, 18)}...` : data.restaurant_name): data.restaurant_name
 
-  const toggleFavorite = () => {
-    setFavorite(!favorite);
+  const toggleFavorite = async () => {
+    const newFavoriteStatus = !favorite;
+    setFavorite(newFavoriteStatus);
+    try {
+      if(newFavoriteStatus) {
+        await updateFavTakeoutID(email, data.id, access_token);
+      } else {
+        await removeFavTakeoutID(email, data.id, access_token);
+      }
+    } catch (error) {
+      console.error("Error updating favorite status:", error);
+    }
   };
 
   return (

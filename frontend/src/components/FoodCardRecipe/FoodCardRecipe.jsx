@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -11,19 +11,37 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
+import {updateFavRecipeID, removeFavRecipeID} from "../../services/UserService";
 
-export function FoodCardRecipe({ data }) {
+export function FoodCardRecipe({ data, isFavorite }) {
   const navigate = useNavigate();
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(isFavorite);
+  const access_token = JSON.parse(localStorage.getItem("token"));
+  const email = localStorage.getItem('userEmail')
 
   function openRecipeInfo() {
     navigate(`recipe/${data.id}`);
   }
 
+  
+  useEffect(() => {
+    setFavorite(isFavorite);
+  }, [isFavorite]);
+
   // Truncate title if it's longer than 60 characters
   const displayTitle = data.title.length > 60 ? `${data.title.substring(0, 40)}...` : data.title;
-  const toggleFavorite = () => {
-    setFavorite(!favorite);
+  const toggleFavorite = async () => {
+    const newFavoriteStatus = !favorite;
+    setFavorite(newFavoriteStatus);
+    try {
+      if(newFavoriteStatus) {
+        await updateFavRecipeID(email, data.id, access_token);
+      } else {
+        await removeFavRecipeID(email, data.id, access_token);
+      }
+    } catch (error) {
+      console.error("Error updating favorite status:", error);
+    }
   };
 
   return (
