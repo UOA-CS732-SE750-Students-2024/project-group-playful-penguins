@@ -139,5 +139,74 @@ const deleteFavRecipeID = async (req, res) => {
   }
 };
 
+const getFavTakeoutIDs = async (req, res) => {
+  const email = req.query.email;
+  try {
+      if (!email) {
+          return res.status(400).json({ message: "Email is required" });
+      }
+      const user = await User.findOne({ email: email }, 'favoriteTakeouts');
+      if (user && user.favoriteTakeouts) {
+          res.json({ ids: user.favoriteTakeouts });
+      } else {
+          res.status(404).json({ message: "No favorites found" });
+      }
+  } catch (error) {
+      console.error("Server Error:", error);
+      res.status(500).json({ message: "Internal Server Error", error: error.toString() });
+  }
+};
 
-export { postUserSignUp, postUserLogin, authorizeGoogleUser, getFavRecipeIDs, postFavRecipeID, deleteFavRecipeID };
+const postFavTakeoutID  = async (req, res) => {
+  const email = req.query.email;
+  const takeoutID = req.body.takeoutID;
+  console.log(email, takeoutID)
+  try {
+    if (!email || !takeoutID) {
+      return res.status(400).json({ message: "Email and Takeout ID are required" });
+    }
+    const user = await User.findOneAndUpdate(
+      { email: email },
+      { $addToSet: { favoriteTakeouts: takeoutID } }, 
+      { new: true, fields: 'favoriteTakeouts' } 
+    );
+
+    if (user) {
+      res.json({ message: "Takeout added to favorites successfully", ids: user.favoriteTakeouts });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).json({ message: "Internal Server Error", error: error.toString() });
+  }
+};
+
+const deleteFavTakeoutID = async (req, res) => {
+  const email = req.query.email;
+  const takeoutID = req.body.takeoutID;
+
+  try {
+    if (!email || !takeoutID) {
+      return res.status(400).json({ message: "Email and Takeout ID are required" });
+    }
+    
+    const user = await User.findOneAndUpdate(
+      { email: email },
+      { $pull: { favoriteTakeouts: takeoutID } },
+      { new: true, fields: 'favoriteTakeouts' }
+    );
+
+    if (user) {
+      res.json({ message: "Takeout removed from favorites successfully", ids: user.favoriteTakeouts });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).json({ message: "Internal Server Error", error: error.toString() });
+  }
+};
+
+
+export { postUserSignUp, postUserLogin, authorizeGoogleUser, getFavRecipeIDs, postFavRecipeID, deleteFavRecipeID, getFavTakeoutIDs, postFavTakeoutID, deleteFavTakeoutID };

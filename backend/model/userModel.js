@@ -24,7 +24,7 @@ const userSchema = new Schema(
       default: [],
     },
     favoriteTakeouts: {
-      type: [Number], 
+      type: [String], 
       default: [],
     },
   },
