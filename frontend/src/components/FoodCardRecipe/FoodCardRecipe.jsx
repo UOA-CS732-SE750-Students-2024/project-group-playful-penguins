@@ -12,9 +12,9 @@ import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 
-export function FoodCardRecipe({ data }) {
+export function FoodCardRecipe({ data , isFavorite}) {
   const navigate = useNavigate();
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(isFavorite);
 
   function openRecipeInfo() {
     navigate(`recipe/${data.id}`);
