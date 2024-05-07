@@ -63,7 +63,7 @@ function App() {
           path="/login"
           element={<LoginPage setToken={setToken} />}
         ></Route>
-        <Route path="/signUp" element={<SignUpPage />}></Route>
+        <Route path="/signUp" element={<SignUpPage setToken={setToken} />}></Route>
       </Routes>
     </ThemeProvider>
   );

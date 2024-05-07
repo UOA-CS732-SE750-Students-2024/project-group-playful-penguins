@@ -15,11 +15,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import styles from "./SignUpPage.module.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { signup } from "../../services/UserService";
 
-export default function SignUpPage() {
+export default function SignUpPage({ setToken }) {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,10 +42,13 @@ export default function SignUpPage() {
     event.preventDefault();
   };
 
+  const goToLogin = () => {
+    navigate('/login');
+  };
+
   const form = useForm({
     defaultValues: {
-      // TODO: remove Kenny Lam after we add input field for name
-      name: "Kenny Lam",
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -64,8 +69,12 @@ export default function SignUpPage() {
     setIsPasswordMatch(true);
     try {
       const response = await signup(data.name, data.email, data.password);
-      console.log(response);
-      setError(false);
+      if (response && response.user) {
+        setToken(response.user.token);
+        sessionStorage.setItem("Name", response.user.name);
+      }
+      setIsError(false);
+      navigate("/");
     } catch (error) {
       if (error.message.includes("duplicate")) {
         console.error("Email is already used");

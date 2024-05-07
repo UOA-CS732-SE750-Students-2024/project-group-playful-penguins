@@ -48,7 +48,6 @@ const postUserSignUp = async (req, res) => {
   }
 };
 
-// TODO: Login
 const postUserLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -56,7 +55,7 @@ const postUserLogin = async (req, res) => {
     const token = generateAccessToken(user);
     res.status(201).json({
       message: "Found user in DB! Logged in successfully",
-      user: { email: email, token: token },
+      user: { name: user.name, email: email, token: token },
     });
   } catch (error) {
     res.status(400).json({ error: error.message }); // Corrected here
