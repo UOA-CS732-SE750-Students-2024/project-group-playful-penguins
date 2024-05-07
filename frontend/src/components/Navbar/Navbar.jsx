@@ -6,10 +6,8 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link as RouterLink, useLocation } from "react-router-dom";
-import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import { GoogleLogin } from "@react-oauth/google";
 import {
   Link,
   MenuItem,
@@ -17,11 +15,14 @@ import {
   Menu,
   Avatar,
   Divider,
+  Typography,
 } from "@mui/material";
 import { AppContext } from "../../providers/AppContextProvider";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Navbar() {
+  const navigate = useNavigate();
   const { isTakeout, changeCategory } = useContext(AppContext);
   const location = useLocation();
   const isRecipePage = location.pathname.startsWith("/home/recipe/");
@@ -32,6 +33,13 @@ export function Navbar() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    setAnchorEl(null);
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/login");
   };
 
   const buttonGroupStyles = {
@@ -150,7 +158,18 @@ export function Navbar() {
           </Box>
 
           <IconButton onClick={handleClick} color="inherit">
-            <AccountCircleIcon />
+            <Box
+              sx={{
+                display:"flex",
+                flexDirection:"row",
+                gap:"8px"
+              }}
+            >
+              <Typography style={{ color: "black" }}>
+                {sessionStorage.getItem("Name")}
+              </Typography>
+              <AccountCircleIcon />
+            </Box>
           </IconButton>
           <Menu
             anchorEl={anchorEl}
@@ -187,20 +206,13 @@ export function Navbar() {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem>
-              <GoogleLogin
-                onSuccess={responseMessage}
-                onError={errorMessage}
-              ></GoogleLogin>
-            </MenuItem>
-            <Divider />
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Settings fontSize="small" />
               </ListItemIcon>
               Settings
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>

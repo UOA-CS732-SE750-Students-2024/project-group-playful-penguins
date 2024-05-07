@@ -15,11 +15,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import styles from "./SignUpPage.module.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { signup } from "../../services/UserService";
 
-export default function SignUpPage() {
+export default function SignUpPage({ setToken }) {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,10 +42,13 @@ export default function SignUpPage() {
     event.preventDefault();
   };
 
+  const goToLogin = () => {
+    navigate("/login");
+  };
+
   const form = useForm({
     defaultValues: {
-      // TODO: remove Kenny Lam after we add input field for name
-      name: "Kenny Lam",
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -64,8 +69,12 @@ export default function SignUpPage() {
     setIsPasswordMatch(true);
     try {
       const response = await signup(data.name, data.email, data.password);
-      console.log(response);
-      setError(false);
+      if (response && response.user) {
+        setToken(response.user.token);
+        sessionStorage.setItem("Name", response.user.name);
+        navigate("/");
+      }
+      setIsError(false);
     } catch (error) {
       if (error.message.includes("duplicate")) {
         console.error("Email is already used");
@@ -178,6 +187,62 @@ export default function SignUpPage() {
             >
               {/* TODO: Add name input field and style the form and the error message a bit*/}
               <form onSubmit={handleSubmit(onSubmit)}>
+                <FormControl
+                  sx={{
+                    m: 1,
+                    width: { xs: 200, sm: 280, md: 400 },
+                    "& .MuiInputBase-root": {
+                      height: 40,
+                      padding: "0 14px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      transform: "translate(14px, 10px) scale(1)",
+                    },
+                    "& .MuiInputLabel-shrink": {
+                      transform: "translate(14px, -6px) scale(0.75)",
+                    },
+                  }}
+                  variant="outlined"
+                >
+                  <InputLabel htmlFor="outlined-adornment-name">
+                    Name
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-name"
+                    type="name"
+                    endAdornment={
+                      <InputAdornment position="end"></InputAdornment>
+                    }
+                    label="Name"
+                    {...register("name", {
+                      required: "Please enter your name",
+                    })}
+                  />
+                  {errors.name && (
+                    <Box
+                      sx={{
+                        width: "90%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                        marginTop: "4px",
+                      }}
+                    >
+                      <Typography
+                        style={{ color: "red" }}
+                        sx={{
+                          fontSize: {
+                            xs: "8px",
+                            sm: "10px",
+                            md: "10px",
+                          },
+                        }}
+                      >
+                        {errors.name.message}
+                      </Typography>
+                    </Box>
+                  )}
+                </FormControl>
                 <FormControl
                   sx={{
                     m: 1,
@@ -423,6 +488,7 @@ export default function SignUpPage() {
               </Typography>
 
               <Button
+                onClick={goToLogin}
                 sx={{
                   width: { xs: 200, sm: 280, md: 400 },
                   border: "2px solid #8e6a70;",

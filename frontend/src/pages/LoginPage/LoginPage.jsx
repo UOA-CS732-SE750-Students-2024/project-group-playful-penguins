@@ -16,15 +16,15 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import styles from "./LoginPage.module.css";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import { authenticateGoogleUser, login } from "../../services/UserService";
 import { useForm } from "react-hook-form";
+import { PropTypes } from "prop-types";
+import { useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+export default function LoginPage({ setToken }) {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [user, setUser] = useState([]);
-  const [profile, setProfile] = useState([]);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -35,11 +35,13 @@ export default function LoginPage() {
     event.preventDefault();
   };
 
+  const goToSignup = () => {
+    navigate('/signup');
+  };
+
   const googleLogin = useGoogleLogin({
     onSuccess: async (codeResponse) => {
-      console.log(codeResponse);
       response = await authenticateGoogleUser(codeResponse);
-      console.log(response);
     },
     onError: () => {
       // Handle login errors here
@@ -64,8 +66,12 @@ export default function LoginPage() {
   const onSubmit = async (data) => {
     try {
       const response = await login(data.email, data.password);
-      console.log(response);
-      setError(false);
+      if (response && response.user) {
+        setToken(response.user.token);
+        sessionStorage.setItem("Name", response.user.name);
+        navigate("/");
+      }
+      setIsError(false);
     } catch (error) {
       console.error(error.message);
       setIsError(true);
@@ -318,6 +324,7 @@ export default function LoginPage() {
               </Typography>
 
               <Button
+                onClick={goToSignup}
                 sx={{
                   width: { xs: 200, sm: 280, md: 400 },
                   border: "2px solid #8e6a70;",
@@ -341,4 +348,9 @@ export default function LoginPage() {
       </Box>
     </Box>
   );
+
 }
+
+LoginPage.propTypes = {
+  setToken: PropTypes.func.isRequired
+};
