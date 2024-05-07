@@ -3,6 +3,14 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Takeout from "../model/takeoutModel.js";
+import { getTakeoutCalorieFilterQuery } from "../functions/get-takeout-queries/getTakeoutCalorieFilterQuery.js";
+import { getTakeoutDeliveryFeeFilterQuery } from "../functions/get-takeout-queries/getTakeoutDeliveryFeeFilterQuery.js";
+import { getDietRequirementQuery } from "../functions/getDietRequirementQuery.js";
+import { getSortCriteria } from "../functions/getSortCriteria.js";
+import { getSearchQuery } from "../functions/getSearchQuery.js";
+import { getTakeoutFoodPriceFilterQuery } from "../functions/get-takeout-queries/getTakeoutFoodPriceFilterQuery.js";
+import { getTakeoutSearchQuery } from "../functions/get-takeout-queries/getTakeoutSearchQuery.js";
+import { getTakeoutDietRequirementQuery } from "../functions/get-takeout-queries/getTakeoutDietRequirementQuery.js";
 
 dotenv.config();
 
@@ -140,4 +148,55 @@ const getPaginateTakeouts = asyncHandler(async (req, res) => {
   res.json({ takeouts, page, pages: Math.ceil(count / pageSize) });
 });
 
-export { getTakeouts, getTakeoutByID, getPaginateTakeouts };
+const getFoodTakeout = async (req, res) => {
+  const {
+    searchTerm,
+    sortBy,
+    sortOrder,
+    minCalorieValues,
+    maxCalorieValues,
+    minFoodPriceValues,
+    maxFoodPriceValues,
+    minDeliveryFeeValues,
+    maxDeliveryFeeValues,
+    selectedRequirement,
+  } = req.query;
+  const sortCriteria = getSortCriteria(sortBy, sortOrder);
+  const searchQuery = getTakeoutSearchQuery(searchTerm);
+  const calorieFilterQuery = getTakeoutCalorieFilterQuery(
+    minCalorieValues,
+    maxCalorieValues
+  );
+  const foodPriceFilterQuery = getTakeoutFoodPriceFilterQuery(
+    minFoodPriceValues,
+    maxFoodPriceValues
+  );
+  const deliveryFeeFilterQuery = getTakeoutDeliveryFeeFilterQuery(
+    minDeliveryFeeValues,
+    maxDeliveryFeeValues
+  );
+  const dietRequirementQuery =
+    getTakeoutDietRequirementQuery(selectedRequirement);
+
+  const queries = [
+    searchQuery,
+    calorieFilterQuery,
+    foodPriceFilterQuery,
+    deliveryFeeFilterQuery,
+    dietRequirementQuery,
+  ].filter((query) => query != undefined);
+
+  const query = queries.length > 0 ? { $and: queries } : {};
+
+  console.log(query);
+  try {
+    const matchRecipes = await Takeout.search(query, sortCriteria);
+    res.status(200).json({
+      takeouts: matchRecipes,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export { getTakeouts, getTakeoutByID, getPaginateTakeouts, getFoodTakeout };
