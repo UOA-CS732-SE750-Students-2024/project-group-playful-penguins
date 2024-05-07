@@ -1,7 +1,7 @@
 import styles from "./LandingPage.module.css";
 import UserIcon from "../../assets/SVGIconComponents/UserIcon";
 import { AppContext } from "../../providers/AppContextProvider";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Typography, Box, Container, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -21,6 +21,12 @@ export default function LandingPage() {
     changeCategory(true);
     navigate(`/home`);
   }
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate("/login");
+    }
+  })
 
   return (
     <>

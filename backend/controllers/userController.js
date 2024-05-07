@@ -9,26 +9,29 @@ dotenv.config();
 const authorizeGoogleUser = (req, res) => {
   try {
     const { code } = req.body;
-    const client_id = process.env.GOOGLE_CLIENT_ID;
-    const client_secret = process.env.GOOGLE_CLIENT_SECRET;
-    const redirect_uri = process.env.REDIRECT_URL;
+    const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+    const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+    const REDIRECT_URL = process.env.REDIRECT_URL;
+    const GOOGLE_API = process.env.GOOGLE_API;
     const grant_type = "authorization_code";
 
-    fetch("https://oauth2.googleapis.com/token", {
+    fetch(GOOGLE_API, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams({
         code,
-        client_id,
-        client_secret,
-        redirect_uri,
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        redirect_uri: REDIRECT_URL,
         grant_type,
       }),
     })
       .then((response) => response.json())
-      .then((tokens) => res.json(tokens));
+      .then((tokens) => {
+        res.json(tokens);
+      });
   } catch (error) {
     console.error("Error: ", error);
   }
@@ -52,6 +55,7 @@ const postUserLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
+    console.log(user);
     const token = generateAccessToken(user);
     res.status(201).json({
       message: "Found user in DB! Logged in successfully",

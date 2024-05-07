@@ -21,6 +21,7 @@ import { authenticateGoogleUser, login } from "../../services/UserService";
 import { useForm } from "react-hook-form";
 import { PropTypes } from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 export default function LoginPage({ setToken }) {
   const navigate = useNavigate();
@@ -41,7 +42,10 @@ export default function LoginPage({ setToken }) {
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (codeResponse) => {
-      response = await authenticateGoogleUser(codeResponse);
+      const response = await authenticateGoogleUser(codeResponse);
+      console.log(response);
+      setToken(response.id_token);
+      navigate('/');
     },
     onError: () => {
       // Handle login errors here
@@ -68,7 +72,6 @@ export default function LoginPage({ setToken }) {
       const response = await login(data.email, data.password);
       if (response && response.user) {
         setToken(response.user.token);
-        sessionStorage.setItem("Name", response.user.name);
         navigate("/");
       }
       setIsError(false);

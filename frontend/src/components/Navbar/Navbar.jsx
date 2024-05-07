@@ -20,12 +20,14 @@ import {
 import { AppContext } from "../../providers/AppContextProvider";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 export function Navbar() {
   const navigate = useNavigate();
   const { isTakeout, changeCategory } = useContext(AppContext);
   const location = useLocation();
   const isRecipePage = location.pathname.startsWith("/home/recipe/");
+  const [userName, setUserName] = useState(jwtDecode(localStorage.getItem('token')).name);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -166,7 +168,7 @@ export function Navbar() {
               }}
             >
               <Typography style={{ color: "black" }}>
-                {sessionStorage.getItem("Name")}
+                {userName}
               </Typography>
               <AccountCircleIcon />
             </Box>
