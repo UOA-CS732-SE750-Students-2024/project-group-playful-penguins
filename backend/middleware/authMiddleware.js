@@ -34,6 +34,8 @@ const generateAccessToken = (user) => {
     id: user._id,
     email: user.email,
     name: user.name,
+    favoriteRecipes: user.favoriteRecipes,
+    favoriteTakeouts: user.favoriteTakeouts
   };
 
   const options = { expiresIn: "1h" };

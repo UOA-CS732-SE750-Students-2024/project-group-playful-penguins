@@ -19,6 +19,14 @@ const userSchema = new Schema(
       required: [true, "Password is required"],
       minLength: [8, "Password must be at least 8 characters long"],
     },
+    favoriteRecipes: {
+      type: [Number], 
+      default: [],
+    },
+    favoriteTakeouts: {
+      type: [Number], 
+      default: [],
+    },
   },
   { timestamps: true }
 );

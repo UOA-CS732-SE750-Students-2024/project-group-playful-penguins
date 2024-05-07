@@ -1,12 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import { FoodCardRecipe } from "../FoodCardRecipe/FoodCardRecipe";
 import { FoodCardTakeout } from "../FoodCardTakeout/FoodCardTakeout";
 import { AppContext } from "../../providers/AppContextProvider";
 import styles from "./FoodList.module.css";
+import {getFavRecipeID} from "../../services/UserService";
 
 export function FoodList({ foodData }) {
   const { isTakeout } = useContext(AppContext);
+  const access_token = JSON.parse(localStorage.getItem("token"));
+  const email = localStorage.getItem('userEmail')
+  const [favoriteTakeouts, setFavoriteTakeouts] = useState();
+  const [favoriteRecipes, setFavoriteRceipes] = useState([]);
+
+
+  useEffect(() => {
+    loadFavoriteRecipes();
+}, [email, access_token]); 
+
+
+  const loadFavoriteRecipes = async () => {
+    try{
+      const response = await getFavRecipeID(email, access_token);
+      setFavoriteRceipes(response);
+    }catch (error) {
+      throw new Error(error.message);
+    } 
+  }
 
   return (
     <div className={styles.scrollableContainer}>
@@ -17,7 +37,7 @@ export function FoodList({ foodData }) {
               {isTakeout ? (
                 <FoodCardTakeout key={index} data={item} />
               ) : (
-                <FoodCardRecipe key={index} data={item} />
+                <FoodCardRecipe key={index} data={item} isFavorite={favoriteRecipes.includes(item.id)} id = {item.id}/>
               )}
             </Grid>
           ))}
