@@ -1,8 +1,8 @@
 import axios from "axios";
-import { getSortQuery } from "./getQuery/getSortQuery";
-import { getRecipeFilterQuery } from "./getQuery/getRecipeFilterQuery";
-import { getSearchQuery } from "./getQuery/getSearchQuery";
-import { getTakeoutFilterQuery } from "./get-takeout-url/getTakeoutFilterQuery";
+import { getSortQuery } from "./get-recipe-queries/getSortQuery";
+import { getRecipeFilterQuery } from "./get-recipe-queries/getRecipeFilterQuery";
+import { getSearchQuery } from "./get-recipe-queries/getSearchQuery";
+import { getTakeoutFilterQuery } from "./get-takeout-queries/getTakeoutFilterQuery";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
