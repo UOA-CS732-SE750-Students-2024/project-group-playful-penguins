@@ -21,7 +21,7 @@ export function SearchBar() {
           console.log(searchTerm);
         }}
         variant="outlined"
-        placeholder="Search for recipes"
+        placeholder={isTakeout ?"Search for dishes":"Search for recipes"}
         fullWidth
         he
         InputProps={{
