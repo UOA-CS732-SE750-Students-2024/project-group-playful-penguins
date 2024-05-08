@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import { FilterPanel } from "../../components/FilterPanel/FilterPanel";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { SortBy } from "../../components/SortBy/SortBy";
+import { Favorites } from "../../components/Favorites/Favorites";
 import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
-import {
-  getMatchedRecipes,
-  getMatchedTakeouts,
-} from "../../services/RecipeService";
+import { getMatchedRecipes } from "../../services/RecipeService";
+import { getMatchedTakeouts } from "../../services/TakeoutService";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -18,11 +17,16 @@ import { useNavigate } from "react-router-dom";
 export function HomePage() {
   const [foodData, setFoodData] = useState(null);
   const navigate = useNavigate();
-  const access_token = JSON.parse(localStorage.getItem("token"));
+  const access_token = JSON.parse(sessionStorage.getItem("token"));
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isTakeout, selectedSortByOption, searchTerm, filters } =
-    useContext(AppContext);
+  const {
+    isTakeout,
+    selectedSortByOption,
+    searchTerm,
+    filters,
+    favoritesSelection,
+  } = useContext(AppContext);
 
   const fetchFoodData = async () => {
     try {
@@ -32,14 +36,16 @@ export function HomePage() {
         response = await getMatchedTakeouts(
           searchTerm,
           selectedSortByOption,
-          filters
+          filters,
+          favoritesSelection,
+          access_token
         );
-        console.log(response);
       } else {
         response = await getMatchedRecipes(
           searchTerm,
           selectedSortByOption,
           filters,
+          favoritesSelection,
           access_token
         );
       }
@@ -63,7 +69,7 @@ export function HomePage() {
 
   useEffect(() => {
     fetchFoodData();
-  }, [searchTerm, selectedSortByOption, isTakeout]);
+  }, [searchTerm, selectedSortByOption, isTakeout, favoritesSelection]);
 
   return (
     <div className={styles["home-container"]}>
@@ -74,6 +80,9 @@ export function HomePage() {
         <div className={styles["search-and-sort-panel"]}>
           <div className={styles["search-bar"]}>
             <SearchBar />
+          </div>
+          <div className={styles["favorites"]}>
+            <Favorites />
           </div>
           <div className={styles["sort-by"]}>
             <SortBy />

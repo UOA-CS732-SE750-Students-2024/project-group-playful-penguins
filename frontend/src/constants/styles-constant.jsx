@@ -77,3 +77,7 @@ export const SORT_BY = {
     },
   ],
 };
+
+export const FAVORITES = {
+  INITIAL_VALUE: false
+}

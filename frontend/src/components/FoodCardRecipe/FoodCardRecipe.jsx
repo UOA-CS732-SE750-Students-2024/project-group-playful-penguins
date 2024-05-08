@@ -16,8 +16,8 @@ import {updateFavRecipeID, removeFavRecipeID} from "../../services/UserService";
 export function FoodCardRecipe({ data, isFavorite }) {
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(isFavorite);
-  const access_token = JSON.parse(localStorage.getItem("token"));
-  const email = localStorage.getItem('userEmail')
+  const access_token = JSON.parse(sessionStorage.getItem("token"));
+  const email = sessionStorage.getItem('userEmail')
 
   function openRecipeInfo() {
     navigate(`recipe/${data.id}`);
@@ -29,7 +29,7 @@ export function FoodCardRecipe({ data, isFavorite }) {
   }, [isFavorite]);
 
   // Truncate title if it's longer than 60 characters
-  const displayTitle = data.title.length > 60 ? `${data.title.substring(0, 40)}...` : data.title;
+  const displayTitle = (data && data.title && data.title.length > 60) ? `${data.title.substring(0, 40)}...` : data.title;
   const toggleFavorite = async () => {
     const newFavoriteStatus = !favorite;
     setFavorite(newFavoriteStatus);

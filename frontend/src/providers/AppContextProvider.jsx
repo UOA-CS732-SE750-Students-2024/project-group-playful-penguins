@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FILTERS, SORT_BY } from "../constants/styles-constant";
+import { FAVORITES, FILTERS, SORT_BY } from "../constants/styles-constant";
 
 export const AppContext = React.createContext({});
 
@@ -18,6 +18,10 @@ export function AppContextProvider({ children }) {
     SORT_BY.INITIAL_VALUE
   );
 
+  const [favoritesSelection, setFavoritesSelection] = useState(
+    FAVORITES.INITIAL_VALUE
+  );
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const changeCategory = (boolean) => setTakeout(boolean);
@@ -31,6 +35,9 @@ export function AppContextProvider({ children }) {
 
     selectedSortByOption,
     setSelectedSortByOption,
+
+    favoritesSelection,
+    setFavoritesSelection,
 
     searchTerm,
     setSearchTerm,
