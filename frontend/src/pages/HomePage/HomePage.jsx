@@ -119,7 +119,7 @@ export function HomePage() {
             color: isTakeout ? "#77595E" : "#00665E",
             backgroundColor: "white",
             borderRadius: "15px",
-            border: "2px solid #E0E0E0",
+            borderBottom: "3px solid #E0E0E0",
             height: "fitContent",
             fontWeight: "bold",
             justifyContent: "space-evenly",
