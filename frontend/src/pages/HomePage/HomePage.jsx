@@ -11,6 +11,8 @@ import {
   getMatchedTakeouts,
 } from "../../services/RecipeService";
 import { Typography, Button } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 // import { useTheme,useMediaQuery } from "@emotion/react";
 import { useTheme, useMediaQuery } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -79,7 +81,7 @@ export function HomePage() {
     <Box
       className={styles["home-container"]}
       sx={{
-        height: "100%",       
+        height: "100%",
         flexDirection: {
           xs: "column",
           sm: "row",
@@ -91,7 +93,7 @@ export function HomePage() {
         <Button
           onClick={toggleFilterVisibility}
           sx={{
-            margin: 1,         
+            margin: 1,
             color: isTakeout ? "#77595E" : "#00665E",
             backgroundColor: "white",
             borderRadius: "15px",
@@ -99,12 +101,21 @@ export function HomePage() {
             height: "fitContent",
             justifyContent: "space-evenly",
             fontSize: "12px",
-            textTransform: "none",         
+            textTransform: "none",
           }}
         >
-          <Typography variant="body1" fontWeight="fontWeightBold">
-            {isFilterVisible ? "Hide Filters" : "Show Filters"}
-          </Typography>
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Typography variant="body1" fontWeight="fontWeightBold">
+              {isFilterVisible ? "Hide Filters" : "Show Filters"}
+            </Typography>
+            {isFilterVisible ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </Box>
         </Button>
       )}
       <Box
