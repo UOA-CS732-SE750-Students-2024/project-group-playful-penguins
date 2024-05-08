@@ -24,8 +24,9 @@ export function HomePage() {
     isTakeout,
     selectedSortByOption,
     searchTerm,
-    filters,
     favoritesSelection,
+    takeoutFilters,
+    recipeFilters,
   } = useContext(AppContext);
 
   const fetchFoodData = async () => {
@@ -36,7 +37,7 @@ export function HomePage() {
         response = await getMatchedTakeouts(
           searchTerm,
           selectedSortByOption,
-          filters,
+          takeoutFilters,
           favoritesSelection,
           access_token
         );
@@ -44,7 +45,7 @@ export function HomePage() {
         response = await getMatchedRecipes(
           searchTerm,
           selectedSortByOption,
-          filters,
+          recipeFilters,
           favoritesSelection,
           access_token
         );

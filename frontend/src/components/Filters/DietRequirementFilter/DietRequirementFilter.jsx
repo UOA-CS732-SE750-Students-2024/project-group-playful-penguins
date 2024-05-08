@@ -5,15 +5,29 @@ import { colors, FILTERS } from "../../../constants/styles-constant";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export function DietRequirementFilter() {
-  const { isTakeout, filters, setFilters } = useContext(AppContext);
+  const {
+    isTakeout,
+    recipeFilters,
+    setRecipeFilters,
+    takeoutFilters,
+    setTakeoutFilters,
+  } = useContext(AppContext);
 
+  const [filters, setFilters] = isTakeout
+    ? [takeoutFilters, setTakeoutFilters]
+    : [recipeFilters, setRecipeFilters];
   const primaryColor = isTakeout
     ? colors.TAKE_OUT_COLOR.PRIMARY_COLOR
     : colors.COOK_AT_HOME_COLOR.PRIMARY_COLOR;
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const filterConfig = FILTERS.DIET_REQUIREMENT;
+
+  const filterConfig = isTakeout
+    ? FILTERS.TAKEOUT_FILTER.DIET_REQUIREMENT
+    : FILTERS.RECIPE_FILTER.DIET_REQUIREMENT;
+
   const stateKey = filterConfig.STATE_KEY;
+
   const isRequirementSelected =
     filters[stateKey] !== filterConfig.INITIAL_VALUE;
 
@@ -74,7 +88,7 @@ export function DietRequirementFilter() {
           {/* Since we are not storing the name of the diet requirement, so we need to use the filters (from app 
               context), to retrieve the name of the selected diet requirement. */}
           {filters[stateKey] !== filterConfig.INITIAL_VALUE
-            ? FILTERS.DIET_REQUIREMENT.OPTIONS.find(
+            ? filterConfig.OPTIONS.find(
                 (option) => option.urlKey === filters[stateKey]
               )?.name
             : filters[stateKey]}

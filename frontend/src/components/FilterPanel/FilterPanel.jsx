@@ -12,23 +12,20 @@ import { LoadingButton } from "@mui/lab";
 // import { getFilteredRecipes } from "../../services/RecipeService";
 
 export function FilterPanel({ onApplyFilter }) {
-  const { isTakeout, filters, setFilters, selectedSortByOption } =
+  const { isTakeout, resetRecipeFilters, resetTakeoutFilters } =
     useContext(AppContext);
+
   const [isLoading, setIsLoading] = useState(false);
 
+  const resetFilters = isTakeout ? resetTakeoutFilters : resetRecipeFilters;
+
+  const handleReset = () => {
+    resetFilters();
+    onApplyFilter();
+  };
   const handleApplyFilters = (event) => {
     event.preventDefault();
     onApplyFilter();
-  };
-
-  const handleReset = () => {
-    const resetFilters = {};
-    // Iterate over the keys in FILTERS
-    Object.keys(FILTERS).forEach((key) => {
-      // Assign the initial value from FILTERS to the corresponding state key
-      resetFilters[FILTERS[key].STATE_KEY] = FILTERS[key].INITIAL_VALUE;
-    });
-    setFilters(resetFilters);
   };
 
   return (
