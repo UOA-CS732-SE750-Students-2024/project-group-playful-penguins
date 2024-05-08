@@ -19,8 +19,8 @@ import {updateFavTakeoutID, removeFavTakeoutID} from "../../services/UserService
 export function FoodCardTakeout({ data, isFavorite }) {
   const [openTakeoutCard, setOpenTakeoutCard] = useState(false);
   const [favorite, setFavorite] = useState(isFavorite);
-  const access_token = JSON.parse(localStorage.getItem("token"));
-  const email = localStorage.getItem('userEmail')
+  const access_token = JSON.parse(sessionStorage.getItem("token"));
+  const email = sessionStorage.getItem('userEmail')
 
   const [takeoutData, setTakeoutData] = useState({});
 

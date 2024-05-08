@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { getSortCriteria } from "../functions/getSortCriteria.js";
 import mongoose from "mongoose";
+import { jwtDecode } from "jwt-decode";
 const { Schema } = mongoose;
 import Recipe from "../model/recipeModel.js";
 import asyncHandler from "express-async-handler";
@@ -10,6 +11,7 @@ import { getRecipeCalorieFilterQuery } from "../functions/get-recipe-filter-quer
 import { getRecipeCarbohydrateFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCarbohydrateFilterQuery.js";
 import { getRecipeCookingTimeFilterQuery } from "../functions/get-recipe-filter-queries/getRecipeCookingTimeFilterQuery.js";
 import { getRecipeDietRequirementQuery } from "../functions/get-recipe-filter-queries/getRecipeDietRequirementQuery.js";
+import { getFavoritesQuery } from "../functions/getFavoritesQuery.js";
 
 dotenv.config();
 
@@ -216,7 +218,12 @@ const getFoodRecipes = async (req, res) => {
     minCookingTimeValues,
     maxCookingTimeValues,
     selectedRequirement,
+    favoritesSelection,
   } = req.query;
+
+  const authToken =
+    req.headers && req.headers.authorization ? req.headers.authorization : "";
+  const email = jwtDecode(authToken).email;
   const sortCriteria = getSortCriteria(sortBy, sortOrder);
   const searchQuery = getRecipeSearchQuery(searchTerm);
   const calorieFilterQuery = getRecipeCalorieFilterQuery(
@@ -233,9 +240,15 @@ const getFoodRecipes = async (req, res) => {
   );
   const dietRequirementQuery =
     getRecipeDietRequirementQuery(selectedRequirement);
+  const favoritesQuery = await getFavoritesQuery(
+    true,
+    email,
+    favoritesSelection
+  );
 
   const queries = [
     searchQuery,
+    favoritesQuery,
     calorieFilterQuery,
     carbohydrateFilterQuery,
     cookingTimeFilterQuery,
@@ -245,11 +258,7 @@ const getFoodRecipes = async (req, res) => {
   const query = queries.length > 0 ? { $and: queries } : {};
 
   try {
-    if (
-      req.headers &&
-      req.headers.authorization &&
-      verifyAccessToken(req.headers.authorization)
-    ) {
+    if (verifyAccessToken(authToken)) {
       const matchRecipes = await Recipe.search(query, sortCriteria);
       res.status(200).json({
         recipes: matchRecipes,

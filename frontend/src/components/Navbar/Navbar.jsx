@@ -27,7 +27,7 @@ export function Navbar() {
   const { isTakeout, changeCategory } = useContext(AppContext);
   const location = useLocation();
   const isRecipePage = location.pathname.startsWith("/home/recipe/");
-  const [userName, setUserName] = useState(jwtDecode(localStorage.getItem('token')).name);
+  const [userName, setUserName] = useState(jwtDecode(sessionStorage.getItem('token')).name);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -39,7 +39,7 @@ export function Navbar() {
 
   const handleLogout = () => {
     setAnchorEl(null);
-    localStorage.clear();
+    sessionStorage.clear();
     sessionStorage.clear();
     navigate("/login");
   };

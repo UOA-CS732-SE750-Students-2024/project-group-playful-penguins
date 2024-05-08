@@ -55,7 +55,6 @@ const postUserLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
-    console.log(user);
     const token = generateAccessToken(user);
     res.status(201).json({
       message: "Found user in DB! Logged in successfully",
@@ -70,46 +69,61 @@ const postUserLogin = async (req, res) => {
 // @route   GET /api/user/favorites/recipe
 // @access  Public
 
-const getFavRecipeIDs = async (req, res) => {
+const getFavoriteIds = async (req, res) => {
   const email = req.query.email;
   try {
-      if (!email) {
-          return res.status(400).json({ message: "Email is required" });
-      }
-      const user = await User.findOne({ email: email }, 'favoriteRecipes');
-      if (user && user.favoriteRecipes) {
-          res.json({ ids: user.favoriteRecipes });
-      } else {
-          res.status(404).json({ message: "No favorites found" });
-      }
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+    const user = await User.findOne(
+      { email: email },
+      { favoriteRecipes: 1, favoriteTakeouts: 1 }
+    );
+    if (user && (user.favoriteRecipes || user.favoriteTakeouts)) {
+      const favIds = {
+        recipes: user.favoriteRecipes,
+        takeouts: user.favoriteTakeouts,
+      };
+      res.json({ favIds });
+    } else {
+      res.status(404).json({ message: "No favorites found" });
+    }
   } catch (error) {
-      console.error("Server Error:", error);
-      res.status(500).json({ message: "Internal Server Error", error: error.toString() });
+    console.error("Server Error:", error);
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.toString() });
   }
 };
 
-const postFavRecipeID  = async (req, res) => {
+const postFavRecipeID = async (req, res) => {
   const email = req.query.email;
   const recipeID = req.body.recipeID;
-  console.log(email, recipeID)
   try {
     if (!email || !recipeID) {
-      return res.status(400).json({ message: "Email and Recipe ID are required" });
+      return res
+        .status(400)
+        .json({ message: "Email and Recipe ID are required" });
     }
     const user = await User.findOneAndUpdate(
       { email: email },
-      { $addToSet: { favoriteRecipes: recipeID } }, 
-      { new: true, fields: 'favoriteRecipes' } 
+      { $addToSet: { favoriteRecipes: recipeID } },
+      { new: true, fields: "favoriteRecipes" }
     );
 
     if (user) {
-      res.json({ message: "Recipe added to favorites successfully", ids: user.favoriteRecipes });
+      res.json({
+        message: "Recipe added to favorites successfully",
+        ids: user.favoriteRecipes,
+      });
     } else {
       res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
     console.error("Server Error:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.toString() });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.toString() });
   }
 };
 
@@ -119,66 +133,61 @@ const deleteFavRecipeID = async (req, res) => {
 
   try {
     if (!email || !recipeID) {
-      return res.status(400).json({ message: "Email and Recipe ID are required" });
+      return res
+        .status(400)
+        .json({ message: "Email and Recipe ID are required" });
     }
-    
+
     const user = await User.findOneAndUpdate(
       { email: email },
       { $pull: { favoriteRecipes: recipeID } },
-      { new: true, fields: 'favoriteRecipes' }
+      { new: true, fields: "favoriteRecipes" }
     );
 
     if (user) {
-      res.json({ message: "Recipe removed from favorites successfully", ids: user.favoriteRecipes });
+      res.json({
+        message: "Recipe removed from favorites successfully",
+        ids: user.favoriteRecipes,
+      });
     } else {
       res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
     console.error("Server Error:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.toString() });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.toString() });
   }
 };
 
-const getFavTakeoutIDs = async (req, res) => {
-  const email = req.query.email;
-  try {
-      if (!email) {
-          return res.status(400).json({ message: "Email is required" });
-      }
-      const user = await User.findOne({ email: email }, 'favoriteTakeouts');
-      if (user && user.favoriteTakeouts) {
-          res.json({ ids: user.favoriteTakeouts });
-      } else {
-          res.status(404).json({ message: "No favorites found" });
-      }
-  } catch (error) {
-      console.error("Server Error:", error);
-      res.status(500).json({ message: "Internal Server Error", error: error.toString() });
-  }
-};
-
-const postFavTakeoutID  = async (req, res) => {
+const postFavTakeoutID = async (req, res) => {
   const email = req.query.email;
   const takeoutID = req.body.takeoutID;
-  console.log(email, takeoutID)
   try {
     if (!email || !takeoutID) {
-      return res.status(400).json({ message: "Email and Takeout ID are required" });
+      return res
+        .status(400)
+        .json({ message: "Email and Takeout ID are required" });
     }
     const user = await User.findOneAndUpdate(
       { email: email },
-      { $addToSet: { favoriteTakeouts: takeoutID } }, 
-      { new: true, fields: 'favoriteTakeouts' } 
+      { $addToSet: { favoriteTakeouts: takeoutID } },
+      { new: true, fields: "favoriteTakeouts" }
     );
 
     if (user) {
-      res.json({ message: "Takeout added to favorites successfully", ids: user.favoriteTakeouts });
+      res.json({
+        message: "Takeout added to favorites successfully",
+        ids: user.favoriteTakeouts,
+      });
     } else {
       res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
     console.error("Server Error:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.toString() });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.toString() });
   }
 };
 
@@ -188,25 +197,40 @@ const deleteFavTakeoutID = async (req, res) => {
 
   try {
     if (!email || !takeoutID) {
-      return res.status(400).json({ message: "Email and Takeout ID are required" });
+      return res
+        .status(400)
+        .json({ message: "Email and Takeout ID are required" });
     }
-    
+
     const user = await User.findOneAndUpdate(
       { email: email },
       { $pull: { favoriteTakeouts: takeoutID } },
-      { new: true, fields: 'favoriteTakeouts' }
+      { new: true, fields: "favoriteTakeouts" }
     );
 
     if (user) {
-      res.json({ message: "Takeout removed from favorites successfully", ids: user.favoriteTakeouts });
+      res.json({
+        message: "Takeout removed from favorites successfully",
+        ids: user.favoriteTakeouts,
+      });
     } else {
       res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
     console.error("Server Error:", error);
-    res.status(500).json({ message: "Internal Server Error", error: error.toString() });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.toString() });
   }
 };
 
-
-export { postUserSignUp, postUserLogin, authorizeGoogleUser, getFavRecipeIDs, postFavRecipeID, deleteFavRecipeID, getFavTakeoutIDs, postFavTakeoutID, deleteFavTakeoutID };
+export {
+  postUserSignUp,
+  postUserLogin,
+  authorizeGoogleUser,
+  getFavoriteIds,
+  postFavRecipeID,
+  deleteFavRecipeID,
+  postFavTakeoutID,
+  deleteFavTakeoutID,
+};

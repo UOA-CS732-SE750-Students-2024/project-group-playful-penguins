@@ -17,7 +17,6 @@ const verifyAccessToken = async (token) => {
         idToken: token,
         audience: CLIENT_ID,
       });
-      console.log(ticket);
       return true;
     } else {
       const verified = jwt.verify(token, ACCESS_TOKEN_SECRET);

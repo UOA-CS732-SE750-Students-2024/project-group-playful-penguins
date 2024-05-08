@@ -186,7 +186,6 @@ const getFoodTakeout = async (req, res) => {
 
   const query = queries.length > 0 ? { $and: queries } : {};
 
-  console.log(query);
   try {
     const matchRecipes = await Takeout.search(query, sortCriteria);
     res.status(200).json({

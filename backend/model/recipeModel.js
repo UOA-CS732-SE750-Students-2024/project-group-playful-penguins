@@ -35,7 +35,6 @@ const RecipeSchema = mongoose.Schema({
 });
 
 RecipeSchema.statics.search = async function (query, sortCriteria) {
-  console.log(query);
   try {
     const matchRecipes = await Recipe.find(query).sort(sortCriteria);
     if (matchRecipes.length > 0) {

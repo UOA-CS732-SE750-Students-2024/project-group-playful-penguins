@@ -23,7 +23,7 @@ export default function LandingPage() {
   }
 
   useEffect(() => {
-    if (!localStorage.getItem('token')) {
+    if (!sessionStorage.getItem('token')) {
       navigate("/login");
     }
   })

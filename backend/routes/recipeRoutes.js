@@ -11,9 +11,7 @@ router.get("/match-recipes", getFoodRecipes);
 
 router.get("/", getRecipes);
 
-// router.get("/filter", getFilteredRecipes);
 router.get("/:id", getRecipeByID);
 router.get("/search/:q", getPaginateRecipe);
-// TODO: change route
 
 export default router;

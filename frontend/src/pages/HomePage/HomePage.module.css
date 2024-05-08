@@ -27,6 +27,10 @@
   flex: 1;
 }
 
+.favorites {
+  flex: 1;
+}
+
 .food-list {
   height: auto;
   overflow-y: auto;

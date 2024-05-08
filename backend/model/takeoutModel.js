@@ -18,7 +18,6 @@ const TakeoutSchema = mongoose.Schema({
 });
 
 TakeoutSchema.statics.search = async function (query, sortCriteria) {
-  console.log(query);
   try {
     const matchRecipes = await Takeout.find(query).sort(sortCriteria);
     if (matchRecipes.length > 0) {
