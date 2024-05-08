@@ -34,7 +34,10 @@ export function FilterPanel({ onApplyFilter }) {
     <form onSubmit={handleApplyFilters}>
       <Box
         sx={{
-          pt: "16px",
+          pt: {
+            xs:"0px",
+            sm:"16px"
+          },
         }}
       >
         <CalorieCountFilter />
