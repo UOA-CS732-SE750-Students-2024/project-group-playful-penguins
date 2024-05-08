@@ -42,14 +42,14 @@ export function HomePage() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [isFilterVisible, setFliterVisible] = useState(!isMobile); // keep an eye
+  const [isFilterVisible, setFilterVisible] = useState(!isMobile); // keep an eye
 
   const toggleFilterVisibility = () => {
-    setFliterVisible(!isFilterVisible);
+    setFilterVisible(!isFilterVisible);
   };
 
   const fetchFoodData = async () => {
-      try {
+    try {
       let response = [];
       setIsLoading(true);
       if (isTakeout) {
@@ -97,7 +97,14 @@ export function HomePage() {
 
   useEffect(() => {
     fetchFoodData();
-  }, [searchTerm, selectedSortByOption, isTakeout, favoritesSelection]);
+    setFilterVisible(!isMobile);
+  }, [
+    searchTerm,
+    selectedSortByOption,
+    isTakeout,
+    isMobile,
+    favoritesSelection,
+  ]);
 
   return (
     <Box
@@ -154,12 +161,11 @@ export function HomePage() {
         <Box className={styles["search-and-sort-panel"]}>
           <Box className={styles["search-bar"]}>
             <SearchBar />
-          </ Box>
+          </Box>
           <div className={styles["favorites"]}>
             <Favorites />
           </div>
-          <Box className={styles["sort-by"]}>
-          </Box>
+          <Box className={styles["sort-by"]}></Box>
           <Box className={styles["sort-by"]}>
             <SortBy />
           </Box>
