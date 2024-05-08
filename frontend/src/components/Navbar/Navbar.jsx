@@ -49,8 +49,8 @@ export function Navbar() {
     padding: "4px 4px",
     textAlign: "center",
     textDecoration: "none",
-    display: "inline-block",
-    fontSize: "14px",
+    display: { xs: "flex", md: "inline-flex" },
+    fontSize: { xs: "8px", md: "14px" },
     fontWeight: "bold",
     borderRadius: "22px",
     marginTop: "4px",
@@ -65,7 +65,7 @@ export function Navbar() {
     textAlign: "center",
     textDecoration: "none",
     display: "inline-block",
-    fontSize: "14px",
+    fontSize: { xs: "10px", md: "14px" },
     fontWeight: "bold",
     borderRadius: "24px",
     margin: "2px",
@@ -85,7 +85,7 @@ export function Navbar() {
     textAlign: "center",
     textDecoration: "none",
     display: "inline-block",
-    fontSize: "14px",
+    fontSize: { xs: "10px", md: "14px" },
     fontWeight: "bold",
     borderRadius: "24px",
     margin: "2px",
@@ -115,9 +115,20 @@ export function Navbar() {
           ? { backgroundColor: "#edb1bb" }
           : { backgroundColor: "#b2dfdb" }
       }
+      sx={{
+        height: {
+          xs: "60px",
+          md: "100px",
+        },
+      }}
     >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+      <Container maxWidth="xl" sx={{ height: "100%" }}>
+        <Toolbar
+          disableGutters
+          sx={{
+            height: "100%",
+          }}
+        >
           <Link
             href="/"
             underline="none"
@@ -139,7 +150,7 @@ export function Navbar() {
               flexGrow: 1,
               backgroundColor: `${isTakeout ? "#edb1bb" : "#b2dfdb"}`,
               justifyContent: "center",
-              width: "200px",
+              width: { xs: "100px", md: "200px" },
               visibility: isRecipePage ? "hidden" : "visible",
             }}
           >
@@ -162,12 +173,21 @@ export function Navbar() {
           <IconButton onClick={handleClick} color="inherit">
             <Box
               sx={{
-                display:"flex",
-                flexDirection:"row",
-                gap:"8px"
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "8px",
               }}
             >
-              <Typography style={{ color: "black" }}>
+              <Typography
+                sx={{
+                  fontSize: {
+                    xs: "10px",
+                    md: "16px",
+                  },
+                }}
+                style={{ color: "black" }}
+              >
                 {userName}
               </Typography>
               <AccountCircleIcon />
