@@ -50,6 +50,7 @@ export function Navbar() {
     textAlign: "center",
     textDecoration: "none",
     display: { xs: "flex", md: "inline-flex" },
+    flexDirection: "row",
     fontSize: { xs: "8px", md: "14px" },
     fontWeight: "bold",
     borderRadius: "22px",
@@ -61,7 +62,7 @@ export function Navbar() {
   const deselectedButton = {
     border: "2px solid white",
     color: "black",
-    padding: "6px 26px",
+    padding: { xs: "3px 12px", sm: "6px 26px" },
     textAlign: "center",
     textDecoration: "none",
     display: "inline-block",
@@ -81,8 +82,8 @@ export function Navbar() {
   const selectedButton = {
     border: "2px solid " + `${isTakeout ? "#edb1bb" : "#00ccbb"}`,
     color: "black",
-    padding: "6px 26px",
     textAlign: "center",
+    padding: { xs: "3px 12px", sm: "6px 26px" },
     textDecoration: "none",
     display: "inline-block",
     fontSize: { xs: "10px", md: "14px" },
@@ -133,15 +134,30 @@ export function Navbar() {
             href="/"
             underline="none"
             sx={{
-              display: { xs: "none", md: "flex" },
+              display: "flex",
             }}
           >
-            <img
-              src="images/app-logo.png"
-              alt="Penguin Logo"
-              width="80"
-              height="80"
-            />
+            <Box
+              sx={{
+                width: {
+                  xs: "40px",
+                  sm: "60px",
+                  md: "80px",
+                },
+                height: {
+                  xs: "40px",
+                  sm: "60px",
+                  md: "80px",
+                },
+              }}
+            >
+              <img
+                src="images/app-logo.png"
+                alt="Penguin Logo"
+                width="100%"
+                height="100%"
+              />
+            </Box>
           </Link>
 
           <Box
