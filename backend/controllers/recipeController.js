@@ -15,39 +15,6 @@ import { getFavoritesQuery } from "../functions/getFavoritesQuery.js";
 
 dotenv.config();
 
-// @desc    Fetch all recipes
-// @route   GET /api/recipes
-// @access  Public
-
-const getRecipes = asyncHandler(async (req, res) => {
-  try {
-    if (
-      req.headers &&
-      req.headers.authorization &&
-      verifyAccessToken(req.headers.authorization)
-    ) {
-      const recipes = await Recipe.find(
-        {},
-        { id: 1, title: 1, servings: 1, readyInMinutes: 1, image: 1 }
-      );
-
-      if (recipes) {
-        res.status(200).json(recipes);
-      } else {
-        res.status(404).send({
-          message: "Recipes not found",
-        });
-        throw new Error("Recipes not found");
-      }
-    } else {
-      res.status(401).send({ message: "Unauthorized" });
-      throw new Error("Unauthorized");
-    }
-  } catch (error) {
-    res.send(404, error);
-  }
-});
-
 // @desc    Fetch a takeout by ID
 // @route   GET /api/takeouts/:id
 // @access  Public
@@ -79,35 +46,11 @@ const getRecipeByID = asyncHandler(async (req, res) => {
   }
 });
 
-// const getFilteredRecipes = async (req, res) => {
-//   try {
-//     let db = await connectToDatabase(process.env.DB_NAME);
-//     const fieldsToRetrieve = {
-//       id: 1,
-//       healthScore: 1,
-//       vegan: 1,
-//       glutenFree: 1,
-//       lowFodmap: 1,
-//       vegetarian: 1,
-//     };
-//     const sortCriteria = getSortCriteria(req);
-//     const query = getFilterQuery(req);
-//     let recipes = await db
-//       .collection("recipes")
-//       .find(query)
-//       .sort(sortCriteria)
-//       .project(fieldsToRetrieve)
-//       .toArray();
-//     res.json(recipes);
-//   } catch (error) {
-//     console.error("Error: ", error);
-//   }
-// };
-
 // @desc    Fetch all recipe by search terms and filters (non-paginated)
 // @route   GET /api/recipes/search/q?key=value
 // @access  Public
 // http://localhost:8000/api/recipes/search/q?title=Spicy
+
 const getRecipeBySearch = asyncHandler(async (req, res) => {
   const {
     title,
@@ -127,10 +70,6 @@ const getRecipeBySearch = asyncHandler(async (req, res) => {
   if (dietary_requirement) {
     query.diets = { $regex: dietary_requirement, $options: "i" };
   }
-
-  // if (minCalorie && maxCalorie) {
-  //   query.calories = { $gte: minCalorie, $lte: maxCalorie };
-  // }
 
   if (minCookingTime && maxCookingTime) {
     query.readyInMinutes = { $gte: minCookingTime, $lte: maxCookingTime };
@@ -274,7 +213,6 @@ const getFoodRecipes = async (req, res) => {
 };
 
 export {
-  getRecipes,
   getRecipeByID,
   getRecipeBySearch,
   getPaginateRecipe,

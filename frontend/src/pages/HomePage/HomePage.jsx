@@ -7,10 +7,8 @@ import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
-import {
-  getMatchedRecipes,
-  getMatchedTakeouts,
-} from "../../services/RecipeService";
+import { getMatchedRecipes } from "../../services/RecipeService";
+import { getMatchedTakeouts } from "../../services/TakeoutService";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -22,8 +20,13 @@ export function HomePage() {
   const access_token = JSON.parse(sessionStorage.getItem("token"));
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isTakeout, selectedSortByOption, searchTerm, filters, favoritesSelection } =
-    useContext(AppContext);
+  const {
+    isTakeout,
+    selectedSortByOption,
+    searchTerm,
+    filters,
+    favoritesSelection,
+  } = useContext(AppContext);
 
   const fetchFoodData = async () => {
     try {
@@ -34,7 +37,8 @@ export function HomePage() {
           searchTerm,
           selectedSortByOption,
           filters,
-          favoritesSelection
+          favoritesSelection,
+          access_token
         );
       } else {
         response = await getMatchedRecipes(
@@ -42,7 +46,7 @@ export function HomePage() {
           selectedSortByOption,
           filters,
           favoritesSelection,
-          access_token,
+          access_token
         );
       }
       if (response) {
@@ -78,7 +82,7 @@ export function HomePage() {
             <SearchBar />
           </div>
           <div className={styles["favorites"]}>
-            <Favorites/>
+            <Favorites />
           </div>
           <div className={styles["sort-by"]}>
             <SortBy />
