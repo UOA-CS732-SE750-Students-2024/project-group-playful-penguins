@@ -62,20 +62,38 @@ export const SORT_BY = {
     sortBy: "",
     sortOrder: "",
   },
-  OPTIONS: [
-    {
-      key: "titleAlphabeticalOrder",
-      name: "Name(A-Z)",
-      sortBy: "title",
-      sortOrder: "asc",
-    },
-    {
-      key: "titleReverseAlphabeticalOrder",
-      name: "Name(Z-A)",
-      sortBy: "title",
-      sortOrder: "desc",
-    },
-  ],
+  RECIPE_SORT_BY: {
+    OPTIONS: [
+      {
+        key: "titleAlphabeticalOrder",
+        name: "Name(A-Z)",
+        sortBy: "title",
+        sortOrder: "asc",
+      },
+      {
+        key: "titleReverseAlphabeticalOrder",
+        name: "Name(Z-A)",
+        sortBy: "title",
+        sortOrder: "desc",
+      },
+    ],
+  },
+  TAKEOUT_SORT_BY: {
+    OPTIONS: [
+      {
+        key: "titleAlphabeticalOrder",
+        name: "Name(A-Z)",
+        sortBy: "dish_name",
+        sortOrder: "asc",
+      },
+      {
+        key: "titleReverseAlphabeticalOrder",
+        name: "Name(Z-A)",
+        sortBy: "dish_name",
+        sortOrder: "desc",
+      },
+    ],
+  },
 };
 
 export const FAVORITES = {

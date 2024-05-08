@@ -22,7 +22,9 @@ export function SortBy() {
     setSelectedSortByOption(selectedOption);
     handleClose();
   };
-  const sortByOptions = SORT_BY.OPTIONS;
+  const sortByOptions = isTakeout
+    ? SORT_BY.TAKEOUT_SORT_BY.OPTIONS
+    : SORT_BY.RECIPE_SORT_BY.OPTIONS;
 
   return (
     <Box
