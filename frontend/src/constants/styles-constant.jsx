@@ -32,7 +32,8 @@ export const FILTERS = {
     },
     DIET_REQUIREMENT: {
       NAME: "Diet Requirement",
-      INITIAL_VALUE: "Choose a diet requirement",
+      DISPLAY_NAME: "Choose a diet requirement",
+      INITIAL_VALUE: "",
       STATE_KEY: "selectedRequirement",
       OPTIONS: [
         {
@@ -67,7 +68,8 @@ export const FILTERS = {
     },
     DIET_REQUIREMENT: {
       NAME: "Diet Requirement",
-      INITIAL_VALUE: "Choose a diet requirement",
+      DISPLAY_NAME: "Choose a diet requirement",
+      INITIAL_VALUE: "",
       STATE_KEY: "selectedRequirement",
       OPTIONS: [
         {

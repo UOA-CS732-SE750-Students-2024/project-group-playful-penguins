@@ -1,9 +1,7 @@
 import axios from "axios";
-import { getSearchQuery } from "./getSearchQuery";
-import { getSortQuery } from "./getSortQuery";
-import { getRecipeFilterQuery } from "./get-recipe-queries/getRecipeFilterQuery";
-import { getSearchQuery } from "./get-recipe-queries/getSearchQuery";
-import { getFavoritesQuery } from "./get-recipe-queries/getFavoritesQuery";
+import { getSearchQuery } from "./get-queries/getSearchQuery";
+import { getSortQuery } from "./get-queries/getSortQuery";
+import { getFilterQuery } from "./get-queries/getFilterQuery";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -17,10 +15,10 @@ const getMatchedRecipes = async (
   try {
     let query = getSearchQuery(searchTerm);
     query += "&" + getSortQuery(selectedSortByOption);
-    query += "&" + getRecipeFilterQuery(filters);
-    query += "&" + getFavoritesQuery(favoritesSelection);
+    query += "&" + getFilterQuery(filters);
 
     const url = `${BACKEND_URL}/recipes/match-recipes?${query}`;
+    console.log(url);
     const response = await axios.get(url, {
       headers: { Authorization: access_token },
     });

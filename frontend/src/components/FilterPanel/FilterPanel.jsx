@@ -22,7 +22,9 @@ export function FilterPanel({ onApplyFilter }) {
   const handleReset = () => {
     resetFilters();
     onApplyFilter();
+    // TODO need help to fix this
   };
+
   const handleApplyFilters = (event) => {
     event.preventDefault();
     onApplyFilter();

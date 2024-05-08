@@ -91,7 +91,7 @@ export function DietRequirementFilter() {
             ? filterConfig.OPTIONS.find(
                 (option) => option.urlKey === filters[stateKey]
               )?.name
-            : filters[stateKey]}
+            : filterConfig.DISPLAY_NAME}
         </Button>
         <Menu
           MenuListProps={{
