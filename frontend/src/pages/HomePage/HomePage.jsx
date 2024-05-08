@@ -40,8 +40,16 @@ export function HomePage() {
     recipeFilters,
   } = useContext(AppContext);
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [isFilterVisible, setFliterVisible] = useState(!isMobile); // keep an eye
+
+  const toggleFilterVisibility = () => {
+    setFliterVisible(!isFilterVisible);
+  };
+
   const fetchFoodData = async () => {
-    try {
+      try {
       let response = [];
       setIsLoading(true);
       if (isTakeout) {
@@ -81,12 +89,10 @@ export function HomePage() {
     }
   };
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [isFilterVisible, setFliterVisible] = useState(isMobile); // keep an eye
-
-  const toggleFilterVisibility = () => {
-    setFliterVisible(!isFilterVisible);
+  const closeFilterOnMobile = () => {
+    if (isFilterVisible && isMobile) {
+      toggleFilterVisibility();
+    }
   };
 
   useEffect(() => {
@@ -137,7 +143,12 @@ export function HomePage() {
           display: isFilterVisible ? "block" : "none",
         }} // keep an eye
       >
-        <FilterPanel onApplyFilter={fetchFoodData} />
+        <FilterPanel
+          onApplyFilter={() => {
+            fetchFoodData();
+            closeFilterOnMobile(); // Replace 'anotherFunction' with the actual function you want to call
+          }}
+        />
       </Box>
       <Box className={styles["features-and-food-list-container"]}>
         <Box className={styles["search-and-sort-panel"]}>
