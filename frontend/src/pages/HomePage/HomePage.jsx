@@ -22,6 +22,8 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
 import { getMatchedRecipes } from "../../services/RecipeService";
 import { getMatchedTakeouts } from "../../services/TakeoutService";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 export function HomePage() {
   const [foodData, setFoodData] = useState(null);
@@ -81,7 +83,7 @@ export function HomePage() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [isFilterVisible, setFliterVisible] = useState(isMobile); // keep an eye 
+  const [isFilterVisible, setFliterVisible] = useState(isMobile); // keep an eye
 
   const toggleFilterVisibility = () => {
     setFliterVisible(!isFilterVisible);
@@ -92,23 +94,41 @@ export function HomePage() {
   }, [searchTerm, selectedSortByOption, isTakeout, favoritesSelection]);
 
   return (
-    <Box className={styles["home-container"]}
-    sx={{
-      height:"100%",
-      flexDirection:{
-        xs:"column",
-        sm:"row",
-        md:"row"
-      }
-    }}>
+    <Box
+      className={styles["home-container"]}
+      sx={{
+        height: "100%",
+        flexDirection: {
+          xs: "column",
+          sm: "row",
+          md: "row",
+        },
+      }}
+    >
       {isMobile && (
         <Button
           onClick={toggleFilterVisibility}
           sx={{
             margin: 1,
+            color: isTakeout ? "#77595E" : "#00665E",
+            backgroundColor: "white",
+            borderRadius: "15px",
+            border: "2px solid #E0E0E0",
+            height: "fitContent",
+            fontWeight: "bold",
+            justifyContent: "space-evenly",
+            fontSize: "16px",
+            textTransform: "none",
           }}
         >
-          {isFilterVisible ? "Hide Filter" : "Show Filters"}
+          <Typography
+            variant="body1"
+            fontWeight="fontWeightBold"
+            sx={{ display: "flex", alignItems: "center", gap: 1 }}
+          >
+            {isFilterVisible ? "Hide Filters" : "Show Filters"}
+            {isFilterVisible ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </Typography>
         </Button>
       )}
       <Box
