@@ -92,7 +92,15 @@ export function HomePage() {
   }, [searchTerm, selectedSortByOption, isTakeout, favoritesSelection]);
 
   return (
-    <Box className={styles["home-container"]}>
+    <Box className={styles["home-container"]}
+    sx={{
+      height:"100%",
+      flexDirection:{
+        xs:"column",
+        sm:"row",
+        md:"row"
+      }
+    }}>
       {isMobile && (
         <Button
           onClick={toggleFilterVisibility}
