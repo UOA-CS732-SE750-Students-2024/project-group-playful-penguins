@@ -7,8 +7,11 @@ import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
-import { Typography } from "@mui/material";
-import Box from "@mui/material/Box";
+import {
+  getMatchedRecipes,
+  getMatchedTakeouts,
+} from "../../services/RecipeService";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
 import { getMatchedRecipes } from "../../services/RecipeService";
@@ -70,28 +73,38 @@ export function HomePage() {
     }
   };
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [isFilterVisible, setFliterVisible] = useState(false);
+
+  const toggleFilterVisibility = () => {
+    setFliterVisible(!isFilterVisible);
+  };
+
   useEffect(() => {
     fetchFoodData();
   }, [searchTerm, selectedSortByOption, isTakeout, favoritesSelection]);
 
   return (
-    <div className={styles["home-container"]}>
-      <div className={styles["filter-container"]}>
+    <Box className={styles["home-container"]}>
+      <Box className={styles["filter-container"]}>
         <FilterPanel onApplyFilter={fetchFoodData} />
-      </div>
-      <div className={styles["features-and-food-list-container"]}>
-        <div className={styles["search-and-sort-panel"]}>
-          <div className={styles["search-bar"]}>
+      </Box>
+      <Box className={styles["features-and-food-list-container"]}>
+        <Box className={styles["search-and-sort-panel"]}>
+          <Box className={styles["search-bar"]}>
             <SearchBar />
-          </div>
+          </ Box>
           <div className={styles["favorites"]}>
             <Favorites />
           </div>
-          <div className={styles["sort-by"]}>
+          <Box className={styles["sort-by"]}>
+          </Box>
+          <Box className={styles["sort-by"]}>
             <SortBy />
-          </div>
-        </div>
-        <div className={styles["food-list"]}>
+          </Box>
+        </Box>
+        <Box className={styles["food-list"]}>
           {isLoading ? (
             <Box
               sx={{
@@ -119,8 +132,8 @@ export function HomePage() {
           ) : (
             <FoodList foodData={foodData} />
           )}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }
