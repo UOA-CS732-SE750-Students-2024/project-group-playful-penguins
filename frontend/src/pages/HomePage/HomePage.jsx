@@ -11,7 +11,13 @@ import {
   getMatchedRecipes,
   getMatchedTakeouts,
 } from "../../services/RecipeService";
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Typography,
+  useTheme,
+  useMediaQuery,
+  Button,
+} from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
 import { getMatchedRecipes } from "../../services/RecipeService";
@@ -75,7 +81,7 @@ export function HomePage() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [isFilterVisible, setFliterVisible] = useState(false);
+  const [isFilterVisible, setFliterVisible] = useState(isMobile); // keep an eye 
 
   const toggleFilterVisibility = () => {
     setFliterVisible(!isFilterVisible);
@@ -87,7 +93,22 @@ export function HomePage() {
 
   return (
     <Box className={styles["home-container"]}>
-      <Box className={styles["filter-container"]}>
+      {isMobile && (
+        <Button
+          onClick={toggleFilterVisibility}
+          sx={{
+            margin: 1,
+          }}
+        >
+          {isFilterVisible ? "Hide Filter" : "Show Filters"}
+        </Button>
+      )}
+      <Box
+        className={styles["filter-container"]}
+        sx={{
+          display: isFilterVisible ? "block" : "none",
+        }} // keep an eye
+      >
         <FilterPanel onApplyFilter={fetchFoodData} />
       </Box>
       <Box className={styles["features-and-food-list-container"]}>
