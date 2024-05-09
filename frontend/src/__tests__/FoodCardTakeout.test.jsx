@@ -11,7 +11,9 @@ const testData = {
   price: "10.99",
   restaurant_name: "Best Restaurant",
 };
-
+/**
+ *  Test case to ensure that the FoodCardTakeout component renders correctly with test data
+ */
 it("food card takeout renders correctly with test data", () => {
   const { getByText } = render(
     <MemoryRouter>
@@ -24,6 +26,9 @@ it("food card takeout renders correctly with test data", () => {
   expect(getByText(testData.dish_name)).toBeDefined();
 });
 
+/**
+ * Test case to ensure that the modal opens when the card image is clicked
+ */
 it("opens modal when clicked", () => {
   const { getByRole } = render(
     <MemoryRouter>
@@ -36,10 +41,13 @@ it("opens modal when clicked", () => {
 
   fireEvent.click(card);
 
-  const modalElement = getByRole("button", { name: /Order!/i });
+  const modalElement = getByRole("button", { name: /Order/i });
   expect(modalElement).toBeInTheDocument();
 });
 
+/**
+ * Test case to ensure that the modal closes when the close button is clicked
+ */
 it("closes modal when close button is clicked", async () => {
   const { getByRole, getByLabelText, queryByRole } = render(
     <MemoryRouter>
@@ -55,5 +63,5 @@ it("closes modal when close button is clicked", async () => {
   const closeButton = getByLabelText("CloseIcon");
   fireEvent.click(closeButton);
 
-  expect(queryByRole("button", { name: /Order!/i })).not.toBeInTheDocument();
+  expect(queryByRole("button", { name: /Order/i })).not.toBeInTheDocument();
 });

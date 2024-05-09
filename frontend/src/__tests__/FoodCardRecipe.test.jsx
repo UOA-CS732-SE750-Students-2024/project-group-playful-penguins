@@ -13,6 +13,9 @@ const testData = {
   servings: 2,
 };
 
+/**
+ *  Test case to ensure that the FoodCardRecipe component renders correctly with test data
+ */
 it("food card recipe renders correctly with test data", () => {
   const { getByText } = render(
     <MemoryRouter>
@@ -26,32 +29,3 @@ it("food card recipe renders correctly with test data", () => {
   expect(getByText(`${testData.readyInMinutes} mins`)).toBeDefined();
   expect(getByText(`Serves ${testData.servings}`)).toBeDefined();
 });
-
-/*
-it("calls navigate function on click", () => {
-  const navigateMock = vi.fn();
-
-  const testData = {
-    id: 123,
-    title: "Burrito bowl with chipotle black beans",
-    image: "https://example.com/images/bowl.png",
-    readyInMinutes: 35,
-    servings: 2,
-  };
-
-  const { getByAltText } = render(
-    <MemoryRouter>
-      <AppContextProvider>
-        <FoodCardRecipe data={testData} />
-      </AppContextProvider>
-    </MemoryRouter>,
-    {
-      navigate: navigateMock,
-    }
-  );
-
-  fireEvent.click(getByAltText(testData.title));
-
-  expect(navigateMock).toHaveBeenCalledWith(`recipe/${testData.id}`);
-});
-*/
