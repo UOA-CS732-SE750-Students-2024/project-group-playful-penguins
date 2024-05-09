@@ -34,9 +34,9 @@ password:
 
 # Screenshots
 
-[https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/recipe_page.png]
+![recipe-page](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/recipe_page.png)
 
-[https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/takeout_page.png]
+![takeout-page](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/takeout_page.png)
 
 # Testing
 
