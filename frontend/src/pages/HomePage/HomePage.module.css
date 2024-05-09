@@ -5,7 +5,7 @@
 
 .filter-container {
   flex: 1;
-  /* height:80vh; */
+
 }
 
 .features-and-food-list-container {
@@ -22,16 +22,8 @@
 
 .search-bar {
   flex: 1;
-  /* display: flex; */
 }
 
-.sort-by {
-  flex: 1;
-}
-
-.favorites {
-  flex: 1;
-}
 
 .food-list {
   height: auto;

@@ -162,7 +162,8 @@ export function HomePage() {
               sm: "row",
             },
             alignItems: "center",
-            justifyContent:"space-between"
+            justifyContent:"space-between",
+            
 
           }}
         >
@@ -188,18 +189,24 @@ export function HomePage() {
               // sm:"column"
             },
             alignItems:"center",
+            justifyContent:"space-evenly",
             paddingBottom:{
               xs:"20px",
-              sm:"0px"
-            }
+              // sm:"0px"
+            },
+            
           }}>
-            <Box className={styles["favorites"]}>
-              <Favorites />
-            </Box>
+                <Favorites />
+            {/* <Box className={styles["favorites"]} sx={{
+              
+            }}>
+          
+            </Box> */}
+            <SortBy />
 
-            <Box className={styles["sort-by"]}>
-              <SortBy />
-            </Box>
+            {/* <Box className={styles["sort-by"]}>
+              
+            </Box> */}
           </Box>
         </Box>
         <Box className={styles["food-list"]}>
