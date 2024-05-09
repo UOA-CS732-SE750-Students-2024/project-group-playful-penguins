@@ -6,12 +6,27 @@ const RecipeSchema = mongoose.Schema({
   servings: String,
   readyInMinutes: Number,
   image: String,
-  dishTypes: String,
+  nutrition:{
+    nutrients:{
+      name: String,
+      amount: Number,
+      unit:String
+    }
+
+  },
+  dishTypes:   {
+    type:[String]
+  },
+  cuisines: {
+    type:[String]
+  },
   diets: {
     type: [String],
   },
   summary: String,
-  cuisines: String,
+  cuisines: {
+    type:[String]
+  },
   extendedIngredients: {
     id: Number,
     aisle: String,
