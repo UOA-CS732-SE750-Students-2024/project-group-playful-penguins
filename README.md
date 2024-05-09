@@ -1,6 +1,5 @@
 # COMPSCI 732 / SOFTENG 750 project - Team Playful Penguins
 
-
 # Introduction to Nutriguin
 
 Diets play significant roles in everyday life and well-being; our diet directly impacts our health and happiness. Many people struggle to stick to healthy eating habits as it can be hard to find the time and resources to plan and prepare meals. They lack accessible and convenient tools to inform and inspire their decisions. Our project sets out to aid health-conscious people in preparing healthy meals at home and finding food-focused balanced diet options from local stores. The app will promote a well-balanced and still delicious diet by encouraging users to make better choices.
@@ -33,6 +32,7 @@ username: reviewer@user.nz <br/>
 password: Test1234
 
 # Key Features
+
 - Mobile responsiveness
 
 # Screenshots
@@ -41,7 +41,7 @@ password: Test1234
 
 ![takeout-page](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/takeout_page.png)
 
-# Assignment specifications 
+# Assignment specifications
 
 ## 1. Usage of the frameworks used in the course
 
@@ -81,7 +81,6 @@ Additionally, we managed to implement several desirable features (should haves) 
 
 Before starting frontend development, we designed our interfaces in Figma to ensure alignment with our visual goals. (Find more information about the UI desing in our [wiki](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/wiki)
 
-
 ## 4. Best practices used in development
 
 Our team has consistently adhered to the best practices within our applied frameworks, ensuring both the understandability and maintainability of our code.
@@ -102,16 +101,19 @@ Environmental Configurations:
 
 - We maintain separate .env files in both the frontend and backend for enhanced security, ensuring sensitive information is properly isolated.
 
-
-## 5. Testing 
+## 5. Testing
 
 We have conducted tests on both the frontend and backend using the Jest testing framework.
 
 ## Backend
 
-```
+Backend end-to-end testing was performed. In this type of testing, we test the application as a whole to ensure that it is working as intended.
 
-```
+1.  In command prompt, navigate to `cd .\backend `
+
+2.  Run the command `npm i` if not already done so
+
+3.  Run the command `npm test`
 
 ## Frontend
 
@@ -125,14 +127,12 @@ Our project has been successfully deployed to a remote VM on Google Cloud Platfo
 
 For detailed deployment procedures and settings, please consult the deployment section of our [wiki](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/wiki).
 
-
 # Project Management
 
 - Our project management process involves creating new issues in Jira for each feature during our sprints, with each feature branch in GitHub named using the prefix 'ppeng-' followed by the Jira task ID.
 - Commits within these branches also follow a consistent naming convention, including the task ID as a prefix, enhancing traceability.
 - At the end of each sprint, features are peer-reviewed by at least two team members before being merged into the main branch, ensuring code quality and collaborative improvement.
 - For comprehensive details on our project management practices and more, please refer to the project management section of our [wiki](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/wiki).
-
 
 # Technologies Used
 
@@ -161,5 +161,3 @@ Technologies beyond the course material that we use are Material UI, Google Clou
 - Imashi Kinigama
 - Hongyang Michael Xu
 - Rahal Medawatte
-
-
