@@ -18,7 +18,6 @@ export function SearchBar() {
       <TextField
         onChange={(e) => {
           setSearchTerm(e.target.value);
-          console.log(searchTerm);
         }}
         variant="outlined"
         placeholder={isTakeout ? "Search for dishes" : "Search for recipes"}

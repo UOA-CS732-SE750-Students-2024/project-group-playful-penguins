@@ -65,7 +65,6 @@ export function HomePage() {
           access_token
         );
       }
-
       if (response) {
         if (response.status === 401) {
           navigate("/login");
@@ -189,7 +188,6 @@ export function HomePage() {
               },
             }}
           >
-
             <SortBy />
           </Box>
         </Box>
