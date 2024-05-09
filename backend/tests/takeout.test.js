@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import express from "express";
 import request from "supertest";
-import routes from "../routes/takeoutRoutes.js";
-import { generateAccessToken } from "../middleware/authMiddleware.js";
+import routes from "../src/routes/takeoutRoutes.js";
+import { generateAccessToken } from "../src/middleware/authMiddleware.js";
 
 require("dotenv").config();
 require("jest-sorted");
