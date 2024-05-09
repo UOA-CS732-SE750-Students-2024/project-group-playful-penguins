@@ -4,17 +4,17 @@
 
 Diets play significant roles in everyday life and well-being; our diet directly impacts our health and happiness. Many people struggle to stick to healthy eating habits as it can be hard to find the time and resources to plan and prepare meals. They lack accessible and convenient tools to inform and inspire their decisions. Our project sets out to aid health-conscious people in preparing healthy meals at home and finding food-focused balanced diet options from local stores. The app will promote a well-balanced and still delicious diet by encouraging users to make better choices.
 
-Our application Nutriguin will provide recommendations of healthy dishes available at stores and detailed healthy food recipes that include the meals' nutrients, calories and other dietary information. Through this, our app will equip individuals with the tools to take their dietary health into their own hands through informed choices and accessibility. Each user will have a profile that they can use to save their favourite meals, creating a convenient list of what the user knows they like. This same profile can be used to rate other meals on the app and is required for various possible future additions to the application.
+Our application Nutriguin will provide recommendations of healthy dishes available at stores and detailed healthy food recipes that include the meals' nutrients, calories and other dietary information. Through this, our app will equip individuals with the tools to take their dietary health into their own hands through informed choices and accessibility. Each user will have a profile that they can use to save their favourite meals, creating a convenient list of what the user knows they like. 
 
 Deployed URL: https://thenutriguin.com
 
-**Note: Users have to use their university emails to signin with Google**
+**Note: Users have to use their university emails to sign in with Google**
 
 # Setup
 
 ## 1. Environment Variables
 
-Add backend and frontend environment variables in two different `./env` files in their respective folders
+Add backend and frontend environment variables in two different `.env` files in their respective folders (frontend and backend folders)
 
 ## 2. Steps to run our App
 
@@ -47,9 +47,9 @@ We have employed git for version control, consistently using several git command
 
 We have also efficiently utilized React to construct our single-page application by creating reusable components.
 
-For backend communications, we have used the Express library along with axios and fetch for making requests to backend endpoints.
+For backend communications, we have used the Express library along with axios and fetch for making requests to backend endpoints. Mongoose library was used to communicate with MongoDB. 
 
-Mongoose was incorporated as demonstrated in the course lectures, and we utilized Jest, vitest and react testing libraries.
+As for testing, we utilized Jest, supertest, vitest and react testing libraries.
 
 ## 2. Application of further learning beyond the scope of course material
 
@@ -104,7 +104,7 @@ Environmental Configurations:
 
 ## 5. Testing
 
-We have conducted tests on both the frontend and backend using the Jest testing framework.
+We have conducted tests on both the frontend and backend using the several testing libraries.
 
 ## Backend
 
@@ -135,7 +135,7 @@ For detailed deployment procedures and settings, please consult the deployment s
 
 # Project Management
 
-- Our project management process involves creating new issues in Jira for each feature during our sprints, with each feature branch in GitHub named using the prefix 'ppeng-' followed by the Jira task ID.
+- Our project management process involves creating new tasks in Jira for each feature during our sprints, with each feature branch in GitHub named using the prefix 'ppeng-' followed by the Jira task ID.
 - Commits within these branches also follow a consistent naming convention, including the task ID as a prefix, enhancing traceability.
 - At the end of each sprint, features are peer-reviewed by at least two team members before being merged into the main branch, ensuring code quality and collaborative improvement.
 - For comprehensive details on our project management practices and more, please refer to the project management section of our [wiki](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/wiki).
@@ -146,7 +146,7 @@ For detailed deployment procedures and settings, please consult the deployment s
 - **Front-end UI component framework** - Material UI
 - **Runtime environment** - Node.js
 - **Web backend application framework** - Express
-  **Database** - MongoDB, Mongoose library
+- **Database** - MongoDB, Mongoose library
 - **Programming language** - JavaScript
 - **Version control** - git
 - **Repository management** - GitHub
