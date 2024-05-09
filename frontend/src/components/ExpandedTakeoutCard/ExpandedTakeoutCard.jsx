@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AttachMoneyTwoToneIcon from "@mui/icons-material/AttachMoneyTwoTone";
+import { button_colors } from "../../constants/styles-constant";
+
 export function ExpandedTakeoutCard({ handleClose, data }) {
   return (
     <Card
@@ -195,9 +197,13 @@ export function ExpandedTakeoutCard({ handleClose, data }) {
           <Button
             variant="contained"
             sx={{
+              backgroundColor: button_colors.TAKE_OUT_COLOR.PRIMARY_COLOR,
               fontSize: {
                 xs: "8px",
                 sm: "16px",
+              },
+              "&:hover": {
+                backgroundColor: button_colors.TAKE_OUT_COLOR.HOVER_COLOR,
               },
             }}
             onClick={() =>
