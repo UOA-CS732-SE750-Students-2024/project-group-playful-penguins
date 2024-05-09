@@ -113,4 +113,9 @@ const getFoodRecipes = async (req, res) => {
   }
 };
 
-export { getRecipeByID, getFoodRecipes };
+export {
+  getRecipeByID,
+  getRecipeBySearch,
+  getPaginateRecipe,
+  getFoodRecipes,
+};
