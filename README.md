@@ -26,9 +26,9 @@ Add backend and frontend environment variables in two different `./env` files in
 7.  Run the command `npm run dev` from the frontend folder
 8.  Navigate to http://localhost:5173/
 
-Feel free to use the following credentials to login:
-username: reviewer@user.nz
-password: 
+Feel free to use the following credentials to login: <br/>
+username: reviewer@user.nz <br/>
+password: Test1234
 
 # Key Features
 
