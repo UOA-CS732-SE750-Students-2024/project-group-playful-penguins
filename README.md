@@ -49,7 +49,7 @@ We have also efficiently utilized React to construct our single-page application
 
 For backend communications, we have used the Express library along with axios and fetch for making requests to backend endpoints.
 
-Mongoose was incorporated as demonstrated in the course lectures, and we utilized Jest testing library.
+Mongoose was incorporated as demonstrated in the course lectures, and we utilized Jest, vitest and react testing libraries.
 
 ## 2. Application of further learning beyond the scope of course material
 
@@ -65,7 +65,7 @@ Our application is designed to inform users about the nutritional aspects of mea
 
 We display detailed nutritional information such as calories, carbs, and proteins in our recipes and offer various filters to help users select meals based on specific nutritional needs.
 
-Our prototype meets all the essential requirements(must haves) outlined in our initial proposal.
+Our prototype meets all the essential requirements (must haves) outlined in our initial proposal.
 
 The application suggests healthy recipes with a health star score of at least 50, including ingredients and cooking instructions. Nutritional information and dietary requirements are also detailed on each recipe page. For takeout options, this information can be filtered on the homepage.
 
@@ -114,8 +114,13 @@ Backend end-to-end testing was performed. In this type of testing, we test the a
 
 ## Frontend
 
+We are using the react testing and vitest libraries to perform the frontend testing
 ```
+1.  In command prompt, navigate to `cd .\frontend `
 
+2.  Run the command `npm i` if not already done so
+
+3.  Run the command `npm test`
 ```
 
 ## 6. Deployment
