@@ -7,6 +7,8 @@ Diets play significant roles in everyday life and well-being; our diet directly 
 
 Our application Nutriguin will provide recommendations of healthy dishes available at stores and detailed healthy food recipes that include the meals' nutrients, calories and other dietary information. Through this, our app will equip individuals with the tools to take their dietary health into their own hands through informed choices and accessibility. Each user will have a profile that they can use to save their favourite meals, creating a convenient list of what the user knows they like. This same profile can be used to rate other meals on the app and is required for various possible future additions to the application.
 
+Deployed URL: https://thenutriguin.com
+
 # Setup
 
 ## 1. Environment Variables
@@ -57,6 +59,10 @@ Create a .env file in the `/frontend` folder with the following content
 
 ```
 
+## 3. Deployment
+
+
+
 # Technologies Used
 
 - **Front-end framework** - React
@@ -84,4 +90,4 @@ Technologies beyond the course material that we use are Material UI, Google Clou
 - Hongyang Michael Xu
 - Rahal Medawatte
 
-![](./group-image/Playful%20Penguins.webp)
+
