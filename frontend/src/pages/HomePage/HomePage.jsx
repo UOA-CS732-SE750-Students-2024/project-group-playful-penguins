@@ -8,10 +8,6 @@ import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
 import {
-  getMatchedRecipes,
-  getMatchedTakeouts,
-} from "../../services/RecipeService";
-import {
   Box,
   Typography,
   useTheme,
