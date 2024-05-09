@@ -25,7 +25,7 @@ export function ExpandedTakeoutCard({ handleClose, data }) {
     >
       {" "}
       <Box className={styles[`close-button`]}>
-        <CloseIcon onClick={handleClose} />
+        <CloseIcon aria-label="CloseIcon" onClick={handleClose} />
       </Box>
       <CardContent
         className={styles[`card-top-content`]}

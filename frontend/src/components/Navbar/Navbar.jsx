@@ -174,14 +174,20 @@ export function Navbar() {
               </Button>
               <Button
                 sx={isTakeout ? deselectedButton : selectedButton}
-                onClick={() => changeCategory(false)}
+                onClick={() => {
+                  changeCategory(false);
+                }}
               >
                 Cook
               </Button>
             </Box>
           </Box>
 
-          <IconButton onClick={handleClick} color="inherit">
+          <IconButton
+            aria-label="profile-icon"
+            onClick={handleClick}
+            color="inherit"
+          >
             <Box
               sx={{
                 display: "flex",
