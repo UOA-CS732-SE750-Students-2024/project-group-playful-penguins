@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { FAVORITES, FILTERS, SORT_BY } from "../constants/styles-constant";
+import { createInitialFilterState } from "../functions/createInitialFilterState";
 
 export const AppContext = React.createContext({});
 
 export function AppContextProvider({ children }) {
   const [isTakeout, setTakeout] = useState(false);
-  const [filters, setFilters] = useState({
-    calorieValues: FILTERS.CALORIE.INITIAL_VALUE,
-    carbohydrateValues: FILTERS.CARBOHYDRATE.INITIAL_VALUE,
-    cookingTimeValues: FILTERS.COOKING_TIME.INITIAL_VALUE,
-    foodPriceValues: FILTERS.FOOD_PRICE.INITIAL_VALUE,
-    deliveryFeeValues: FILTERS.DELIVERY_FEE.INITIAL_VALUE,
-    selectedRequirement: FILTERS.DIET_REQUIREMENT.INITIAL_VALUE,
-  });
+
+  const [recipeFilters, setRecipeFilters] = useState(
+    createInitialFilterState("RECIPE_FILTER")
+  );
+  const [takeoutFilters, setTakeoutFilters] = useState(
+    createInitialFilterState("TAKEOUT_FILTER")
+  );
 
   const [selectedSortByOption, setSelectedSortByOption] = useState(
     SORT_BY.INITIAL_VALUE
@@ -26,12 +26,21 @@ export function AppContextProvider({ children }) {
 
   const changeCategory = (boolean) => setTakeout(boolean);
 
+  const resetRecipeFilters = () =>
+    setRecipeFilters(createInitialFilterState("RECIPE_FILTER"));
+
+  const resetTakeoutFilters = () =>
+    setTakeoutFilters(createInitialFilterState("TAKEOUT_FILTER"));
+
   const context = {
     isTakeout,
     changeCategory,
 
-    filters,
-    setFilters,
+    recipeFilters,
+    setRecipeFilters,
+
+    takeoutFilters,
+    setTakeoutFilters,
 
     selectedSortByOption,
     setSelectedSortByOption,
@@ -41,6 +50,9 @@ export function AppContextProvider({ children }) {
 
     searchTerm,
     setSearchTerm,
+
+    resetRecipeFilters,
+    resetTakeoutFilters,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

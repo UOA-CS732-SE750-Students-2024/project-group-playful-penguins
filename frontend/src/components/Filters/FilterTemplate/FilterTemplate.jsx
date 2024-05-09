@@ -6,7 +6,17 @@ import { colors, FILTERS } from "../../../constants/styles-constant";
 import { StyledSlider, StyledTextField } from "../../../theme-overrides";
 
 export function FilterTemplate({ filterKey }) {
-  const { isTakeout, filters, setFilters } = useContext(AppContext);
+  const {
+    isTakeout,
+    recipeFilters,
+    setRecipeFilters,
+    takeoutFilters,
+    setTakeoutFilters,
+  } = useContext(AppContext);
+
+  const [filters, setFilters] = isTakeout
+    ? [takeoutFilters, setTakeoutFilters]
+    : [recipeFilters, setRecipeFilters];
 
   const primaryColor = isTakeout
     ? colors.TAKE_OUT_COLOR.PRIMARY_COLOR
@@ -15,7 +25,9 @@ export function FilterTemplate({ filterKey }) {
     ? colors.TAKE_OUT_COLOR.SECONDARY_COLOR
     : colors.COOK_AT_HOME_COLOR.SECONDARY_COLOR;
 
-  const filterConfig = FILTERS[filterKey];
+  const filterConfig = isTakeout
+    ? FILTERS.TAKEOUT_FILTER[filterKey]
+    : FILTERS.RECIPE_FILTER[filterKey];
   const stateKey = filterConfig.STATE_KEY;
 
   const [minValue, setMinValue] = useState(filters[stateKey][0]);

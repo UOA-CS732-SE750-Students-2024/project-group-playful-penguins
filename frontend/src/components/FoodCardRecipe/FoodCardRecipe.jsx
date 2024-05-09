@@ -11,30 +11,36 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import {updateFavRecipeID, removeFavRecipeID} from "../../services/UserService";
+import {
+  updateFavRecipeID,
+  removeFavRecipeID,
+} from "../../services/UserService";
 
 export function FoodCardRecipe({ data, isFavorite }) {
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(isFavorite);
   const access_token = JSON.parse(sessionStorage.getItem("token"));
-  const email = sessionStorage.getItem('userEmail')
+  const email = sessionStorage.getItem("userEmail");
 
   function openRecipeInfo() {
     navigate(`recipe/${data.id}`);
   }
 
-  
   useEffect(() => {
     setFavorite(isFavorite);
   }, [isFavorite]);
 
   // Truncate title if it's longer than 60 characters
-  const displayTitle = (data && data.title && data.title.length > 60) ? `${data.title.substring(0, 40)}...` : data.title;
+  const displayTitle = data.title
+    ? data.title.length > 60
+      ? `${data.title.substring(0, 40)}...`
+      : data.title
+    : data.title;
   const toggleFavorite = async () => {
     const newFavoriteStatus = !favorite;
     setFavorite(newFavoriteStatus);
     try {
-      if(newFavoriteStatus) {
+      if (newFavoriteStatus) {
         await updateFavRecipeID(email, data.id, access_token);
       } else {
         await removeFavRecipeID(email, data.id, access_token);
@@ -53,30 +59,30 @@ export function FoodCardRecipe({ data, isFavorite }) {
         className={styles.cardMedia}
       />
       <CardContent className={styles.cardContent}>
-      <Box className={styles.cardTitle}>
+        <Box className={styles.cardTitle}>
           <Typography gutterBottom component="div" className={styles.title}>
             {displayTitle}
           </Typography>
         </Box>
         <div className={styles.details}>
-          <AccessTimeIcon/>
+          <AccessTimeIcon />
           <Typography variant="body2" color="text.secondary">
             {data.readyInMinutes} mins
           </Typography>
-          <LocalDiningIcon/>
+          <LocalDiningIcon />
           <Typography variant="body2" color="text.secondary">
             Serves {data.servings}
           </Typography>
           <IconButton
-        onClick={(event) => {
-          event.stopPropagation();
-          toggleFavorite();
-        }}
-        className={styles.favoriteIcon}
-        aria-label="add to favorites"
-      >
-        {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-      </IconButton>
+            onClick={(event) => {
+              event.stopPropagation();
+              toggleFavorite();
+            }}
+            className={styles.favoriteIcon}
+            aria-label="add to favorites"
+          >
+            {favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </IconButton>
         </div>
       </CardContent>
     </Card>

@@ -7,12 +7,12 @@ import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
-import { getMatchedRecipes } from "../../services/RecipeService";
-import { getMatchedTakeouts } from "../../services/TakeoutService";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
+import { getMatchedRecipes } from "../../services/RecipeService";
+import { getMatchedTakeouts } from "../../services/TakeoutService";
 
 export function HomePage() {
   const [foodData, setFoodData] = useState(null);
@@ -24,8 +24,9 @@ export function HomePage() {
     isTakeout,
     selectedSortByOption,
     searchTerm,
-    filters,
     favoritesSelection,
+    takeoutFilters,
+    recipeFilters,
   } = useContext(AppContext);
 
   const fetchFoodData = async () => {
@@ -36,7 +37,7 @@ export function HomePage() {
         response = await getMatchedTakeouts(
           searchTerm,
           selectedSortByOption,
-          filters,
+          takeoutFilters,
           favoritesSelection,
           access_token
         );
@@ -44,11 +45,13 @@ export function HomePage() {
         response = await getMatchedRecipes(
           searchTerm,
           selectedSortByOption,
-          filters,
+          recipeFilters,
           favoritesSelection,
           access_token
         );
       }
+      console.log(response);
+
       if (response) {
         if (response.status === 401) {
           navigate("/login");

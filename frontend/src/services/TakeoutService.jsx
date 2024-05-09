@@ -1,8 +1,8 @@
 import axios from "axios";
-import { getSortQuery } from "./get-recipe-queries/getSortQuery";
-import { getSearchQuery } from "./get-recipe-queries/getSearchQuery";
-import { getFavoritesQuery } from "./get-recipe-queries/getFavoritesQuery";
-import { getTakeoutFilterQuery } from "./get-takeout-queries/getTakeoutFilterQuery";
+import { getSearchQuery } from "./get-queries/getSearchQuery";
+import { getSortQuery } from "./get-queries/getSortQuery";
+import { getFilterQuery } from "./get-queries/getFilterQuery";
+import { getFavoritesQuery } from "./get-queries/getFavoritesQuery";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -16,7 +16,7 @@ const getMatchedTakeouts = async (
   try {
     let query = getSearchQuery(searchTerm);
     query += "&" + getSortQuery(selectedSortByOption);
-    query += "&" + getTakeoutFilterQuery(filters);
+    query += "&" + getFilterQuery(filters);
     query += "&" + getFavoritesQuery(favoritesSelection);
 
     const url = `${BACKEND_URL}/takeouts/match-takeouts?${query}`;
