@@ -40,6 +40,11 @@ Create a .env file in the `/frontend` folder with the following content
 5.  In command prompt, navigate to `.\frontend`
 6.  Run the command `npm i`
 7.  Run the command `npm run dev` from the frontend folder
+8.  Navigate to http://localhost:5173/
+
+Feel free to use the following credentials to login:
+username: reviewer@user.nz
+password: 
 
 # Key Features
 
@@ -59,8 +64,89 @@ Create a .env file in the `/frontend` folder with the following content
 
 ```
 
-## 3. Deployment
+# Assignment specifications and team contributions
 
+## 1. How well have you mastered React, git, and other tools / frameworks introduced in this course?
+
+Our team has effectively utilized the MERN stack, which was covered in the course. We have implemented React for our front-end framework, NodeJS for our backend operations, the Express library for backend routing, and MongoDB for our database needs.
+
+We have employed git for version control, consistently using several git commands to ensure our code remains synchronized.
+
+Each team member developed features in separate branches, which were merged into the main branch only after receiving approval from at least two other reviewers on the team.
+
+We have efficiently utilized React to construct our single-page application by creating reusable components.
+
+For backend communications, we have used the Express library along with axios and fetch for making requests to backend endpoints.
+
+Mongoose was incorporated as demonstrated in the course lectures, and we utilized various testing libraries...
+
+## 2. Have you shown the ability to carry out further learning beyond the course material to add value to your prototype?
+
+Our project extensively incorporates MaterialUI to achieve a modern and sleek design.
+
+We deployed our application using a virtual machine instance on Google Compute Engine.
+
+For user authentication, we integrated Google Auth along with JWT tokens.
+
+## 3. How well is your product designed, especially from a user's perspective? How well have you applied principles such as design thinking in the construction of your prototype? Does your solution actually meet the user requirements agreed in the original proposal? Can users actually accomplish the tasks they need to accomplish?
+
+Our application is designed to inform users about the nutritional aspects of meals, whether cooked at home or ordered out.
+
+We display detailed nutritional information such as calories, carbs, and proteins in our recipes and offer various filters to help users select meals based on specific nutritional needs.
+
+Our prototype meets all the essential requirements outlined in our initial proposal.
+
+The application suggests healthy recipes with a health star score of at least 50, including ingredients and cooking instructions. Nutritional information and dietary requirements are also detailed on each recipe page. For takeout options, this information can be filtered on the homepage.
+
+For those mindful of their budget, takeout prices are displayed, allowing users to filter menu items within their financial limits.
+
+The search functionality enables users to quickly find specific dishes in both takeouts and recipes.
+
+Additionally, we managed to implement several desirable features like dietary filters (e.g., vegan, vegetarian, gluten-free) and user profiles, which save favorite dishes for easy access.
+
+Before starting frontend development, we designed our interfaces in Figma to ensure alignment with our visual goals.
+
+
+## 4. Has your code been developed according to best-practices within your applied frameworks? Is it understandable and maintainable?
+
+Our team has consistently adhered to the best practices within our applied frameworks, ensuring both the understandability and maintainability of our code.
+
+Frontend Practices:
+
+- We employ style constant files to maintain consistent UI design throughout the application.
+- We have organized separate services in the frontend to manage backend route calls efficiently.
+- Our filters are structured for high reusability across different parts of the application.
+Backend Practices:
+
+- We utilize app context and nested routes to enhance the structure and readability of our backend.
+Security is a priority; we hash user passwords combined with a salt before storing them in the database to safeguard against external threats.
+- For critical APIs, such as those handling recipes and takeouts, we implement JWT to ensure that only authorized users can make requests.
+
+Environmental Configurations:
+
+- We maintain separate .env files in both the frontend and backend for enhanced security, ensuring sensitive information is properly isolated.
+
+
+## 5. Has your code been tested? How?
+
+We have conducted tests on both the frontend and backend using the Jest testing framework.
+
+Prettier has been used to ensure code formatting consistency.
+
+## 6. Has your project been deployed? Any free-tier deployment solution will be perfectly acceptable.
+
+Our project has been successfully deployed to a remote VM on Google Cloud Platform.
+
+For detailed deployment procedures and settings, please consult the deployment section of our wiki.
+
+
+# Project Management
+
+
+- Our project management process involves creating new issues in Jira for each feature during our sprints, with each feature branch in GitHub named using the prefix 'ppeng-' followed by the Jira task ID.
+- Commits within these branches also follow a consistent naming convention, including the task ID as a prefix, enhancing traceability.
+- At the end of each sprint, features are peer-reviewed by at least two team members before being merged into the main branch, ensuring code quality and collaborative improvement.
+- For comprehensive details on our project management practices and more, please refer to the project management section of our wiki.
 
 
 # Technologies Used
