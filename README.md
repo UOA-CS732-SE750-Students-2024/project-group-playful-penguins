@@ -53,11 +53,15 @@ Mongoose was incorporated as demonstrated in the course lectures, and we utilize
 
 ## 2. Application of further learning beyond the scope of course material
 
+We used Figma Design Tool to design all our UI components
+
 Our project extensively incorporates MaterialUI to achieve a modern and sleek design.
 
 We deployed our application using a virtual machine instance on Google Compute Engine.
 
-For user authentication, we integrated Google Auth along with JWT tokens.
+We used JIRA as our project management tool
+
+For user authentication, we integrated Google Auth along with JWT tokens. We protected our crucial GET requests with authorization and does backend validation for the tokens. We added redirection such that if the user is not authenticated and try to access any of our routes other than login and signup, user will be redirected to the login page.
 
 ## 3. Meeting user requirements and initial project proporsal requirements
 
