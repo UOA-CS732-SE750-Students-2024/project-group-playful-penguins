@@ -21,7 +21,7 @@ export function SearchBar() {
           console.log(searchTerm);
         }}
         variant="outlined"
-        placeholder="Search for recipes"
+        placeholder={isTakeout ?"Search for dishes":"Search for recipes"}
         fullWidth
         he
         InputProps={{
@@ -31,7 +31,9 @@ export function SearchBar() {
             </InputAdornment>
           ),
           sx: {
-            height: "65px",
+            height: {xs:"40px",sm:"60px"},
+            width:{xs:"280px"},
+            fontSize:{xs:"14px",md:"20px"},
             borderRadius: "15px",
             boxShadow: "0 3px 6px rgba(0,0,0,0.1)",
             backgroundColor: isTakeout ? "#FDF7F8" : "#E6FAF8",

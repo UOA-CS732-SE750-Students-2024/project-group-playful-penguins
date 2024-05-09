@@ -7,12 +7,19 @@ import { FoodList } from "../../components/FoodList/FoodList";
 import styles from "./HomePage.module.css";
 import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppContextProvider";
-import { Typography } from "@mui/material";
-import Box from "@mui/material/Box";
+import {
+  Box,
+  Typography,
+  useTheme,
+  useMediaQuery,
+  Button,
+} from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useNavigate } from "react-router-dom";
 import { getMatchedRecipes } from "../../services/RecipeService";
 import { getMatchedTakeouts } from "../../services/TakeoutService";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 export function HomePage() {
   const [foodData, setFoodData] = useState(null);
@@ -28,6 +35,14 @@ export function HomePage() {
     takeoutFilters,
     recipeFilters,
   } = useContext(AppContext);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [isFilterVisible, setFilterVisible] = useState(!isMobile); // keep an eye
+
+  const toggleFilterVisibility = () => {
+    setFilterVisible(!isFilterVisible);
+  };
 
   const fetchFoodData = async () => {
     try {
@@ -70,28 +85,124 @@ export function HomePage() {
     }
   };
 
+  const closeFilterOnMobile = () => {
+    if (isFilterVisible && isMobile) {
+      toggleFilterVisibility();
+    }
+  };
+
   useEffect(() => {
     fetchFoodData();
-  }, [searchTerm, selectedSortByOption, isTakeout, favoritesSelection]);
+    setFilterVisible(!isMobile);
+  }, [
+    searchTerm,
+    selectedSortByOption,
+    isTakeout,
+    isMobile,
+    favoritesSelection,
+  ]);
 
   return (
-    <div className={styles["home-container"]}>
-      <div className={styles["filter-container"]}>
-        <FilterPanel onApplyFilter={fetchFoodData} />
-      </div>
-      <div className={styles["features-and-food-list-container"]}>
-        <div className={styles["search-and-sort-panel"]}>
-          <div className={styles["search-bar"]}>
+    <Box
+      className={styles["home-container"]}
+      sx={{
+        height: "100%",
+        flexDirection: {
+          xs: "column",
+          sm: "row",
+          md: "row",
+        },
+      }}
+    >
+      {isMobile && (
+        <Button
+          onClick={toggleFilterVisibility}
+          sx={{
+            margin: 1,
+            color: isTakeout ? "#77595E" : "#00665E",
+            backgroundColor: "white",
+            borderRadius: "15px",
+            borderBottom: "3px solid #E0E0E0",
+            height: "fitContent",
+            fontWeight: "bold",
+            justifyContent: "space-evenly",
+            fontSize: "16px",
+            textTransform: "none",
+          }}
+        >
+          <Typography
+            variant="body1"
+            fontWeight="fontWeightBold"
+            sx={{ display: "flex", alignItems: "center", gap: 1 }}
+          >
+            {isFilterVisible ? "Hide Filters" : "Show Filters"}
+            {isFilterVisible ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </Typography>
+        </Button>
+      )}
+      <Box
+        className={styles["filter-container"]}
+        sx={{
+          display: isFilterVisible ? "block" : "none",
+        }} // keep an eye
+      >
+        <FilterPanel
+          onApplyFilter={() => {
+            fetchFoodData();
+            closeFilterOnMobile();
+          }}
+        />
+      </Box>
+      <Box className={styles["features-and-food-list-container"]}>
+        <Box
+          className={styles["search-and-sort-panel"]}
+          sx={{
+            flexDirection: {
+              xs: "column",
+              sm: "row",
+            },
+            alignItems: "center",
+            justifyContent:"space-between"
+
+          }}
+        >
+          <Box className={styles["search-bar"]} sx={{
+            margin:{
+              xs:"0px",
+              md:"40px"
+            },
+            // width:{
+            //   xs:"100px",
+            //   sm:"100%"
+            // }
+
+          }}>
             <SearchBar />
-          </div>
-          <div className={styles["favorites"]}>
-            <Favorites />
-          </div>
-          <div className={styles["sort-by"]}>
-            <SortBy />
-          </div>
-        </div>
-        <div className={styles["food-list"]}>
+          </Box>
+          <Box sx={{
+            width:"100%",
+            display:"flex",
+            flexDirection:{
+              xs:"row",
+              sm:"column"
+              // sm:"column"
+            },
+            alignItems:"center",
+            paddingBottom:{
+              xs:"20px",
+              sm:"0px"
+            }
+          }}>
+            <Box className={styles["favorites"]}>
+              <Favorites />
+            </Box>
+
+            <Box className={styles["sort-by"]}>
+              <SortBy />
+            </Box>
+          </Box>
+        </Box>
+        <Box className={styles["food-list"]}>
           {isLoading ? (
             <Box
               sx={{
@@ -119,8 +230,8 @@ export function HomePage() {
           ) : (
             <FoodList foodData={foodData} />
           )}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }

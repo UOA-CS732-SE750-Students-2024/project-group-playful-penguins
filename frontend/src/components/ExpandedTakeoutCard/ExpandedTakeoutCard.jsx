@@ -10,12 +10,51 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AttachMoneyTwoToneIcon from "@mui/icons-material/AttachMoneyTwoTone";
 export function ExpandedTakeoutCard({ handleClose, data }) {
   return (
-    <Card className={styles[`card`]}>
-      <CardContent className={styles[`card-top-content`]}>
-        <Box>
+    <Card
+      className={styles[`card`]}
+      sx={{
+        width: {
+          xs: "280px",
+          sm: "580px",
+        },
+        height: {
+          xs: "500px",
+          sm: "auto",
+        },
+      }}
+    >
+      {" "}
+      <Box className={styles[`close-button`]}>
+        <CloseIcon onClick={handleClose} />
+      </Box>
+      <CardContent
+        className={styles[`card-top-content`]}
+        sx={{
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+          },
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: {
+            xs: "0px",
+            sm: "24px",
+          },
+        }}
+      >
+        <Box
+          sx={{
+            width: { xs: "150px", sm: "300px" },
+            height: { xs: "125px", sm: "200px" },
+          }}
+        >
           <CardMedia
             component="img"
             image={data.dish_image_url}
+            sx={{
+              height: "100%",
+              width: "100%",
+            }}
             alt={data.dish_name}
             className={styles[`food-image`]}
           />
@@ -25,48 +64,142 @@ export function ExpandedTakeoutCard({ handleClose, data }) {
           <Typography
             variant="h5"
             component="h2"
+            fontWeight="fontWeightBold"
             className={styles[`food-title`]}
+            sx={{
+              fontSize: {
+                xs: "16px",
+                sm: "24px",
+              },
+              padding: {
+                xs: "8px",
+                sm: "16px",
+              },
+            }}
           >
             {data.dish_name}
           </Typography>
 
           <Box>
-            <Box className={styles[`single-param`]}>
-              <AccessTimeIcon />
-              <Typography variant="body2">
+            <Box
+              className={styles[`single-param`]}
+              sx={{
+                margin: {
+                  xs: "4px",
+                  sm: "10px",
+                },
+                gap: "4px",
+              }}
+            >
+              <AccessTimeIcon
+                sx={{
+                  fontSize: {
+                    xs: "18px",
+                    sm: "22px",
+                  },
+                }}
+              />
+              <Typography
+                varaint="body2"
+                sx={{
+                  fontSize: {
+                    xs: "14px",
+                    sm: "16px",
+                  },
+                }}
+              >
                 Approx delivery time {data.delivery_time} mins
               </Typography>
             </Box>
-            <Box className={styles[`single-param`]}>
-              <AttachMoneyTwoToneIcon />
-              <Typography variant="body2">
+            <Box
+              className={styles[`single-param`]}
+              sx={{
+                margin: {
+                  xs: "4px",
+                  sm: "10px",
+                },
+                gap: "2px",
+              }}
+            >
+              <AttachMoneyTwoToneIcon
+                sx={{
+                  fontSize: {
+                    xs: "18px",
+                    sm: "22px",
+                  },
+                }}
+              />
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: {
+                    xs: "14px",
+                    sm: "16px",
+                  },
+                }}
+              >
                 Approx cost per serving ${data.price}
               </Typography>
             </Box>
-            <Box className={styles[`single-param`]}>
-              <AttachMoneyTwoToneIcon />
-              <Typography variant="body2">
+            <Box
+              className={styles[`single-param`]}
+              sx={{
+                margin: {
+                  xs: "4px",
+                  sm: "10px",
+                },
+                gap: "2px",
+              }}
+            >
+              <AttachMoneyTwoToneIcon
+                sx={{
+                  fontSize: {
+                    xs: "18px",
+                    sm: "22px",
+                  },
+                }}
+              />
+              <Typography
+                variant="body2"
+                sx={{
+                  fontSize: {
+                    xs: "14px",
+                    sm: "16px",
+                  },
+                }}
+              >
                 Approx delivery fee ${data.delivery_fee}
               </Typography>
             </Box>
           </Box>
         </Box>
-        <Box className={styles[`close-button`]}>
-          <CloseIcon onClick={handleClose} />
-        </Box>
       </CardContent>
-
       <CardContent className={styles[`card-bottom-content`]}>
-        <Typography variant="h6" className={styles[`card-description-title`]}>
+        {/* <Typography variant="h6" className={styles[`card-description-title`]}>
           Description
-        </Typography>
-        <Typography variant="body1" className={styles[`card-description`]}>
+        </Typography> */}
+        <Typography
+          variant="body1"
+          sx={{
+            fontSize: {
+              xs: "12px",
+              sm: "16px",
+            },
+          }}
+          className={styles[`card-description`]}
+        >
           {data.dish_description}
         </Typography>
 
         <Box className={styles[`card-button`]}>
           <Button
             variant="contained"
+            sx={{
+              fontSize: {
+                xs: "8px",
+                sm: "16px",
+              },
+            }}
             onClick={() =>
               window.open(`${data.restaurant_web_url}`, "_blank", "noopener")
             }

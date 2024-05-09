@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   height: auto;
-  width: 600px;
+  width: 520px;
 }
 
 /* Top half of the card (image, title and icons) */
@@ -26,12 +26,13 @@
   width: 100%;
   padding: 15px;
   font-size: 24px;
-  text-align: left;
+  /* text-align: left; */
 }
 
 .single-param {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 5px;
 }
 
@@ -41,8 +42,8 @@
 }
 
 .single-param p {
-  font-size: 16px;
-  margin: 10px;
+  /* font-size: 16px;
+  margin: 10px; */
 }
 
 .close-button {
@@ -55,7 +56,7 @@
 
 /* Bottom half of the card (description) */
 .card-bottom-content {
-  padding: 10px;
+  /* padding: 10px; */
   height: fit-content;
 }
 
