@@ -1,8 +1,8 @@
 import fetch from "node-fetch";
 import dotenv from "dotenv";
-import { response } from "express";
 import User from "../model/userModel.js";
 import { generateAccessToken } from "../middleware/authMiddleware.js";
+import { jwtDecode } from "jwt-decode";
 
 dotenv.config();
 
@@ -29,7 +29,13 @@ const authorizeGoogleUser = (req, res) => {
       }),
     })
       .then((response) => response.json())
-      .then((tokens) => {
+      .then(async (tokens) => {
+        if (tokens.id_token) {
+          const decode = jwtDecode(tokens.id_token);
+          if (decode) {
+            const user = await User.postGoogleCheck(decode.name, decode.email)
+          }
+        }
         res.json(tokens);
       });
   } catch (error) {

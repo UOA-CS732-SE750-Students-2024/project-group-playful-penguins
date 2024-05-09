@@ -1,14 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
-  Menu,
-  MenuItem,
   Button,
-  Typography,
   Box,
   Checkbox,
 } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { colors, FAVORITES } from "../../constants/styles-constant";
 import { AppContext } from "../../providers/AppContextProvider";
 
 export function Favorites() {

@@ -5,11 +5,12 @@ import { FoodCardTakeout } from "../FoodCardTakeout/FoodCardTakeout";
 import { AppContext } from "../../providers/AppContextProvider";
 import styles from "./FoodList.module.css";
 import { getFavoriteIds } from "../../services/UserService";
+import { jwtDecode } from "jwt-decode";
 
 export function FoodList({ foodData }) {
   const { isTakeout } = useContext(AppContext);
   const access_token = JSON.parse(sessionStorage.getItem("token"));
-  const email = sessionStorage.getItem("userEmail");
+  const email = access_token ? jwtDecode(access_token).email : '';
   const [favoriteTakeouts, setFavoriteTakeouts] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 

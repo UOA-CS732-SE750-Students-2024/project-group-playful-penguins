@@ -14,13 +14,14 @@ import Zoom from "@mui/material/Zoom";
 import axios from "axios";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 import {updateFavTakeoutID, removeFavTakeoutID} from "../../services/UserService";
+import { jwtDecode } from "jwt-decode";
 
 
 export function FoodCardTakeout({ data, isFavorite }) {
   const [openTakeoutCard, setOpenTakeoutCard] = useState(false);
   const [favorite, setFavorite] = useState(isFavorite);
   const access_token = JSON.parse(sessionStorage.getItem("token"));
-  const email = sessionStorage.getItem('userEmail')
+  const email = access_token ? jwtDecode(access_token).email : '';
 
   const [takeoutData, setTakeoutData] = useState({});
 

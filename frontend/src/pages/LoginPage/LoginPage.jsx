@@ -43,7 +43,6 @@ export default function LoginPage({ setToken }) {
   const googleLogin = useGoogleLogin({
     onSuccess: async (codeResponse) => {
       const response = await authenticateGoogleUser(codeResponse);
-      console.log(response);
       setToken(response.id_token);
       navigate('/');
     },
@@ -72,7 +71,6 @@ export default function LoginPage({ setToken }) {
       const response = await login(data.email, data.password);
       if (response && response.user) {
         setToken(response.user.token);
-        sessionStorage.setItem('userEmail', response.user.email);
         navigate("/");
       }
       setIsError(false);

@@ -16,20 +16,39 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
       minLength: [8, "Password must be at least 8 characters long"],
     },
     favoriteRecipes: {
-      type: [Number], 
+      type: [Number],
       default: [],
     },
     favoriteTakeouts: {
-      type: [String], 
+      type: [String],
       default: [],
     },
   },
   { timestamps: true }
 );
+
+userSchema.statics.postGoogleCheck = async function (name, email) {
+  try {
+    const userInDb = await User.findOne({ email });
+    if (userInDb) {
+      return userInDb;
+    } else {
+      const user = new User({
+        name,
+        email,
+      });
+      await user.validate();
+      await user.save();
+      return user;
+    }
+    return userInDb;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 userSchema.statics.signup = async function (name, email, password) {
   // Check if name, email, and password are empty

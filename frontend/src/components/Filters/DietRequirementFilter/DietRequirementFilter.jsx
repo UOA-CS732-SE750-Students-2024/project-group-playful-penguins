@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Menu, MenuItem, Button, Typography, Box } from "@mui/material";
 import { AppContext } from "../../../providers/AppContextProvider";
-import { colors, FILTERS } from "../../../constants/styles-constant";
+import { colors } from "../../../constants/styles-constant";
+import { FILTERS } from "../../../constants/filters-constant";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export function DietRequirementFilter() {

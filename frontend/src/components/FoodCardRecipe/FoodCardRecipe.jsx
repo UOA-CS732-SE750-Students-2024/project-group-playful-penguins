@@ -15,12 +15,13 @@ import {
   updateFavRecipeID,
   removeFavRecipeID,
 } from "../../services/UserService";
+import { jwtDecode } from "jwt-decode";
 
 export function FoodCardRecipe({ data, isFavorite }) {
   const navigate = useNavigate();
   const [favorite, setFavorite] = useState(isFavorite);
   const access_token = JSON.parse(sessionStorage.getItem("token"));
-  const email = sessionStorage.getItem("userEmail");
+  const email = access_token ? jwtDecode(access_token).email : '';
 
   function openRecipeInfo() {
     navigate(`recipe/${data.id}`);

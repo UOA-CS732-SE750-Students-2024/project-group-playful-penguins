@@ -12,16 +12,17 @@ const client = new OAuth2Client();
 const verifyAccessToken = async (token) => {
   try {
     const decoded = jwtDecode(token);
+    let ticket;
     if (decoded.iss === "https://accounts.google.com") {
-      const ticket = await client.verifyIdToken({
+      ticket = await client.verifyIdToken({
         idToken: token,
         audience: CLIENT_ID,
       });
       return true;
     } else {
-      const verified = jwt.verify(token, ACCESS_TOKEN_SECRET);
-      return true;
+      ticket = jwt.verify(token, ACCESS_TOKEN_SECRET);
     }
+    return true;
   } catch (error) {
     console.log(error);
     return false;

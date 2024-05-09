@@ -1,10 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import recipeRoutes from "./routes/recipeRoutes.js";
-import takeoutRoutes from "./routes/takeoutRoutes.js";
-import connectToDatabase from "./config/mongooseDb.js";
-import userRoutes from "./routes/userRoutes.js";
+import recipeRoutes from "./src/routes/recipeRoutes.js";
+import takeoutRoutes from "./src/routes/takeoutRoutes.js";
+import connectToDatabase from "./src/config/mongooseDb.js";
+import userRoutes from "./src/routes/userRoutes.js";
 
 dotenv.config();
 

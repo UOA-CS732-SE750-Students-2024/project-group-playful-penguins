@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import express from "express";
 import request from "supertest";
-import routes from "../routes/takeoutRoutes.js";
+import routes from "../src/routes/takeoutRoutes.js";
 
 require("dotenv").config();
 

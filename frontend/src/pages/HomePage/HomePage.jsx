@@ -65,8 +65,7 @@ export function HomePage() {
           access_token
         );
       }
-      console.log(response);
-
+      console.log(recipeFilters);
       if (response) {
         if (response.status === 401) {
           navigate("/login");

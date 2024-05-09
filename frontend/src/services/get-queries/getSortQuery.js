@@ -1,4 +1,4 @@
-import { SORT_BY } from "../../constants/styles-constant";
+import { SORT_BY } from "../../constants/filters-constant";
 
 export const getSortQuery = (selectedSortByOption) => {
   const { key, sortBy, sortOrder } = selectedSortByOption;

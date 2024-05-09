@@ -20,7 +20,6 @@ const getMatchedRecipes = async (
     query += "&" + getFavoritesQuery(favoritesSelection);
 
     const url = `${BACKEND_URL}/recipes/match-recipes?${query}`;
-    console.log(url);
     const response = await axios.get(url, {
       headers: { Authorization: access_token },
     });
