@@ -27,13 +27,6 @@ const StepLabel = styled("div")({
 
 const DirectionText = styled("div")({});
 
-const nutritionInfo = [
-  { type: "Calories Content", amount: `100 kcal` },
-  { type: "Protein Content", amount: `12.5g` },
-  { type: "Carbohydrate Content", amount: `11.4g` },
-  { type: "Total Fat Content", amount: `1.3g` },
-];
-
 export default function RecipeInfo() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
@@ -230,6 +223,7 @@ export default function RecipeInfo() {
                 }}
               >
                 <strong>Dish Type: </strong>
+
                 {recipe && recipe.dishTypes && recipe.dishTypes.length > 0
                   ? recipe.dishTypes.join(", ")
                   : "Stay tuned for dish types !"}
@@ -245,9 +239,11 @@ export default function RecipeInfo() {
                 }}
               >
                 <strong>Cuisine Type: </strong>
-                {recipe && recipe.cuisines && recipe.cuisines.length > 0
+
+                {recipe.cuisines && recipe.cuisines.length > 0
                   ? recipe.cuisines.join(", ")
                   : "Stay tuned for cuisine details !"}
+                {}
               </Typography>
 
               <Box
@@ -345,20 +341,23 @@ export default function RecipeInfo() {
                 >
                   NUTRITION INFORMATION
                 </Typography>
-                {nutritionInfo.map((nutrient, index) => (
-                  <Box key={index} className={` ${styles["nutrients-item"]}`}>
-                    <Typography
-                      variant="h6"
-                      fontWeight="fontWeightMedium"
-                      sx={{
-                        fontSize: {
-                          xs: "12px",
-                          md: "18px",
-                        },
-                      }}
-                    >{`${nutrient.type}:   ${nutrient.amount}`}</Typography>
-                  </Box>
-                ))}
+
+                {recipe.nutrition.nutrients
+                  .slice(0, 10)
+                  .map((nutrient, index) => (
+                    <Box key={index} className={` ${styles["nutrients-item"]}`}>
+                      <Typography
+                        variant="h6"
+                        fontWeight="fontWeightMedium"
+                        sx={{
+                          fontSize: {
+                            xs: "12px",
+                            md: "18px",
+                          },
+                        }}
+                      >{`${nutrient.name}:   ${nutrient.amount}  ${nutrient.unit}`}</Typography>
+                    </Box>
+                  ))}
               </Box>
             </Box>
             {/* Directions of the recipe */}

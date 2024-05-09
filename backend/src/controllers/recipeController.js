@@ -34,11 +34,12 @@ const getRecipeByID = async (req, res) => {
       cuisines: 1,
       extendedIngredients: 1,
       analyzedInstructions: 1,
+      "nutrition.nutrients": 1,
     }
   );
 
   if (recipe) {
-    res.json(recipe);
+    res.status(200).json(recipe);
   } else {
     res.status(404);
     throw new Error("Recipe not found");
@@ -62,7 +63,7 @@ const getFoodRecipes = async (req, res) => {
 
   const authToken =
     req.headers && req.headers.authorization ? req.headers.authorization : "";
-  const email = authToken ? jwtDecode(authToken).email : '';
+  const email = authToken ? jwtDecode(authToken).email : "";
   const sortCriteria = getSortCriteria(sortBy, sortOrder);
   const searchQuery = getRecipeSearchQuery(searchTerm);
   const calorieFilterQuery = getRecipeCalorieFilterQuery(
@@ -112,7 +113,4 @@ const getFoodRecipes = async (req, res) => {
   }
 };
 
-export {
-  getRecipeByID,
-  getFoodRecipes,
-};
+export { getRecipeByID, getFoodRecipes };
