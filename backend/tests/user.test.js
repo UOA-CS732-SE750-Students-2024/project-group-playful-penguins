@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import express from "express";
 import request from "supertest";
-import routes from "../routes/userRoutes.js";
+import routes from "../src/routes/userRoutes.js";
 
 require("dotenv").config();
 jest.mock("node-fetch", () => jest.fn());

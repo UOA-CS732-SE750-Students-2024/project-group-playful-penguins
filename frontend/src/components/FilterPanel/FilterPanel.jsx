@@ -9,6 +9,7 @@ import { FoodPriceFilter } from "../Filters/FoodPriceFilter/FoodPriceFilter";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { Favorites } from "../Favorites/Favorites";
 import { LoadingButton } from "@mui/lab";
+import { button_colors } from "../../constants/styles-constant";
 
 export function FilterPanel({ onApplyFilter }) {
   const { isTakeout, resetRecipeFilters, resetTakeoutFilters } =
@@ -20,7 +21,6 @@ export function FilterPanel({ onApplyFilter }) {
 
   const handleReset = () => {
     resetFilters();
-    onApplyFilter();
   };
 
   const handleApplyFilters = (event) => {
@@ -88,9 +88,9 @@ export function FilterPanel({ onApplyFilter }) {
                 flex: 1,
                 color: "white",
                 borderRadius: "15px",
-                backgroundColor: isTakeout ? "#EDB1BB" : "#00CCBB",
+                backgroundColor: isTakeout ? button_colors.TAKE_OUT_COLOR.PRIMARY_COLOR : button_colors.COOK_AT_HOME_COLOR.PRIMARY_COLOR,
                 "&:hover": {
-                  backgroundColor: isTakeout ? "#473538" : "#00665E",
+                  backgroundColor: isTakeout ? button_colors.TAKE_OUT_COLOR.HOVER_COLOR : button_colors.COOK_AT_HOME_COLOR.HOVER_COLOR,
                 },
                 marginRight: "8px",
               }}
