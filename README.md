@@ -118,7 +118,7 @@ Backend end-to-end testing was performed. In this type of testing, we test the a
 
 ## Frontend
 
-We are using the react testing and vitest libraries to perform the frontend testing
+We are using the react testing library and vitest libraries to perform the frontend testing
 
 1.  In command prompt, navigate to `cd .\frontend `
 
@@ -155,7 +155,7 @@ For detailed deployment procedures and settings, please consult the deployment s
 - **Code Formatting** - Prettier
 - **Linting Utility** - ESLint
 - **Deployment** - Google Cloud
-- **Testing** - Jest
+- **Testing** - Jest, Vitest, react-testing library
 
 Technologies beyond the course material that we use are Material UI, Google Cloud (deployment), jwt & Google OAuth 2.0 (Authorization)
 
