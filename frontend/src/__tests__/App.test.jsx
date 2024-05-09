@@ -13,8 +13,8 @@ const dummyContext = {
 /*
  * Ensures landing page is rendered correctly
  */
-it("Renders the landing page correctly", () => {
-  const { queryByText } = render(
+it("Renders the landing page correctly", async () => {
+  const { findByText } = render(
     <MemoryRouter initialEntries={["/"]}>
       <AppContextProvider value={dummyContext}>
         <App />
@@ -22,20 +22,28 @@ it("Renders the landing page correctly", () => {
     </MemoryRouter>
   );
 
-  expect(queryByText("PLAYFUL PENGUINS GOT YOU COVERED")).toBeDefined();
+  const slogan = await findByText("PLAYFUL PENGUINS GOT YOU COVERED");
+
+  expect(slogan).toBeDefined();
 });
 
 /*
  * Ensures home page is rendered correctly
  */
-it("Renders the home page correctly", () => {
-  const { queryByText } = render(
-    <MemoryRouter initialEntries={["/"]}>
+it("Renders the home page correctly", async () => {
+  const { getByLabelText, findByText, getByPlaceholderText } = render(
+    <MemoryRouter initialEntries={["/home"]}>
       <AppContextProvider value={dummyContext}>
         <App />
       </AppContextProvider>
     </MemoryRouter>
   );
 
-  expect(queryByText("PLAYFUL PENGUINS GOT YOU COVERED")).toBeDefined();
+  const sortBy = await getByLabelText("Sort By");
+  const searchBar = await getByPlaceholderText("Search for recipes");
+  const dietReq = await findByText("Diet Requirement");
+
+  expect(sortBy).toBeDefined();
+  expect(searchBar).toBeDefined();
+  expect(dietReq).toBeDefined();
 });

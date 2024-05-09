@@ -28,6 +28,7 @@ export function SortBy() {
 
   return (
     <Box
+      aria-label="Sort By"
       sx={{
         pt: "32px",
         pl: "16px",
