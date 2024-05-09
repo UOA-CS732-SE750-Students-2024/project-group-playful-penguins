@@ -131,8 +131,6 @@ Environmental Configurations:
 
 We have conducted tests on both the frontend and backend using the Jest testing framework.
 
-Prettier has been used to ensure code formatting consistency.
-
 ## 6. Deployment
 
 Our project has been successfully deployed to a remote VM on Google Cloud Platform.
