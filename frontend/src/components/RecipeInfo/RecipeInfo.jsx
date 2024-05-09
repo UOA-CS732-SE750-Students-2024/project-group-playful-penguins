@@ -349,20 +349,22 @@ export default function RecipeInfo() {
                   NUTRITION INFORMATION
                 </Typography>
 
-                {recipe.nutrition.nutrients.map((nutrient, index) => (
-                  <Box key={index} className={` ${styles["nutrients-item"]}`}>
-                    <Typography
-                      variant="h6"
-                      fontWeight="fontWeightMedium"
-                      sx={{
-                        fontSize: {
-                          xs: "12px",
-                          md: "18px",
-                        },
-                      }}
-                    >{`${nutrient.name}:   ${nutrient.amount}  ${nutrient.unit}`}</Typography>
-                  </Box>
-                ))}
+                {recipe.nutrition.nutrients
+                  .slice(0, 10)
+                  .map((nutrient, index) => (
+                    <Box key={index} className={` ${styles["nutrients-item"]}`}>
+                      <Typography
+                        variant="h6"
+                        fontWeight="fontWeightMedium"
+                        sx={{
+                          fontSize: {
+                            xs: "12px",
+                            md: "18px",
+                          },
+                        }}
+                      >{`${nutrient.name}:   ${nutrient.amount}  ${nutrient.unit}`}</Typography>
+                    </Box>
+                  ))}
               </Box>
             </Box>
             {/* Directions of the recipe */}
