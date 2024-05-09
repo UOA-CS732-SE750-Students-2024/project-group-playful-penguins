@@ -31,10 +31,6 @@ Feel free to use the following credentials to login: <br/>
 username: reviewer@user.nz <br/>
 password: Test1234
 
-# Key Features
-
-- Mobile responsiveness
-
 # Screenshots
 
 ![recipe-page](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/recipe_page.png)
@@ -90,6 +86,7 @@ Frontend Practices:
 - We employ style constant files to maintain consistent UI design throughout the application.
 - We have organized separate services in the frontend to manage backend route calls efficiently.
 - Our filters are structured for high reusability across different parts of the application.
+- We made our web app mobile responsive 
 
 Backend Practices:
 
