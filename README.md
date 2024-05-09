@@ -53,7 +53,7 @@ We have also efficiently utilized React to construct our single-page application
 
 For backend communications, we have used the Express library along with axios and fetch for making requests to backend endpoints.
 
-Mongoose was incorporated as demonstrated in the course lectures, and we utilized various testing libraries...
+Mongoose was incorporated as demonstrated in the course lectures, and we utilized Jest testing library.
 
 ## 2. Application of further learning beyond the scope of course material
 
