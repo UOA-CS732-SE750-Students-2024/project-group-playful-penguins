@@ -48,7 +48,7 @@ describe("GET /api/takeouts/match-takeouts", () => {
       .get(`/api/takeouts/match-takeouts`)
       .set("Authorization", ` ${token}`);
     expect(res.body.takeouts.length).toBe(21);
-    // Expect 38 takeouts
+    // Expect 21 takeouts
   });
 });
 
@@ -61,7 +61,7 @@ describe("GET /api/takeouts/match-takeouts?searchTerm=${input}", () => {
       .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(7);
-    // Expect 4 takeouts related to 'chicken' to be returned
+    // Expect 7 takeouts related to 'chicken' to be returned
   });
 });
 
@@ -77,7 +77,7 @@ describe("GET /api/takeouts/match-takeouts?minCalorieValues=${input1}&maxCalorie
       .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(0);
-    // Expect 3 takeouts within the specified calorie range
+    // Expect 0 takeouts within the specified calorie range
   });
 });
 
@@ -93,7 +93,7 @@ describe("GET /api/takeouts/match-takeouts?minFoodPriceValues=${input1}&maxFoodP
       .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(0);
-    // Expect 13 takeouts within the specified carbohydrate range
+    // Expect 0 takeouts within the specified carbohydrate range
   });
 });
 
@@ -109,7 +109,7 @@ describe("GET /api/takeouts/match-takeouts?minDeliveryFeeValues=${input1}&maxDel
       .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(11);
-    // Expect 5 takeouts that can be cooked within 30 minutes
+    // Expect 11 takeouts that can be cooked within 30 minutes
   });
 });
 
@@ -124,7 +124,7 @@ describe("GET /api/takeouts/match-takeouts?selectedRequirement={input}", () => {
       .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(9);
-    // Expect 7 vegan takeouts
+    // Expect 9 vegan takeouts
   });
 });
 
