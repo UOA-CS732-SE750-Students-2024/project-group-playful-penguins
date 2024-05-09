@@ -21,13 +21,12 @@ const getTakeoutByID = async (req, res) => {
   const takeout = await Takeout.findOne({ id: req.params.id });
 
   if (takeout) {
-    res.json(takeout);
+    res.status(200).json(takeout);
   } else {
     res.status(404);
     throw new Error("Takeout not found");
   }
 };
-
 
 const getFoodTakeout = async (req, res) => {
   const {
@@ -82,17 +81,17 @@ const getFoodTakeout = async (req, res) => {
 
   try {
     if (await verifyAccessToken(authToken)) {
-      const matchRecipes = await Takeout.search(query, sortCriteria);
+      const matchTakeouts = await Takeout.search(query, sortCriteria);
       res.status(200).json({
-        takeouts: matchRecipes,
+        takeouts: matchTakeouts,
       });
     } else {
-      const error = new Error("Unathorized");
+      const error = new Error("Unauthorized");
       error.status = 401;
       throw error;
     }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.send(error.status, error);
   }
 };
 

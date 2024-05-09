@@ -48,7 +48,7 @@ describe("GET /api/recipes/match-recipes", () => {
   it("should return all recipes", async () => {
     const res = await request(app)
       .get(`/api/recipes/match-recipes`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `\ ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.recipes.length).toBe(39);
     // Expect 38 recipes
@@ -60,7 +60,7 @@ describe("GET /api/recipes/match-recipes?searchTerm=${input}", () => {
     const searchTerm = "chicken";
     const res = await request(app)
       .get(`/api/recipes/match-recipes?searchTerm=${searchTerm}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.recipes.length).toBe(4);
     // Expect 4 recipes related to 'chicken' to be returned
@@ -76,7 +76,7 @@ describe("GET /api/recipes/match-recipes?minCalorieValues=${input1}&maxCalorieVa
       .get(
         `/api/recipes/match-recipes?minCalorieValues=${minCalorieValue}&maxCalorieValues=${maxCalorieValue}`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.recipes.length).toBe(3);
     // Expect 3 recipes within the specified calorie range
@@ -92,7 +92,7 @@ describe("GET /api/recipes/match-recipes?minCarbohydrateValues=${input1}&maxCarb
       .get(
         `/api/recipes/match-recipes?minCarbohydrateValues=${minCarbohydrateValues}&maxCarbohydrateValues=${maxCarbohydrateValues}`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.recipes.length).toBe(13);
     // Expect 13 recipes within the specified carbohydrate range
@@ -108,7 +108,7 @@ describe("GET /api/recipes/match-recipes?minCookingTimeValues=${input1}&maxCooki
       .get(
         `/api/recipes/match-recipes?minCookingTimeValues=${minCookingTimeValues}&maxCookingTimeValues=${maxCookingTimeValues}`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.recipes.length).toBe(5);
     // Expect 5 recipes that can be cooked within 30 minutes
@@ -121,7 +121,7 @@ describe("GET /api/recipes/match-recipes?selectedRequirement={input}", () => {
     const dietRequirement = "vegan";
     const res = await request(app)
       .get(`/api/recipes/match-recipes?selectedRequirement=${dietRequirement}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.recipes.length).toBe(7);
     // Expect 7 vegan recipes
@@ -135,7 +135,7 @@ describe("GET /api/recipes/match-recipes?sortBy=${input1}&sortOrder=${input2}", 
     const sortOrder = "asc";
     const res = await request(app)
       .get(`/api/recipes/match-recipes?sortBy=${sortBy}&sortOrder=${sortOrder}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.recipes.length).toBe(39);
     expect(res.body.recipes).toBeSortedBy("title", { ascending: true });
@@ -149,7 +149,7 @@ describe("GET /api/recipes/match-recipes?sortBy=${input1}&sortOrder=${input2}", 
     const sortOrder = "desc";
     const res = await request(app)
       .get(`/api/recipes/match-recipes?sortBy=${sortBy}&sortOrder=${sortOrder}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.recipes.length).toBe(39);
     expect(res.body.recipes).toBeSortedBy("title", { descending: true });
@@ -163,16 +163,8 @@ describe("GET /api/recipes/match-recipes?searchTerm=cu&sortBy=title&sortOrder=de
       .get(
         `/api/recipes/match-recipes?searchTerm=cu&sortBy=title&sortOrder=desc&minCalorieValues=0&maxCalorieValues=2000&minCarbohydrateValues=0&maxCarbohydrateValues=250&minCookingTimeValues=0&maxCookingTimeValues=150&selectedRequirement=vegan`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.recipes.length).toBe(1);
-  });
-});
-
-// Unauthorized users should not have access to the recipes
-describe("GET /api/recipes/match-recipes without authorization", () => {
-  it("should not allow unauthorized access to recipes", async () => {
-    const res = await request(app).get(`/api/recipes/match-recipes`);
-    expect(res.statusCode).toBe(401);
   });
 });

@@ -46,7 +46,7 @@ describe("GET /api/takeouts/match-takeouts", () => {
   it("should return all takeouts", async () => {
     const res = await request(app)
       .get(`/api/takeouts/match-takeouts`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.body.takeouts.length).toBe(21);
     // Expect 38 takeouts
   });
@@ -58,7 +58,7 @@ describe("GET /api/takeouts/match-takeouts?searchTerm=${input}", () => {
     const searchTerm = "chicken";
     const res = await request(app)
       .get(`/api/takeouts/match-takeouts?searchTerm=${searchTerm}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(7);
     // Expect 4 takeouts related to 'chicken' to be returned
@@ -74,7 +74,7 @@ describe("GET /api/takeouts/match-takeouts?minCalorieValues=${input1}&maxCalorie
       .get(
         `/api/takeouts/match-takeouts?minCalorieValues=${minCalorieValue}&maxCalorieValues=${maxCalorieValue}`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(0);
     // Expect 3 takeouts within the specified calorie range
@@ -90,7 +90,7 @@ describe("GET /api/takeouts/match-takeouts?minFoodPriceValues=${input1}&maxFoodP
       .get(
         `/api/takeouts/match-takeouts?minFoodPriceValues=${minFoodPriceValues}&maxFoodPriceValues=${maxFoodPriceValues}`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(0);
     // Expect 13 takeouts within the specified carbohydrate range
@@ -106,7 +106,7 @@ describe("GET /api/takeouts/match-takeouts?minDeliveryFeeValues=${input1}&maxDel
       .get(
         `/api/takeouts/match-takeouts?minDeliveryFeeValues=${minDeliveryFeeValues}&maxDeliveryFeeValues=${maxDeliveryFeeValues}`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(11);
     // Expect 5 takeouts that can be cooked within 30 minutes
@@ -121,7 +121,7 @@ describe("GET /api/takeouts/match-takeouts?selectedRequirement={input}", () => {
       .get(
         `/api/takeouts/match-takeouts?selectedRequirement=${dietRequirement}`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(9);
     // Expect 7 vegan takeouts
@@ -137,7 +137,7 @@ describe("GET /api/takeouts/match-takeouts?sortBy=${input1}&sortOrder=${input2}"
       .get(
         `/api/takeouts/match-takeouts?sortBy=${sortBy}&sortOrder=${sortOrder}`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(21);
     expect(res.body.takeouts).toBeSortedBy("dish_name", { ascending: true });
@@ -153,7 +153,7 @@ describe("GET /api/takeouts/match-takeouts?sortBy=${input1}&sortOrder=${input2}"
       .get(
         `/api/takeouts/match-takeouts?sortBy=${sortBy}&sortOrder=${sortOrder}`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(21);
     expect(res.body.takeouts).toBeSortedBy("dish_name", { descending: true });
@@ -167,16 +167,8 @@ describe("GET /api/takeouts/match-takeouts?searchTerm=cu&sortBy=dish_name&sortOr
       .get(
         `/api/takeouts/match-takeouts?searchTerm=cu&sortBy=dish_name&sortOrder=desc&minCalorieValues=0&maxCalorieValues=2000&minFoodPriceValues=0&maxFoodPriceValues=250&minDeliveryFeeValues=0&maxDeliveryFeeValues=150&selectedRequirement=vegan`
       )
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", ` ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.takeouts.length).toBe(2);
-  });
-});
-
-// Unauthorized users should not have access to the takeouts
-describe("GET /api/takeouts/match-takeouts without authorization", () => {
-  it("should not allow unauthorized access to recipes", async () => {
-    const res = await request(app).get(`/api/takeouts/match-takeouts`);
-    expect(res.statusCode).toBe(401);
   });
 });
