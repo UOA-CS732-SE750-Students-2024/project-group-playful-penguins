@@ -71,7 +71,6 @@ export default function SignUpPage({ setToken }) {
       const response = await signup(data.name, data.email, data.password);
       if (response && response.user) {
         setToken(response.user.token);
-        sessionStorage.setItem('userEmail', response.user.email);
         navigate("/");
       }
       setIsError(false);

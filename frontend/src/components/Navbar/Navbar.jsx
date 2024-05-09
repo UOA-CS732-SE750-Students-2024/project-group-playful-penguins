@@ -40,7 +40,6 @@ export function Navbar() {
   const handleLogout = () => {
     setAnchorEl(null);
     sessionStorage.clear();
-    sessionStorage.clear();
     navigate("/login");
   };
 

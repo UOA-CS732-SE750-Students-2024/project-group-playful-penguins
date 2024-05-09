@@ -7,10 +7,10 @@ export const getFavoritesQuery = async (isRecipe, email, isFavorites) => {
     if (isFavorites) {
       if (isRecipe) {
         user = await User.findOne({ email }, { favoriteRecipes: 1 });
-        return { id: { $in: user.favoriteRecipes } };
+        if (user) return { id: { $in: user.favoriteRecipes } };
       } else {
         user = await User.findOne({ email }, { favoriteTakeouts: 1 });
-        return { id: { $in: user.favoriteTakeouts } };
+        if (user) return { id: { $in: user.favoriteTakeouts } };
       }
     } else return {};
   } catch (error) {
