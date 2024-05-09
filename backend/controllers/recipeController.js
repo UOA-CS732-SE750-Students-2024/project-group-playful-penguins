@@ -35,11 +35,12 @@ const getRecipeByID = asyncHandler(async (req, res) => {
       cuisines: 1,
       extendedIngredients: 1,
       analyzedInstructions: 1,
+      "nutrition.nutrients": 1,
     }
   );
 
   if (recipe) {
-    res.json(recipe);
+    res.statusCode(200).json(recipe);
   } else {
     res.status(404);
     throw new Error("Recipe not found");
@@ -212,9 +213,4 @@ const getFoodRecipes = async (req, res) => {
   }
 };
 
-export {
-  getRecipeByID,
-  getRecipeBySearch,
-  getPaginateRecipe,
-  getFoodRecipes,
-};
+export { getRecipeByID, getRecipeBySearch, getPaginateRecipe, getFoodRecipes };

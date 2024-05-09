@@ -230,7 +230,7 @@ export default function RecipeInfo() {
                 }}
               >
                 <strong>Dish Type: </strong>
-                {console.log(recipe.dishTypes)}
+
                 {recipe && recipe.dishTypes && recipe.dishTypes.length > 0
                   ? recipe.dishTypes.join(", ")
                   : "Stay tuned for dish types !"}
@@ -246,11 +246,11 @@ export default function RecipeInfo() {
                 }}
               >
                 <strong>Cuisine Type: </strong>
-                
+
                 {recipe.cuisines && recipe.cuisines.length > 0
                   ? recipe.cuisines.join(", ")
                   : "Stay tuned for cuisine details !"}
-                  {console.log(recipe)}
+                {}
               </Typography>
 
               <Box
@@ -348,7 +348,7 @@ export default function RecipeInfo() {
                 >
                   NUTRITION INFORMATION
                 </Typography>
-                {console.log(recipe.nutrition)}
+
                 {recipe.nutrition.nutrients.map((nutrient, index) => (
                   <Box key={index} className={` ${styles["nutrients-item"]}`}>
                     <Typography
