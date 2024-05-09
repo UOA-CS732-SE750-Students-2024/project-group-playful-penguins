@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const RecipeSchema = mongoose.Schema({
   id: Number,
@@ -6,26 +6,18 @@ const RecipeSchema = mongoose.Schema({
   servings: String,
   readyInMinutes: Number,
   image: String,
-  nutrition:{
-    nutrients:{
-      name: String,
-      amount: Number,
-      unit:String
-    }
-
-  },
-  dishTypes:   {
-    type:[String]
+  dishTypes: {
+    type: [String],
   },
   cuisines: {
-    type:[String]
+    type: [String],
   },
   diets: {
     type: [String],
   },
   summary: String,
   cuisines: {
-    type:[String]
+    type: [String],
   },
   extendedIngredients: {
     id: Number,
@@ -45,6 +37,10 @@ const RecipeSchema = mongoose.Schema({
       number: Number,
       step: String,
     },
+  },
+  nutrition: {
+    type: Schema.Types.Mixed,
+    default: {},
   },
   calories: Number,
 });
