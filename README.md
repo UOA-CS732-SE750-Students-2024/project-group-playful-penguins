@@ -64,9 +64,9 @@ password:
 
 ```
 
-# Assignment specifications and team contributions
+# Assignment specifications 
 
-## 1. How well have you mastered React, git, and other tools / frameworks introduced in this course?
+## 1. Usage of the frameworks used in the course
 
 Our team has effectively utilized the MERN stack, which was covered in the course. We have implemented React for our front-end framework, NodeJS for our backend operations, the Express library for backend routing, and MongoDB for our database needs.
 
@@ -80,7 +80,7 @@ For backend communications, we have used the Express library along with axios an
 
 Mongoose was incorporated as demonstrated in the course lectures, and we utilized various testing libraries...
 
-## 2. Have you shown the ability to carry out further learning beyond the course material to add value to your prototype?
+## 2. Application of further learning beyond the scope of course material
 
 Our project extensively incorporates MaterialUI to achieve a modern and sleek design.
 
@@ -88,7 +88,7 @@ We deployed our application using a virtual machine instance on Google Compute E
 
 For user authentication, we integrated Google Auth along with JWT tokens.
 
-## 3. How well is your product designed, especially from a user's perspective? How well have you applied principles such as design thinking in the construction of your prototype? Does your solution actually meet the user requirements agreed in the original proposal? Can users actually accomplish the tasks they need to accomplish?
+## 3. Meeting user requirements and initial project proporsal requirements
 
 Our application is designed to inform users about the nutritional aspects of meals, whether cooked at home or ordered out.
 
@@ -107,7 +107,7 @@ Additionally, we managed to implement several desirable features like dietary fi
 Before starting frontend development, we designed our interfaces in Figma to ensure alignment with our visual goals.
 
 
-## 4. Has your code been developed according to best-practices within your applied frameworks? Is it understandable and maintainable?
+## 4. Best practices used in development
 
 Our team has consistently adhered to the best practices within our applied frameworks, ensuring both the understandability and maintainability of our code.
 
@@ -127,13 +127,13 @@ Environmental Configurations:
 - We maintain separate .env files in both the frontend and backend for enhanced security, ensuring sensitive information is properly isolated.
 
 
-## 5. Has your code been tested? How?
+## 5. Testing 
 
 We have conducted tests on both the frontend and backend using the Jest testing framework.
 
 Prettier has been used to ensure code formatting consistency.
 
-## 6. Has your project been deployed? Any free-tier deployment solution will be perfectly acceptable.
+## 6. Deployment
 
 Our project has been successfully deployed to a remote VM on Google Cloud Platform.
 
