@@ -135,7 +135,7 @@ We have conducted tests on both the frontend and backend using the Jest testing 
 
 Our project has been successfully deployed to a remote VM on Google Cloud Platform.
 
-For detailed deployment procedures and settings, please consult the deployment section of our wiki.
+For detailed deployment procedures and settings, please consult the deployment section of our [wiki](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/wiki).
 
 
 # Project Management
@@ -144,7 +144,7 @@ For detailed deployment procedures and settings, please consult the deployment s
 - Our project management process involves creating new issues in Jira for each feature during our sprints, with each feature branch in GitHub named using the prefix 'ppeng-' followed by the Jira task ID.
 - Commits within these branches also follow a consistent naming convention, including the task ID as a prefix, enhancing traceability.
 - At the end of each sprint, features are peer-reviewed by at least two team members before being merged into the main branch, ensuring code quality and collaborative improvement.
-- For comprehensive details on our project management practices and more, please refer to the project management section of our wiki.
+- For comprehensive details on our project management practices and more, please refer to the project management section of our [wiki](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/wiki).
 
 
 # Technologies Used
