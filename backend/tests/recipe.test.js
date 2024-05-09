@@ -51,16 +51,17 @@ describe("GET /api/recipes/:id", () => {
   });
 });
 
-describe("GET /api/recipes/:id", () => {
+describe("GET /api/recipes/match-recipes", () => {
   const token = jwt.sign(testUser, ACCESS_TOKEN_SECRET, options);
 
-  it("should return a range", async () => {
+  it("should return a range of recipes", async () => {
     const res = await request(app)
       .get(
         "/api/recipes/match-recipes?searchTerm=&sortBy=&sortOrder=&minCalorieValues=0&maxCalorieValues=100&minCarbohydrateValues=&maxCarbohydrateValues=&minCookingTimeValues=&maxCookingTimeValues=&selectedRequirement="
       )
       .set("Authorization", `Bearer ${token}`);
+
     expect(res.statusCode).toBe(200);
-    expect(res.body.length).toBe(3);
+    expect(res.body.recipes.length).toBe(3);
   });
 });
