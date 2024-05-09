@@ -13,23 +13,7 @@ Deployed URL: https://thenutriguin.com
 
 ## 1. Environment Variables
 
-**Backend**
-
-Create a .env file in the `/backend` folder with the following content
-
-```
-
-
-```
-
-**Frontend**
-
-Create a .env file in the `/frontend` folder with the following content
-
-```
-
-
-```
+Add backend and frontend environment variables in two different `./env` files in their respective folders
 
 ## 2. Steps to run our App
 
@@ -49,6 +33,10 @@ password:
 # Key Features
 
 # Screenshots
+
+[https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/recipe_page.png]
+
+[https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/takeout_page.png]
 
 # Testing
 
@@ -116,11 +104,13 @@ Frontend Practices:
 - We employ style constant files to maintain consistent UI design throughout the application.
 - We have organized separate services in the frontend to manage backend route calls efficiently.
 - Our filters are structured for high reusability across different parts of the application.
+- We used a provider to provide helper functions for the filter
+
 Backend Practices:
 
-- We utilize app context and nested routes to enhance the structure and readability of our backend.
-Security is a priority; we hash user passwords combined with a salt before storing them in the database to safeguard against external threats.
-- For critical APIs, such as those handling recipes and takeouts, we implement JWT to ensure that only authorized users can make requests.
+- We utilize nested routes to enhance the structure and readability of our backend.
+- Security is a priority; we hash user passwords combined with a salt before storing them in the database to safeguard against external threats.
+- For critical APIs, such as those handling recipes and takeouts, we verify JWT to ensure that only authorized users can make requests. So even if someone changes the token on the frontend, the backend is going to verify the token that it receives.
 
 Environmental Configurations:
 
@@ -158,12 +148,13 @@ For detailed deployment procedures and settings, please consult the deployment s
 - **Version control** - git
 - **Repository management** - GitHub
 - **Project Management** - JIRA
+- **Authorization & Token** - jwt, Google OAuth 2.0
 - **Code Formatting** - Prettier
 - **Linting Utility** - ESLint
 - **Deployment** - Google Cloud
-- **Testing** - Jest, Cypress
+- **Testing** - Jest
 
-Technologies beyond the course material that we use are Material UI, Google Cloud (deployment), and Cypress (for front-end testing).
+Technologies beyond the course material that we use are Material UI, Google Cloud (deployment), jwt & Google OAuth 2.0 (Authorization)
 
 # Members
 
