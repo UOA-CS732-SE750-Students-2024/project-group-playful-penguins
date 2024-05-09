@@ -31,26 +31,13 @@ username: reviewer@user.nz <br/>
 password: Test1234
 
 # Key Features
+- Mobile responsiveness
 
 # Screenshots
 
 ![recipe-page](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/recipe_page.png)
 
 ![takeout-page](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/blob/ppeng-61-readme-changes/group-image/takeout_page.png)
-
-# Testing
-
-## Backend
-
-```
-
-```
-
-## Frontend
-
-```
-
-```
 
 # Assignment specifications 
 
@@ -60,9 +47,7 @@ Our team has effectively utilized the MERN stack, which was covered in the cours
 
 We have employed git for version control, consistently using several git commands to ensure our code remains synchronized.
 
-Each team member developed features in separate branches, which were merged into the main branch only after receiving approval from at least two other reviewers on the team.
-
-We have efficiently utilized React to construct our single-page application by creating reusable components.
+We have also efficiently utilized React to construct our single-page application by creating reusable components.
 
 For backend communications, we have used the Express library along with axios and fetch for making requests to backend endpoints.
 
@@ -82,7 +67,7 @@ Our application is designed to inform users about the nutritional aspects of mea
 
 We display detailed nutritional information such as calories, carbs, and proteins in our recipes and offer various filters to help users select meals based on specific nutritional needs.
 
-Our prototype meets all the essential requirements outlined in our initial proposal.
+Our prototype meets all the essential requirements(must haves) outlined in our initial proposal.
 
 The application suggests healthy recipes with a health star score of at least 50, including ingredients and cooking instructions. Nutritional information and dietary requirements are also detailed on each recipe page. For takeout options, this information can be filtered on the homepage.
 
@@ -90,9 +75,9 @@ For those mindful of their budget, takeout prices are displayed, allowing users 
 
 The search functionality enables users to quickly find specific dishes in both takeouts and recipes.
 
-Additionally, we managed to implement several desirable features like dietary filters (e.g., vegan, vegetarian, gluten-free) and user profiles, which save favorite dishes for easy access.
+Additionally, we managed to implement several desirable features (should haves) like dietary filters (e.g., vegan, vegetarian, gluten-free) and user profiles, which save favorite dishes for easy access.
 
-Before starting frontend development, we designed our interfaces in Figma to ensure alignment with our visual goals.
+Before starting frontend development, we designed our interfaces in Figma to ensure alignment with our visual goals. (Find more information about the UI desing in our [wiki](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/wiki)
 
 
 ## 4. Best practices used in development
@@ -104,7 +89,6 @@ Frontend Practices:
 - We employ style constant files to maintain consistent UI design throughout the application.
 - We have organized separate services in the frontend to manage backend route calls efficiently.
 - Our filters are structured for high reusability across different parts of the application.
-- We used a provider to provide helper functions for the filter
 
 Backend Practices:
 
@@ -121,15 +105,26 @@ Environmental Configurations:
 
 We have conducted tests on both the frontend and backend using the Jest testing framework.
 
+## Backend
+
+```
+
+```
+
+## Frontend
+
+```
+
+```
+
 ## 6. Deployment
 
-Our project has been successfully deployed to a remote VM on Google Cloud Platform.
+Our project has been successfully deployed to a remote VM on Google Cloud Platform, which can be accessed by the URL: https://thenutriguin.com/
 
 For detailed deployment procedures and settings, please consult the deployment section of our [wiki](https://github.com/UOA-CS732-SE750-Students-2024/project-group-playful-penguins/wiki).
 
 
 # Project Management
-
 
 - Our project management process involves creating new issues in Jira for each feature during our sprints, with each feature branch in GitHub named using the prefix 'ppeng-' followed by the Jira task ID.
 - Commits within these branches also follow a consistent naming convention, including the task ID as a prefix, enhancing traceability.
