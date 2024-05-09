@@ -7,6 +7,7 @@ import { CookingTimeFilter } from "../Filters/CookingTimeFilter/CookingTimeFilte
 import { DeliveryFeeFilter } from "../Filters/DeliveryFeeFilter/DeliveryFeeFilter";
 import { FoodPriceFilter } from "../Filters/FoodPriceFilter/FoodPriceFilter";
 import { Box, Button, CircularProgress } from "@mui/material";
+import { Favorites } from "../Favorites/Favorites";
 import { LoadingButton } from "@mui/lab";
 
 export function FilterPanel({ onApplyFilter }) {
@@ -51,6 +52,7 @@ export function FilterPanel({ onApplyFilter }) {
           </div>
         )}
         <DietRequirementFilter />
+        <Favorites />
         <Box
           sx={{
             display: "flex",

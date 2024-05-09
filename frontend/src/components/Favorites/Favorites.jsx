@@ -17,9 +17,7 @@ export function Favorites() {
   return (
     <Box
       sx={{
-        pt: "32px",
-        pl: "16px",
-        pr: "16px",
+        pr: "50px",
         display: "flex",
         justifyContent: "flex-end",
       }}
@@ -34,9 +32,8 @@ export function Favorites() {
           backgroundColor: isTakeout ? "#77595E" : "#00665E",
           borderRadius: "15px",
           border: "1px solid #E0E0E0",
-          height: { xs: "40px", md: "65px" },
+          height: { xs: "45px", md: "45px" },
           fontSize: { xs: "14px", sm: "16px" },
-          justifyContent: "space-evenly",
           textTransform: "none",
           "&:hover": {
             backgroundColor: isTakeout ? "#473538" : "#00665E",
