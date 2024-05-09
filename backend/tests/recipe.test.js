@@ -1,9 +1,22 @@
+import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import express from "express";
 import request from "supertest";
-import routes from "../src/routes/recipeRoutes.js";
+import routes from "../routes/recipeRoutes.js";
+import { generateAccessToken } from "../middleware/authMiddleware.js";
 
 require("dotenv").config();
+
+const testUser = {
+  id: "663c3bec32d5e6141817a49b",
+  email: "Testing@gmail.com",
+  name: "test",
+  favoriteRecipes: [],
+  favoriteTakeouts: [],
+};
+const options = { expiresIn: "1h" };
+
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
 const app = express();
 app.use(express.json());
@@ -35,5 +48,19 @@ describe("GET /api/recipes/:id", () => {
     expect(res.body.title).toBe(
       "Quinoa Salad With Avocado, Asparagus and Sun Dried Tomatoes"
     );
+  });
+});
+
+describe("GET /api/recipes/:id", () => {
+  const token = jwt.sign(testUser, ACCESS_TOKEN_SECRET, options);
+
+  it("should return a range", async () => {
+    const res = await request(app)
+      .get(
+        "/api/recipes/match-recipes?searchTerm=&sortBy=&sortOrder=&minCalorieValues=0&maxCalorieValues=100&minCarbohydrateValues=&maxCarbohydrateValues=&minCookingTimeValues=&maxCookingTimeValues=&selectedRequirement="
+      )
+      .set("Authorization", `Bearer ${token}`);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(3);
   });
 });
