@@ -8,7 +8,7 @@ Our application Nutriguin will provide recommendations of healthy dishes availab
 
 Deployed URL: https://thenutriguin.com
 
-Note: Users have to use their university emails to signin with Google
+**Note: Users have to use their university emails to signin with Google**
 
 # Setup
 
