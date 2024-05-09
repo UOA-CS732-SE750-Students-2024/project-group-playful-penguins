@@ -1,4 +1,3 @@
-import asyncHandler from "express-async-handler";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { jwtDecode } from "jwt-decode";
@@ -18,7 +17,7 @@ dotenv.config();
 // @desc    Fetch a takeout by ID
 // @route   GET /api/takeouts/:id
 // @access  Public
-const getTakeoutByID = asyncHandler(async (req, res) => {
+const getTakeoutByID = async (req, res) => {
   const takeout = await Takeout.findOne({ id: req.params.id });
 
   if (takeout) {
@@ -27,7 +26,7 @@ const getTakeoutByID = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Takeout not found");
   }
-});
+};
 
 
 const getFoodTakeout = async (req, res) => {
@@ -82,7 +81,7 @@ const getFoodTakeout = async (req, res) => {
   const query = queries.length > 0 ? { $and: queries } : {};
 
   try {
-    if (verifyAccessToken(authToken)) {
+    if (await verifyAccessToken(authToken)) {
       const matchRecipes = await Takeout.search(query, sortCriteria);
       res.status(200).json({
         takeouts: matchRecipes,

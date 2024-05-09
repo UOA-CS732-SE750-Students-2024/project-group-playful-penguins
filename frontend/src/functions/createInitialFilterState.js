@@ -1,4 +1,4 @@
-import { FILTERS } from "../constants/styles-constant";
+import { FILTERS } from "../constants/filters-constant";
 
 export const createInitialFilterState = (filterConfig) => {
   const filterKeys = FILTERS[filterConfig];

@@ -1,8 +1,7 @@
-import { FILTERS } from "../../constants/styles-constant";
+import { FILTERS } from "../../constants/filters-constant";
 
 export const getFilterQuery = (filters) => {
   const queryParams = [];
-  console.log(filters);
 
   Object.keys(filters).map((key) => {
     if (

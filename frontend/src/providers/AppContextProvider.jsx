@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FAVORITES, FILTERS, SORT_BY } from "../constants/styles-constant";
+import { FAVORITES, SORT_BY } from "../constants/filters-constant";
 import { createInitialFilterState } from "../functions/createInitialFilterState";
 
 export const AppContext = React.createContext({});

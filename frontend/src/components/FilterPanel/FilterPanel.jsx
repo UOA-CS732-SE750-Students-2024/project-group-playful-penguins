@@ -7,9 +7,7 @@ import { CookingTimeFilter } from "../Filters/CookingTimeFilter/CookingTimeFilte
 import { DeliveryFeeFilter } from "../Filters/DeliveryFeeFilter/DeliveryFeeFilter";
 import { FoodPriceFilter } from "../Filters/FoodPriceFilter/FoodPriceFilter";
 import { Box, Button, CircularProgress } from "@mui/material";
-import { colors, FILTERS } from "../../constants/styles-constant";
 import { LoadingButton } from "@mui/lab";
-// import { getFilteredRecipes } from "../../services/RecipeService";
 
 export function FilterPanel({ onApplyFilter }) {
   const { isTakeout, resetRecipeFilters, resetTakeoutFilters } =
@@ -22,7 +20,6 @@ export function FilterPanel({ onApplyFilter }) {
   const handleReset = () => {
     resetFilters();
     onApplyFilter();
-    // TODO need help to fix this
   };
 
   const handleApplyFilters = (event) => {

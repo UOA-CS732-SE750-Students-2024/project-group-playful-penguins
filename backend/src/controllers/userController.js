@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import dotenv from "dotenv";
-import { response } from "express";
 import User from "../model/userModel.js";
 import { generateAccessToken } from "../middleware/authMiddleware.js";
 

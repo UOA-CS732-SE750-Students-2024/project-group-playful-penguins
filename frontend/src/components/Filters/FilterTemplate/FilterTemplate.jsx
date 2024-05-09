@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { AppContext } from "../../../providers/AppContextProvider";
-import { colors, FILTERS } from "../../../constants/styles-constant";
+import { colors } from "../../../constants/styles-constant";
+import { FILTERS } from "../../../constants/filters-constant";
 import { StyledSlider, StyledTextField } from "../../../theme-overrides";
 
 export function FilterTemplate({ filterKey }) {

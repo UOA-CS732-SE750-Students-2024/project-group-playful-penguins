@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Menu, MenuItem, Button, Typography, Box } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { colors, SORT_BY } from "../../constants/styles-constant";
+import { SORT_BY } from "../../constants/filters-constant";
 import { AppContext } from "../../providers/AppContextProvider";
 
 export function SortBy() {
