@@ -3,6 +3,7 @@ import { Menu, MenuItem, Button, Typography, Box } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { SORT_BY } from "../../constants/filters-constant";
 import { AppContext } from "../../providers/AppContextProvider";
+import { button_colors } from "../../constants/styles-constant";
 
 export function SortBy() {
   const { isTakeout, selectedSortByOption, setSelectedSortByOption } =
@@ -46,7 +47,7 @@ export function SortBy() {
           },
           width: { xs: "120px", sm: "160px",md:"200px" },
           color: "white",
-          backgroundColor: isTakeout ? "#77595E" : "#00665E",
+          backgroundColor: isTakeout ? button_colors.TAKE_OUT_COLOR.PRIMARY_COLOR : button_colors.COOK_AT_HOME_COLOR.PRIMARY_COLOR,
           borderRadius: "15px",
           border: "1px solid #E0E0E0",
           height: { xs: "50px", md: "65px" },
@@ -54,7 +55,7 @@ export function SortBy() {
           fontSize: { xs: "14px", sm: "16px" },
           textTransform: "none",
           "&:hover": {
-            backgroundColor: isTakeout ? "#473538" : "#00665E",
+            backgroundColor: isTakeout ? button_colors.TAKE_OUT_COLOR.HOVER_COLOR : button_colors.COOK_AT_HOME_COLOR.HOVER_COLOR,
           },
         }}
         endIcon={<KeyboardArrowDownIcon />}
