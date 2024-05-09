@@ -115,13 +115,13 @@ Backend end-to-end testing was performed. In this type of testing, we test the a
 ## Frontend
 
 We are using the react testing and vitest libraries to perform the frontend testing
-```
+
 1.  In command prompt, navigate to `cd .\frontend `
 
 2.  Run the command `npm i` if not already done so
 
 3.  Run the command `npm test`
-```
+
 
 ## 6. Deployment
 
