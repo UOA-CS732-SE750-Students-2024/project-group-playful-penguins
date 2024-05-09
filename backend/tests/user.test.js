@@ -22,50 +22,52 @@ afterEach(async () => {
 
 describe("POST /api/user/login", () => {
   it("should return a specific user", async () => {
+    const testEmail = "helloworld@aucklanduni.ac.nz";
     const requestBody = {
-      email: "helloworld@aucklanduni.ac.nz",
+      email: testEmail,
       password: "12345678",
     };
 
     const res = await request(app).post("/api/user/login").send(requestBody);
-    // console.log(res.body);
     expect(res.statusCode).toBe(201);
     expect(res.body.user.name).toBe("Hello World");
-    expect(res.body.user.email).toBe("helloworld@aucklanduni.ac.nz");
+    expect(res.body.user.email).toBe(testEmail);
   });
 });
 
 describe("POST /api/user/signup", () => {
   it("should return a specific user signup", async () => {
+    const testName = "John Doe";
+    const testEmail = "johndoe@aucklanduni.ac.nz";
     const requestBody = {
-      name: "John Doe",
-      email: "johndoe@aucklanduni.ac.nz",
+      name: testName,
+      email: testEmail,
       password: "12345678",
     };
 
     const res = await request(app).post("/api/user/signup").send(requestBody);
-    // console.log(res.body);
     expect(res.statusCode).toBe(201);
     expect(res.body.message).toBe("User successfully registered!");
 
-    expect(res.body.user.name).toBe("John Doe");
-    expect(res.body.user.email).toBe("johndoe@aucklanduni.ac.nz");
+    expect(res.body.user.name).toBe(testName);
+    expect(res.body.user.email).toBe(testEmail);
 
     //clean up test user
     const result = await mongoose.connection.db
       .collection("users")
-      .findOneAndDelete({ email: "johndoe@aucklanduni.ac.nz" });
+      .findOneAndDelete({ email: testEmail });
   });
 });
 
 describe("GET /api/user/favorites/get", () => {
   it("should return all favourites", async () => {
+    const testEmail = "helloworld@aucklanduni.ac.nz";
     const requestBody = {
-      email: "helloworld@aucklanduni.ac.nz",
+      email: testEmail,
     };
 
     const res = await request(app).get(
-      "/api/user/favorites/get?email=helloworld@aucklanduni.ac.nz"
+      "/api/user/favorites/get?email=" + testEmail
     );
 
     // console.log(res.body);
@@ -78,7 +80,6 @@ describe("GET /api/user/favorites/get", () => {
 describe("POST /api/user/favorites/updaterecipe", () => {
   it("should add a favourite recipe", async () => {
     const testRecipeID = 659060;
-
     const testEmail = "helloworld@aucklanduni.ac.nz";
 
     const requestBody = {
@@ -135,7 +136,6 @@ describe("POST /api/user/favorites/removerecipe", () => {
 describe("POST /api/user/favorites/updatetakeout", () => {
   it("should add a favourite takeout", async () => {
     const testTakeoutID = "t21";
-
     const testEmail = "helloworld@aucklanduni.ac.nz";
 
     const requestBody = {
