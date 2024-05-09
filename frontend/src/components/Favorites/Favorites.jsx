@@ -34,12 +34,13 @@ export function Favorites() {
         aria-haspopup="true"
         onClick={handleClick}
         sx={{
-          width: "150px",
+          width: {xs:"120px",sm:"200px"},
           color: "white",
           backgroundColor: isTakeout ? "#77595E" : "#00665E",
           borderRadius: "15px",
           border: "1px solid #E0E0E0",
-          height: "65px",
+          height:{xs:"40px",m:"65px"},
+          fontSize: {xs:"14px",sm:"16px"},          
           justifyContent: "space-evenly",
           fontSize: "16px",
           textTransform: "none",

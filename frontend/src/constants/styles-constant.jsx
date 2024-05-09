@@ -14,20 +14,20 @@ export const FILTERS = {
   RECIPE_FILTER: {
     CALORIE: {
       NAME: "Calorie (kcal)",
-      INITIAL_VALUE: [0, 20000],
-      MIN_AND_MAX_VALUE: [0, 20000],
+      INITIAL_VALUE: [0, 2000],
+      MIN_AND_MAX_VALUE: [0, 2000],
       STATE_KEY: "calorieValues",
     },
     CARBOHYDRATE: {
       NAME: "Carbohydrate (g)",
-      INITIAL_VALUE: [0, 10000],
-      MIN_AND_MAX_VALUE: [0, 10000],
+      INITIAL_VALUE: [0, 250],
+      MIN_AND_MAX_VALUE: [0, 250],
       STATE_KEY: "carbohydrateValues",
     },
     COOKING_TIME: {
-      NAME: "Cooking Time",
-      INITIAL_VALUE: [0, 2000],
-      MIN_AND_MAX_VALUE: [0, 20000],
+      NAME: "Cooking Time (min)",
+      INITIAL_VALUE: [0, 150],
+      MIN_AND_MAX_VALUE: [0, 150],
       STATE_KEY: "cookingTimeValues",
     },
     DIET_REQUIREMENT: {
@@ -50,20 +50,20 @@ export const FILTERS = {
   TAKEOUT_FILTER: {
     CALORIE: {
       NAME: "Calorie (kcal)",
-      INITIAL_VALUE: [0, 20000],
-      MIN_AND_MAX_VALUE: [0, 20000],
+      INITIAL_VALUE: [0, 2000],
+      MIN_AND_MAX_VALUE: [0, 2000],
       STATE_KEY: "calorieValues",
     },
     FOOD_PRICE: {
-      NAME: "Food price",
-      INITIAL_VALUE: [10, 10000],
-      MIN_AND_MAX_VALUE: [0, 50000],
+      NAME: "Food price ($)",
+      INITIAL_VALUE: [0, 50],
+      MIN_AND_MAX_VALUE: [0, 50],
       STATE_KEY: "foodPriceValues",
     },
     DELIVERY_FEE: {
-      NAME: "Delivery Time",
-      INITIAL_VALUE: [1, 700],
-      MIN_AND_MAX_VALUE: [0, 1400],
+      NAME: "Delivery Time (min)",
+      INITIAL_VALUE: [0, 20],
+      MIN_AND_MAX_VALUE: [0, 20],
       STATE_KEY: "deliveryFeeValues",
     },
     DIET_REQUIREMENT: {
@@ -128,5 +128,5 @@ export const SORT_BY = {
 };
 
 export const FAVORITES = {
-  INITIAL_VALUE: false
-}
+  INITIAL_VALUE: false,
+};

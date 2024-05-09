@@ -38,6 +38,7 @@ export function FilterPanel({ onApplyFilter }) {
             xs:"0px",
             sm:"16px"
           },
+          height:"80%"
         }}
       >
         <CalorieCountFilter />

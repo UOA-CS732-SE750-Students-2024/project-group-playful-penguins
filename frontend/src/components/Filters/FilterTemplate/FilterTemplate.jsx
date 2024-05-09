@@ -72,7 +72,11 @@ export function FilterTemplate({ filterKey }) {
         width:{
           xs:"200px",
           // sm:"200px",
-          md:"250px"
+          md:"200px"
+        },
+        height:{
+          xs:"100px"
+          // xs:"60%"
         }
       }}
     >

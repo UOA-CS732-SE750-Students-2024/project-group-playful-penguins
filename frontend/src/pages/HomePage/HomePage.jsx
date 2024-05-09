@@ -149,21 +149,57 @@ export function HomePage() {
         <FilterPanel
           onApplyFilter={() => {
             fetchFoodData();
-            closeFilterOnMobile(); // Replace 'anotherFunction' with the actual function you want to call
+            closeFilterOnMobile();
           }}
         />
       </Box>
       <Box className={styles["features-and-food-list-container"]}>
-        <Box className={styles["search-and-sort-panel"]}>
-          <Box className={styles["search-bar"]}>
+        <Box
+          className={styles["search-and-sort-panel"]}
+          sx={{
+            flexDirection: {
+              xs: "column",
+              sm: "row",
+            },
+            alignItems: "center",
+            justifyContent:"space-between"
+
+          }}
+        >
+          <Box className={styles["search-bar"]} sx={{
+            margin:{
+              xs:"0px",
+              md:"40px"
+            },
+            // width:{
+            //   xs:"100px",
+            //   sm:"100%"
+            // }
+
+          }}>
             <SearchBar />
           </Box>
-          <div className={styles["favorites"]}>
-            <Favorites />
-          </div>
-          <Box className={styles["sort-by"]}></Box>
-          <Box className={styles["sort-by"]}>
-            <SortBy />
+          <Box sx={{
+            width:"100%",
+            display:"flex",
+            flexDirection:{
+              xs:"row",
+              sm:"column"
+              // sm:"column"
+            },
+            alignItems:"center",
+            paddingBottom:{
+              xs:"20px",
+              sm:"0px"
+            }
+          }}>
+            <Box className={styles["favorites"]}>
+              <Favorites />
+            </Box>
+
+            <Box className={styles["sort-by"]}>
+              <SortBy />
+            </Box>
           </Box>
         </Box>
         <Box className={styles["food-list"]}>
