@@ -38,7 +38,7 @@ export function HomePage() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [isFilterVisible, setFilterVisible] = useState(!isMobile); // keep an eye
+  const [isFilterVisible, setFilterVisible] = useState(!isMobile); 
 
   const toggleFilterVisibility = () => {
     setFilterVisible(!isFilterVisible);
@@ -144,7 +144,7 @@ export function HomePage() {
         className={styles["filter-container"]}
         sx={{
           display: isFilterVisible ? "block" : "none",
-        }} // keep an eye
+        }} 
       >
         <FilterPanel
           onApplyFilter={() => {
@@ -162,44 +162,38 @@ export function HomePage() {
               sm: "row",
             },
             alignItems: "center",
-            justifyContent:"space-between"
-
+            justifyContent: "space-between",
           }}
         >
-          <Box className={styles["search-bar"]} sx={{
-            margin:{
-              xs:"0px",
-              md:"40px"
-            },
-            // width:{
-            //   xs:"100px",
-            //   sm:"100%"
-            // }
-
-          }}>
+          <Box
+            className={styles["search-bar"]}
+            sx={{
+              margin: {
+                xs: "0px",
+                md: "40px",
+              },
+            }}
+          >
             <SearchBar />
           </Box>
-          <Box sx={{
-            width:"100%",
-            display:"flex",
-            flexDirection:{
-              xs:"row",
-              sm:"column"
-              // sm:"column"
-            },
-            alignItems:"center",
-            paddingBottom:{
-              xs:"20px",
-              sm:"0px"
-            }
-          }}>
-            <Box className={styles["favorites"]}>
-              <Favorites />
-            </Box>
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: {
+                xs: "row",
+                sm: "column",
+              },
+              alignItems: "center",
+              justifyContent: "space-evenly",
+              paddingBottom: {
+                xs: "20px",
+              },
+            }}
+          >
+            <Favorites />
 
-            <Box className={styles["sort-by"]}>
-              <SortBy />
-            </Box>
+            <SortBy />
           </Box>
         </Box>
         <Box className={styles["food-list"]}>

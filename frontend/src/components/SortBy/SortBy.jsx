@@ -31,7 +31,7 @@ export function SortBy() {
       sx={{
         pt: "32px",
         pl: "16px",
-        pr: "32px",
+        pr: "16px",
         display: "flex",
         justifyContent: "flex-end",
       }}
@@ -41,14 +41,17 @@ export function SortBy() {
         aria-haspopup="true"
         onClick={handleClick}
         sx={{
-          width: {xs:"120px",sm:"200px"},
+          padding:{
+
+          },
+          width: { xs: "120px", sm: "160px",md:"200px" },
           color: "white",
           backgroundColor: isTakeout ? "#77595E" : "#00665E",
           borderRadius: "15px",
           border: "1px solid #E0E0E0",
-          height:{xs:"40px",sm:"65px"}, 
+          height: { xs: "40px", md: "65px" },
           justifyContent: "space-evenly",
-          fontSize: {xs:"14px",sm:"16px"},
+          fontSize: { xs: "14px", sm: "16px" },
           textTransform: "none",
           "&:hover": {
             backgroundColor: isTakeout ? "#473538" : "#00665E",
@@ -61,7 +64,11 @@ export function SortBy() {
       <Menu
         MenuListProps={{
           sx: {
-            width: "150px",
+            width: {
+              xs: "100px",
+              sm: "150px",
+            },
+           
           },
         }}
         id="sort-by-menu"
@@ -74,6 +81,12 @@ export function SortBy() {
           <MenuItem
             key={sortByOption.key}
             onClick={() => handleSortBySelect(sortByOption)}
+            sx={{
+              fontSize: {
+                xs: "12px",
+                sm: "16px",
+              },
+            }}
           >
             {sortByOption.name}
           </MenuItem>

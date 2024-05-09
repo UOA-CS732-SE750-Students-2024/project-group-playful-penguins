@@ -195,7 +195,7 @@ export function Navbar() {
                 gap: "8px",
               }}
             >
-              <Typography
+              <Typography fontWeight="fontWeightBold"
                 sx={{
                   fontSize: {
                     xs: "10px",
@@ -204,7 +204,7 @@ export function Navbar() {
                 }}
                 style={{ color: "black" }}
               >
-                {userName}
+                Hi, {userName} !
               </Typography>
               <AccountCircleIcon />
             </Box>
@@ -245,10 +245,6 @@ export function Navbar() {
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
             <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <Settings fontSize="small" />
-              </ListItemIcon>
-              Settings
             </MenuItem>
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>

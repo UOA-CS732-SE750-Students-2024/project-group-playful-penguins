@@ -32,7 +32,7 @@ export function SearchBar() {
           ),
           sx: {
             height: {xs:"40px",sm:"60px"},
-            width:{xs:"280px"},
+            width:{xs:"280px",sm:"300px",md:"300px",lg:"700px"},
             fontSize:{xs:"14px",md:"20px"},
             borderRadius: "15px",
             boxShadow: "0 3px 6px rgba(0,0,0,0.1)",
