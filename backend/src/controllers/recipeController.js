@@ -39,7 +39,7 @@ const getRecipeByID = async (req, res) => {
   );
 
   if (recipe) {
-    res.statusCode(200).json(recipe);
+    res.status(200).json(recipe);
   } else {
     res.status(404);
     throw new Error("Recipe not found");

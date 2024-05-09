@@ -38,7 +38,7 @@ export function HomePage() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [isFilterVisible, setFilterVisible] = useState(!isMobile); 
+  const [isFilterVisible, setFilterVisible] = useState(!isMobile);
 
   const toggleFilterVisibility = () => {
     setFilterVisible(!isFilterVisible);
@@ -65,7 +65,7 @@ export function HomePage() {
           access_token
         );
       }
-      console.log(recipeFilters);
+
       if (response) {
         if (response.status === 401) {
           navigate("/login");
@@ -143,7 +143,7 @@ export function HomePage() {
         className={styles["filter-container"]}
         sx={{
           display: isFilterVisible ? "block" : "none",
-        }} 
+        }}
       >
         <FilterPanel
           onApplyFilter={() => {
