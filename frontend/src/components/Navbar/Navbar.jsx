@@ -27,7 +27,11 @@ export function Navbar() {
   const { isTakeout, changeCategory } = useContext(AppContext);
   const location = useLocation();
   const isRecipePage = location.pathname.startsWith("/home/recipe/");
-  const [userName, setUserName] = useState(sessionStorage.getItem('token') ? jwtDecode(sessionStorage.getItem('token')).name : '');
+  const [userName, setUserName] = useState(
+    sessionStorage.getItem("token")
+      ? jwtDecode(sessionStorage.getItem("token")).name
+      : ""
+  );
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -97,14 +101,6 @@ export function Navbar() {
     transition: "background-color 0.3s ease",
     outline: "none",
     cursor: "pointer",
-  };
-
-  const responseMessage = (response) => {
-    console.log(response);
-  };
-
-  const errorMessage = (error) => {
-    console.log(error);
   };
 
   return (
@@ -194,7 +190,8 @@ export function Navbar() {
                 gap: "8px",
               }}
             >
-              <Typography fontWeight="fontWeightBold"
+              <Typography
+                fontWeight="fontWeightBold"
                 sx={{
                   fontSize: {
                     xs: "10px",
@@ -243,8 +240,7 @@ export function Navbar() {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem onClick={handleClose}>
-            </MenuItem>
+            <MenuItem onClick={handleClose}></MenuItem>
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <Logout fontSize="small" />
