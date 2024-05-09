@@ -169,7 +169,7 @@ export function HomePage() {
             sx={{
               margin: {
                 xs: "0px",
-                md: "40px",
+                md: "0px",
               },
             }}
           >
@@ -177,7 +177,6 @@ export function HomePage() {
           </Box>
           <Box
             sx={{
-              width: "100%",
               display: "flex",
               flexDirection: {
                 xs: "row",
@@ -186,11 +185,10 @@ export function HomePage() {
               alignItems: "center",
               justifyContent: "space-evenly",
               paddingBottom: {
-                xs: "20px",
+                xs: "10px",
               },
             }}
           >
-            <Favorites />
 
             <SortBy />
           </Box>
